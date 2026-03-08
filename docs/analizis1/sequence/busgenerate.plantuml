@@ -1,0 +1,15 @@
+@startuml
+participant "Controller" as c order 10
+participant "s1: Station" as station order 40
+participant "s2: Station" as station2 order 50
+participant "f: Field" as field order 20
+participant "b: Bus" as bus order 30
+
+c -> station: put(b)
+station -> field: setVehicle(b)
+field --> station:
+station -> bus: setDestination(s2) 
+bus --> station:
+station --> c:
+
+@enduml

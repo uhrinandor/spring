@@ -1,0 +1,117 @@
+@startuml "fields"
+skinparam linetype ortho
+
+interface "ICollector"
+interface "IHead"
+
+  interface IDriver{
+       + nextMove(): IField
+       + setNext(f: IField): void
+       + getCurrent(): IField
+       + getNext(): IField
+}
+
+   abstract class Vehicle {
+       - driver: IDriver
+       + step(): void
+       + step(forced: bool): void
+       + wreck(): void
+       + isWrecked(): bool
+       + getDriver(): IDriver
+       + interact(field: IField): void
+   }
+
+    Vehicle -- IDriver
+   
+       interface IInventory{
+           + removeItem(i: IInventoryItem, amount: int): bool
+           + addItem(i: IInventoryItem  , amount: int): void
+       }
+
+  interface ISnowPlow{
+           +switchHead(head: IHead): bool
+           +getInventory(): IInventory
+       }
+       
+    class SnowPlow extends Vehicle implements ISnowPlow, ShopItem
+    {
+    -inventory: IInventory
+    -collector: ICollector
+    -driver: IDriver
+    -currentHead: IHead
+    +switchHead(head: IHead): bool
+    +getInventory(): IInventory
+    +price(): int
+    +step(): void
+    +step (forced: bool): void
+    +wreck(): void
+    +isWrecked(): bool
+    +getDriver(): IDriver
+    +interact(field: IField): void
+    }
+
+    SnowPlow -- IInventory
+    SnowPlow -- ICollector
+    SnowPlow -- IHead
+
+
+    class Bus extends Vehicle
+    {
+    -destination: Station
+    -collector: ICollector
+    -count: int
+    -driver: IDriver
+    +step(): void
+    +step(forced: bool): void
+    +wreck(): void
+    +isWrecked(): bool
+    +getDriver(): IDriver
+    +interact(field: IField): void
+    }
+    
+    Bus -- Station
+    Bus -- ICollector
+
+
+    class Inventory implements IInventory{
+        - items : Map<string,int>
+        + removeItem(i : IInventoryItem, amount : int) : bool
+        + addItem(i: IInventoryItem, amount : int) : void
+    }
+
+
+    class Car extends Vehicle
+    {
+    -destination: Office
+    -count: int
+    -driver: IDriver
+    +step(): void
+    +step (forced: bool): void
+    +wreck(): void
+    +isWrecked(): bool
+    +getDriver(): IDriver
+    +interact(field: IField): void
+    }
+    
+    Car -- Office
+
+
+    class CarDriver implements IDriver{
+        - current : IField
+        - next : IField
+        + nexMove() : IField
+        + setNext(field : IField) : void
+        + getCurrent() : IField
+        + getNext() : IField
+    }
+
+    class PlayerDriver implements IDriver{
+        - current : IField
+        - next : IField
+        + nexMove() : IField
+        + setNext(field : IField) : void
+        + getCurrent() : IField
+        + getNext() : IField
+    }
+
+@enduml

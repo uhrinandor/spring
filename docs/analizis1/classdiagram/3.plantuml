@@ -1,0 +1,57 @@
+@startuml "layers"
+skinparam linetype ortho
+
+   interface ILayer{
+       + merge(layer: ILayer): ILayer
+       + slip(v: Vehicle, random: IRandom): bool
+       + canExit(v: Vehicle): bool
+       + press(): ILayer 
+   }
+
+
+   interface ISalt {
+       + melt(layer: ILayer): ILayer
+   }
+
+ class Ice implements ILayer
+    {
+    -broken: bool
+    +merge(layer: ILayer): ILayer
+    +slip(v: Vehicle, random: IRandom): bool
+    +canExit(v: Vehicle): bool
+    +press(): ILayer
+    }
+   
+    
+    class Snow implements ILayer
+    {
+    -int level: int
+    +merge(layer: ILayer): ILayer
+    +slip(v: Vehicle, random: IRandom): bool
+    +canExit(v: Vehicle): bool
+    +press(): ILayer
+    }
+   
+    
+    
+    class Salt implements ShopItem, IInventoryItem, ISalt
+    {
+    -timer: int
+    +melt(layer: ILayer): ILayer
+    +price(): int
+    +apply(ctx: PurchaseContext, amount: int): void
+    +key(): string
+    }
+    
+    class Layer implements ILayer
+    {
+    +merge(layer: ILayer): ILayer
+    +slip(v: Vehicle, random: IRandom): bool
+    +canExit(v: Vehicle): bool
+    +press(): ILayer
+    }
+   
+
+
+
+@enduml

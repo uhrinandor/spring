@@ -1,0 +1,76 @@
+@startuml "visitors"
+skinparam linetype ortho
+
+   interface ILayerVisitor {
+       + visit(s: Snow): void
+       + visit(i: Ice): void
+       + visit(l: Layer): void
+   }
+
+
+   interface IVehicleVisitor {
+       + visit(c: Car): void
+       + visit(b: Bus): void
+       + visit(s: SnowPlow): void
+   }
+
+
+   class SnowMergeVisitor implements ILayerVisitor{
+        - base : Snow
+        - result: ILayer
+        + visit(s : Snow) : void
+        + visit(i : Ice) : void
+        + visit(l : Layer) : void
+    }
+    SnowMergeVisitor -- Snow
+
+    class IceMergeVisitor implements ILayerVisitor{
+        - base : Ice
+        - result : ILayer
+        + visit(s : Snow) : void
+        + visit(i : Ice) : void
+        + visit(l : Layer) : void
+    }
+    IceMergeVisitor -- Ice
+
+    class IceSlipVisitor implements IVehicleVisitor{
+        - result : bool
+        - random : IRandom
+        + visit(c : Car) : void
+        + visit(s : SnowPlow) : void
+        + visit(b : Bus) : void
+    }
+
+    class SnowExitVisitor implements IVehicleVisitor{
+        - base : Snow
+        - result : bool
+        + visit(c : Car) : void
+        + visit(b : Bus) : void
+        + visit(s : SnowPlow) : void
+    }
+    SnowExitVisitor -- Snow
+
+    class BrushClearLayerVisitor implements ILayerVisitor{
+        - result : bool
+        + visit(s : Snow) : void
+        + visit(i : Ice) : void
+        + visit(l : Layer) : void
+    }
+
+    class BroomClearLayerVisitor implements ILayerVisitor{
+        - result : bool
+        + visit(s : Snow) : void
+        + visit(i : Ice) : void
+        + visit(l : Layer) : void
+    }
+
+    class IceBreakerClearLayerVisitor implements ILayerVisitor{
+        - result : bool
+        + visit(s : Snow) : void
+        + visit(i : Ice) : void
+        + visit(l : Layer) : void
+    }
+
+
+
+@enduml

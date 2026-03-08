@@ -1,0 +1,28 @@
+@startuml 
+participant "Controller" as controller order 10
+participant "c: Car" as car order 30
+participant "b: Bus" as bus order 80
+participant "driver: CarDriver" as driver order 20
+participant "next: Field" as next order 60
+participant "current: Field" as current order 40
+participant "s1: Snow" as currentLayer order 50
+participant "s2: Snow" as nextLayer order 70
+
+controller -> car: step()
+car -> driver: nextMove()
+driver --> car: next
+car -> driver: getCurrent()
+driver --> car: current
+car -> current: tryExit(next)
+current -> currentLayer: canExit(c)
+currentLayer --> current: true
+current -> next: tryEnter(c)
+next -> car: wreck()
+car --> next: 
+next -> bus: wreck()
+bus --> next:
+next --> current: false
+current --> car:
+car --> controller:
+
+@enduml

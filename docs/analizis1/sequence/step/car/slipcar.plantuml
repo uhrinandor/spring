@@ -1,0 +1,61 @@
+@startuml
+participant "next: Field" as next order 10
+participant "ice: Ice" as nextLayer order 20
+participant "c: Car" as car order 30
+participant "driver: CarDriver" as driver order 40
+
+participant "current: Field" as current order 0
+participant "s1: Snow" as currentLayer order 50
+participant  "nextAfter: Field" as nextNext order 80
+participant "s: Snow" as nextNextLayer order 90
+
+current -> next: tryEnter(c)
+
+next -> nextLayer: slip(c)
+nextLayer --> next: true
+
+next -> car: getDriver()
+car --> next: driver
+next -> driver: setNext(nextAfter)
+driver --> next:
+
+next -> car: step(true)
+
+car -> driver: getNext()
+driver --> car: nextAfter
+car -> driver: getCurrent()
+driver --> car: next
+
+car -> next: tryExit(nextAfter)
+
+next -> nextLayer: canExit(car)
+nextLayer --> next: true
+
+next -> nextNext: tryEnter(c)
+
+nextNext -> nextNextLayer: slip(c)
+nextNextLayer --> nextNext: false
+
+nextNext -> car: interact(next)
+car --> nextNext: 
+
+nextNext --> next: true
+
+next --> car:
+
+
+car --> next:
+
+next --> current: true
+/'
+
+
+
+
+
+
+
+nextNext --> next: true
+car --> next: true
+next --> current: true
+@enduml

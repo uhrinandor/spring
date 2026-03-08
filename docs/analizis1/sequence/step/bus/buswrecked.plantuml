@@ -1,0 +1,8 @@
+@startuml
+participant "b: Bus" as bus
+participant "Controller" as caller
+
+caller -> bus: step()
+bus --> caller:
+
+@enduml
