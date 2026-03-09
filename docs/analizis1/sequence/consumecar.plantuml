@@ -1,0 +1,15 @@
+@startuml
+'odaért az office mellé, szól az office-nak hogy fogyassza el
+
+participant "current: Field" as field
+participant "c: Car" as car
+participant "o: Office" as office
+
+field -> car: interact(current)
+car -> office: consume(c)
+office -> field: setVehicle(null)
+field --> office:
+office --> car:
+car --> field:
+
+@end

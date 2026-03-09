@@ -1,0 +1,15 @@
+@startuml
+
+participant "o: Office" as office order 50
+participant "c: Car" as car order 30
+participant "h: Home" as home order 20
+participant "field: Field" as field order 40
+participant "Controller" as c order 10
+
+c -> home: generateCar(o)
+home -> car: setDestination(o)
+car --> home:
+home -> field: setVehicle(c)
+field --> home:
+home --> c:
+

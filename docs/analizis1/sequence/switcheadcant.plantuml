@@ -1,0 +1,13 @@
+@startuml switchhead
+participant "p: SnowPlowPlayer" as player
+participant "sp: SnowPlow" as sp
+participant "inventory: Inventory" as inventory
+participant "h: DragonHead" as head
+participant "b: IceBreaker" as currentHead
+
+player -> sp: switchHead(h)
+sp -> inventory: removeItem(h, 1)
+inventory --> sp: false
+sp --> player:
+
+@enduml

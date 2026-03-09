@@ -1,0 +1,18 @@
+@startuml melt
+
+participant "Controller" as controller
+participant "s: Salt" as salt
+participant "f: Field" as field
+participant "l: Ice" as layer
+participant "snow: Snow" as melted
+
+controller -> field: getSalt()
+field --> controller: s
+controller -> field: getLayer()
+field --> controller: l
+controller -> salt: melt(l)
+salt --> controller: snow
+controller -> field: setLayer(snow)
+field --> controller:
+
+@enduml

@@ -1,0 +1,87 @@
+@startuml "Roads and buildings"
+skinparam linetype ortho
+interface IRandom{
+   + happen(probability: double): boolean
+}
+
+   interface IRoad{
+       + getAvailable(): List<IField>
+   }
+
+   interface IField implements IRoad{
+    + getAvailable(): List<IField> 
+    + isUnderGround():bool
+    + tryEnter(v: IVehicle): bool
+    + tryExit(f: IField): bool
+    + interact(): void
+    + slip(): void
+   }
+
+    class Field implements IField
+    {
+    -front: IRoad
+    -right: IField
+    -left: IField
+    -layer : ILayer
+    -salt : ISalt
+    -random : IRandom
+    -underground : bool
+    +getAvailable(): List<IField>
+    +isUnderGround(): bool
+    +tryEnter(v: IVehicle): bool
+    +tryExit(next: IField): bool
+    +interact(): void
+    +slip(): void
+    }
+    
+    Field -- IRoad
+    Field -- IField
+    Field -- IRandom
+    
+    class CrossRoad implements IRoad
+    {
+    -outFields: List<IField>
+    +getAvailable(): List<IField>
+    }
+    
+    CrossRoad -- IField
+
+
+  class Home extends Building
+    {
+    -field: IField
+    +generateCar(destination: Office): void
+    }
+    
+    Home -- IField
+    
+    
+    class Office extends Building
+    {
+    -field: IField
+    +consume(c : Car): void
+    }
+    
+    Office -- IField
+    
+    class Station extends Building
+    {
+    -field: IField
+    -pair: Station
+    +getPair(): Station
+    +put(bus: Bus): void
+    }
+    
+    Station -- IField
+    Station -- Station
+    
+    abstract class Building
+    {
+    -field: IField
+    }
+    
+    Building -- IField
+
+    class Random implements IRandom{
+        + happen(probability : double) : bool
+    }
