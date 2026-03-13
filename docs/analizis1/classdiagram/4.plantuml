@@ -16,7 +16,6 @@ interface "IHead"
        + step(): void
        + step(forced: bool): void
        + wreck(): void
-       + isWrecked(): bool
        + getDriver(): IDriver
        + interact(field: IField): void
    }
@@ -45,7 +44,6 @@ interface "IHead"
     +step(): void
     +step (forced: bool): void
     +wreck(): void
-    +isWrecked(): bool
     +getDriver(): IDriver
     +interact(field: IField): void
     }
@@ -59,12 +57,11 @@ interface "IHead"
     {
     -destination: Station
     -collector: ICollector
-    -count: int
+    -immobileTurnsLeft: int
     -driver: IDriver
     +step(): void
     +step(forced: bool): void
     +wreck(): void
-    +isWrecked(): bool
     +getDriver(): IDriver
     +interact(field: IField): void
     }
@@ -83,12 +80,11 @@ interface "IHead"
     class Car extends Vehicle
     {
     -destination: Office
-    -count: int
+    -immobileTurnsLeft: int
     -driver: IDriver
     +step(): void
     +step (forced: bool): void
     +wreck(): void
-    +isWrecked(): bool
     +getDriver(): IDriver
     +interact(field: IField): void
     }

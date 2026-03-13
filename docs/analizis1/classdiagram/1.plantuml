@@ -15,6 +15,7 @@ interface IRandom{
     + tryExit(f: IField): bool
     + interact(): void
     + slip(): void
+    + melt(): void
    }
 
     class Field implements IField
@@ -32,6 +33,7 @@ interface IRandom{
     +tryExit(next: IField): bool
     +interact(): void
     +slip(): void
+    +melt(): void
     }
     
     Field -- IRoad
