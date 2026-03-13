@@ -1,0 +1,16 @@
+participant "bp: BusPlayer"
+participant "b: Bus"
+
+participant "s1: Station"
+participant "s2: Station"
+participant "field: Field"
+participant "i: Inventory"
+
+"bp: BusPlayer" -> "b: Bus": step()
+"b: Bus" -> "field: Field" :interact(field)
+"field: Field" --> "b: Bus"
+"b: Bus" -> "s1: Station": getPair()
+"s1: Station" --> "b: Bus": s2
+"b: Bus" --> "bp: BusPlayer"
+"bp: BusPlayer" -> "b: Bus": give(1)
+"b: Bus" --> "bp: BusPlayer"
