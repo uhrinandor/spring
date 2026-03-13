@@ -1,0 +1,56 @@
+@startuml
+
+skinparam linetype ortho
+
+interface IShop {
+    buy(ctx: PurchaseContext, item: ShopItem, amount: int): void
+}
+
+interface PurchaseContext{
+    + player(): IPlayer
+    + snowplow(): ISnowPlow
+    + charge(amount: int): bool
+}
+
+
+interface IPlayer implements ICollector{
+    + vehicles(): List<Vehicle>
+    + getPoints(): int
+    + give(amount: int): void
+}
+
+
+interface ICollector {
+    + give(amount: int): void
+}
+
+class SnowPlowPlayer implements IPlayer, PurchaseContext
+{
+    -snowPlows: List<SnowPlow>
+    -money: int
+    -active: SnowPlow
+    +give(amount: int): void
+    +vehicles(): List<Vehicle>
+    +getPoints(): int
+    +player(): IPlayer
+    +snowplow(): ISnowPlow
+    +charge(amount: int): bool
+}
+
+SnowPlowPlayer -- SnowPlow
+
+class BusPlayer implements IPlayer
+{
+    -bus: Bus
+    -point: int
+    +give(amount : int): void
+    +vehicles(): List<Vehicle>
+    +getPoints(): int
+}
+
+BusPlayer -- Bus
+class Shop implements IShop{
+    + buy(ctx : PurchaseContext, item : ShopItem, amount : int) : void
+}
+
+@enduml
