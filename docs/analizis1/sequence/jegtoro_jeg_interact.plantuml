@@ -1,0 +1,13 @@
+participant "i: Inventory"
+participant "current: Field"
+participant "sp: SnowPlow"
+participant "h: IceBreaker"
+participant "l1: Ice"
+participant "sp: SnowPlowPlayer"
+
+"sp: SnowPlow" -> "h: IceBreaker": interact(current, i)
+"h: IceBreaker" -> "current: Field" : getLayer()
+"current: Field" -->"h: IceBreaker": l1
+"h: IceBreaker" -> "current: Field" :setBroken(true)
+"current: Field" --> "h: IceBreaker"
+"h: IceBreaker" --> "sp: SnowPlow"

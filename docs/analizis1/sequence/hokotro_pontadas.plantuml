@@ -1,0 +1,19 @@
+participant "spp: SnowPlowPlayer"
+participant "sp: SnowPlow"
+
+participant "h: Brush"
+participant "field: Field"
+participant "i: Inventory"
+
+"spp: SnowPlowPlayer" -> "sp: SnowPlow": step()
+"sp: SnowPlow" -> "h: Brush" :interact(field)
+"h: Brush" -> "field: Field" : interact(field,i)
+
+"field: Field" --> "h: Brush": true
+
+"h: Brush" --> "sp: SnowPlow"
+"sp: SnowPlow" --> "spp: SnowPlowPlayer"
+"spp: SnowPlowPlayer" -> "sp: SnowPlow": give(1)
+
+"sp: SnowPlow" --> "spp: SnowPlowPlayer"
+

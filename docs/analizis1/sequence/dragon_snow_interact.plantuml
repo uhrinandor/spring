@@ -1,0 +1,30 @@
+participant "i: Inventory"
+participant "current: Field"
+participant "sp: SnowPlow"
+participant "h: Dragon"
+participant "l1: Snow"
+participant "b: Biokerosene"
+participant "sp: SnowPlowPlayer"
+participant "next: Field"
+participant "nextnext: Field"
+
+"sp: SnowPlow" -> "h: Dragon": interact(current, i)
+"h: Dragon" -> "current: Field": getLayer()
+"current: Field" --> "h: Dragon": l1
+"h: Dragon" -> "i: Inventory": removeItem(b,1)
+"i: Inventory" --> "h: Dragon": True
+"h: Dragon" -> "current: Field":setLayer(Layer)
+"current: Field" --> "h: Dragon"
+
+
+"h: Dragon" -> "current: Field" : getNext()
+"current: Field" --> "h: Dragon": next
+"h: Dragon" -> "next: Field": setLayer(Layer)
+"next: Field" --> "h: Dragon"
+
+"h: Dragon" -> "next: Field" : getNext()
+"next: Field" --> "h: Dragon": nextnext
+"h: Dragon" -> "nextnext: Field": setLayer(Layer)
+"nextnext: Field" --> "h: Dragon"
+"h: Dragon" --> "sp: SnowPlow"
+

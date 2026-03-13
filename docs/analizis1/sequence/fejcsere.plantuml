@@ -1,0 +1,17 @@
+@startuml
+
+participant "d1:Dragon"
+participant "b1:Broom"
+"sp1:SnowPlowPlayer" -> "s1:SnowPlow" : switchHead(d1)
+
+"s1:SnowPlow" -> "i1:Inventory" : removeItem(d1, 1)
+
+"i1:Inventory" --> "s1:SnowPlow": true
+
+"s1:SnowPlow" -> "i1:Inventory" : addItem(b1, 1)
+
+
+"i1:Inventory" --> "s1:SnowPlow":
+"s1:SnowPlow" --> "sp1:SnowPlowPlayer" : true
+
+@enduml

@@ -1,0 +1,27 @@
+participant "i: Inventory"
+participant "current: Field"
+participant "rightright: Field"
+participant "sp: SnowPlow"
+participant "b: Broom"
+participant "l1: Snow"
+participant "l2: Snow"
+
+
+
+"sp: SnowPlow" -> "b: Broom" : interact(current, i)
+"b: Broom" -> "current: Field" : getLayer()
+"current: Field" -->"b: Broom": l1
+"b: Broom" -> "current: Field": getRight()
+"current: Field" --> "b: Broom": rightright
+"b: Broom" -> "rightright: Field": getLayer()
+"rightright: Field" --> "b: Broom" : l2
+"b: Broom" -> "rightright: Field": merge(l1)
+"rightright: Field" --> "b: Broom": l2
+"b: Broom" -> "rightright: Field": setLayer(l2)
+"rightright: Field" --> "b: Broom"
+"b: Broom" -> "current: Field": setLayer(clear)
+"current: Field" -->"b: Broom"
+"b: Broom" --> "sp: SnowPlow"
+
+
+
