@@ -15,6 +15,7 @@ interface IRandom{
     + tryExit(f: IField): bool
     + interact(): void
     + slip(): void
+    + melt(): void
    }
 
     class Field implements IField
@@ -32,11 +33,15 @@ interface IRandom{
     +tryExit(next: IField): bool
     +interact(): void
     +slip(): void
+    +melt(): void
     }
     
-    Field -- IRoad
-    Field -- IField
-    Field -- IRandom
+    Field --> "1" IRoad: front
+    Field --> "1" IField: right
+    Field --> "1" IField: left
+    Field --> "1" ILayer: layer
+    Field --> "1" ISalt: salt
+    Field --> "1" IRandom: random
     
     class CrossRoad implements IRoad
     {
@@ -44,7 +49,7 @@ interface IRandom{
     +getAvailable(): List<IField>
     }
     
-    CrossRoad -- IField
+    CrossRoad --> "1..*" IField: outFields
 
 
   class Home extends Building
@@ -53,7 +58,7 @@ interface IRandom{
     +generateCar(destination: Office): void
     }
     
-    Home -- IField
+    Home --> "1" IField: field
     
     
     class Office extends Building
@@ -62,7 +67,7 @@ interface IRandom{
     +consume(c : Car): void
     }
     
-    Office -- IField
+    Office --> "1" IField: field
     
     class Station extends Building
     {
@@ -72,15 +77,15 @@ interface IRandom{
     +put(bus: Bus): void
     }
     
-    Station -- IField
-    Station -- Station
+    Station --> "1" IField: field
+    Station "1" -- "1" Station: pair
     
     abstract class Building
     {
     -field: IField
     }
     
-    Building -- IField
+    Building --> "1" IField: field
 
     class Random implements IRandom{
         + nextBool(probability : double) : bool
