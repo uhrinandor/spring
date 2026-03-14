@@ -15,7 +15,7 @@ interface "IHead"
        - driver: IDriver
        + step(): void
        + step(forced: bool): void
-       + wreck(): void
+       + contact(v: Vehicle): void
        + getDriver(): IDriver
        + interact(field: IField): void
    }
@@ -43,7 +43,7 @@ interface "IHead"
     +price(): int
     +step(): void
     +step (forced: bool): void
-    +wreck(): void
+    +contact(v: Vehicle): void
     +getDriver(): IDriver
     +interact(field: IField): void
     }
@@ -62,7 +62,7 @@ interface "IHead"
     -driver: IDriver
     +step(): void
     +step(forced: bool): void
-    +wreck(): void
+    +contact(v: Vehicle): void
     +getDriver(): IDriver
     +interact(field: IField): void
     }
@@ -86,7 +86,7 @@ interface "IHead"
     -driver: IDriver
     +step(): void
     +step (forced: bool): void
-    +wreck(): void
+    +contact(v: Vehicle): void
     +getDriver(): IDriver
     +interact(field: IField): void
     }
