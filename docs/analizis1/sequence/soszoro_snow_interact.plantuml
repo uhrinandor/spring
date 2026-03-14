@@ -5,7 +5,7 @@ participant "h: SaltSpreader"
 participant "s: Salt"
 
 "sp: SnowPlow" -> "h: SaltSpreader" : interact(current, i)
-"h: SaltSpreader" -> "i: Inventory": removeItem(b,1)
+"h: SaltSpreader" -> "i: Inventory": removeItem(s,1)
 "i: Inventory" --> "h: SaltSpreader": True
 "h: SaltSpreader" -> "current: Field": setSalt(s)
 "current: Field" --> "h: SaltSpreader"

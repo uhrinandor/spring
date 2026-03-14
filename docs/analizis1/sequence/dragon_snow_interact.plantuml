@@ -3,7 +3,6 @@ participant "current: Field"
 participant "sp: SnowPlow"
 participant "h: Dragon"
 participant "l1: Snow"
-participant "b: Biokerosene"
 participant "sp: SnowPlowPlayer"
 participant "next: Field"
 participant "nextnext: Field"
@@ -11,7 +10,7 @@ participant "nextnext: Field"
 "sp: SnowPlow" -> "h: Dragon": interact(current, i)
 "h: Dragon" -> "current: Field": getLayer()
 "current: Field" --> "h: Dragon": l1
-"h: Dragon" -> "i: Inventory": removeItem(b,1)
+"h: Dragon" -> "i: Inventory": removeItem(new Biokerosene(),1)
 "i: Inventory" --> "h: Dragon": True
 "h: Dragon" -> "current: Field":setLayer(Layer)
 "current: Field" --> "h: Dragon"
