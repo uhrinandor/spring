@@ -20,7 +20,7 @@ interface "IHead"
        + interact(field: IField): void
    }
 
-    Vehicle -- IDriver
+    Vehicle --> "1" IDriver: driver
    
        interface IInventory{
            + removeItem(i: IInventoryItem, amount: int): bool
@@ -48,9 +48,10 @@ interface "IHead"
     +interact(field: IField): void
     }
 
-    SnowPlow -- IInventory
-    SnowPlow -- ICollector
-    SnowPlow -- IHead
+    SnowPlow --> "1" IInventory: inventory
+    SnowPlow --> "1" ICollector: collector
+    SnowPlow --> "1" IDriver: driver
+    SnowPlow --> "1" IHead: currentHead
 
 
     class Bus extends Vehicle
@@ -66,8 +67,9 @@ interface "IHead"
     +interact(field: IField): void
     }
     
-    Bus -- Station
-    Bus -- ICollector
+    Bus --> "1" Station: destination
+    Bus --> "1" ICollector: collector
+    Bus --> "1" IDriver: driver
 
 
     class Inventory implements IInventory{
@@ -89,7 +91,8 @@ interface "IHead"
     +interact(field: IField): void
     }
     
-    Car -- Office
+    Car --> "1" Office: destination
+    Car --> "1" IDriver: driver
 
 
     class CarDriver implements IDriver{
@@ -101,6 +104,9 @@ interface "IHead"
         + getNext() : IField
     }
 
+    CarDriver --> "1" IField: current
+    CarDriver --> "1" IField: next
+
     class PlayerDriver implements IDriver{
         - current : IField
         - next : IField
@@ -109,5 +115,8 @@ interface "IHead"
         + getCurrent() : IField
         + getNext() : IField
     }
+
+    PlayerDriver --> "1" IField: current
+    PlayerDriver --> "1" IField: next
 
 @enduml

@@ -39,7 +39,8 @@ class SnowPlowPlayer implements IPlayer, PurchaseContext
     +addVehicle(v: Vehicle): void
 }
 
-SnowPlowPlayer -- SnowPlow
+SnowPlowPlayer --> "1..*" SnowPlow: snowPlows
+SnowPlowPlayer --> "1" SnowPlow: active
 
 class BusPlayer implements IPlayer
 {
@@ -50,7 +51,8 @@ class BusPlayer implements IPlayer
     +getPoints(): int
 }
 
-BusPlayer -- Bus
+BusPlayer --> "1" Bus: bus
+
 class Shop implements IShop{
     + buy(ctx : PurchaseContext, item : ShopItem, amount : int) : void
 }
