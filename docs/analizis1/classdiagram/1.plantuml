@@ -1,7 +1,7 @@
 @startuml "Roads and buildings"
 skinparam linetype ortho
 interface IRandom{
-   + happen(probability: double): boolean
+   + nextBool(probability: double): boolean
 }
 
    interface IRoad{
@@ -83,5 +83,5 @@ interface IRandom{
     Building -- IField
 
     class Random implements IRandom{
-        + happen(probability : double) : bool
+        + nextBool(probability : double) : bool
     }
