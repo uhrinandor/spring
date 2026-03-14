@@ -1,18 +1,15 @@
 @startuml melt
 
 participant "Controller" as controller
-participant "s: Salt" as salt
 participant "f: Field" as field
-participant "l: Ice" as layer
-participant "snow: Snow" as melted
+participant "s: Salt" as salt
+participant "snow: Snow" as beforeMelt
+participant "layer: Layer" as afterMelt
 
-controller -> field: getSalt()
-field --> controller: s
-controller -> field: getLayer()
-field --> controller: l
-controller -> salt: melt(l)
-salt --> controller: snow
-controller -> field: setLayer(snow)
-field --> controller:
+controller -> field: melt()
+field -> salt: melt(snow)
+salt --> field: layer
+field --> controller
+
 
 @enduml

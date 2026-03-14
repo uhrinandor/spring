@@ -3,23 +3,23 @@ participant "current: Field"
 participant "rightright: Field"
 participant "sp: SnowPlow"
 participant "b: Broom"
-participant "l1: Snow"
-participant "l2: Snow"
+participant "currentLayer: Snow"
+participant "rightrightLayer: Snow"
 
 
 
 "sp: SnowPlow" -> "b: Broom" : interact(current, i)
 "b: Broom" -> "current: Field" : getLayer()
-"current: Field" -->"b: Broom": l1
+"current: Field" -->"b: Broom": currentLayer
 "b: Broom" -> "current: Field": getRight()
 "current: Field" --> "b: Broom": rightright
 "b: Broom" -> "rightright: Field": getLayer()
-"rightright: Field" --> "b: Broom" : l2
-"b: Broom" -> "rightright: Field": merge(l1)
-"rightright: Field" --> "b: Broom": l2
-"b: Broom" -> "rightright: Field": setLayer(l2)
+"rightright: Field" --> "b: Broom" : rightrightLayer
+"b: Broom" -> "rightrightLayer: Snow": merge(currentLayer)
+"rightrightLayer: Snow" --> "b: Broom": rightrightLayer
+"b: Broom" -> "rightright: Field": setLayer(rightrightLayer)
 "rightright: Field" --> "b: Broom"
-"b: Broom" -> "current: Field": setLayer(clear)
+"b: Broom" -> "current: Field": setLayer(new Layer())
 "current: Field" -->"b: Broom"
 "b: Broom" --> "sp: SnowPlow"
 
