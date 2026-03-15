@@ -20,12 +20,6 @@ interface IRandom{
 
     class Field implements IField
     {
-    -front: IRoad
-    -right: IField
-    -left: IField
-    -layer : ILayer
-    -salt : ISalt
-    -random : IRandom
     -underground : bool
     +getAvailable(): List<IField>
     +isUnderGround(): bool
@@ -45,7 +39,6 @@ interface IRandom{
     
     class CrossRoad implements IRoad
     {
-    -outFields: List<IField>
     +getAvailable(): List<IField>
     }
     
@@ -54,35 +47,27 @@ interface IRandom{
 
   class Home extends Building
     {
-    -field: IField
     +generateCar(destination: Office): void
     }
-    
-    Home --> "1" IField: field
     
     
     class Office extends Building
     {
-    -field: IField
     +consume(c : Car): void
     }
     
-    Office --> "1" IField: field
     
     class Station extends Building
     {
-    -field: IField
-    -pair: Station
     +getPair(): Station
     +put(bus: Bus): void
     }
     
-    Station --> "1" IField: field
     Station "1" -- "1" Station: pair
     
     abstract class Building
     {
-    -field: IField
+
     }
     
     Building --> "1" IField: field

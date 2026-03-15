@@ -1,6 +1,6 @@
 @startuml "fields"
 skinparam linetype ortho
-
+interface "IField"
 interface "ICollector"
 interface "IHead"
 
@@ -12,7 +12,6 @@ interface "IHead"
 }
 
    abstract class Vehicle {
-       - driver: IDriver
        + step(): void
        + step(forced: bool): void
        + contact(v: Vehicle): void
@@ -34,10 +33,6 @@ interface "IHead"
        
     class SnowPlow extends Vehicle implements ISnowPlow, ShopItem
     {
-    -inventory: IInventory
-    -collector: ICollector
-    -driver: IDriver
-    -currentHead: IHead
     +switchHead(head: IHead): bool
     +getInventory(): IInventory
     +price(): int
@@ -50,16 +45,12 @@ interface "IHead"
 
     SnowPlow --> "1" IInventory: inventory
     SnowPlow --> "1" ICollector: collector
-    SnowPlow --> "1" IDriver: driver
     SnowPlow --> "1" IHead: currentHead
 
 
     class Bus extends Vehicle
     {
-    -destination: Station
-    -collector: ICollector
     -immobileTurnsLeft: int
-    -driver: IDriver
     +step(): void
     +step(forced: bool): void
     +contact(v: Vehicle): void
@@ -69,7 +60,6 @@ interface "IHead"
     
     Bus --> "1" Station: destination
     Bus --> "1" ICollector: collector
-    Bus --> "1" IDriver: driver
 
 
     class Inventory implements IInventory{
@@ -81,9 +71,7 @@ interface "IHead"
 
     class Car extends Vehicle
     {
-    -destination: Office
     -immobileTurnsLeft: int
-    -driver: IDriver
     +step(): void
     +step (forced: bool): void
     +contact(v: Vehicle): void
@@ -92,12 +80,9 @@ interface "IHead"
     }
     
     Car --> "1" Office: destination
-    Car --> "1" IDriver: driver
 
 
     class CarDriver implements IDriver{
-        - current : IField
-        - next : IField
         + nexMove() : IField
         + setNext(field : IField) : void
         + getCurrent() : IField
@@ -108,8 +93,6 @@ interface "IHead"
     CarDriver --> "1" IField: next
 
     class PlayerDriver implements IDriver{
-        - current : IField
-        - next : IField
         + nexMove() : IField
         + setNext(field : IField) : void
         + getCurrent() : IField
