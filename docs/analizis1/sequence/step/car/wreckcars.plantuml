@@ -17,9 +17,9 @@ car -> current: tryExit(next)
 current -> currentLayer: canExit(c)
 currentLayer --> current: true
 current -> next: tryEnter(c)
-next -> car: wreck()
+next -> car: contact(b)
 car --> next: 
-next -> bus: wreck()
+next -> bus: contact(c)
 bus --> next:
 next --> current: false
 current --> car:
