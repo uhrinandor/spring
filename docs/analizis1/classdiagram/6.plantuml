@@ -3,7 +3,7 @@
 skinparam linetype ortho
 
 interface IShop {
-    buy(ctx: PurchaseContext, item: ShopItem, amount: int): void
+    +buy(ctx: PurchaseContext, item: ShopItem, amount: int): void
 }
 
 interface PurchaseContext{
@@ -27,9 +27,7 @@ interface ICollector {
 
 class SnowPlowPlayer implements IPlayer, PurchaseContext
 {
-    -snowPlows: List<SnowPlow>
     -money: int
-    -active: SnowPlow
     +give(amount: int): void
     +vehicles(): List<Vehicle>
     +getPoints(): int
@@ -44,7 +42,6 @@ SnowPlowPlayer --> "1" SnowPlow: active
 
 class BusPlayer implements IPlayer
 {
-    -bus: Bus
     -point: int
     +give(amount : int): void
     +vehicles(): List<Vehicle>
