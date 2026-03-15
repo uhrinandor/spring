@@ -3,7 +3,7 @@
 participant "p: SnowPlowPlayer" as player
 participant "sp: SnowPlow" as sp
 participant "shop: Shop" as shop
-participant "vehicles: List<SnowPlow>" as vehicleList
+
 
 player -> shop: buy(player, sp, 1)
 shop -> sp: price()
