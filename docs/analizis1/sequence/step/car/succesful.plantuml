@@ -16,6 +16,8 @@ car -> current: tryExit(next)
 current -> currentLayer: canExit(c)
 currentLayer --> current: true
 current -> next: tryEnter(c)
+next -> nextLayer: enter()
+nextLayer --> next:
 next -> nextLayer: slip(c)
 nextLayer --> next: false
 next -> car: interact(next)
