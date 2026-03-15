@@ -3,7 +3,7 @@
 participant "p: SnowPlowPlayer" as player
 participant "sp: SnowPlow" as sp
 participant "shop: Shop" as shop
-participant "vehicles: List<SnowPlow>" as vehicleList
+
 
 player -> shop: buy(player, sp, 1)
 shop -> sp: price()
@@ -11,11 +11,9 @@ sp --> shop: 5
 shop -> player: charge(5)
 player --> shop: true
 shop -> sp: apply(player, 1)
-sp -> player: vehicles()
-player --> sp: vehicles
-sp -> vehicleList: add(sp)
-vehicleList --> sp:
-sp --> shop:
-shop --> player:
+sp -> player: addVehicle(sp)
+player --> sp
+sp --> shop
+shop --> player
 
 @enduml
