@@ -1,0 +1,9 @@
+@startuml
+
+actor Tesztelő as a1
+participant "i : Ice" as p1
+
+a1 -> p1 : enter()
+p1 --> a1 : i : Ice
+
+@enduml
