@@ -2,21 +2,21 @@ package com.spring.app.utils.mock;
 
 import java.util.List;
 
+import com.spring.app.utils.Entity;
 import com.spring.app.utils.IPrintable;
 import com.spring.app.utils.Tracer;
 
-public class Test1 implements IPrintable {
-    int id;
+public class Test1 extends Entity implements IPrintable {
     String prop;
     public Test1(){
-        id = 0;
+        super();
         prop = "property";
-
     }
+
     @Override
     public List<String> init() {
         return List.of(
-            "id: "+this.hashCode(),
+            "id: "+id,
             "prop: "+this.prop
         );
     }

@@ -19,22 +19,34 @@ public class Tracer {
     public void reset(){
         indentationLevel = 0;
     }
+
+    public void printIndent(int increase){
+        for(int i=0; i<indentationLevel + increase; i++){
+            System.out.print(INDENT);
+        }
+    }
+    public void printIndent(){
+        printIndent(0);
+    }
     
     public void info(String message){
+        printIndent();
         System.out.println("[INFO] "+message);
     }
 
     public void input(String message){
+        printIndent();
         System.out.println("[?] "+message);
     }
 
     // Függvény belépés jelzése az indítás ELŐTT, pl:
     // Tracer.getInstance().enterFunction("user.login()");
     // user.login();
+    // Paraméter esetén: Tracer.getInstance().enterFunction("user.login("+"username"+", "+"password"+")");
+    // Ha osztály akkor Tracer.getInstance().enterFunction("user.login(User@"+ user.getId()  +")");
+    // User osztály getId-ja az Entity osztályból származik, ez egy absztrakt osztály, mindenkinek ebből kell származnia
     public void enterFunction(String message){
-        for(int i=0; i<indentationLevel; i++){
-            System.out.print(INDENT);
-        }
+        printIndent();
         System.out.println("[->] " + message);
         indentationLevel++;
     }
@@ -43,9 +55,7 @@ public class Tracer {
     // Tracer.getInstance().exitFunction();
     public void exitFunction(){
         indentationLevel--;
-        for(int i=0; i<indentationLevel; i++){
-            System.out.print(INDENT);
-        }
+        printIndent();
         System.out.println("[<-]");
     }
 
@@ -54,15 +64,11 @@ public class Tracer {
     // User user = new User(); // implements IPrintable
     // Tracer.getInstance().newObject("user", user);
     public void newObject(String variableName, IPrintable object){
-        for(int i=0; i<indentationLevel; i++){
-            System.out.print(INDENT);
-        }
+        printIndent();
         System.out.println("[+] "+ object.getClass().getSimpleName() + " "+ variableName);
         List<String> properties = object.init();
         for(String property: properties){
-            for(int i=0; i<indentationLevel+1; i++){
-                System.out.print(INDENT);
-            }
+            printIndent(1);
             System.out.println("- "+property);
         }
     }
