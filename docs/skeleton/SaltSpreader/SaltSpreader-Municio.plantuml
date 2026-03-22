@@ -2,12 +2,9 @@
 actor "Tesztelő" as tester
 participant "p: Prerequisite" as preq
 participant "sp: SnowPlow" as SnowP
-participant "brush: Brush" as Brush
-participant "f1: Field" as f1
-participant "f2: Field" as f2
-participant "l1: Layer" as l1
-participant "l2: Layer" as l2
+participant "saltspreader: SaltSpreader" as ss
 participant "i: Inventory" as i
+participant "s: Salt" as s
 
 
 
@@ -18,14 +15,12 @@ SnowP --> tester: sp
 tester -> f1: setVehicle(sp)
 f1 --> tester
 tester -> SnowP: interact(f1)
-SnowP -> Brush: interact(f1, i)
-Brush -> f1: getLayer()
-f1 --> Brush: l1
-Brush -> f1: getRight()
-f1 -> Brush: null
-Brush -> f1: setLayer(new Layer())
-f1 --> Brush
-Brush --> SnowP 
+SnowP -> ss: interact(f1, i)
+ss -> i: removeItem(s, 1)
+i --> ss: true
+ss -> f1: setSalt(s)
+f1 --> ss
+ss --> SnowP 
 SnowP --> tester
 
 @enduml

@@ -3,8 +3,9 @@ actor "Tesztelő" as tester
 participant "p: Prerequisite" as preq
 participant "sp: SnowPlow" as SnowP
 participant "brush: Brush" as Brush
-participant "f1: Field" as f1
-participant "f2: Field" as f2
+participant "f1: Field" as f3
+participant "f2: Field" as f1
+participant "f3: Field" as f2
 participant "l1: Layer" as l1
 participant "l2: Layer" as l2
 participant "i: Inventory" as i
