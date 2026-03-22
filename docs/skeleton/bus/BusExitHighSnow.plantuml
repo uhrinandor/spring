@@ -2,7 +2,8 @@
 /'komm diagram: harom mezo egymas utan kozepson magas ho'/
 /'BusExitHighSnow'/
 /'busz ralep magas havas mezore es utana nem tud lelepni rola'/
-title BusExitHighSnow
+
+
 participant "Tesztelő" as tester
 participant "pre: Prerequisite" as pre
 participant "b: Bus" as bus
