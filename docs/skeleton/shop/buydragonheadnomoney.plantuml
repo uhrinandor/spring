@@ -1,6 +1,4 @@
 @startuml
-title Buy-DragonHead-NoMoney
-
 actor "Tesztelő" as tester
 participant "pr: Prerequisite" as preq
 participant "spp: SnowPlowPlayer" as player

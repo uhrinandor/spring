@@ -1,6 +1,4 @@
 @startuml
-title Melt-Layer
-
 actor "Tesztelő" as tester
 participant "pr: Prerequisite" as preq
 participant "f: Field" as field

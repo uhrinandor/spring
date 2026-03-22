@@ -1,6 +1,4 @@
 @startuml
-title Melt-LowSnow
-
 actor "Tesztelő" as tester
 participant "pr: Prerequisite" as preq
 participant "f: Field" as field

@@ -1,6 +1,4 @@
 @startuml
-title Melt-HighSnow-NoSalt
-
 actor "Tesztelő" as tester
 participant "pr: Prerequisite" as preq
 
