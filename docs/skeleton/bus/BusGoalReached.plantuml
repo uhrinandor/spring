@@ -1,0 +1,82 @@
+@startuml
+/'komm diagram: ket mezo egymas utan, a masodik mellett egy buszmegallo, mindket mezon sima layer'/
+/'BusGoalReached'/
+title BusGoalReached
+participant "Tesztelő" as tester
+participant "pre: Prerequisite" as pre
+participant "b: Bus" as b
+participant "pd: PlayerDriver" as pd
+participant "startField: Field" as startField
+participant "nextField: Field" as nextField
+participant "startLayer: Layer" as startLayer
+participant "nextLayer: Layer" as nextLayer
+participant "s1: Station" as s1
+participant "busPlayer: BusPlayer" as busPlayer
+
+/'letrehoz egy playerdrivert'/
+tester->cd:new()
+cd-->tester:cd
+
+/'letrehozza a buszt a playerdriverrel'/
+tester->b:new(cd)
+b-->tester:b
+
+tester->pre:BusGoalReached()
+pre-->tester:startField
+
+/'az elso mezo beallitja a buszt'/
+tester->startField: setVehicle(b)
+startField-->tester:
+
+/'megkerdezi az elso mezot hogy mi a kovetkezo IRoad'/
+tester->startField: getForward()
+startField-->tester:next
+
+/'elkeri a Field-ek listajat a kovetkezo IRoad-tol'/
+tester->nextField:getAvailable()
+nextField-->tester:[next]
+
+/'a tesztelo lepteti a buszt'/
+tester->b: step()
+
+/'a driver meghatarozza a kovetkezo mezot'/
+b->cd: nextMove()
+cd-->b: nextField
+
+/'lekerdezi a busz aktualis mezojet'/
+b->cd: getCurrent()
+cd-->b: startField
+
+/'busz megprobal kilepni a jelenlegi mezorol'/
+b->startField: tryExit(nextField)
+
+/'a jelenlegi mezo retege eldonti, hogy kilephet-e'/
+startField->startLayer: canExit(b)
+startLayer-->startField: true
+
+/'megprobal belepni a kovetkezo mezore'/
+startField->nextField: tryEnter(b)
+
+/'a kovetkezo mezon nem csuszik meg'/
+nextField->nextLayer: slip(b)
+nextLayer-->nextField: false
+
+/'a busz ellenorzi a mezot, es kiderul hogy celba ert'/
+nextField->b: interact(nextField)
+
+b -> s1: getPair()
+s1 --> b: s2
+
+/'collector-ral noveli a pontjat'/
+b->busPlayer:give(1)
+busPlayer-->b
+
+
+/'interact-ra valasz'/
+b-->nextField:
+
+/'sikeres belepes'/
+nextField-->startField: true
+startField-->b: true
+b-->tester:
+@enduml

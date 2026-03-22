@@ -1,0 +1,69 @@
+@startuml
+/'komm diagram: ket egymas melletti mezo, mindketton sima layer'/
+/'CarGoalNotReached'/
+title CarGoalNotReached
+participant "Tesztelő" as tester
+participant "pre: Prerequisite" as pre
+participant "c: Car" as c1
+participant "cd: CarDriver" as cd
+participant "startField: Field" as startField
+participant "nextField: Field" as nextField
+participant "startLayer: Layer" as startLayer
+participant "nextLayer: Layer" as nextLayer
+
+/'letrehoz egy cardrivert'/
+tester->cd:new()
+cd-->tester:cd
+
+/'letrehozza az autot a cardriverrel'/
+tester->c1:new(cd)
+c1-->tester:c1
+
+tester->pre:CarGoalNotReached()
+pre-->tester:startField
+
+/'az elso mezo beallitja az autot'/
+tester->startField: setVehicle(c1)
+startField-->tester:
+
+/'lekeri a tovabblepesi lehetoseget'/
+tester->startField: getForward()
+startField-->tester:next
+
+tester->nextField:getAvailable()
+nextField-->tester:[next]
+
+/'a tesztelo lepteti az autot'/
+tester->c1: step()
+
+/'a driver meghatarozza a kovetkezo mezot'/
+c1->cd: nextMove()
+cd-->c1: nextField
+
+/'lekerdezi az auto aktualis mezojet'/
+c1->cd: getCurrent()
+cd-->c1: startField
+
+/'auto megprobal kilepni a jelenlegi mezorol'/
+c1->startField: tryExit(nextField)
+
+/'a jelenlegi mezo retege eldonti, hogy kilephet-e'/
+startField->startLayer: canExit(c1)
+startLayer-->startField: true
+
+/'megprobal belepni a kovetkezo mezore'/
+startField->nextField: tryEnter(c1)
+
+/'a kovetkezo mezon nem csuszik meg'/
+nextField->nextLayer: slip(c1)
+nextLayer-->nextField: false
+
+/'az auto ellenorzi a mezot, de ez meg nem a celja'/
+nextField->c1: interact(nextField)
+c1-->nextField:
+
+/'sikeres belepes'/
+nextField-->startField: true
+startField-->c1: true
+c1-->tester:
+@enduml

@@ -1,0 +1,118 @@
+@startuml
+/'komm diagram: 3 egymast koveto mezo kozepson jeg'/
+/'CarStepOnIce'/
+title CarStepOnIce
+participant "Tesztelő" as tester
+participant "pre: Prerequisite" as pre
+participant "c: Car" as c1
+participant "driver: CarDriver" as driver
+participant "startField: Field" as startField
+participant "nextField: Field" as nextField
+participant "nextNextField: Field" as nextNextField
+participant "startLayer: Layer" as startLayer
+participant "nextLayer: Ice" as nextLayer
+participant "nextNextLayer: Layer" as nextNextLayer
+/'letrehoz egy cardrivert'/
+tester->driver:new()
+driver-->tester:driver
+
+/'letrehozza az autot a cardriverrel'/
+tester->c1:new(driver)
+c1-->tester:c1
+
+/'pre megadja a kezdo mezot'/
+tester->pre:CarStepOnIce()
+pre-->tester:startField
+
+/'az elso mezo beallitja az autot'/
+tester->startField: setVehicle(c1)
+startField-->tester:
+
+/'megkerdezi az elso mezot hogy mi a kovetkezo IRoad'/
+tester->startField: getForward()
+startField-->tester:next
+
+/'elkeri a Field-ek listajat a kovetkezo IRoad-tol'/
+tester->nextField:getAvailable()
+nextField-->tester: [next]
+
+tester->c1: step()
+
+/'beallitja a kovetkezo lepest'/
+c1->driver: nextMove()
+driver-->c1:next
+
+/'lekerdezi az auto aktualis mezojet'/
+c1 -> driver: getCurrent()
+driver --> c1: startField
+
+/'auto megprobal kilepni'/
+c1 -> startField: tryExit(nextField)
+
+/'auto megkerdezi h kilephet-e'/
+startField -> startLayer: canExit(c1)
+startLayer --> startField: true
+
+/'megprobal belepni a kov mezore'/
+startField -> nextField: tryEnter(c1)
+
+/'megcsuszik'/
+nextField -> nextLayer: slip(c1)
+nextLayer --> nextField: true
+
+/'lekerdezi a sofort'/
+nextField -> c1: getDriver()
+c1 --> nextField: driver
+
+/'beallitja a kovetkezo mezot'/
+nextField -> driver: setNext(nextNextField)
+driver --> nextField:
+
+/'forced==true mert kotelezo megcsuszas'/
+nextField -> c1: step(true)
+
+/'lekeri a kov mezot'/
+c1 -> driver: getNext()
+driver --> c1: nextNextField
+
+/'lekeri az aktualis mezot'/
+c1 -> driver: getCurrent()
+driver --> c1: nextField
+
+/'megprobal lelepni a jegrol'/
+c1 -> nextField: tryExit(nextNextField)
+
+/'lelephet'/
+nextField -> nextLayer: canExit(c1)
+nextLayer --> nextField: true
+
+/'megprobal belepni a harmadik mezore'/
+nextField -> nextNextField: tryEnter(c1)
+
+/'a kovetkezon mar nem csuszik meg'/
+nextNextField -> nextNextLayer: slip(c1)
+nextNextLayer --> nextNextField: false
+
+/'megnezi h odaert-e a vegallomasahoz'/
+nextNextField -> c1: interact(nextNextField)
+c1 --> nextNextField: 
+
+/'tryEnter-re valasz sikerult belepni'/
+nextNextField --> nextField: true
+
+/'tryExit-re a valasz'/
+nextField --> c1:
+
+/'step-re a valasz'/
+c1 --> nextField:
+
+/'tryEnter-re a valasz'/
+nextField --> startField: true
+
+/'tryExit'/
+startField --> c1: true
+
+/'step'/
+c1 --> tester:
+
+@enduml
