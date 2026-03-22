@@ -1,0 +1,9 @@
+@startuml
+
+actor Tesztelő as a1
+participant "s : Snow" as p1
+
+a1 -> p1 : enter()
+p1 --> a1 : s : Snow
+
+@enduml

@@ -1,0 +1,9 @@
+@startuml
+
+actor Tesztelő as a1
+participant "l : Layer" as p1
+
+a1 -> p1 : merge(i : Ice)
+p1 --> a1 : i : Ice
+
+@enduml
