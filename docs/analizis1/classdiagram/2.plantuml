@@ -1,6 +1,8 @@
 @startuml "visitors"
 skinparam linetype ortho
 
+interface "ILayer"
+
    interface ILayerVisitor {
        + visit(s: Snow): void
        + visit(i: Ice): void
@@ -16,39 +18,37 @@ skinparam linetype ortho
 
 
    class SnowMergeVisitor implements ILayerVisitor{
-        - base : Snow
-        - result: ILayer
         + visit(s : Snow) : void
         + visit(i : Ice) : void
         + visit(l : Layer) : void
     }
-    SnowMergeVisitor -- Snow
+    SnowMergeVisitor --> "1" Snow: base
+    SnowMergeVisitor --> "1" ILayer: result
 
     class IceMergeVisitor implements ILayerVisitor{
-        - base : Ice
-        - result : ILayer
         + visit(s : Snow) : void
         + visit(i : Ice) : void
         + visit(l : Layer) : void
     }
-    IceMergeVisitor -- Ice
+    IceMergeVisitor --> "1" Ice: base
+    IceMergeVisitor --> "1" ILayer: result
 
     class IceSlipVisitor implements IVehicleVisitor{
         - result : bool
-        - random : IRandom
         + visit(c : Car) : void
         + visit(s : SnowPlow) : void
         + visit(b : Bus) : void
     }
 
+    IceSlipVisitor --> "1" IRandom: random
+
     class SnowExitVisitor implements IVehicleVisitor{
-        - base : Snow
         - result : bool
         + visit(c : Car) : void
         + visit(b : Bus) : void
         + visit(s : SnowPlow) : void
     }
-    SnowExitVisitor -- Snow
+    SnowExitVisitor --> "1" Snow: base
 
     class BrushClearLayerVisitor implements ILayerVisitor{
         - result : bool

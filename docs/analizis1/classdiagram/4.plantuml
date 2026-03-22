@@ -1,6 +1,6 @@
 @startuml "fields"
 skinparam linetype ortho
-
+interface "IField"
 interface "ICollector"
 interface "IHead"
 
@@ -12,16 +12,14 @@ interface "IHead"
 }
 
    abstract class Vehicle {
-       - driver: IDriver
        + step(): void
        + step(forced: bool): void
-       + wreck(): void
-       + isWrecked(): bool
+       + contact(v: Vehicle): void
        + getDriver(): IDriver
        + interact(field: IField): void
    }
 
-    Vehicle -- IDriver
+    Vehicle --> "1" IDriver: driver
    
        interface IInventory{
            + removeItem(i: IInventoryItem, amount: int): bool
@@ -35,42 +33,33 @@ interface "IHead"
        
     class SnowPlow extends Vehicle implements ISnowPlow, ShopItem
     {
-    -inventory: IInventory
-    -collector: ICollector
-    -driver: IDriver
-    -currentHead: IHead
     +switchHead(head: IHead): bool
     +getInventory(): IInventory
     +price(): int
     +step(): void
     +step (forced: bool): void
-    +wreck(): void
-    +isWrecked(): bool
+    +contact(v: Vehicle): void
     +getDriver(): IDriver
     +interact(field: IField): void
     }
 
-    SnowPlow -- IInventory
-    SnowPlow -- ICollector
-    SnowPlow -- IHead
+    SnowPlow --> "1" IInventory: inventory
+    SnowPlow --> "1" ICollector: collector
+    SnowPlow --> "1" IHead: currentHead
 
 
     class Bus extends Vehicle
     {
-    -destination: Station
-    -collector: ICollector
-    -count: int
-    -driver: IDriver
+    -immobileTurnsLeft: int
     +step(): void
     +step(forced: bool): void
-    +wreck(): void
-    +isWrecked(): bool
+    +contact(v: Vehicle): void
     +getDriver(): IDriver
     +interact(field: IField): void
     }
     
-    Bus -- Station
-    Bus -- ICollector
+    Bus --> "1" Station: destination
+    Bus --> "1" ICollector: collector
 
 
     class Inventory implements IInventory{
@@ -82,36 +71,35 @@ interface "IHead"
 
     class Car extends Vehicle
     {
-    -destination: Office
-    -count: int
-    -driver: IDriver
+    -immobileTurnsLeft: int
     +step(): void
     +step (forced: bool): void
-    +wreck(): void
-    +isWrecked(): bool
+    +contact(v: Vehicle): void
     +getDriver(): IDriver
     +interact(field: IField): void
     }
     
-    Car -- Office
+    Car --> "1" Office: destination
 
 
     class CarDriver implements IDriver{
-        - current : IField
-        - next : IField
         + nexMove() : IField
         + setNext(field : IField) : void
         + getCurrent() : IField
         + getNext() : IField
     }
 
+    CarDriver --> "1" IField: current
+    CarDriver --> "1" IField: next
+
     class PlayerDriver implements IDriver{
-        - current : IField
-        - next : IField
         + nexMove() : IField
         + setNext(field : IField) : void
         + getCurrent() : IField
         + getNext() : IField
     }
+
+    PlayerDriver --> "1" IField: current
+    PlayerDriver --> "1" IField: next
 
 @enduml

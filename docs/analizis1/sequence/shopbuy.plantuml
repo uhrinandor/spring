@@ -6,8 +6,8 @@ participant "head: DragonHead" as item
 participant "i: Inventory" as inventory
 participant "shop: Shop" as shop
 player -> shop: buy(player, head, 1)
-shop -> head: price()
-head --> shop: 3
+shop -> item: price()
+item --> shop: 3
 shop -> player: charge(3)
 player --> shop: true
 shop -> item: apply(player, 1)

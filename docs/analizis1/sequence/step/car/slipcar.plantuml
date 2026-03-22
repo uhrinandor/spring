@@ -3,15 +3,16 @@ participant "next: Field" as next order 10
 participant "ice: Ice" as nextLayer order 20
 participant "c: Car" as car order 30
 participant "driver: CarDriver" as driver order 40
-
+participant "random: Random" as random order 50
 participant "current: Field" as current order 0
 participant "s1: Snow" as currentLayer order 50
 participant  "nextAfter: Field" as nextNext order 80
 participant "s: Snow" as nextNextLayer order 90
 
 current -> next: tryEnter(c)
-
-next -> nextLayer: slip(c)
+next -> nextLayer: slip(c, random)
+nextLayer -> random: nextBool(0.25)
+random --> nextLayer: true
 nextLayer --> next: true
 
 next -> car: getDriver()
