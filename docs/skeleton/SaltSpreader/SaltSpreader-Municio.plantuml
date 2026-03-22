@@ -1,0 +1,26 @@
+@startuml
+actor "Tesztelő" as tester
+participant "p: Prerequisite" as preq
+participant "sp: SnowPlow" as SnowP
+participant "saltspreader: SaltSpreader" as ss
+participant "i: Inventory" as i
+participant "s: Salt" as s
+
+
+
+tester -> preq: Brush-NoFieldToThrow-Layer()
+preq --> tester: f1
+tester -> SnowP: new SnowPlow()
+SnowP --> tester: sp
+tester -> f1: setVehicle(sp)
+f1 --> tester
+tester -> SnowP: interact(f1)
+SnowP -> ss: interact(f1, i)
+ss -> i: removeItem(s, 1)
+i --> ss: true
+ss -> f1: setSalt(s)
+f1 --> ss
+ss --> SnowP 
+SnowP --> tester
+
+@enduml

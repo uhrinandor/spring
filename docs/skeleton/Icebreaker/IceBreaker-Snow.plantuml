@@ -1,0 +1,26 @@
+@startuml
+actor "Tesztelő" as tester
+participant "p: Prerequisite" as preq
+participant "sp: SnowPlow" as SnowP
+participant "ib: IceBreaker" as ib
+participant "f1: Field" as f3
+participant "f2: Field" as f1
+participant "l1: Snow" as l1
+participant "i: Inventory" as i
+
+
+
+tester -> preq: Brush-NoFieldToThrow-Ice()
+preq --> tester: f1
+tester -> SnowP: new SnowPlow()
+SnowP --> tester: sp
+tester -> f1: setVehicle(sp)
+f1 --> tester
+tester -> SnowP: interact(f1)
+SnowP -> ib: interact(f1, i)
+ib -> f1: getLayer()
+f1 --> ib: l1
+ib --> SnowP 
+SnowP --> tester
+
+@enduml
