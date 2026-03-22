@@ -1,0 +1,69 @@
+@startuml
+/'komm diagram: ket egymas melletti mezo, mindketton sima layer'/
+/'BusGoalNotReached'/
+title BusGoalNotReached
+participant "Tesztelő" as tester
+participant "pre: Prerequisite" as pre
+participant "b: Bus" as b
+participant "pd: PlayerDriver" as pd
+participant "startField: Field" as startField
+participant "nextField: Field" as nextField
+participant "startLayer: Layer" as startLayer
+participant "nextLayer: Layer" as nextLayer
+
+/'letrehoz egy playerdrivert'/
+tester->pd:new()
+pd-->tester:pd
+
+/'letrehozza a buszt a playerdriverrel'/
+tester->b:new(pd)
+b-->tester:b
+
+tester->pre:BusGoalNotReached()
+pre-->tester:startField
+
+/'az elso mezo beallitja a buszt'/
+tester->startField: setVehicle(b)
+startField-->tester:
+
+/'lekeri a tovabblepesi lehetoseget'/
+tester->startField: getForward()
+startField-->tester:next
+
+tester->nextField:getAvailable()
+nextField-->tester:[next]
+
+/'a tesztelo lepteti a buszt'/
+tester->b: step()
+
+/'a driver meghatarozza a kovetkezo mezot'/
+b->pd: nextMove()
+pd-->b: nextField
+
+/'lekerdezi a busz aktualis mezojet'/
+b->pd: getCurrent()
+pd-->b: startField
+
+/'busz megprobal kilepni a jelenlegi mezorol'/
+b->startField: tryExit(nextField)
+
+/'a jelenlegi mezo retege eldonti, hogy kilephet-e'/
+startField->startLayer: canExit(b)
+startLayer-->startField: true
+
+/'megprobal belepni a kovetkezo mezore'/
+startField->nextField: tryEnter(b)
+
+/'a kovetkezo mezon nem csuszik meg'/
+nextField->nextLayer: slip(b)
+nextLayer-->nextField: false
+
+/'a busz ellenorzi a mezot, de ez meg nem a celja'/
+nextField->b: interact(nextField)
+b-->nextField:
+
+/'sikeres belepes'/
+nextField-->startField: true
+startField-->b: true
+b-->tester:
+@enduml

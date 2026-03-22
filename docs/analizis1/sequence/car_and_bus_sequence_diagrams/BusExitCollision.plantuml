@@ -1,0 +1,94 @@
+@startuml
+/'komm diagram: ket mezo egymas utan, mindketton sima layer'/
+/'BusExitCollision'/
+title BusExitCollision
+participant "Tesztelő" as tester
+participant "pre: Prerequisite" as pre
+participant "start:Field" as startField
+participant "next: Field" as nextField
+participant "c: Car" as c
+participant "b: Bus" as b
+participant "cd: CarDriver" as cd
+participant "pd: PlayerDriver" as pd
+participant "l1: Layer" as startLayer
+participant "l2: Layer" as nextLayer
+/'letrehoz egy cardrivert'/
+tester->cd:new()
+cd-->tester:cd
+
+/'letrehozza az autot a Cardriverrel'/
+tester->c:new(cd)
+c-->tester:c
+
+/'letrehoz egy Playerdrivert'/
+tester->pd:new()
+pd-->tester:pd
+
+/'letrehozza a buszt'/
+tester->b:new(pd)
+b-->tester:b
+
+/'pre megadja a kezdomezot'/
+tester->pre:CarExitCollision()
+pre-->tester:startField
+
+/'az elso mezo beallitja az autot'/
+tester->startField: setVehicle(c)
+startField-->tester:
+
+/'megkerdezi az elso mezot hogy mi a kovetkezo IRoad'/
+tester->startField: getForward()
+startField-->tester:next
+
+/'elkeri a Field-ek listajat a kovetkezo IRoad-tol'/
+tester->nextField:getAvailable()
+nextField-->tester: [next]
+
+/'beallitja a masodik mezore a buszt'/
+tester->nextField: setVehicle(b)
+nextField-->tester:
+
+tester->c: step()
+
+/'az auto elore probal majd lepni'/
+c->cd: nextMove()
+cd-->c: nextField
+
+/'lekerdezi az auto aktualis mezojet'/
+c -> cd: getCurrent()
+cd --> c: startField
+
+/'az auto megprobal kilepni'/
+c -> startField: tryExit(nextField)
+
+/'az auto megkerdezi h kilephet-e'/
+startField -> startLayer: canExit(c)
+startLayer --> startField: true
+
+/'az auto megprobal belepni'/
+startField -> nextField: tryEnter(c)
+
+/'az auto osszetorik'/
+nextField -> c: contact(b)
+c --> nextField: 
+
+/'bus is osszetorik'/
+nextField -> b: contact(c)
+b --> nextField:
+
+/'tryEnter-re a valasz, tehat nem lephet be a car'/
+nextField --> startField: false
+
+/'tryExit-re a valasz, tehat nem lephet ki a car'/
+startField --> c:
+
+/'step()-re a valasz'/
+c --> tester:
+
+
+/'BUSZ MEGPROBAL MEG KETSZER LEPNI es egybol visszater'/
+tester->b: step()
+b-->tester:
+tester->b: step()
+b-->tester:
+@enduml

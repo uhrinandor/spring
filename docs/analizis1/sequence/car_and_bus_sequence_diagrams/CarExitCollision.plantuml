@@ -1,0 +1,93 @@
+@startuml
+/'komm diagramba szukseges: ket ures mezo sima layer'/
+/'CarExitCollision'/
+/'hatso auto beleutkozik az elsobe, utana elso auto megprobal kilepni'/
+title CarExitCollision
+participant "Tesztelő" as tester
+participant "pre: Prerequisite" as pre
+participant "start:Field" as startField
+participant "next: Field" as nextField
+participant "c1: Car" as c1
+participant "c2: Car" as c2
+participant "cd1: CarDriver" as pd1
+participant "cd2: CarDriver" as pd2
+participant "l1: Layer" as startLayer
+participant "l2: Layer" as nextLayer
+/'letrehoz egy playerdrivert'/
+tester->cd1:new()
+cd1-->tester:cd1
+
+/'letrehozza az elso autot a Cardriverrel'/
+tester->c1:new(cd1)
+c1-->tester:c1
+
+/'letrehoz meg egy Cardrivert'/
+tester->cd2:new()
+cd2-->tester:cd2
+
+/'letrehozza a masodik autot'/
+tester->c2:new(cd2)
+c2-->tester:c2
+
+/'pre megadja a kezdomezot'/
+tester->pre:CarExitCollision()
+pre-->tester:startField
+
+/'az elso mezo beallitja az elso autot'/
+tester->startField: setVehicle(c1)
+startField-->tester:
+
+/'megkerdezi az elso mezot hogy mi a kovetkezo IRoad'/
+tester->startField: getForward()
+startField-->tester:next
+
+/'elkeri a Field-ek listajat a kovetkezo IRoad-tol'/
+tester->nextField:getAvailable()
+nextField-->tester: [next]
+
+/'beallitja a masodik mezore a masodik autot'/
+tester->nextField: setVehicle(c2)
+nextField-->tester:
+
+tester->c1: step()
+
+/'jatekos beallitja h elore szeretne lepni'/
+c1->cd1: nextMove()
+cd1-->c1: nextField
+
+/'lekerdezi az auto aktualis mezojet'/
+c1 -> cd1: getCurrent()
+cd1 --> c1: startField
+
+/'hatso auto megprobal kilepni'/
+c1 -> startField: tryExit(nextField)
+
+/'hatso auto megkerdezi h kilephet-e'/
+startField -> startLayer: canExit(c1)
+startLayer --> startField: true
+
+/'hatso auto megprobal belepni'/
+startField -> nextField: tryEnter(c1)
+
+/'hatso auto osszetorik'/
+nextField -> c1: contact(c2)
+c1 --> nextField: 
+
+/'elso auto is osszetorik'/
+nextField -> c2: contact(c1)
+c2 --> nextField:
+
+/'tryEnter-re a valasz, tehat nem lephet be a c1'/
+nextField --> startField: false
+
+/'tryExit-re a valasz, tehat nem lephet ki a c1'/
+startField --> c1:
+
+/'step()-re a valasz'/
+c1 --> tester:
+
+
+/'ELSO AUTO MEGPROBAL LEPNI es egybol visszater'/
+tester->c2: step()
+c2-->tester:
+@enduml
