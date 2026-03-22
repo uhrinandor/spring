@@ -1,0 +1,12 @@
+@startuml
+
+actor Tesztelő as a1
+participant "i : Ice" as p1
+participant "s2 : Snow" as p2
+
+a1 -> p1 : merge(s1 : Snow)
+p1 -> p2 : Snow()
+p2 --> p1 : s2 : Snow
+p1 --> a1 : s2 : Snow
+
+@enduml

@@ -1,9 +1,9 @@
 @startuml
 
 actor Tesztelő as a1
-participant "s : Snow" as p1
+participant "l : Layer" as p1
 
-a1 -> p1 : enter()
+a1 -> p1 : merge(s : Snow)
 p1 --> a1 : s : Snow
 
 @enduml

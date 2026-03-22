@@ -5,7 +5,6 @@ participant "s : Snow" as p1
 participant "i : Ice" as p2
 
 a1 -> p1 : enter()
-p1 -> p1 : level--
 p1 -> p2 : Ice()
 p2 -> p1 : i : Ice
 p1 -> a1 : i : Ice
