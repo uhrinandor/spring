@@ -1,0 +1,29 @@
+@startuml
+
+actor tester as user
+participant "pr: Prerequisite" as pr
+participant "sp: SnowPlow" as sp
+participant "dragon: Dragon" as dragon
+participant "f1: Field" as f1
+
+
+'participant "l1: Layer" as l1 
+participant "i: Inventory" as i
+
+user -> pr: Dragon-Nomunicio()
+pr --> user: f1
+
+user -> sp: new SnowPlow()
+sp --> user: sp
+user -> f1: setVehicle(sp)
+f1 --> user
+
+'interact:
+user -> sp: interact(f2)
+sp -> dragon: interact(f2, i)
+dragon -> i: removeItem(new Biokerosene(), 1)
+i --> dragon: false
+dragon --> sp
+sp --> user
+
+
