@@ -1,7 +1,7 @@
 @startuml
 /'komm diagram: ket mezo egymas utan, a masodik mellett egy buszmegallo, mindket mezon sima layer'/
 /'BusGoalReached'/
-title BusGoalReached
+
 participant "Tesztelő" as tester
 participant "pre: Prerequisite" as pre
 participant "b: Bus" as b
