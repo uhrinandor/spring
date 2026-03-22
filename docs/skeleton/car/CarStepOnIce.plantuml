@@ -1,7 +1,6 @@
 @startuml
 /'komm diagram: 3 egymast koveto mezo kozepson jeg'/
 /'CarStepOnIce'/
-title CarStepOnIce
 participant "Tesztelő" as tester
 participant "pre: Prerequisite" as pre
 participant "c: Car" as c1

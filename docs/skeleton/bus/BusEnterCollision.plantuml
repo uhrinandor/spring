@@ -2,7 +2,7 @@
 
 /'komm diagram: ket mezo egymas utan mindketton sima layer'/
 /'BusEnterCollision'/
-title BusEnterCollision
+
 participant "Tesztelő" as tester
 participant "pre: Prerequisite" as pre
 participant "start:Field" as startField

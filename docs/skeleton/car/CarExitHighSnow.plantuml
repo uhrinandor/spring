@@ -2,7 +2,7 @@
 /'komm. diagram: 3 mezo egymas utan kozepson magas ho'/
 /'CarExitHighSnow'/
 /'auto ralep magas havas mezore es utana nem tud lelepni rola'/
-title CarExitHighSnow
+
 participant "Tesztelő" as tester
 participant "pre: Prerequisite" as pre
 participant "c: Car" as car

@@ -3,7 +3,7 @@
 /'komm diagramba szukseges: ket ures mezo sima layer'/
 /'CarEnterCollision'/
 /'hatso auto probal kilepni a mezobol es karambolozik az elotte levo autoval'/
-title CarEnterCollision
+
 participant "Tesztelő" as tester
 participant "pre: Prerequisite" as pre
 participant "start:Field" as startField

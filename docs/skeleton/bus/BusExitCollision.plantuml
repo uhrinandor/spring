@@ -1,7 +1,8 @@
 @startuml
 /'komm diagram: ket mezo egymas utan, mindketton sima layer'/
 /'BusExitCollision'/
-title BusExitCollision
+
+
 participant "Tesztelő" as tester
 participant "pre: Prerequisite" as pre
 participant "start:Field" as startField
