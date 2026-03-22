@@ -1,0 +1,26 @@
+@startuml
+title Melt-HighSnow
+
+actor "Tesztelő" as tester
+participant "pr: Prerequisite" as preq
+participant "f: Field" as field
+participant "s: Salt" as salt
+participant "hs: HighSnow" as layer
+participant "visitor: MeltLayerVisitor" as visitor
+
+tester -> preq: meltHignSnow()
+preq --> tester: f
+tester -> field: melt()
+
+field -> salt: melt(hs)
+
+salt -> visitor: new()
+visitor --> salt: visitor
+salt -> visitor: visit(hs)
+visitor --> salt:
+salt -> visitor: getResult()
+visitor --> salt: hs
+salt --> field: hs
+
+field --> tester:
+@enduml

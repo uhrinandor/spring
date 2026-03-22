@@ -1,0 +1,29 @@
+@startuml
+title Melt-LowSnow
+
+actor "Tesztelő" as tester
+participant "pr: Prerequisite" as preq
+participant "f: Field" as field
+participant "s: Salt" as salt
+participant "ls: LowSnow" as layer
+participant "l: Layer" as result
+participant "visitor: MeltLayerVisitor" as visitor
+
+tester -> preq: meltLowSnow()
+preq --> tester: f
+tester -> field: melt()
+
+field -> salt: melt(ls)
+
+salt -> visitor: new()
+visitor --> salt: visitor
+salt -> visitor: visit(ls)
+visitor -> result: new()
+result --> visitor: l
+visitor --> salt:
+salt -> visitor: getResult()
+visitor --> salt: l
+salt --> field: l
+
+field --> tester:
+@enduml
