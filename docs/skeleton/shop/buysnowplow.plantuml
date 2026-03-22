@@ -1,0 +1,30 @@
+@startuml
+title Buy-SnowPlow
+
+actor "Tesztelő" as tester
+participant "pr: Prerequisite" as preq
+participant "spp: SnowPlowPlayer" as player
+participant "s: Shop" as shop
+participant "sp2: SnowPlow" as newSnowplow
+
+tester -> preq: buyDragonHead()
+preq --> tester: spp
+tester -> shop: new()
+shop --> tester: s
+tester -> newSnowplow: new()
+newSnowplow --> tester: sp2
+tester -> shop: buy(spp, sp2, 1)
+
+shop -> newSnowplow: price()
+newSnowplow --> shop: 5
+shop -> player: charge(5)
+player --> shop: true
+shop -> newSnowplow: apply(player, 1)
+
+newSnowplow -> player: addVehicle(newSnowplow)
+player --> newSnowplow
+
+newSnowplow --> shop:
+shop --> tester: 
+
+@enduml
