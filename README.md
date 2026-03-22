@@ -18,7 +18,7 @@ A `com.spring.app.skeleton` indítható package, ami egy CLI-t ad, amiben futtat
 
 ## Setup
 
-Van egy aggregátor build project, az `app/build` mappában, itt futtassátok:
+Van egy aggregátor build project, az `app/app-build` mappában, itt futtassátok:
 
 ```
 > mvn clean package
