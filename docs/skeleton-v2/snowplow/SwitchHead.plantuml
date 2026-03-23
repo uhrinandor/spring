@@ -1,6 +1,6 @@
 @startuml switchhead
 actor "Tesztelő" as tester
-participant "sp: SnowPlow" as sp
+participant "s5: SnowPlow" as sp
 participant "inventory: Inventory" as inventory
 participant "h: DragonHead" as head
 participant "b: IceBreaker" as currentHead
