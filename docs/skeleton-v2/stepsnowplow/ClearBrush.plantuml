@@ -1,0 +1,20 @@
+@startuml StepsnowplowFromSnowDragonHead
+
+actor "Tesztelő" as tester
+participant "s1: SnowPlow" as snowplow
+participant "p1: SnowPlowPlayer" as player
+participant "bru: Brush" as head
+participant "f6: Field" as f6
+participant "l6: Snow" as l6
+
+tester -> snowplow: interact(f6)
+activate snowplow
+
+snowplow -> head: interact(f6, i)
+activate head
+
+head --> snowplow: true
+deactivate head
+
+snowplow --> tester: 
+deactivate snowplow

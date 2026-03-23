@@ -2,110 +2,108 @@
 
 actor "Tesztelő" as tester
 participant "s5: Snowplow" as snowplow
+participant "p1: SnowPlowPlayer" as player
+participant "ib: IceBreaker" as head
+participant "i: Inventory" as inventory
 participant "d5: PlayerDriver" as driver
 participant "f8: Field" as f8
 participant "l8: Ice" as l8
-participant "f8: Field" as f8
-participant "l4: Ice" as l4
-participant "f5: Field" as f5
-participant "r: MockRandom" as random
+participant "f9: Field" as f9
+participant "l9: Ice" as l9
 participant "slip: IceSlipVisitor" as iceslipvisitor
+participant "r: Random" as r
+participant "breakIce: IceBreakerClearLayerVisitor" as breakIceVisitor
 
 tester -> snowplow: step()
 activate snowplow
 snowplow -> snowplow: canMove()
 activate snowplow
-'Skeleton.askInt("Meddig van még lerobbanva?")'
-snowplow --> snowplow: üzemképes
+snowplow --> snowplow: true
 deactivate snowplow
-alt üzemképes
-    snowplow -> driver: nextMove()
-    activate driver
-    driver --> snowplow: f8
-    deactivate driver
-    snowplow -> driver: getCurrent()
-    activate driver
-    driver --> snowplow: f8
-    deactivate driver
-    snowplow -> f8: tryExit(f8)
-    activate f8
-    f8 -> l8: canExit(c2)
-    activate l8
-    l8 --> f8: true
-    deactivate l8
-    
-    f8 -> f8: tryEnter(c2)
-    activate f8
-    
-    f8 -> l4: enter()
-    activate l4
-    l4 --> f8: l4
-    deactivate l4
-    
-    f8 -> l4: slip(c2, r)
-    activate l4
-    l4 -> iceslipvisitor: <<create>>(r)
-    l4 -> iceslipvisitor: visit(c2)
-    activate iceslipvisitor
-    'Skeleton.askBool("Megcsúszik?")
-    iceslipvisitor --> l4: 
-    deactivate iceslipvisitor
-    l4 -> iceslipvisitor: getResult()
-    activate iceslipvisitor
-    iceslipvisitor --> l4: megcsúszik
-    deactivate iceslipvisitor
-    l4 --> f8: megcsúszik
-    deactivate l4
-    alt megcsúszik
-        f8 -> snowplow: getDriver()
-        activate snowplow
-        snowplow --> f8: d2
-        deactivate snowplow
-        f8 -> f5: getAvailable()
-        activate f5
-        f5 --> f8: [f5]
-        deactivate f5
-        f8 -> driver: setNext(f5)
-        activate driver
-        driver --> f8:
-        deactivate driver
-        f8 -> snowplow: step(true)
-        activate snowplow
+snowplow -> driver: nextMove()
+activate driver
+driver --> snowplow: f9
+deactivate driver
+snowplow -> driver: getCurrent()
+activate driver
+driver --> snowplow: f8
+deactivate driver
+snowplow -> f8: tryExit(f9)
+activate f8
+f8 -> l8: canExit(s5)
+activate l8
+l8 --> f8: true
+deactivate l8
 
-        snowplow -> driver: getNext()
-        activate driver
-        driver --> snowplow: f5
-        deactivate driver
-        snowplow -> driver: getCurrent()
-        activate driver
-        driver --> snowplow: f8
-        deactivate driver
-        snowplow -> f8: tryExit(f5)
-        activate f8
-        note right
-            Nincs külöbség a két step között,
-            kizárólag a Driver-től való lekérés,
-            míg egyiknél újrakalkulálja a keresett irányt,
-            a getNext() kizárólag egy getter-ként szolgál, ezért
-            nem bontom továbbiakban a következő step lefutását.
-        end note
-        f8 --> snowplow:
-        deactivate f8
+f8 -> f9: tryEnter(s5)
+activate f9
 
-        snowplow --> f8:
-        deactivate snowplow
-    else 
-        f8 -> snowplow: interact(f8)
-        activate snowplow
-        snowplow --> f8: 
-        deactivate snowplow
-    end
-    
-    f8 --> f8: true
-    deactivate f8
-    
-    f8 --> snowplow:
-    deactivate f8
-end
+f9 -> l9: enter()
+activate l9
+l9 --> f9: l9
+deactivate l9
+
+f9 -> l9: slip(s5, r)
+activate l9
+l9 -> iceslipvisitor: <<create>>(r)
+activate iceslipvisitor
+iceslipvisitor --> l9:
+deactivate iceslipvisitor
+l9 -> iceslipvisitor: visit(s5)
+activate iceslipvisitor
+iceslipvisitor --> l9: 
+deactivate iceslipvisitor
+l9 -> iceslipvisitor: getResult()
+activate iceslipvisitor
+iceslipvisitor --> l9: false
+deactivate iceslipvisitor
+l9 --> f9: false
+deactivate l9
+
+f9 -> snowplow: interact(f9)
+activate snowplow
+
+snowplow -> head: interact(f9, i)
+activate head
+head -> f9: getLayer()
+activate f9
+f9 --> head: l9
+deactivate f9
+head -> breakIceVisitor: <<create>>()
+activate breakIceVisitor
+breakIceVisitor --> head:
+deactivate breakIceVisitor
+head -> breakIceVisitor: visit(l9)
+activate breakIceVisitor
+note right
+Mivel itt be kell billenteni a flaget, ezért ezt itt meg fogjuk tenni
+a visitoron belül
+end note
+breakIceVisitor -> l9: setBroken(true)
+activate l9
+l9 --> breakIceVisitor:
+deactivate l9
+breakIceVisitor --> head:
+deactivate breakIceVisitor
+head -> breakIceVisitor: getResult()
+activate breakIceVisitor
+breakIceVisitor --> head: true
+deactivate breakIceVisitor
+head --> snowplow: true
+deactivate head
+snowplow -> player: give(1)
+activate player
+player --> snowplow:
+deactivate player
+
+snowplow --> f9: 
+deactivate snowplow
+
+f9 --> f8: true
+deactivate f9
+
+f8 --> snowplow:
+deactivate f8
+
 snowplow --> tester: 
 deactivate snowplow

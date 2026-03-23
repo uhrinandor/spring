@@ -9,7 +9,7 @@ participant "l3: Ice" as l3
 participant "f4: Field" as f4
 participant "l4: Ice" as l4
 participant "f5: Field" as f5
-participant "r: MockRandom" as random
+participant "r: Random" as random
 participant "slip: IceSlipVisitor" as iceslipvisitor
 
 tester -> car: step()
@@ -46,6 +46,9 @@ alt üzemképes
     f4 -> l4: slip(c2, r)
     activate l4
     l4 -> iceslipvisitor: <<create>>(r)
+    activate iceslipvisitor
+    iceslipvisitor --> l4:
+    deactivate iceslipvisitor
     l4 -> iceslipvisitor: visit(c2)
     activate iceslipvisitor
     'Skeleton.askBool("Megcsúszik?")

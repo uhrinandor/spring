@@ -34,6 +34,9 @@ alt üzemképes
     activate l1
     'Skeleton.askInt("Milyen magas a hó?")
     l1 -> exitVisitor: <<create>>(l1)
+    activate exitVisitor
+    exitVisitor --> l1:
+    deactivate exitVisitor
     l1 -> exitVisitor: visit(c1)
     activate exitVisitor
     exitVisitor --> l1:
@@ -53,8 +56,11 @@ alt üzemképes
         f2 -> l2: enter()
         activate l2
         'Skeleton.askInt("Milyen magas a hó?")'
-        alt level > 1
+        alt level <= 1
           l2 -> newIce: <<create>>()
+          activate newIce
+          newIce --> l2:
+          deactivate newIce
           l2 --> f2: newIce
           deactivate l2
           f2 -> newIce: slip(c1)

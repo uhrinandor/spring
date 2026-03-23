@@ -42,20 +42,32 @@ f1 -> f2: tryEnter(s1)
 activate f2
 'Lecsökkenti a hó vastagságát'
 f2 -> l2: enter()
+activate l2
 'Skeleton.askInt("Milyen magas a hó?")'
-alt level > 1
+alt level <= 1
     l2 -> newIce: <<create>>()
+    activate newIce
+    newIce --> l2:
+    deactivate newIce
+    
     l2 --> f2: newIce
+    deactivate l2
     f2 -> newIce: slip(s1)
+    activate newIce
     newIce --> f2: megcsúszik
+    deactivate newIce
     note left
     Lásd: 
     StepSnowplowToIceIceBreaker
     end note
 else
+    activate l2
     l2 --> f2: l2
+    deactivate l2
     f2 -> l2: slip(s1)
+    activate l2
     l2 --> f2: false
+    deactivate l2
 end
 
 
@@ -66,28 +78,49 @@ snowplow -> head: interact(f2, i)
 activate head
 
 head -> inventory: removeItem(new Biokerosene(), 1)
+activate inventory
 'Skeleton.askInt("Mennyi biokerozinja van a hókotrónak?")
 inventory -> head: vanMunicio
+deactivate inventory
 alt vanMunicio
 head -> f2: setLayer(new Layer())
-f2 --> head: 
-head -> f2: getForward()
+activate f2
+f2 --> head:
+deactivate f2 
+head -> f2: getFront()
+activate f2
 f2 --> head: f3
+deactivate f2
 f3 -> head: getAvailable()
+activate f3
 f3 --> head: [f3]
+deactivate f3
 head -> f3: setLayer(new Layer())
+activate f3
 f3 --> head:
-head -> f3: getForward()
+deactivate f3
+head -> f3: getFront()
+activate f3
 f3 --> head: f4
+deactivate f3
 head -> f4: getAvailable()
+activate f4
 f4 --> head: [f4]
+deactivate f4
 head -> f4: setLayer(new Layer())
+activate f4
 f4 --> head:
+deactivate f4
 head --> snowplow: true
+deactivate head
 snowplow -> player: give(1)
+activate player
 player --> snowplow: 
+deactivate player
 else
+activate head
 head --> snowplow: false
+deactivate head
 end
 deactivate head
 snowplow --> f2: 
