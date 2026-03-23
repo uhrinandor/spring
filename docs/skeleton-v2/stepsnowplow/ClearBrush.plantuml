@@ -4,17 +4,83 @@ actor "Tesztelő" as tester
 participant "s1: SnowPlow" as snowplow
 participant "p1: SnowPlowPlayer" as player
 participant "bru: Brush" as head
+participant "visitor: BrushClearLayerVisitor" as visitor
 participant "f6: Field" as f6
 participant "l6: Snow" as l6
+participant "f7: Field" as f7
+participant "l7: Snow" as l7
+participant "mergeVisitor: MergeSnowVisitor" as mergeVisitor
 
 tester -> snowplow: interact(f6)
 activate snowplow
 
 snowplow -> head: interact(f6, i)
 activate head
+head -> f6: getLayer()
+activate f6
+f6 --> head: l6
+deactivate f6
+head -> visitor: <<create>>()
+activate visitor
+visitor --> head:
+deactivate visitor
+head -> visitor: visit(l6)
+activate visitor
+visitor --> head:
+deactivate visitor
+head -> visitor: getResult()
+activate visitor
+visitor --> head: true
+deactivate visitor
 
+head -> f6: setLayer(new Layer())
+activate f6
+f6 --> head:
+deactivate f6
+
+head -> f6: getRight()
+activate f6
+f6 --> head: f7
+deactivate f6
+head -> f7: getLayer()
+activate f7
+f7 --> head: l7
+deactivate f7
+head -> l7: merge(l6)
+activate l7
+l7 -> mergeVisitor: <<create>>(l7)
+activate mergeVisitor
+mergeVisitor --> l7:
+deactivate mergeVisitor
+l7 -> mergeVisitor: visit(l6)
+activate mergeVisitor
+'Skeleton.askInt("Milyen vastag a hó?") A
+'Skeleton.askInt("Milyen vastag a hó?") B
+mergeVisitor --> l7: 
+deactivate mergeVisitor
+l7 -> mergeVisitor: getResult()
+activate mergeVisitor
+note right
+Összeadódik
+a két hóvastagság
+end note
+mergeVisitor --> l7: l7
+deactivate mergeVisitor
+l7 --> head: l7
+deactivate l7
+head -> f7: setLayer(l7)
+activate f7
+note right
+Itt azért kell mindig beállítani, mert nem biztos, hogy nem 
+új réteg jön létre...
+end note
+f7 --> head:
+deactivate f7
 head --> snowplow: true
 deactivate head
-
+snowplow -> player: give(1)
+activate player
+player --> snowplow:
+deactivate player
 snowplow --> tester: 
 deactivate snowplow
