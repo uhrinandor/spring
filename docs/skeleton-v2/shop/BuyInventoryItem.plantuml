@@ -1,0 +1,43 @@
+@startuml BuyInventoryItem
+
+actor "Tesztelő" as tester
+participant "sp: SnowPlow" as sp
+participant "p: SnowPlowPlayer" as player
+participant "head: DragonHead" as item
+participant "i: Inventory" as inventory
+participant "s: Shop" as shop
+tester -> shop: buy(player, head, 1)
+activate shop
+shop -> item: price()
+activate item
+'Skeleton.askInt("Mennyibe kerül?")
+item --> shop: price
+deactivate item
+shop -> player: charge(price)
+activate player
+'Skeleton.askInt("Mennyi pénze van?")
+player --> shop: success
+deactivate player
+alt success
+shop -> item: apply(player, 1)
+activate item
+item -> player: snowplow()
+activate player
+player --> item: sp
+deactivate player
+item -> sp: getInventory()
+activate sp
+sp --> item: i
+deactivate sp
+item -> inventory: addItem(head, 1)
+activate inventory
+inventory --> item:
+deactivate inventory
+item --> shop:
+deactivate item
+end
+shop --> tester:
+
+deactivate shop
+
+@enduml

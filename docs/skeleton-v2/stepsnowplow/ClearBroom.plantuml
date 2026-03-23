@@ -1,0 +1,96 @@
+@startuml StepsnowplowFromSnowDragonHead
+
+actor "Tesztelő" as tester
+participant "s3: SnowPlow" as snowplow
+participant "p1: SnowPlowPlayer" as player
+participant "bro: Broom" as head
+participant "visitor: BroomClearLayerVisitor" as visitor
+participant "f5: Field" as f5
+participant "l5: Ice" as l5
+participant "f6: Field" as f6
+participant "f7: Field" as f7
+participant "l7: Snow" as l7
+participant "mergeVisitor: MergeSnowVisitor" as mergeVisitor
+
+tester -> snowplow: interact(f5)
+activate snowplow
+
+snowplow -> head: interact(f5, i)
+activate head
+head -> f5: getLayer()
+activate f5
+f5 --> head: l5
+deactivate f5
+head -> visitor: <<create>>()
+activate visitor
+visitor --> head:
+deactivate visitor
+head -> visitor: visit(l5)
+'Skeleton.askBool("Tört a jég?")
+activate visitor
+visitor --> head:
+deactivate visitor
+head -> visitor: getResult()
+activate visitor
+visitor --> head: isBrokenIce
+
+deactivate visitor
+alt isBrokenIce
+head -> f5: setLayer(new Layer())
+activate f5
+f5 --> head:
+deactivate f5
+
+head -> f5: getRight()
+activate f5
+f5 --> head: f6
+deactivate f5
+head -> f6: getRight()
+activate f6
+f6 --> head: f7
+deactivate f6
+head -> f7: getLayer()
+activate f7
+f7 --> head: l7
+deactivate f7
+head -> l7: merge(l5)
+activate l7
+l7 -> mergeVisitor: <<create>>(l7)
+activate mergeVisitor
+mergeVisitor --> l7:
+deactivate mergeVisitor
+l7 -> mergeVisitor: visit(l5)
+activate mergeVisitor
+'Skeleton.askInt("Milyen vastag a hó?") B
+mergeVisitor --> l7: 
+deactivate mergeVisitor
+l7 -> mergeVisitor: getResult()
+activate mergeVisitor
+note right
+A tört jég eggyel emeli a szintjét a hónak
+end note
+mergeVisitor --> l7: l7
+deactivate mergeVisitor
+l7 --> head: l7
+deactivate l7
+head -> f7: setLayer(l7)
+activate f7
+note right
+Itt azért kell mindig beállítani, mert nem biztos, hogy nem 
+új réteg jön létre...
+end note
+f7 --> head:
+deactivate f7
+head --> snowplow: true
+deactivate head
+snowplow -> player: give(1)
+activate player
+player --> snowplow:
+deactivate player
+else
+activate head
+head --> snowplow: false
+deactivate head
+end
+snowplow --> tester: 
+deactivate snowplow

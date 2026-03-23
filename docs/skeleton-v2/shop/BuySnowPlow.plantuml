@@ -1,0 +1,29 @@
+@startuml buyFromShop
+
+actor "Tesztelő" as tester
+participant "p: SnowPlowPlayer" as player
+participant "sp: SnowPlow" as sp
+participant "s: Shop" as shop
+
+
+tester -> shop: buy(player, sp, 1)
+activate shop
+shop -> sp: price()
+activate sp
+sp --> shop: 5
+deactivate sp
+shop -> player: charge(5)
+activate player
+player --> shop: true
+deactivate player
+shop -> sp: apply(player, 1)
+activate sp
+sp -> player: addVehicle(sp)
+activate player
+player --> sp
+deactivate player
+sp --> shop:
+deactivate sp
+shop --> tester
+deactivate shop
+@enduml
