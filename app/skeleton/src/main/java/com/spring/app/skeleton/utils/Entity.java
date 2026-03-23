@@ -1,6 +1,6 @@
-package com.spring.app.utils;
+package com.spring.app.skeleton.utils;
 
-public abstract class Entity {
+public abstract class Entity implements IEntity {
     protected int id;
     private static int nextId = 0;
 

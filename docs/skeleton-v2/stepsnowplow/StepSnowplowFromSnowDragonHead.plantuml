@@ -1,0 +1,102 @@
+@startuml StepsnowplowFromSnowDragonHead
+
+actor "Tesztelő" as tester
+participant "s1: SnowPlow" as snowplow
+participant "p1: SnowPlowPlayer" as player
+participant "d: Dragon" as head
+participant "f3: Field" as f3
+participant "f4: Field" as f4
+participant "i: Inventory" as inventory
+participant "d1: PlayerDriver" as driver
+participant "f1: Field" as f1
+participant "l1: Snow" as l1
+participant "exitVisitor: SnowExitVisitor" as exitVisitor
+participant "f2: Field" as f2
+participant "l2: Snow" as l2
+participant "newIce: Ice" as newIce
+
+
+tester -> snowplow: step()
+activate snowplow
+snowplow -> snowplow: canMove()
+activate snowplow
+snowplow --> snowplow: true
+deactivate snowplow
+
+snowplow -> driver: nextMove()
+driver --> snowplow: f2
+snowplow -> driver: getCurrent()
+driver --> snowplow: f1
+snowplow -> f1: tryExit(f2)
+activate f1
+f1 -> l1: canExit(s1)
+l1 -> exitVisitor: <<create>>(l1)
+l1 -> exitVisitor: visit(s1)
+exitVisitor --> l1:
+l1 -> exitVisitor: getResult()
+exitVisitor --> l1: true
+
+l1 --> f1: true
+
+f1 -> f2: tryEnter(s1)
+activate f2
+'Lecsökkenti a hó vastagságát'
+f2 -> l2: enter()
+'Skeleton.askInt("Milyen magas a hó?")'
+alt level > 1
+    l2 -> newIce: <<create>>()
+    l2 --> f2: newIce
+    f2 -> newIce: slip(s1)
+    newIce --> f2: megcsúszik
+    note left
+    Lásd: 
+    StepSnowplowToIceIceBreaker
+    end note
+else
+    l2 --> f2: l2
+    f2 -> l2: slip(s1)
+    l2 --> f2: false
+end
+
+
+f2 -> snowplow: interact(f2)
+activate snowplow
+
+snowplow -> head: interact(f2, i)
+activate head
+
+head -> inventory: removeItem(new Biokerosene(), 1)
+'Skeleton.askInt("Mennyi biokerozinja van a hókotrónak?")
+inventory -> head: vanMunicio
+alt vanMunicio
+head -> f2: setLayer(new Layer())
+f2 --> head: 
+head -> f2: getForward()
+f2 --> head: f3
+f3 -> head: getAvailable()
+f3 --> head: [f3]
+head -> f3: setLayer(new Layer())
+f3 --> head:
+head -> f3: getForward()
+f3 --> head: f4
+head -> f4: getAvailable()
+f4 --> head: [f4]
+head -> f4: setLayer(new Layer())
+f4 --> head:
+head --> snowplow: true
+snowplow -> player: give(1)
+player --> snowplow: 
+else
+head --> snowplow: false
+end
+deactivate head
+snowplow --> f2: 
+deactivate snowplow
+f2 --> f1: true    
+deactivate f2
+
+f1 --> snowplow:
+deactivate f1
+
+snowplow --> tester: 
+deactivate snowplow

@@ -1,4 +1,4 @@
-package com.spring.app.utils;
+package com.spring.app.skeleton.utils;
 
 import java.util.List;
 

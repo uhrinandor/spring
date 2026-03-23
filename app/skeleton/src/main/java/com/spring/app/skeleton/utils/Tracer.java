@@ -1,12 +1,22 @@
-package com.spring.app.utils;
+package com.spring.app.skeleton.utils;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.List;
 
 public class Tracer {
     private static Tracer instance;
     private int indentationLevel = 0;
     private static final String INDENT = "  ";
+    private final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+    private final PrintStream tracerStream = new PrintStream(buffer);
     private Tracer(){}
+
+    public void flush(){
+        System.out.print(buffer.toString());
+        tracerStream.flush();
+        buffer.reset();
+    }
 
     public static Tracer getInstance(){
         if(instance == null){
@@ -15,14 +25,9 @@ public class Tracer {
         return instance;
     }
 
-    // Minden teszt előtt érdemes meghívni, hogy az előzőben tesztelt hívás ne okozzon gondot.
-    public void reset(){
-        indentationLevel = 0;
-    }
-
     public void printIndent(int increase){
         for(int i=0; i<indentationLevel + increase; i++){
-            System.out.print(INDENT);
+            tracerStream.print(INDENT);
         }
     }
     public void printIndent(){
@@ -31,12 +36,12 @@ public class Tracer {
     
     public void info(String message){
         printIndent();
-        System.out.println("[INFO] "+message);
+        tracerStream.print("[INFO] "+message);
     }
 
     public void input(String message){
         printIndent();
-        System.out.println("[?] "+message);
+        tracerStream.print("[?] "+message);
     }
 
     // Függvény belépés jelzése az indítás ELŐTT, pl:
@@ -47,7 +52,7 @@ public class Tracer {
     // User osztály getId-ja az Entity osztályból származik, ez egy absztrakt osztály, mindenkinek ebből kell származnia
     public void enterFunction(String message){
         printIndent();
-        System.out.println("[->] " + message);
+        tracerStream.print("[->] " + message);
         indentationLevel++;
     }
 
@@ -56,7 +61,7 @@ public class Tracer {
     public void exitFunction(){
         indentationLevel--;
         printIndent();
-        System.out.println("[<-]");
+        tracerStream.print("[<-]");
     }
 
     // Ha új objektumot inicializáltunk ezzel tudjuk jelezni, példa:
@@ -65,11 +70,11 @@ public class Tracer {
     // Tracer.getInstance().newObject("user", user);
     public void newObject(String variableName, IPrintable object){
         printIndent();
-        System.out.println("[+] "+ object.getClass().getSimpleName() + " "+ variableName);
+        tracerStream.print("[+] "+ object.getClass().getSimpleName() + " "+ variableName);
         List<String> properties = object.init();
         for(String property: properties){
             printIndent(1);
-            System.out.println("- "+property);
+            tracerStream.print("- "+property);
         }
     }
 

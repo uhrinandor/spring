@@ -1,0 +1,56 @@
+@startuml StepCarToLayer
+
+actor "Tesztelő" as tester
+participant "c3: Car" as car
+participant "d3: CarDriver" as driver
+participant "f6: Field" as f6
+participant "l6: Layer" as l6
+participant "f7: Field" as f7
+participant "l7: Layer" as l7
+
+tester -> car: step()
+activate car
+car -> car: canMove()
+activate car
+'Skeleton.askInt("Meddig van még lerobbanva?")'
+car --> car: üzemképes
+deactivate car
+alt üzemképes
+    car -> driver: nextMove()
+    activate driver
+    driver --> car: f7
+    deactivate driver
+    car -> driver: getCurrent()
+    activate driver
+    driver --> car: f6
+    deactivate driver
+    car -> f6: tryExit(f7)
+    activate f6
+    f6 -> l6: canExit(c3)
+    activate l6
+    l6 --> f6: true
+    deactivate l6
+    f6 -> f7: tryEnter(c3)
+    activate f7
+
+    f7 -> l7: enter()
+    activate l7
+    l7 --> f7: l7
+    deactivate l7
+    
+    f7 -> l7: slip(c3)
+    activate l7
+    l7 --> f7: false
+    deactivate l7
+    f7 -> car: interact(f7)
+    activate car
+    
+    car --> f7: 
+    deactivate car
+    f7 --> f6: true    
+    deactivate f7
+    f6 --> car:
+    deactivate f6
+end
+car --> tester: 
+deactivate car

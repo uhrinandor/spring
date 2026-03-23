@@ -9,7 +9,6 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>../utils</module>
         <module>../model</module>
         <module>../skeleton</module>
     </modules>

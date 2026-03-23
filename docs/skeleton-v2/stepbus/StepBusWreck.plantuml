@@ -1,0 +1,56 @@
+@startuml StepBusWreck
+
+actor "Tesztelő" as tester
+participant "b3: Bus" as bus
+participant "player: BusPlayer" as player
+participant "d1: PlayerDriver" as driver
+participant "dest: Station" as dest
+participant "f6: Field" as f6
+participant "l6: Layer" as l6
+participant "f7: Field" as f7
+participant "c1: Car" as car
+
+tester -> bus: step()
+activate bus
+bus -> bus: canMove()
+activate bus
+'Skeleton.askInt("Meddig van még lerobbanva?")'
+bus --> bus: üzemképes
+deactivate bus
+alt üzemképes
+    bus -> driver: nextMove()
+    activate driver
+    driver --> bus: f7
+    deactivate driver
+    bus -> driver: getCurrent()
+    activate driver
+    driver --> bus: f6
+    deactivate driver
+    bus -> f6: tryExit(f7)
+    activate f6
+    f6 -> l6: canExit(b3)
+    activate l6
+    l6 --> f6: true
+    deactivate l6
+    
+    f6 -> f7: tryEnter(b3)
+    activate f7
+
+    f7 -> bus: contact(c1)
+    activate bus
+    bus --> f7: 
+    deactivate bus
+
+    f7 -> car: contact(b3)
+    activate car
+    car --> f7:
+    deactivate car
+
+    f7 --> f6: false
+    deactivate f7
+    
+    f6 --> bus:
+    deactivate f6
+end
+bus --> tester: 
+deactivate bus
