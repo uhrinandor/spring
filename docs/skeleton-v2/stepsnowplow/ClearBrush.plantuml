@@ -1,7 +1,7 @@
 @startuml StepsnowplowFromSnowDragonHead
 
 actor "Tesztelő" as tester
-participant "s1: SnowPlow" as snowplow
+participant "s3: SnowPlow" as snowplow
 participant "p1: SnowPlowPlayer" as player
 participant "bru: Brush" as head
 participant "visitor: BrushClearLayerVisitor" as visitor

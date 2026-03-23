@@ -1,0 +1,42 @@
+@startuml StepsnowplowFromSnowDragonHead
+
+actor "Tesztelő" as tester
+participant "s4: SnowPlow" as snowplow
+
+participant "ss: SaltSpreader" as head
+participant "i: Inventory" as inventory
+participant "f7: Field" as f7
+participant "salt: Salt" as salt
+
+tester -> snowplow: interact(f7)
+activate snowplow
+
+snowplow -> head: interact(f7, i)
+activate head
+head -> salt: <<create>>()
+activate salt
+salt --> head:
+deactivate salt
+
+head -> inventory: removeItem(salt)
+activate inventory
+'Skeleton.askInt("Mennyi só van a hókotrónak?")
+inventory --> head: vanMunicio
+deactivate inventory
+alt vanMunicio
+head -> f7: setSalt(salt)
+activate f7
+f7 --> head:
+deactivate f7
+end
+
+head --> snowplow: false
+note right
+Így jelezzük, hogy a lerakásért alapvetően
+nem jár jutalom
+end note
+deactivate head
+
+snowplow --> tester:
+
+deactivate snowplow
