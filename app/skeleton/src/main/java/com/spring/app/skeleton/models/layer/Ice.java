@@ -8,10 +8,30 @@ import com.spring.app.skeleton.utils.IRandom;
 
 public class Ice extends Entity implements ILayer {
 
+    private boolean broken;
+
+    public Ice(boolean broken){
+        this.broken = broken;
+    }
+
+    public boolean getBroken(){
+        return broken;
+    }
+
+    public void setBroken(boolean tmp){
+        broken = tmp;
+    }
+
     @Override
     public ILayer merge(ILayer layer) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'merge'");
+        IceMergeVisitor visitor = new IceMergeVisitor(this);
+        layer.accept(visitor);
+        return visitor.getResult();
+    }
+
+    @Override
+    public void accept(ILayerVisitor visitor) {
+        visitor.visit(this);
     }
 
     @Override
@@ -22,14 +42,12 @@ public class Ice extends Entity implements ILayer {
 
     @Override
     public boolean canExit(Vehicle v) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'canExit'");
+        return true;
     }
 
     @Override
     public ILayer enter() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'enter'");
+        return this;
     }
 
     @Override

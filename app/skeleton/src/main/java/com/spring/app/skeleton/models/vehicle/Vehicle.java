@@ -28,7 +28,8 @@ public abstract class Vehicle extends Entity {
     }
 
     public abstract void interact(IField f);
-
+    public abstract void accept(IVehicleVisitor visitor);
+  
     public IDriver getDriver(){
         return driver;
     }

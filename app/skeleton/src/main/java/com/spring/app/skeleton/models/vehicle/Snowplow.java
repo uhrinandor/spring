@@ -42,4 +42,11 @@ public class Snowplow extends Vehicle implements ISnowPlow{
         throw new UnsupportedOperationException("Unimplemented method 'interact'");
     }
     
+
+    @Override
+    public void accept(IVehicleVisitor visitor) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'accept'");
+    }
+    
 }
