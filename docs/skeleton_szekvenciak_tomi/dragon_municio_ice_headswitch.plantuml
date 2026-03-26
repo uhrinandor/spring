@@ -1,0 +1,55 @@
+@startuml
+
+actor tester as user
+participant "pr: Prerequisite" as pr
+participant "sp: SnowPlow" as sp
+participant "dragon: Dragon" as dragon
+participant "brush: Brush" as brush
+participant "f1: Field" as f1
+participant "f2: Field" as f2
+participant "f3: Field" as f3
+
+'participant "l1: Ice" as l1
+'participant "l2: Ice" as l2
+'participant "l3: Layer" as l3   
+participant "i: Inventory" as i
+
+
+
+
+
+user -> pr: Dragon-Municio-Ice()
+pr --> user: f1
+user -> sp: new SnowPlow()
+sp --> user: sp
+user -> f2: setVehicle(sp)
+f2 --> user
+
+'ide meg egy fejcsere
+user -> sp: switchHead(dragon)
+sp -> i: removeItem(dragon,1)
+i --> sp: true
+sp -> i: addItem(brush,1)
+i --> sp
+sp --> user
+
+
+'interact:
+user -> sp: interact(f2)
+sp -> dragon: interact(f2, i)
+dragon -> i: removeItem(new Biokerosene(), 1)
+i --> dragon: true
+dragon -> f2: setLayer(new Layer())
+f2 --> dragon
+dragon -> f2 :getNext()
+f2 --> dragon: f1
+dragon -> f1: setLayer(new Layer())
+f1 --> dragon
+dragon --> sp
+sp --> user
+
+
+
+
+
+@enduml

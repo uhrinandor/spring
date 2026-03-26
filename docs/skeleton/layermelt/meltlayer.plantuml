@@ -1,0 +1,23 @@
+@startuml
+actor "Tesztelő" as tester
+participant "pr: Prerequisite" as preq
+participant "f: Field" as field
+participant "s: Salt" as salt
+participant "l: Layer" as layer
+participant "visitor: MeltLayerVisitor" as visitor
+tester -> preq: meltLayer()
+preq --> tester: f
+tester -> field: melt()
+
+field -> salt: melt(l)
+
+salt -> visitor: new()
+visitor --> salt: visitor
+salt -> visitor: visit(l)
+visitor --> salt:
+salt -> visitor: getResult()
+visitor --> salt: l
+salt --> field: l
+
+field --> tester:
+@enduml

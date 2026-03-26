@@ -1,0 +1,119 @@
+@startuml
+/'komm diagram: 3 egymast koveto mezo kozepson jeg'/
+/'BusStepOnIce'/
+
+
+participant "Tesztelő" as tester
+participant "pre: Prerequisite" as pre
+participant "b: Bus" as b
+participant "driver: PlayerDriver" as driver
+participant "startField: Field" as startField
+participant "nextField: Field" as nextField
+participant "nextNextField: Field" as nextNextField
+participant "startLayer: Layer" as startLayer
+participant "nextLayer: Ice" as nextLayer
+participant "nextNextLayer: Layer" as nextNextLayer
+/'letrehoz egy playerdrivert'/
+tester->driver:new()
+driver-->tester:driver
+
+/'letrehozza az buszt a playerdriverrel'/
+tester->b:new(driver)
+b-->tester:b
+
+/'pre megadja a kezdo mezot'/
+tester->pre:BusStepOnIce()
+pre-->tester:startField
+
+/'az elso mezo beallitja az autot'/
+tester->startField: setVehicle(b)
+startField-->tester:
+
+/'megkerdezi az elso mezot hogy mi a kovetkezo IRoad'/
+tester->startField: getForward()
+startField-->tester:next
+
+/'elkeri a Field-ek listajat a kovetkezo IRoad-tol'/
+tester->nextField:getAvailable()
+nextField-->tester: [next]
+
+tester->b: step()
+
+/'beallitja a kovetkezo lepest'/
+b->driver: nextMove()
+driver-->b:next
+
+/'lekerdezi az busz aktualis mezojet'/
+b -> driver: getCurrent()
+driver --> b: startField
+
+/'busz megprobal kilepni'/
+b -> startField: tryExit(nextField)
+
+/'busz megkerdezi h kilephet-e'/
+startField -> startLayer: canExit(b)
+startLayer --> startField: true
+
+/'megprobal belepni a kov mezore'/
+startField -> nextField: tryEnter(b)
+
+/'megcsuszik'/
+nextField -> nextLayer: slip(b)
+nextLayer --> nextField: true
+
+/'lekerdezi a sofort'/
+nextField -> b: getDriver()
+b --> nextField: driver
+
+/'beallitja a kovetkezo mezot'/
+nextField -> driver: setNext(nextNextField)
+driver --> nextField:
+
+/'forced==true mert kotelezo megcsuszas'/
+nextField -> b: step(true)
+
+/'lekeri a kov mezot'/
+b -> driver: getNext()
+driver --> b: nextNextField
+
+/'lekeri az aktualis mezot'/
+b -> driver: getCurrent()
+driver --> b: nextField
+
+/'megprobal lelepni a jegrol'/
+b -> nextField: tryExit(nextNextField)
+
+/'lelephet'/
+nextField -> nextLayer: canExit(b)
+nextLayer --> nextField: true
+
+/'megprobal belepni a harmadik mezore'/
+nextField -> nextNextField: tryEnter(b)
+
+/'a kovetkezon mar nem csuszik meg'/
+nextNextField -> nextNextLayer: slip(b)
+nextNextLayer --> nextNextField: false
+
+/'megnezi h odaert-e a vegallomasahoz'/
+nextNextField -> b: interact(nextNextField)
+b --> nextNextField: 
+
+/'tryEnter-re valasz sikerult belepni'/
+nextNextField --> nextField: true
+
+/'tryExit-re a valasz'/
+nextField --> b:
+
+/'step-re a valasz'/
+b --> nextField:
+
+/'tryEnter-re a valasz'/
+nextField --> startField: true
+
+/'tryExit'/
+startField --> b: true
+
+/'step'/
+b --> tester:
+
+@enduml

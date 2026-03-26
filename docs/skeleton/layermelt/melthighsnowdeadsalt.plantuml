@@ -1,0 +1,17 @@
+@startuml
+actor "Tesztelő" as tester
+participant "pr: Prerequisite" as preq
+participant "f: Field" as field
+participant "s: Salt" as salt
+participant "hs: HighSnow" as layer
+
+tester -> preq: meltHighSnowDeadSalt()
+preq --> tester: f
+tester -> field: melt()
+
+field -> salt: melt(hs)
+
+salt --> field: hs
+
+field --> tester:
+@enduml

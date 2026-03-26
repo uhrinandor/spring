@@ -1,0 +1,116 @@
+@startuml
+/'komm diagram: harom mezo egymas utan kozepson magas ho'/
+/'BusExitHighSnow'/
+/'busz ralep magas havas mezore es utana nem tud lelepni rola'/
+
+
+participant "Tesztelő" as tester
+participant "pre: Prerequisite" as pre
+participant "b: Bus" as bus
+participant "driver: PlayerDriver" as driver
+participant "start: Field" as start
+participant "snowField: Field" as snowField
+participant "next: Field" as next
+participant "normal: Layer" as startLayer
+participant "snow: Snow" as snowLayer
+
+/'busz es driver letrehozasa'/
+tester -> driver: new()
+driver --> tester:
+
+tester -> bus: new(driver)
+bus --> tester:
+
+tester->pre: BusExitHighSnow()
+pre-->tester: start
+
+/'elhelyezi az buszt'/
+tester -> start: setVehicle(bus)
+start --> tester:
+
+/'lekeri az IRoad-ot'/
+tester -> start: getForward()
+start --> tester: next
+
+/'lekeri a Field-ek listajat ami a havas Field lesz'/
+tester -> nextField: getAvailable()
+nextField --> tester: [snowField]
+
+/'az busznak ra kell lepnie a havas mezore'/
+tester -> bus: step()
+
+/'beallitja kovetkezo lepesnek a havas mezot'/
+bus -> driver: nextMove()
+driver --> bus: snowField
+
+/'lekerdezi az aktualis mezot'/
+bus -> driver: getCurrent()
+driver --> bus: start
+
+/'megprobal lelepni'/
+bus -> start: tryExit(snowField)
+
+/'lelephet'/
+start -> startLayer: canExit(bus)
+startLayer --> start: true
+
+/'megprobal belepni'/
+start -> snowField: tryEnter(bus)
+
+/'nem csuszik meg'/
+snowField -> snowLayer: slip(bus)
+snowLayer --> snowField: false
+
+/'ellenorzi h a celallomasnal van-e'/
+snowField -> bus: interact(snowField)
+bus --> snowField:
+
+/'tryEnter visszateresi erteke: azt mondja sikerult belepni'/
+snowField --> start: true
+/'tryExit visszateresi erteke'/
+start --> bus:
+/'step visszateresi erteke'/
+bus --> tester:
+
+/'----------------------most a havas mezorol megprobal lepni megegyet------------------------------------'/
+tester -> bus: step()
+
+bus -> driver: nextMove()
+driver --> bus: next
+
+bus -> driver: getCurrent()
+driver --> bus: snowField
+
+bus -> snowField: tryExit(next)
+
+/' a horeteg nem engedi a kilepest'/
+snowField -> snowLayer: canExit(bus)
+snowLayer --> snowField: false
+ 
+/'tryExit-re a valasz, nem sikerult kilepni'/
+snowField --> bus: false
+
+/'step-re a valasz'/
+bus --> tester:
+
+/'----------------------masodik sikertelen kilepesi probalkozas------------------------------------'/
+tester -> bus: step()
+
+bus -> driver: nextMove()
+driver --> bus: next
+
+bus -> driver: getCurrent()
+driver --> bus: snowField
+
+bus -> snowField: tryExit(next)
+
+/' a horeteg nem engedi a kilepest'/
+snowField -> snowLayer: canExit(bus)
+snowLayer --> snowField: false
+ 
+/'tryExit-re a valasz, nem sikerult kilepni'/
+snowField --> bus: false
+
+/'step-re a valasz'/
+bus --> tester:
+@enduml

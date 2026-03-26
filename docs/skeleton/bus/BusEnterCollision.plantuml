@@ -1,0 +1,89 @@
+@startuml
+
+/'komm diagram: ket mezo egymas utan mindketton sima layer'/
+/'BusEnterCollision'/
+
+participant "Tesztelő" as tester
+participant "pre: Prerequisite" as pre
+participant "start:Field" as startField
+participant "next: Field" as nextField
+participant "c: Car" as c
+participant "b: Bus" as b
+participant "pd: PlayerDriver" as pd
+participant "l1: Layer" as startLayer
+/'letrehoz egy playerdrivert'/
+tester->pd:new()
+pd-->tester:pd
+
+/'letrehozza a buszt a playerdriverrel'/
+tester->b:new(pd)
+b-->tester:b
+
+/'letrehozza az autot aminek nincs vezetoje mert nem mozdul'/
+tester->c:new(null)
+c-->tester:c
+
+/'a pre visszaadja a kezdo fieldet'/
+tester->pre: BusEnterCollision()
+pre-->tester:startField
+
+/'az elso mezo beallitja a buszt'/
+tester->startField: setVehicle(b)
+startField-->tester:
+
+/'megkerdezi az elso mezot hogy mi a kovetkezo IRoad'/
+tester->startField: getForward()
+startField-->tester:next
+
+/'elkeri a Field-ek listajat a kovetkezo IRoad-tol'/
+tester->nextField:getAvailable()
+nextField-->tester: [next]
+
+/'beallitja a masodik mezore az autot'/
+tester->nextField: setVehicle(c)
+nextField-->tester:
+
+tester->b: step()
+
+/'jatekos beallitja h elore szeretne lepni'/
+b->pd: nextMove()
+pd-->b:next
+
+/'lekerdezi a busz aktualis mezojet'/
+b -> pd: getCurrent()
+pd --> b: startField
+
+/'busz megprobal kilepni'/
+b -> startField: tryExit(next)
+
+/'busz megkerdezi h kilephet-e'/
+startField -> startLayer: canExit(b)
+startLayer --> startField: true
+
+/'busz megprobal belepni'/
+startField -> nextField: tryEnter(b)
+
+/'busz osszetorik'/
+nextField -> b: contact(c)
+b --> nextField: 
+
+/'az auto is osszetorik'/
+nextField -> c: contact(b)
+c --> nextField:
+
+/'tryEnter-re a valasz, tehat nem lephet be a busz'/
+nextField --> startField: false
+
+/'tryExit-re a valasz, tehat nem lephet ki a busz'/
+startField --> b:
+
+/'step()-re a valasz'/
+b --> tester:
+
+
+/'meg ketszer megprobal lepni, de sikertelenul'/
+tester->b: step()
+b-->tester:
+tester->b: step()
+b-->tester:
+@enduml

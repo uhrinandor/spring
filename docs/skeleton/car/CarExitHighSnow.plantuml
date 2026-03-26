@@ -1,0 +1,95 @@
+@startuml
+/'komm. diagram: 3 mezo egymas utan kozepson magas ho'/
+/'CarExitHighSnow'/
+/'auto ralep magas havas mezore es utana nem tud lelepni rola'/
+
+participant "Tesztelő" as tester
+participant "pre: Prerequisite" as pre
+participant "c: Car" as car
+participant "driver: CarDriver" as driver
+participant "start: Field" as start
+participant "snowField: Field" as snowField
+participant "next: Field" as next
+participant "normal: Layer" as startLayer
+participant "snow: Snow" as snowLayer
+
+/'auto es driver letrehozasa'/
+tester -> driver: new()
+driver --> tester:
+
+tester -> car: new(driver)
+car --> tester:
+
+/'pre megadja a kezdo fieldet'/
+tester->pre:CarExitHighSnow()
+pre-->tester:start
+
+/'elhelyezi az autot'/
+tester -> start: setVehicle(car)
+start --> tester:
+
+/'megkerdezi az elso mezot hogy mi a kovetkezo IRoad'/
+tester->startField: getForward()
+startField-->tester:next
+
+/'elkeri a Field-ek listajat a kovetkezo IRoad-tol'/
+tester->nextField:getAvailable()
+nextField-->tester: [snowField]
+
+/'az autonak ra kell lepnie a havas mezore'/
+tester -> car: step()
+
+/'beallitja kovetkezo lepesnek a havas mezot'/
+car -> driver: nextMove()
+driver --> car: snowField
+
+/'lekerdezi az aktualis mezot'/
+car -> driver: getCurrent()
+driver --> car: start
+
+/'megprobal lelepni'/
+car -> start: tryExit(snowField)
+
+/'lelephet'/
+start -> startLayer: canExit(car)
+startLayer --> start: true
+
+/'megprobal belepni'/
+start -> snowField: tryEnter(car)
+
+/'nem csuszik meg'/
+snowField -> snowLayer: slip(car)
+snowLayer --> snowField: false
+
+/'ellenorzi h a celallomasnal van-e'/
+snowField -> car: interact(snowField)
+car --> snowField:
+
+/'tryEnter visszateresi erteke: azt mondja sikerult belepni'/
+snowField --> start: true
+/'tryExit visszateresi erteke'/
+start --> car:
+/'step visszateresi erteke'/
+car --> tester:
+
+/'----------------------most a havas mezorol megprobal lepni megegyet------------------------------------'/
+tester -> car: step()
+
+car -> driver: nextMove()
+driver --> car: next
+
+car -> driver: getCurrent()
+driver --> car: snowField
+
+car -> snowField: tryExit(next)
+
+/' a horeteg nem engedi a kilepest'/
+snowField -> snowLayer: canExit(car)
+snowLayer --> snowField: false
+ 
+/'tryExit-re a valasz, nem sikerult kilepni'/
+snowField --> car: false
+
+/'step-re a valasz'/
+car --> tester:
+@enduml

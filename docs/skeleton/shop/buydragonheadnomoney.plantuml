@@ -1,0 +1,23 @@
+@startuml
+actor "Tesztelő" as tester
+participant "pr: Prerequisite" as preq
+participant "spp: SnowPlowPlayer" as player
+participant "s: Shop" as shop
+participant "d: DragonHead" as head
+
+tester -> preq: buyDragonHeadNoMoney()
+preq --> tester: spp
+tester -> shop: new()
+shop --> tester: s
+tester -> head: new()
+head --> tester: d
+tester -> shop: buy(spp, d, 1)
+
+shop -> head: price()
+head --> shop: 3
+shop -> player: charge(3)
+player --> shop: false
+
+shop --> tester: 
+
+@enduml

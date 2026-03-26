@@ -1,0 +1,34 @@
+@startuml
+actor "Tesztelő" as tester
+participant "pr: Prerequisite" as preq
+participant "spp: SnowPlowPlayer" as player
+participant "sp: SnowPlow" as sp
+participant "s: Shop" as shop
+participant "d: DragonHead" as head
+participant "i: Inventory" as inventory
+
+tester -> preq: buyDragonHead()
+preq --> tester: spp
+tester -> shop: new()
+shop --> tester: s
+tester -> head: new()
+head --> tester: d
+tester -> shop: buy(spp, d, 1)
+
+shop -> head: price()
+head --> shop: 3
+shop -> player: charge(3)
+player --> shop: true
+shop -> head: apply(player, 1)
+
+head -> player: snowplow()
+player --> head: sp
+head -> sp: getInventory()
+sp --> head: i
+head -> inventory: addItem(head, 1)
+inventory --> head:
+head --> shop:
+
+shop --> tester: 
+
+@enduml

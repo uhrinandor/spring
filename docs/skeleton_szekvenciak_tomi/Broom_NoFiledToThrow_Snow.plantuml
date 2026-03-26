@@ -1,0 +1,32 @@
+actor tester as user
+participant "pr: Prerequisite" as pr
+participant "sp: SnowPlow" as sp
+participant "broom: Broom" as broom
+participant "f1: Field" as f1
+participant "f2: Field" as f2
+
+
+'participant "l1: Layer" as l1
+participant "l2: Snow" as l2
+participant "i: Inventory" as i
+
+user -> pr: Brush-NoFieldToThrow-Snow()
+pr --> user: f1
+user -> sp: new SnowPlow()
+sp --> user: sp
+user -> f2: setVehicle(sp)
+f2 --> user
+
+'step TODO
+
+'interact:
+user -> sp: interact(f2)
+sp -> broom:interact(f2, i)
+broom -> f2: getLayer()
+f2 --> broom: l2
+broom -> f2:getRight()
+f2 --> broom: null
+broom -> f2: setLayer(new Layer())
+f2 --> broom
+broom --> sp
+sp --> user
