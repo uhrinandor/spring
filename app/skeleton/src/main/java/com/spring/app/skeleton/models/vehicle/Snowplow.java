@@ -48,5 +48,11 @@ public class Snowplow extends Vehicle implements ISnowPlow{
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'accept'");
     }
+
+    @Override
+    public IInventory getInventory() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getInventory'");
+    }
     
 }
