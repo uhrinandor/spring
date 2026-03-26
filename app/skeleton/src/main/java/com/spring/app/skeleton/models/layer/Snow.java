@@ -9,6 +9,10 @@ import com.spring.app.skeleton.utils.IRandom;
 public class Snow extends Entity implements ILayer {
     private int level;
 
+    public Snow(int level){
+        this.level = level;
+    }
+
     public int getLevel(){
         return level;
     }
@@ -31,26 +35,28 @@ public class Snow extends Entity implements ILayer {
 
     @Override
     public boolean slip(Vehicle v, IRandom random) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'slip'");
+        return false;
     }
 
     @Override
     public boolean canExit(Vehicle v) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'canExit'");
+        return level < 2;
     }
 
     @Override
     public ILayer enter() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'enter'");
+        if(level > 1){
+            level--;
+            return this;
+        }
+        
+        return new Ice(false);
+        
     }
 
     @Override
     public List<String> init() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'init'");
+        return List.of("level: " + level);
     }
     
 }
