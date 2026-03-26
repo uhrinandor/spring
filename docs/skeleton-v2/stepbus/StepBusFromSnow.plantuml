@@ -1,0 +1,101 @@
+@startuml StepBusFromSnow
+
+actor "Tesztelő" as tester
+participant "b1: Bus" as bus
+participant "player: BusPlayer" as player
+participant "d1: PlayerDriver" as driver
+participant "dest: Station" as dest
+participant "f1: Field" as f1
+participant "l1: Snow" as l1
+participant "exitVisitor: SnowExitVisitor" as exitVisitor
+participant "f2: Field" as f2
+participant "l2: Snow" as l2
+participant "newIce: Ice" as newIce
+participant "dest2: Station" as pair
+
+tester -> bus: step()
+activate bus
+bus -> bus: canMove()
+activate bus
+'Skeleton.askInt("Meddig van még lerobbanva?")'
+bus --> bus: üzemképes
+deactivate bus
+alt üzemképes
+    bus -> driver: nextMove()
+    activate driver
+    driver --> bus: f2
+    deactivate driver
+    bus -> driver: getCurrent()
+    activate driver
+    driver --> bus: f1
+    deactivate driver
+    bus -> f1: tryExit(f2)
+    activate f1
+    f1 -> l1: canExit(b1)
+    activate l1
+    'Skeleton.askInt("Milyen magas a hó?")
+    l1 -> exitVisitor: <<create>>(l1)
+    activate exitVisitor
+    exitVisitor --> l1:
+    deactivate exitVisitor
+    l1 -> exitVisitor: visit(b1)
+    activate exitVisitor
+    exitVisitor --> l1:
+    deactivate exitVisitor
+    l1 -> exitVisitor: getResult()
+    activate exitVisitor
+    exitVisitor --> l1: kitudlépni
+    deactivate exitVisitor
+
+    l1 --> f1: kitudlépni
+    deactivate l1
+    alt kitudlépni
+        f1 -> f2: tryEnter(b1)
+        activate f2
+        'Lecsökkenti a hó vastagságát'
+        f2 -> l2: enter()
+        activate l2
+        'Skeleton.askInt("Milyen magas a hó?")'
+        alt level <= 1
+          l2 -> newIce: <<create>>()
+          activate newIce
+          newIce --> l2:
+          deactivate newIce
+          l2 --> f2: newIce
+          deactivate l2
+          f2 -> newIce: slip(b1)
+          activate newIce
+          newIce --> f2: megcsúszik
+          deactivate newIce
+          note right
+          Lásd: StepBusToIce
+          end note
+        else
+          activate l2
+          l2 --> f2: l2
+          deactivate l2
+          f2 -> l2: slip(b1)
+          activate l2
+          l2 --> f2: false
+          deactivate l2
+        end
+        f2 -> bus: interact(f2)
+        activate bus
+        bus -> dest: getPair()
+        activate dest
+        dest --> bus: dest2
+        deactivate dest
+        bus -> player: give(1)
+        activate player
+        player --> bus:
+        deactivate player
+        bus --> f2: 
+        deactivate bus
+        f2 --> f1: true    
+        deactivate f2
+    end
+    f1 --> bus:
+    deactivate f1
+end
+bus --> tester: 
+deactivate bus

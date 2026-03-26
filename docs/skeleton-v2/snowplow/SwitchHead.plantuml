@@ -1,0 +1,24 @@
+@startuml switchhead
+actor "Tesztelő" as tester
+participant "s5: SnowPlow" as sp
+participant "inventory: Inventory" as inventory
+participant "h: DragonHead" as head
+participant "b: IceBreaker" as currentHead
+
+tester -> sp: switchHead(h)
+activate sp
+sp -> inventory: removeItem(h, 1)
+activate inventory
+'Skeleton.askInt("Hány elem van az inventory-ban?")
+inventory --> sp: success
+deactivate inventory
+alt success
+sp -> inventory: addItem(b, 1)
+activate inventory
+inventory --> sp:
+deactivate inventory
+end
+sp --> tester: success
+deactivate sp
+
+@enduml

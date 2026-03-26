@@ -1,0 +1,115 @@
+@startuml StepCarFromSnow
+
+actor "Tesztelő" as tester
+participant "c2: Car" as car
+participant "d2: CarDriver" as driver
+participant "dest: Office" as dest
+participant "f3: Field" as f3
+participant "l3: Ice" as l3
+participant "f4: Field" as f4
+participant "l4: Ice" as l4
+participant "f5: Field" as f5
+participant "r: Random" as random
+participant "slip: IceSlipVisitor" as iceslipvisitor
+
+tester -> car: step()
+activate car
+car -> car: canMove()
+activate car
+'Skeleton.askInt("Meddig van még lerobbanva?")'
+car --> car: üzemképes
+deactivate car
+alt üzemképes
+    car -> driver: nextMove()
+    activate driver
+    driver --> car: f4
+    deactivate driver
+    car -> driver: getCurrent()
+    activate driver
+    driver --> car: f3
+    deactivate driver
+    car -> f3: tryExit(f4)
+    activate f3
+    f3 -> l3: canExit(c2)
+    activate l3
+    l3 --> f3: true
+    deactivate l3
+    
+    f3 -> f4: tryEnter(c2)
+    activate f4
+    
+    f4 -> l4: enter()
+    activate l4
+    l4 --> f4: l4
+    deactivate l4
+    
+    f4 -> l4: slip(c2, r)
+    activate l4
+    l4 -> iceslipvisitor: <<create>>(r)
+    activate iceslipvisitor
+    iceslipvisitor --> l4:
+    deactivate iceslipvisitor
+    l4 -> iceslipvisitor: visit(c2)
+    activate iceslipvisitor
+    'Skeleton.askBool("Megcsúszik?")
+    iceslipvisitor --> l4: 
+    deactivate iceslipvisitor
+    l4 -> iceslipvisitor: getResult()
+    activate iceslipvisitor
+    iceslipvisitor --> l4: megcsúszik
+    deactivate iceslipvisitor
+    l4 --> f4: megcsúszik
+    deactivate l4
+    alt megcsúszik
+        f4 -> car: getDriver()
+        activate car
+        car --> f4: d2
+        deactivate car
+        f4 -> f5: getAvailable()
+        activate f5
+        f5 --> f4: [f5]
+        deactivate f5
+        f4 -> driver: setNext(f5)
+        activate driver
+        driver --> f4:
+        deactivate driver
+        f4 -> car: step(true)
+        activate car
+
+        car -> driver: getNext()
+        activate driver
+        driver --> car: f5
+        deactivate driver
+        car -> driver: getCurrent()
+        activate driver
+        driver --> car: f4
+        deactivate driver
+        car -> f4: tryExit(f5)
+        activate f4
+        note right
+            Nincs külöbség a két step között,
+            kizárólag a Driver-től való lekérés,
+            míg egyiknél újrakalkulálja a keresett irányt,
+            a getNext() kizárólag egy getter-ként szolgál, ezért
+            nem bontom továbbiakban a következő step lefutását.
+        end note
+        f4 --> car:
+        deactivate f4
+
+        car --> f4:
+        deactivate car
+    else 
+        f4 -> car: interact(f4)
+        activate car
+        car --> f4: 
+        deactivate car
+    end
+    
+    f4 --> f3: true
+    deactivate f4
+    
+    f3 --> car:
+    deactivate f3
+end
+car --> tester: 
+deactivate car

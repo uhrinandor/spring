@@ -1,0 +1,116 @@
+@startuml StepBusToIce
+
+actor "Tesztelő" as tester
+participant "b2: Bus" as bus
+participant "d2: PlayerDriver" as driver
+participant "dest: Office" as dest
+participant "f3: Field" as f3
+participant "l3: Ice" as l3
+participant "f4: Field" as f4
+participant "l4: Ice" as l4
+participant "f5: Field" as f5
+participant "r: Random" as random
+participant "slip: IceSlipVisitor" as iceslipvisitor
+
+tester -> bus: step()
+activate bus
+bus -> bus: canMove()
+activate bus
+'Skeleton.askInt("Meddig van még lerobbanva?")'
+bus --> bus: üzemképes
+deactivate bus
+alt üzemképes
+    bus -> driver: nextMove()
+    activate driver
+    driver --> bus: f4
+    deactivate driver
+    bus -> driver: getCurrent()
+    activate driver
+    driver --> bus: f3
+    deactivate driver
+    bus -> f3: tryExit(f4)
+    activate f3
+    f3 -> l3: canExit(b2)
+    activate l3
+    l3 --> f3: true
+    deactivate l3
+    
+    f3 -> f4: tryEnter(b2)
+    activate f4
+    'Lecsökkenti a hó vastagságát'
+    f4 -> l4: enter()
+    activate l4
+    l4 --> f4: l4
+    deactivate l4
+    
+    f4 -> l4: slip(b2, r)
+    activate l4
+    l4 -> iceslipvisitor: <<create>>(r)
+    activate iceslipvisitor
+    iceslipvisitor --> l4:
+    deactivate iceslipvisitor
+    l4 -> iceslipvisitor: visit(b2)
+    activate iceslipvisitor
+    'Skeleton.askBool("Megcsúszik?")
+    iceslipvisitor --> l4: 
+    deactivate iceslipvisitor
+    l4 -> iceslipvisitor: getResult()
+    activate iceslipvisitor
+    iceslipvisitor --> l4: megcsúszik
+    deactivate iceslipvisitor
+    l4 --> f4: megcsúszik
+    deactivate l4
+    alt megcsúszik
+        f4 -> bus: getDriver()
+        activate bus
+
+        bus --> f4: d2
+        deactivate bus
+        f4 -> f5: getAvailable()
+        activate f5
+        f5 --> f4: [f5]
+        deactivate f5
+        f4 -> driver: setNext(f5)
+        activate driver
+        driver --> f4:
+        deactivate driver
+        f4 -> bus: step(true)
+        activate bus
+
+        bus -> driver: getNext()
+        activate driver
+        driver --> bus: f5
+        deactivate driver
+        bus -> driver: getCurrent()
+        activate driver
+        driver --> bus: f4
+        deactivate driver
+        bus -> f4: tryExit(f5)
+        activate f4
+        note right
+            Nincs külöbség a két step között,
+            kizárólag a Driver-től való lekérés,
+            itt még annyi különbség sincs, mint a Car esetében,
+            itt a getNext() és nextMove() mindkettő egy getter.
+            Ezt továbbiakban nem bontom lejjebb.
+        end note
+        f4 --> bus:
+        deactivate f4
+
+        bus --> f4:
+        deactivate bus
+    else 
+        f4 -> bus: interact(next)
+        activate bus
+        bus --> f4: 
+        deactivate bus
+    end
+    
+    f4 --> f3: true
+    deactivate f4
+    
+    f3 --> bus:
+    deactivate f3
+end
+bus --> tester: 
+deactivate bus

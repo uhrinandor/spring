@@ -1,0 +1,104 @@
+@startuml StepCarFromSnow
+
+actor "Tesztelő" as tester
+participant "c1: Car" as car
+participant "d1: CarDriver" as driver
+participant "o1: Office" as dest
+participant "f1: Field" as f1
+participant "l1: Snow" as l1
+participant "exitVisitor: SnowExitVisitor" as exitVisitor
+participant "f2: Field" as f2
+participant "l2: Snow" as l2
+participant "newIce: Ice" as newIce
+
+
+tester -> car: step()
+activate car
+car -> car: canMove()
+activate car
+'Skeleton.askInt("Meddig van még lerobbanva?")'
+car --> car: üzemképes
+deactivate car
+alt üzemképes
+    car -> driver: nextMove()
+    activate driver
+    driver --> car: f2
+    deactivate driver
+    car -> driver: getCurrent()
+    activate driver
+    driver --> car: f1
+    deactivate driver
+    car -> f1: tryExit(f2)
+    activate f1
+    f1 -> l1: canExit(c1)
+    activate l1
+    'Skeleton.askInt("Milyen magas a hó?")
+    l1 -> exitVisitor: <<create>>(l1)
+    activate exitVisitor
+    exitVisitor --> l1:
+    deactivate exitVisitor
+    l1 -> exitVisitor: visit(c1)
+    activate exitVisitor
+    exitVisitor --> l1:
+    deactivate exitVisitor
+    l1 -> exitVisitor: getResult()
+    activate exitVisitor
+    exitVisitor --> l1: kitudlépni
+    deactivate exitVisitor
+
+    l1 --> f1: kitudlépni
+    deactivate l1
+
+    alt kitudlépni
+        f1 -> f2: tryEnter(c1)
+        activate f2
+        'Lecsökkenti a hó vastagságát'
+        f2 -> l2: enter()
+        activate l2
+        'Skeleton.askInt("Milyen magas a hó?")'
+        alt level <= 1
+          l2 -> newIce: <<create>>()
+          activate newIce
+          newIce --> l2:
+          deactivate newIce
+          l2 --> f2: newIce
+          deactivate l2
+          f2 -> newIce: slip(c1)
+          activate newIce
+          
+          newIce --> f2: megcsúszik
+          deactivate newIce
+          note right
+          Lásd: StepCarToIce
+          end note
+        else
+          activate l2
+          l2 --> f2: l2
+          deactivate l2
+          f2 -> l2: slip(c1)
+          activate l2
+          l2 --> f2: false
+          deactivate l2
+        end
+        
+        
+        f2 -> car: interact(f2)
+        activate car
+        car -> dest: consume(c1)
+        activate dest
+        dest -> f1: setVehicle(null)
+        activate f1
+        f1 --> dest:
+        deactivate f1
+        dest --> car:
+        deactivate dest
+        car --> f2: 
+        deactivate car
+        f2 --> f1: true    
+        deactivate f2
+    end
+    f1 --> car:
+    deactivate f1
+end
+car --> tester: 
+deactivate car
