@@ -14,6 +14,9 @@ import com.spring.app.skeleton.utils.Tracer;
 public class Salt extends Entity implements ShopItem, IInventoryItem, ISalt{
     private int timer;
 
+    public Salt() {
+        this.timer = 3;
+    }
 
     public Salt(int timer){
         this.timer = timer;
@@ -29,8 +32,13 @@ public class Salt extends Entity implements ShopItem, IInventoryItem, ISalt{
 
     @Override
     public ILayer melt(ILayer layer) {
-        
-        throw new UnsupportedOperationException("Unimplemented method 'melt'");
+        if(Tracer.getInstance().askInt("Meddig érvényes a só?") <= 0) return layer;
+
+        MeltLayerVisitor visitor = new MeltLayerVisitor();
+
+        layer.accept(visitor);
+
+        return visitor.getResult();
     }
 
     @Override
