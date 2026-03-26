@@ -9,8 +9,8 @@ public interface IField extends IEntity {
     public List<IField> getAvailable();
     public boolean isUnderGround();
     public boolean tryEnter(Vehicle v);
-    public boolean tryExit(IField f);
-
+    public void tryExit(IField f);
+    public void setVehicle(Vehicle v);
     // FLAG: EZ MÁR NEM AKTUÁLIS
     public void interact();
     // FLAG: EZ MÁR NEM AKTUÁLIS

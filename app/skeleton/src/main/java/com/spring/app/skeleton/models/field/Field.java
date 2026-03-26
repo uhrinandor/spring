@@ -9,26 +9,55 @@ import com.spring.app.skeleton.utils.Entity;
 import com.spring.app.skeleton.utils.IRandom;
 
 public class Field extends Entity implements IField {
-    ILayer layer;
-    Vehicle vehicle;
-    IRoad front;
-    IRandom random;
+    
+    private ILayer layer;
+    private Vehicle vehicle;
+    private IRoad front;
+    private IField left;
+    private IField right;
+    private IRandom random;
+    private boolean underground;
 
-    @Override
-    public List<String> init() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Field(ILayer layer, Vehicle vehicle, IRoad front, IField left, IField right, IRandom random, boolean underground)
+    {
+        this.layer=layer;
+        this.vehicle=vehicle;
+        this.front=front;
+        this.left=left;
+        this.right=right;
+        this.random=random;
+        this.underground=underground;
     }
+
+    public void setLeft(IField field)
+    {
+        left=field;
+    }
+
+    public void setRight(IField field)
+    {
+        right=field;
+    }
+
+    public void setFront(IRoad front)
+    {
+        this.front=front;
+    }
+
+    
+    @Override
+    public boolean isUnderGround()
+    {
+        return underground;
+    }
+    
+    
 
     @Override
     public List<IField> getAvailable() {
        return List.of(this);
     }
 
-    @Override
-    public boolean isUnderGround() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isUnderGrund'");
-    }
 
     @Override
     public boolean tryEnter(Vehicle v) {
@@ -56,13 +85,13 @@ public class Field extends Entity implements IField {
     }
 
     @Override
-    public boolean tryExit(IField f) {
-        if(!layer.canExit(vehicle)) return false;
+    public void tryExit(IField f) {
+        if(!layer.canExit(vehicle)) return;
 
-        if(!f.tryEnter(vehicle)) return false;
+        if(!f.tryEnter(vehicle)) return;
         
         vehicle = null;
-        return true;
+        return;
     }
 
     // FLAG: EZ MÁR NEM AKTUÁLIS
@@ -84,5 +113,15 @@ public class Field extends Entity implements IField {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'melt'");
     }
-    
+
+    @Override
+    public List<String> init() {
+       return List.of("layer: " + layer.toString() + "vehicle: " + vehicle.toString() +
+       "road: " + front.toString() + "left: " + left.toString() + "right: " + right.toString() +
+       "random: " + random.toString());
+    }
+    public void setVehicle(Vehicle v)
+    {
+        
+    }
 }
