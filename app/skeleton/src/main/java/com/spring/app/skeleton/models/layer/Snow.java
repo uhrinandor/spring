@@ -19,8 +19,14 @@ public class Snow extends Entity implements ILayer {
 
     @Override
     public ILayer merge(ILayer layer) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'merge'");
+        SnowMergeVisitor visitor = new SnowMergeVisitor(this);
+        layer.accept(visitor);
+        return visitor.getResult();
+    }
+
+    @Override
+    public void accept(ILayerVisitor visitor) {
+        visitor.visit(this);
     }
 
     @Override

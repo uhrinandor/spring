@@ -20,8 +20,14 @@ public class Ice extends Entity implements ILayer {
 
     @Override
     public ILayer merge(ILayer layer) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'merge'");
+        IceMergeVisitor visitor = new IceMergeVisitor(this);
+        layer.accept(visitor);
+        return visitor.getResult();
+    }
+
+    @Override
+    public void accept(ILayerVisitor visitor) {
+        visitor.visit(this);
     }
 
     @Override

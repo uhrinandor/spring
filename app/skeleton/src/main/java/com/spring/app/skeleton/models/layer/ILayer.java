@@ -9,4 +9,5 @@ public interface ILayer extends IEntity {
     public boolean slip(Vehicle v, IRandom random);
     public boolean canExit(Vehicle v);
     public ILayer enter();
+    public void accept(ILayerVisitor visitor);
 }
