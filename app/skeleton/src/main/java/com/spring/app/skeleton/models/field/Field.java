@@ -3,6 +3,7 @@ package com.spring.app.skeleton.models.field;
 import java.util.List;
 
 import com.spring.app.skeleton.models.layer.ILayer;
+import com.spring.app.skeleton.models.layer.ISalt;
 import com.spring.app.skeleton.models.random.IRandom;
 import com.spring.app.skeleton.models.vehicle.IDriver;
 import com.spring.app.skeleton.models.vehicle.Vehicle;
@@ -17,8 +18,9 @@ public class Field extends Entity implements IField {
     private IField right;
     private IRandom random;
     private boolean underground;
+    private ISalt salt;
 
-    public Field(ILayer layer, Vehicle vehicle, IRoad front, IField left, IField right, IRandom random, boolean underground)
+    public Field(ILayer layer, Vehicle vehicle, IRoad front, IField left, IField right, IRandom random, ISalt salt, boolean underground)
     {
         this.layer=layer;
         this.vehicle=vehicle;
@@ -27,6 +29,7 @@ public class Field extends Entity implements IField {
         this.right=right;
         this.random=random;
         this.underground=underground;
+        this.salt = salt;
     }
 
     public IField getRight(){
@@ -55,15 +58,12 @@ public class Field extends Entity implements IField {
     {
         this.front=front;
     }
-
     
     @Override
     public boolean isUnderGround()
     {
         return underground;
     }
-    
-    
 
     @Override
     public List<IField> getAvailable() {
@@ -122,8 +122,9 @@ public class Field extends Entity implements IField {
 
     @Override
     public void melt() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'melt'");
+        if(salt == null) return;
+
+        layer = salt.melt(layer);
     }
 
     @Override
@@ -135,5 +136,10 @@ public class Field extends Entity implements IField {
     public void setVehicle(Vehicle v)
     {
         
+    }
+
+    @Override
+    public void setSalt(ISalt salt) {
+        this.salt = salt;
     }
 }
