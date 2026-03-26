@@ -12,41 +12,41 @@ public class Field extends Entity implements IField {
     
     private ILayer layer;
     private Vehicle vehicle;
-    private IRoad road;
+    private IRoad front;
     private IField left;
     private IField right;
     private IRandom random;
-    private bool underground;
+    private boolean underground;
 
-    public Field(ILayer layer, Vehicle vehicle, IRoad road, IField left, IField right, IRandom random, bool underground)
+    public Field(ILayer layer, Vehicle vehicle, IRoad front, IField left, IField right, IRandom random, boolean underground)
     {
         this.layer=layer;
         this.vehicle=vehicle;
-        this.road=road;
+        this.front=front;
         this.left=left;
         this.right=right;
         this.random=random;
         this.underground=underground;
     }
 
-    public setLeft(IField field)
+    public void setLeft(IField field)
     {
         left=field;
     }
 
-    public setRight(IField field)
+    public void setRight(IField field)
     {
         right=field;
     }
 
-    public setFront(IRoad road)
+    public void setFront(IRoad front)
     {
-        this.road=road;
+        this.front=front;
     }
 
     
     @Override
-    public bool isUnderGround()
+    public boolean isUnderGround()
     {
         return underground;
     }
@@ -117,8 +117,11 @@ public class Field extends Entity implements IField {
     @Override
     public List<String> init() {
        return List.of("layer: " + layer.toString() + "vehicle: " + vehicle.toString() +
-       "road: " + road.toString() + "left: " + left.toString() + "right: " + right.toString() +
+       "road: " + front.toString() + "left: " + left.toString() + "right: " + right.toString() +
        "random: " + random.toString());
     }
-    
+    public void setVehicle(Vehicle v)
+    {
+        
+    }
 }

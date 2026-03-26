@@ -41,5 +41,8 @@ public class Bus extends Vehicle {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'accept'");
     }
-    
+    public void setStation(IField field)
+    {
+
+    }
 }

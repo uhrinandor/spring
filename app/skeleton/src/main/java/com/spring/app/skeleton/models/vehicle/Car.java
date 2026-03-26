@@ -2,6 +2,7 @@ package com.spring.app.skeleton.models.vehicle;
 
 import java.util.List;
 
+import com.spring.app.skeleton.models.buildings.Building;
 import com.spring.app.skeleton.models.field.IField;
 
 public class Car extends Vehicle {
@@ -41,5 +42,8 @@ public class Car extends Vehicle {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'accept'");
     }
-    
+    public void setDestination(Building building)
+    {
+
+    }
 }

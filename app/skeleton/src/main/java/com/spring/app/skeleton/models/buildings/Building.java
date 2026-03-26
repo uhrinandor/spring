@@ -1,5 +1,8 @@
 package com.spring.app.skeleton.models.buildings;
 
+import java.util.List;
+
+import com.spring.app.skeleton.models.field.IField;
 import com.spring.app.skeleton.utils.Entity;
 
 public abstract class Building extends Entity{

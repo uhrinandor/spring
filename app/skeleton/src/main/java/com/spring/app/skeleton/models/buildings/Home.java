@@ -2,16 +2,19 @@ package com.spring.app.skeleton.models.buildings;
 
 import java.util.List;
 
+import com.spring.app.skeleton.models.field.IField;
+import com.spring.app.skeleton.models.vehicle.Car;
+
 public class Home extends Building{
 
     public Home(IField field)
     {
-        this.field=field;
+        super(field);
     }
     
     public void generateCar(Office destination)
     {
-        Car c=new Car();
+        Car c=new Car(null);
         c.setDestination(destination);
         getField().setVehicle(c);
     }
