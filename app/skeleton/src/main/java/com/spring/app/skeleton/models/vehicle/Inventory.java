@@ -18,13 +18,15 @@ public class Inventory extends Entity implements IInventory{
     @Override
     public boolean removeItem(IInventoryItem i, int amount) {
         if(items.get(i.key()) >= amount){
-            items.put(i.key(), items.get(i.key())+amount);
+            items.put(i.key(), items.get(i.key())-amount);
+            return true;
         }
+        return false;
     }
 
     @Override
     public void addItem(IInventoryItem i, int amount) {
-        items.put(i.key(), amount);
+        items.put(i.key(), items.get(i.key())+amount);
     }
 
     @Override
