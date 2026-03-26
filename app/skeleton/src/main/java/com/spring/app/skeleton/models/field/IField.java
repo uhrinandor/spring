@@ -1,7 +1,16 @@
 package com.spring.app.skeleton.models.field;
 
+import java.util.ArrayList;
+
 import com.spring.app.skeleton.utils.IEntity;
+import com.spring.app.skeleton.models.vehicle.Vehicle;
 
 public interface IField extends IEntity {
-    
+    public ArrayList<IField> getAvailible();
+    public boolean isUnderGrund();
+    public boolean tryEnter(Vehicle v);
+    public boolean tryExit(IField f);
+    public void interact();
+    public void slip();
+    public void melt();
 }
