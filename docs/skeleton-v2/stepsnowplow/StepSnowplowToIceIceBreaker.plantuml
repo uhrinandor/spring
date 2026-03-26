@@ -75,7 +75,7 @@ breakIceVisitor --> head:
 deactivate breakIceVisitor
 head -> breakIceVisitor: visit(l9)
 activate breakIceVisitor
-note right
+note left
 Mivel itt be kell billenteni a flaget, ezért ezt itt meg fogjuk tenni
 a visitoron belül
 end note

@@ -1,0 +1,49 @@
+@startuml StepCarFromSnow
+
+actor "Tesztelő" as tester
+participant "c3: Car" as car
+participant "d3: CarDriver" as driver
+participant "dest: Office" as dest
+participant "f6: Field" as f6
+participant "l6: Layer" as l6
+participant "f7: Field" as f7
+participant "l7: Snow" as l7
+
+tester -> car: step()
+activate car
+car -> car: canMove()
+activate car
+'Skeleton.askInt("Meddig van még lerobbanva?")'
+car --> car: üzemképes
+deactivate car
+alt üzemképes
+    car -> driver: nextMove()
+    driver --> car: f7
+    car -> driver: getCurrent()
+    driver --> car: f6
+    car -> f6: tryExit(f7)
+    activate f6
+    f6 -> l6: canExit(c1)
+
+    l6 --> f6: true
+    f6 -> f7: tryEnter(c1)
+    activate f7
+    'Lecsökkenti a hó vastagságát'
+    f7 -> l7: enter()
+    l7 --> f7: l7
+    'Skeleton.askInt("Milyen magas a hó?")'
+    
+    f7 -> l7: slip(c1)
+    l7 --> f7: false
+    f7 -> car: interact(next)
+    activate car
+    
+    car --> f7: 
+    deactivate car
+    f7 --> f6: true    
+    deactivate f7
+    f6 --> car:
+    deactivate f6
+end
+car --> tester: 
+deactivate car

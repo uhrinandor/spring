@@ -1,6 +1,8 @@
 package com.spring.app.skeleton.utils;
 
-public abstract class Entity implements IEntity {
+import java.util.List;
+
+public abstract class Entity {
     protected int id;
     private static int nextId = 0;
 
@@ -11,6 +13,8 @@ public abstract class Entity implements IEntity {
     public int getId() {
         return id;
     }
+
+    abstract List<String> init();
 }
 
 

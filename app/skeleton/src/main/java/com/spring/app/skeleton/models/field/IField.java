@@ -2,8 +2,8 @@ package com.spring.app.skeleton.models.field;
 
 import java.util.ArrayList;
 
-import com.spring.app.skeleton.utils.IEntity;
 import com.spring.app.skeleton.models.vehicle.Vehicle;
+import com.spring.app.skeleton.utils.IEntity;
 
 public interface IField extends IEntity {
     public ArrayList<IField> getAvailible();
