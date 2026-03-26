@@ -1,7 +1,6 @@
 package com.spring.app.skeleton.models.shop;
 
-import com.spring.app.skeleton.utils.IEntity;
 
 public interface IShop {
-
+ public void buy(PurchaseContext ctx, ShopItem item, int amount);
 }
