@@ -9,5 +9,11 @@ public class Bus extends Vehicle {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'init'");
     }
+
+    @Override
+    public void accept(IVehicleVisitor visitor) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'accept'");
+    }
     
 }

@@ -58,5 +58,5 @@ public class Snow extends Entity implements ILayer {
     public List<String> init() {
         return List.of("level: " + level);
     }
-    
+
 }
