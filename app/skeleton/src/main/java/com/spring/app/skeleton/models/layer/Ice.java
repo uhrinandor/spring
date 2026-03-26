@@ -8,6 +8,16 @@ import com.spring.app.skeleton.utils.IRandom;
 
 public class Ice extends Entity implements ILayer {
 
+    private boolean broken;
+
+    public boolean getBroken(){
+        return broken;
+    }
+
+    public void setBroken(boolean tmp){
+        broken = tmp;
+    }
+
     @Override
     public ILayer merge(ILayer layer) {
         // TODO Auto-generated method stub

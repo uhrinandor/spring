@@ -7,6 +7,15 @@ import com.spring.app.skeleton.utils.Entity;
 import com.spring.app.skeleton.utils.IRandom;
 
 public class Snow extends Entity implements ILayer {
+    private int level;
+
+    public int getLevel(){
+        return level;
+    }
+
+    public void setLevel(int l){
+        level = l;
+    }
 
     @Override
     public ILayer merge(ILayer layer) {

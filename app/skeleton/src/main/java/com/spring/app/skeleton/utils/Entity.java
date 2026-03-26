@@ -14,6 +14,11 @@ public abstract class Entity {
         return id;
     }
 
+    @Override
+    public String toString(){
+        return getClass().getSimpleName() + "@" +id;
+    }
+
     public abstract List<String> init();
 }
 
