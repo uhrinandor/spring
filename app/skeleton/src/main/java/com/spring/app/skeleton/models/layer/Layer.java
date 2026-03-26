@@ -10,8 +10,12 @@ public class Layer extends Entity implements ILayer {
 
     @Override
     public ILayer merge(ILayer layer) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'merge'");
+        return layer;
+    }
+
+    @Override
+    public void accept(ILayerVisitor visitor) {
+        visitor.visit(this);
     }
 
     @Override

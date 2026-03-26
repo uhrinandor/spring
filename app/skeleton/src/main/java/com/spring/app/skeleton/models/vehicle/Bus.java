@@ -35,4 +35,11 @@ public class Bus extends Vehicle {
         throw new UnsupportedOperationException("Unimplemented method 'interact'");
     }
     
+
+    @Override
+    public void accept(IVehicleVisitor visitor) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'accept'");
+    }
+    
 }
