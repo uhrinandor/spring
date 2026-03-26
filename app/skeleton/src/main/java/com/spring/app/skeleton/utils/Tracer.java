@@ -1,6 +1,5 @@
 package com.spring.app.skeleton.utils;
 
-import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.List;
 import java.util.Scanner;
@@ -9,16 +8,13 @@ public class Tracer {
     private static Tracer instance;
     private int indentationLevel = 0;
     private static final String INDENT = "    ";
-    private final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-    private final PrintStream tracerStream = new PrintStream(buffer);
+    private static final PrintStream stream = System.out;
     private Tracer(){}
 
-    public void flush(){
-        System.out.print(buffer.toString());
-        tracerStream.flush();
-        buffer.reset();
-    }
-
+    /**
+     * Singleton instance-t adja vissza
+     * @return Tracer instance
+     */
     public static Tracer getInstance(){
         if(instance == null){
             instance = new Tracer();
@@ -26,68 +22,108 @@ public class Tracer {
         return instance;
     }
 
-    public void printIndent(int increase){
+    /**
+     * Indentálásért felelős függvény
+     * @param increase Mennyivel többre húzza be a jelenlegin felül
+     */
+    private void printIndent(int increase){
         for(int i=0; i<indentationLevel + increase; i++){
-            tracerStream.print(INDENT);
+            stream.print(INDENT);
         }
     }
-    public void printIndent(){
+    /**
+     * Indentálásért felelős függvény
+     */
+    private void printIndent(){
         printIndent(0);
     }
     
+    /**
+     * Információs üzenet kiírása a konzolra
+     * @param message Az üzenet, amit ki szeretnénk írni    
+     */
     public void info(String message){
-        tracerStream.print("[INFO] "+message);
+        printIndent();
+        stream.println("[INFO] "+message);
+    }
+    /**
+     * Bement bekérés kiírása a konzolra
+     * @param message Az üzenet, amit ki szeretnénk írni    
+     */
+    private void input(String message){
+        stream.print("[?] "+message+": ");
     }
 
-    public void input(String message){
-        System.out.print("[?] "+message+": ");
-    }
-
+    /**
+     * Int típusú bemenet bekérés
+     * @param message Az üzenet, amit ki szeretnénk írni    
+     */
     public int askInt(String message){
         input(message);
         Scanner sc = new Scanner(System.in);
         return sc.nextInt();
     }
 
+     /**
+     * Boolean típusú bemenet bekérés
+     * @param message Az üzenet, amit ki szeretnénk írni    
+     */
     public boolean askBool(String message){
         input(message+" (true/false)");
         Scanner sc = new Scanner(System.in);
         return sc.nextBoolean();
-    }
+    }    
 
-    
-
-    // Függvény belépés jelzése az indítás ELŐTT, pl:
-    // Tracer.getInstance().enterFunction("user.login()");
-    // user.login();
-    // Paraméter esetén: Tracer.getInstance().enterFunction("user.login("+"username"+", "+"password"+")");
-    // Ha osztály akkor Tracer.getInstance().enterFunction("user.login(User@"+ user.getId()  +")");
-    // User osztály getId-ja az Entity osztályból származik, ez egy absztrakt osztály, mindenkinek ebből kell származnia
-    public void enterFunction(String message){
+     /**
+     * Függvényhívás előtt meghívandó, base az amin hívni fogjuk a hívást, ezt csak Entity típusokra követjük le, functionName hogy mit hívunk, Object... params pedig további listában megadhatjuk hogy milyen bemenő értékei vannak.
+     * Növeli az indentálást
+     * @param base Az Entity, amin a függvényt hívjuk
+     * @param functionName A függvény neve
+     * @param params A függvény paraméterei
+     */
+    public void enterFunction(Entity base, String functionName, Object... params){
         printIndent();
-        tracerStream.print("[->] " + message);
+        stream.print(String.format("[->] %s.%s(", base, functionName));
+        for(int i=0; i<params.length; i++){
+            stream.print(params[i]);
+            if(i < params.length - 1){
+                stream.print(", ");
+            }
+        }
+        stream.println(")");
         indentationLevel++;
     }
 
-    // Indentálás visszavonása, fgv-ből való kilépés jelzése, user.login() végén:
-    // Tracer.getInstance().exitFunction();
-    public void exitFunction(String returnValue){
+    /**
+     * Függvénykilépés végén meghívandó, csökkenti az indentálást
+     * @param returnValue a visszatérési érték, ha van
+     */
+    public void exitFunction(Object returnValue){
         indentationLevel--;
         printIndent();
-        tracerStream.print("[<-] " + returnValue);
+        stream.println("[<-] " + returnValue);
     }
 
-    // Ha új objektumot inicializáltunk ezzel tudjuk jelezni, példa:
-    // Inicializálás így:
-    // User user = new User(); // implements IPrintable
-    // Tracer.getInstance().newObject("user", user);
-    public void newObject(String variableName, Entity object){
+      /**
+     * Függvénykilépés végén meghívandó void típus esetén, csökkenti az indentálást
+     */
+    public void exitFunction(){
+        exitFunction("");
+    }
+
+    /**
+     * Új objektum létrehozásakor meghívandó, kiírja az objektum típusát és azonosítóját
+     * valamint, ha vannak attribútumai vagy asszociáció is kiíratjuk
+     * Külön implementálandó az Entity osztályból
+     * @param object Az objektum, amit létrehozunk, csak Entity típusokat követjük le
+     */
+    public void newObject(Entity object){
         printIndent();
-        tracerStream.print("[+] "+ object.getClass().getSimpleName() + "@" + object.getId() + " " + variableName);
+        stream.println("[+] "+ object);
         List<String> properties = object.init();
         for(String property: properties){
             printIndent(1);
-            tracerStream.print("- "+property);
+            stream.print("- "+property);
         }
     }
 
