@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.spring.app.skeleton.models.head.IHead;
 
-public class Snowplow extends Vehicle implements ISnowplow{
+public class Snowplow extends Vehicle implements ISnowPlow{
 
     @Override
     public boolean switchHead(IHead head) {
