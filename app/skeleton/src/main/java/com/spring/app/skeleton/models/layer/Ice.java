@@ -2,11 +2,9 @@ package com.spring.app.skeleton.models.layer;
 
 import java.util.List;
 
-import javax.swing.UIDefaults.LazyInputMap;
-
+import com.spring.app.skeleton.models.random.IRandom;
 import com.spring.app.skeleton.models.vehicle.Vehicle;
 import com.spring.app.skeleton.utils.Entity;
-import com.spring.app.skeleton.utils.IRandom;
 
 public class Ice extends Entity implements ILayer {
 
@@ -14,6 +12,10 @@ public class Ice extends Entity implements ILayer {
 
     public Ice(boolean broken){
         this.broken = broken;
+    }
+
+    public Ice(){
+        this.broken = false;
     }
 
     public boolean getBroken(){
@@ -38,8 +40,9 @@ public class Ice extends Entity implements ILayer {
 
     @Override
     public boolean slip(Vehicle v, IRandom random) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'slip'");
+        IceSlipVisitor visitor = new IceSlipVisitor(random);
+        v.accept(visitor);
+        return visitor.getResult();
     }
 
     @Override
@@ -54,7 +57,6 @@ public class Ice extends Entity implements ILayer {
 
     @Override
     public List<String> init() {
-        return List.of("broken: " + broken + "@" + getId());
+        return List.of("broken: " + broken);
     }
-    
 }
