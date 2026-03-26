@@ -29,9 +29,21 @@ public class Field extends Entity implements IField {
         this.underground=underground;
     }
 
+    public IField getRight(){
+        return right;
+    }
+
     public void setLeft(IField field)
     {
         left=field;
+    }
+
+    public ILayer getLayer(){
+        return layer;
+    }
+
+    public void setLayer(ILayer layer){
+        this.layer = layer;
     }
 
     public void setRight(IField field)

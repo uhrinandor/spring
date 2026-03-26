@@ -3,13 +3,12 @@ package com.spring.app.skeleton.models.head;
 import java.util.List;
 
 import com.spring.app.skeleton.models.layer.ILayerVisitor;
-import com.spring.app.skeleton.models.layer.Snow;
-import com.spring.app.skeleton.utils.Entity;
 import com.spring.app.skeleton.models.layer.Ice;
 import com.spring.app.skeleton.models.layer.Layer;
+import com.spring.app.skeleton.models.layer.Snow;
+import com.spring.app.skeleton.utils.Entity;
 
-public class BrushClearLayerVisitor extends Entity implements ILayerVisitor{
-
+public class BroomClearLayerVisitor extends Entity implements ILayerVisitor{
     private boolean result;
 
     public boolean getResult(){
@@ -18,7 +17,7 @@ public class BrushClearLayerVisitor extends Entity implements ILayerVisitor{
 
     @Override
     public void visit(Snow s) {
-        result = true;
+        result=true;
     }
 
     @Override
@@ -35,4 +34,5 @@ public class BrushClearLayerVisitor extends Entity implements ILayerVisitor{
     public List<String> init() {
         return List.of();
     }
+
 }

@@ -11,7 +11,8 @@ public class Home extends Building{
     {
         super(field);
     }
-    
+
+    //TODO: Ezt most nem hasznaljuk és változtatasra szorul
     public void generateCar(Office destination)
     {
         Car c=new Car(null);

@@ -20,26 +20,22 @@ public class Layer extends Entity implements ILayer {
 
     @Override
     public boolean slip(Vehicle v, IRandom random) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'slip'");
+        return false;
     }
 
     @Override
     public boolean canExit(Vehicle v) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'canExit'");
+        return true;
     }
 
     @Override
     public ILayer enter() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'enter'");
+        return this;
     }
 
     @Override
     public List<String> init() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'init'");
+        return List.of();
     }
     
 }
