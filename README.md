@@ -2,34 +2,45 @@
 
 ### 2025/26/2
 
-## Projects
+# Skeleton
 
-### Model
+## Tracer használata
 
-A `com.spring.app.model` tartalmazza a teljes modellt. Hivatkozik a `com.spring.app.utils` package-re, amiben a Tracer osztály található.
+Lesz egy közös Entity osztályunk, amivel az id-kat tudjuk követni.
+toString() felül van írva, `ClsName@ID` formátumot követ, így tudjuk majd követni
+kire hívunk mit.
 
-### Utils
+### Tracer.info(String message)
 
-A `com.spring.app.utils` package-ben a Tracer van, ami a szekvencia logolást segíti.
+Információra szolgál, mindig behúzást követi.
 
-### Skeleton
+### Tracer.input(String message)
 
-A `com.spring.app.skeleton` indítható package, ami egy CLI-t ad, amiben futtatni tudjuk a tesztjeinket.
+Input előtti template kérdés, csak formáz: `[?] {message}: `
 
-## Setup
+### Tracer.enterFunction(Entity base, String functionName, Object... params)
 
-Van egy aggregátor build project, az `app/app-build` mappában, itt futtassátok:
+Függvényhívás előtt meghívandó, base az amin hívni fogjuk a hívást, ezt csak Entity típusokra követjük le, functionName hogy mit hívunk, Object... params pedig további listában megadhatjuk hogy milyen bemenő értékei vannak.
 
+Példa:
+
+```java
+IField next = driver.nextMove();
+IField current = driver.getCurrent();
+Trace.getInstance().enterFunction(current, "tryExit", next); // Ha lenne több param akkor csak felsoroljuk így enterFunction(base, functionName, param1, param2, ...)
+current.tryExit(next);
 ```
-> mvn clean package
-```
 
-Ez minden dependenciát elkészít, és utána, ha skeleton felületet akarjuk indítani.
+### Tracer.exitFunction(Object returnValue)
 
-```
-> java -jar <gitRoot>/app/skeleton/target/skeleton.jar
-```
+Amikor egy függvény végzett a dolgával, akkor a végén hívjuk meg ezt, ha van return
+érték akkor adjuk meg azt is, Entity-k esetén ez `ClsName@ID` formátumú lesz.
+Ha void, akkor van overload `Tracer.exitFunction()`
 
-A skeleton.jar egy fat jar fájl, minden plusz dependecia bele van telepítve, standalone indítható.
+### Tracer.askInt(String message)
 
-Csak a skeleton indítható, utils és models csak az osztályokat tartalmazzák.
+Ha bemenetről szükségünk van intre ezt használjuk.
+
+### Tracer.askBool(String message)
+
+Ha bemenetről szükségünk van bool-ra ezt használjuk.
