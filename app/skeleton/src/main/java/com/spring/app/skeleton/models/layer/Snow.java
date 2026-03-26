@@ -41,7 +41,9 @@ public class Snow extends Entity implements ILayer {
 
     @Override
     public boolean canExit(Vehicle v) {
-        return level < 2;
+        SnowExitVisitor visitor = new SnowExitVisitor(this);
+        v.accept(visitor);
+        return visitor.getResult();
     }
 
     @Override
