@@ -5,4 +5,5 @@ import com.spring.app.skeleton.utils.IEntity;
 
 public interface ISnowPlow extends IEntity {
     public boolean switchHead(IHead head);
+    public IInventory getInventory();
 }
