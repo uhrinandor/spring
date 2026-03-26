@@ -29,17 +29,17 @@ public class Field extends Entity implements IField {
         this.underground=underground;
     }
 
-    public void setLeft(IField field)
+    public setLeft(IField field)
     {
         left=field;
     }
 
-    public void setRight(IField field)
+    public setRight(IField field)
     {
         right=field;
     }
 
-    public void setFront(IRoad road)
+    public setFront(IRoad road)
     {
         this.road=road;
     }
