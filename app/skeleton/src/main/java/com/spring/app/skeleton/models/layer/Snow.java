@@ -2,9 +2,10 @@ package com.spring.app.skeleton.models.layer;
 
 import java.util.List;
 
+import com.spring.app.skeleton.models.random.IRandom;
 import com.spring.app.skeleton.models.vehicle.Vehicle;
 import com.spring.app.skeleton.utils.Entity;
-import com.spring.app.skeleton.utils.IRandom;
+
 
 public class Snow extends Entity implements ILayer {
     private int level;

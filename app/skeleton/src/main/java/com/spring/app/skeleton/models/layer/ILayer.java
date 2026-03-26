@@ -1,8 +1,8 @@
 package com.spring.app.skeleton.models.layer;
 
+import com.spring.app.skeleton.models.random.IRandom;
 import com.spring.app.skeleton.models.vehicle.Vehicle;
 import com.spring.app.skeleton.utils.IEntity;
-import com.spring.app.skeleton.utils.IRandom;
 
 public interface ILayer extends IEntity {
     public ILayer merge(ILayer layer);

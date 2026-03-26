@@ -8,7 +8,6 @@ import com.spring.app.skeleton.models.shop.ShopItem;
 import com.spring.app.skeleton.models.vehicle.IInventory;
 import com.spring.app.skeleton.models.vehicle.IInventoryItem;
 import com.spring.app.skeleton.models.vehicle.ISnowPlow;
-import com.spring.app.skeleton.models.vehicle.Snowplow;
 import com.spring.app.skeleton.utils.Entity;
 import com.spring.app.skeleton.utils.Tracer;
 
