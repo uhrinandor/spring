@@ -14,7 +14,7 @@ public abstract class Entity {
         return id;
     }
 
-    abstract List<String> init();
+    public abstract List<String> init();
 }
 
 
