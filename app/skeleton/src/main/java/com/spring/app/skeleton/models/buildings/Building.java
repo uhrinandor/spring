@@ -13,4 +13,9 @@ public abstract class Building extends Entity{
     public IField getField() {
         return field;
     }
+
+    @Override
+    public List<String> init() {
+       return List.of("field: " + field);
+    }
 }
