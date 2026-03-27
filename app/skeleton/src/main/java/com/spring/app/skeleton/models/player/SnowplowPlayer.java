@@ -52,10 +52,12 @@ public class SnowplowPlayer extends Entity implements PurchaseContext, IPlayer{
 
     @Override
     public boolean charge(int amount) {
+        Tracer.getInstance().enterFunction(this, "charge", amount);
         int m = Tracer.getInstance().askInt("Mennyi pénze van?");
         if(m < amount)  return false;
 
         money -= m - amount;
+        Tracer.getInstance().exitFunction();
         return true;
     }
 

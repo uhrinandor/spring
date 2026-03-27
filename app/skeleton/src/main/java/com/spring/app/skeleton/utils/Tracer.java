@@ -127,4 +127,10 @@ public class Tracer {
         }
     }
 
+    public void enterFunction(IEntity base, String functionName){
+        printIndent();
+        stream.println(String.format("[->] %s.%s()", base, functionName));
+        indentationLevel++;
+    }
+
 }
