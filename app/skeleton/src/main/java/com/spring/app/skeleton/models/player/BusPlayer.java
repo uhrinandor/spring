@@ -6,27 +6,50 @@ import com.spring.app.skeleton.models.vehicle.Bus;
 import com.spring.app.skeleton.models.vehicle.Vehicle;
 import com.spring.app.skeleton.utils.Entity;
 
+/**
+ * Ez az osztály felel azért, hogy megkülönböztessük melyik játékoshoz melyik busz tartozik. 
+ * Gyűjti a pontokat.
+ */
 public class BusPlayer extends Entity implements IPlayer{
+    /**
+     * A játéoshoz tartozó busz.
+     */
     private Bus bus;
-    private int point;
 
-    
+    /**
+     * Ebben az attribútumban tárolja el, hogy hány pontot szerzett az általa 
+     * vezetett buszt. A dupláját tárolja, a busz minden célállomáshoz éréskor ad neki egy 
+     * pontot.
+     */
+    private int point;
 
     @Override
     public List<String> init() {
         return List.of("bus: " + bus + ", point: " + getPoints());
     }
 
+    /**
+     * @return Ez a metódus visszaadja a játékos által vezetett buszt.
+     * (Azért listát ad vissza, mert a SnowPlowPlayer esetében egynél több hókotró is lehetne a listában.)
+     */
     @Override
     public List<Vehicle> vehicles() {
         return List.of(bus);
     }
 
+    /**
+     * @return Ez a metódus visszaadja a játékos pontszámát. Lefelezi a tárolt pontok 
+     * számát, mivel a busz minden célállomáshoz éréskor ad neki egy pontot.
+     */
     @Override
     public int getPoints() {
         return point/2;
     }
 
+    /**
+     * Növeli a játékos pontszámát a megadott mennyiséggel.
+     * @param amount a mennyiség amivel növelni kell a pontszámot
+     */
     @Override
     public void give(int amount) {
         point += amount;
