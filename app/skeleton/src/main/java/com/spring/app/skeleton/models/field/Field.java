@@ -31,11 +31,13 @@ public class Field extends Entity implements IField {
         this.underground=underground;
         this.salt = salt;
     }
-
+    
+    @Override
     public IRoad getFront(){
         return front;
     }
 
+    @Override
     public IField getRight(){
         return right;
     }
@@ -44,7 +46,8 @@ public class Field extends Entity implements IField {
     {
         left=field;
     }
-
+    
+    @Override
     public ILayer getLayer(){
         return layer;
     }
@@ -107,21 +110,6 @@ public class Field extends Entity implements IField {
         if(!f.tryEnter(vehicle)) return;
         
         vehicle = null;
-        return;
-    }
-
-    // FLAG: EZ MÁR NEM AKTUÁLIS
-    @Override
-    public void interact() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'interact'");
-    }
-
-    // FLAG: EZ MÁR NEM AKTUÁLIS
-    @Override
-    public void slip() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'slip'");
     }
 
     @Override
@@ -137,9 +125,11 @@ public class Field extends Entity implements IField {
        "road: " + front.toString() + "left: " + left.toString() + "right: " + right.toString() +
        "random: " + random.toString());
     }
+
+    @Override
     public void setVehicle(Vehicle v)
     {
-        
+        this.vehicle=v;
     }
 
     @Override

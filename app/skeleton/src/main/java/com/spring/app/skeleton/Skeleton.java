@@ -34,7 +34,7 @@ public class Skeleton {
     /**
      * Kiíratja a menü lehetőségeket a konzolra
      */
-    public void printMenu(){
+    private void printMenu(){
         tracer.info("Options:");
         for(int i=0; i<menuItems.size(); i++){  
             tracer.info(String.format("%d. %s", i, menuItems.get(i).getTitle()));
@@ -44,7 +44,7 @@ public class Skeleton {
     /**
      * Kilép a programból
      */
-    public void exit(){
+    private void exit(){
         tracer.info("Exiting...");
         end = true;
     }

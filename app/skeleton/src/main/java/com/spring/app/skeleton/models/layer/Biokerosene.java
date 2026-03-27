@@ -15,7 +15,7 @@ public class Biokerosene extends Entity implements IInventoryItem, ShopItem{
 
     @Override
     public int price() {
-        return Tracer.getInstance().askInt("Mennyibe kerul?");
+        return Tracer.getInstance().askInt("Mennyibe kerül?");
     }
 
     @Override
