@@ -32,6 +32,10 @@ public class Field extends Entity implements IField {
         this.salt = salt;
     }
 
+    public IRoad getFront(){
+        return front;
+    }
+
     public IField getRight(){
         return right;
     }
@@ -142,4 +146,6 @@ public class Field extends Entity implements IField {
     public void setSalt(ISalt salt) {
         this.salt = salt;
     }
+
+    
 }

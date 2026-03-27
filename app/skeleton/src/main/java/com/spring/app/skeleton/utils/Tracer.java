@@ -81,7 +81,7 @@ public class Tracer {
      * @param functionName A függvény neve
      * @param params A függvény paraméterei
      */
-    public void enterFunction(Entity base, String functionName, Object... params){
+    public void enterFunction(IEntity base, String functionName, Object... params){
         printIndent();
         stream.print(String.format("[->] %s.%s(", base, functionName));
         for(int i=0; i<params.length; i++){
