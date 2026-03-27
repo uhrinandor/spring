@@ -20,6 +20,10 @@ public class Layer extends Entity implements ILayer {
         return layer;
     }
 
+    /**
+     * Lehetővé teszi a visitor számára, hogy műveletet hajtson végre ezen a rétegen.
+     * @param visitor a réteget feldolgozó visitor objektum
+     */
     @Override
     public void accept(ILayerVisitor visitor) {
         visitor.visit(this);

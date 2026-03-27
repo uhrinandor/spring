@@ -6,7 +6,7 @@ import java.util.List;
 import com.spring.app.skeleton.utils.Entity;
 
 /**
- * Megvalósítja a havas út felszín és a rá kerülő út takarók interakcióját.
+ * Megvalósítja a havas útfelszín és a rá kerülő út takarók interakcióját.
  */
 public class SnowMergeVisitor extends Entity implements ILayerVisitor{
     /**
