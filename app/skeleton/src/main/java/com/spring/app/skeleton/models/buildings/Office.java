@@ -2,6 +2,7 @@ package com.spring.app.skeleton.models.buildings;
 
 import com.spring.app.skeleton.models.field.IField;
 import com.spring.app.skeleton.models.vehicle.Car;
+import com.spring.app.skeleton.utils.Tracer;
 
 /**
  * Célként szolgálnak az autóknak, emellett felelősségük az autók elfogyasztása.
@@ -19,6 +20,8 @@ public class Office extends Building{
      */
     public void consume(Car c)
     {
+        Tracer.getInstance().enterFunction(this, "consume",c);
         field.setVehicle(null);
+        Tracer.getInstance().exitFunction();
     }
 }

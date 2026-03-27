@@ -28,11 +28,14 @@ public class Snowplow extends Vehicle implements ISnowPlow{
      */
     @Override
     public boolean switchHead(IHead head) {
+        Tracer.getInstance().enterFunction(this, "switchHead",head);
         if(inventory.removeItem(head, 1)){
             inventory.addItem(activeHead, 1);
             activeHead = head;
+            Tracer.getInstance().exitFunction(true);
             return true;
         }
+        Tracer.getInstance().exitFunction(false);
         return false;
     }
 

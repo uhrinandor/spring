@@ -31,7 +31,9 @@ public class Inventory extends Entity implements IInventory{
 
     @Override
     public void addItem(IInventoryItem i, int amount) {
+        Tracer.getInstance().enterFunction(this, "addItem",i,amount);
         items.put(i.key(), items.get(i.key())+amount);
+        Tracer.getInstance().exitFunction();
     }
 
     @Override
