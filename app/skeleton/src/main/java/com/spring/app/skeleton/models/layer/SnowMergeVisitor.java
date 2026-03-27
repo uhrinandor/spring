@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.spring.app.skeleton.utils.Entity;
+import com.spring.app.skeleton.utils.Tracer;
 
 public class SnowMergeVisitor extends Entity implements ILayerVisitor{
     private Snow base;
@@ -16,22 +17,30 @@ public class SnowMergeVisitor extends Entity implements ILayerVisitor{
 
     @Override
     public void visit(Snow s) {
+        Tracer.getInstance().enterFunction(this, "visit",s);
         base.setLevel(base.getLevel() + s.getLevel());
         result = base; 
+        Tracer.getInstance().exitFunction();
     }
 
     @Override
     public void visit(Ice i) {
+        Tracer.getInstance().enterFunction(this, "visit",i);
         base.setLevel(base.getLevel() + 1);
         result = base;
+        Tracer.getInstance().exitFunction();
     }
 
     @Override
     public void visit(Layer l) {
+        Tracer.getInstance().enterFunction(this, "visit",l);
         result = base;
+        Tracer.getInstance().exitFunction();
     }
 
     public ILayer getResult() {
+        Tracer.getInstance().enterFunction(this, "getResult");
+        Tracer.getInstance().exitFunction(result);
         return result;
     }
 

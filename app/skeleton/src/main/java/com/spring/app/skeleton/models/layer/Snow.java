@@ -16,6 +16,8 @@ public class Snow extends Entity implements ILayer {
     }
 
     public int getLevel(){
+        Tracer.getInstance().enterFunction(this, "getLevel");
+        Tracer.getInstance().exitFunction(level);
         return level;
     }
 
@@ -25,8 +27,11 @@ public class Snow extends Entity implements ILayer {
 
     @Override
     public ILayer merge(ILayer layer) {
+        Tracer.getInstance().enterFunction(this, "merge",layer);
         SnowMergeVisitor visitor = new SnowMergeVisitor(this);
+        Tracer.getInstance().newObject(visitor);
         layer.accept(visitor);
+        Tracer.getInstance().exitFunction(visitor.getResult());
         return visitor.getResult();
     }
 
