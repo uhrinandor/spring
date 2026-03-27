@@ -183,7 +183,9 @@ public class Field extends Entity implements IField {
 
     @Override
     public void setSalt(ISalt salt) {
+        Tracer.getInstance().enterFunction(this, "setSalt",salt);
         this.salt = salt;
+        Tracer.getInstance().exitFunction();
     }
 
     

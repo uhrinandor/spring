@@ -68,7 +68,9 @@ public class Snowplow extends Vehicle implements ISnowPlow{
 
     @Override
     public void accept(IVehicleVisitor visitor) {
+        Tracer.getInstance().enterFunction(this, "accept",visitor);
         visitor.visit(this);
+        Tracer.getInstance().exitFunction();
     }
 
     @Override
