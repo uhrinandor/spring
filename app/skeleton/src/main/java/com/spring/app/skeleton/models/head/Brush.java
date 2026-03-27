@@ -16,11 +16,16 @@ public class Brush extends Entity implements IHead, ShopItem{
 
     @Override
     public boolean interact(IField field, IInventory inventory) {
+        Tracer.getInstance().enterFunction(this, "interact",field,inventory);
         ILayer current = field.getLayer();
         BrushClearLayerVisitor visitor = new BrushClearLayerVisitor();
+        Tracer.getInstance().newObject(visitor);
         current.accept(visitor);
 
-        if(!visitor.getResult()) return false;
+        if(!visitor.getResult()){
+            Tracer.getInstance().exitFunction(false);
+            return false;
+        } 
 
         field.setLayer(new Layer());
         IField right = field.getRight();
