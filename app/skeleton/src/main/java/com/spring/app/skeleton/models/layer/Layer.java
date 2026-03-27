@@ -5,6 +5,7 @@ import java.util.List;
 import com.spring.app.skeleton.models.random.IRandom;
 import com.spring.app.skeleton.models.vehicle.Vehicle;
 import com.spring.app.skeleton.utils.Entity;
+import com.spring.app.skeleton.utils.Tracer;
 
 public class Layer extends Entity implements ILayer {
 
@@ -25,6 +26,8 @@ public class Layer extends Entity implements ILayer {
 
     @Override
     public boolean canExit(Vehicle v) {
+        Tracer.getInstance().enterFunction(this, "canExit",v);
+        Tracer.getInstance().exitFunction(true);
         return true;
     }
 

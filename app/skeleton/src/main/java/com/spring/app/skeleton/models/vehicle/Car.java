@@ -30,7 +30,9 @@ public class Car extends Vehicle {
 
     @Override
     public void contact(Vehicle v) {
+        Tracer.getInstance().enterFunction(this, "contact",v);
         immobileTurnsLeft = 3;
+        Tracer.getInstance().exitFunction();
     }
 
     /**
