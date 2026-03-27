@@ -31,4 +31,10 @@ public class Broom extends Entity implements IHead{
         rightright.setLayer(rightLayer);
         return true;
     }
+
+    @Override
+    public Item key() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'key'");
+    }
 }

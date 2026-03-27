@@ -16,8 +16,12 @@ public class Dragon extends Entity implements IHead{
 
     @Override
     public List<String> init() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'init'");
+        return List.of();
+    }
+
+    @Override
+    public Item key() {
+        return Item.DRAGON;
     }
 
 }
