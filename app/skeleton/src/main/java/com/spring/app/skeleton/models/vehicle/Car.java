@@ -2,48 +2,55 @@ package com.spring.app.skeleton.models.vehicle;
 
 import java.util.List;
 
-import com.spring.app.skeleton.models.buildings.Building;
+import com.spring.app.skeleton.models.buildings.Office;
 import com.spring.app.skeleton.models.field.IField;
+import com.spring.app.skeleton.utils.Tracer;
 
 public class Car extends Vehicle {
+    Office destination;
+    int immobileTurnsLeft = 0;
 
-    public Car(IDriver driver) {
+    public Car(IDriver driver, Office destination) {
         super(driver);
-        //TODO Auto-generated constructor stub
+        this.destination = destination;
     }
 
     @Override
     public List<String> init() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'init'");
+       return List.of("driver: " + driver, "destination: " + destination);  
     }
 
+    /**
+     * Megadja, hogy az autó képes-e megmozdulni
+     */
     @Override
     boolean canMove() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'canMove'");
+        return Tracer.getInstance().askInt("Mennyi ideig van lerobbanva a busz?") == 0;
     }
 
     @Override
     public void contact(Vehicle v) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'contact'");
+        immobileTurnsLeft = 3;
     }
 
+    /**
+     * Ha célba ér, akkor a célállomás leszedi a pályáról.
+     */
     @Override
     public void interact(IField f) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'interact'");
+        if(destination.getField() != f) return;
+
+        destination.consume(this);
     }
     
 
     @Override
     public void accept(IVehicleVisitor visitor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'accept'");
+        visitor.visit(this);
     }
-    public void setDestination(Building building)
-    {
 
+    public void setDestination(Office destination  )
+    {
+        this.destination = destination;
     }
 }

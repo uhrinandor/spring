@@ -1,7 +1,5 @@
 package com.spring.app.skeleton.models.buildings;
 
-import java.util.List;
-
 import com.spring.app.skeleton.models.field.IField;
 import com.spring.app.skeleton.models.vehicle.Bus;
 
@@ -18,15 +16,14 @@ public class Station extends Building{
         return pair;
     }
 
+    /**
+     * Lerakja a megadott buszt maga mellé
+     * @param bus A busz, amit le akarunk rakni
+     */
     public void put(Bus bus)
     {
-        getField().setVehicle(bus);
-        bus.setStation(getField());
+        bus.getDriver().setCurrent(field);
+        field.setVehicle(bus);
+        
     }
-
-    @Override
-    public List<String> init() {
-       return List.of("field: " + field);
-    }
-
 }

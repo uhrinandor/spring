@@ -33,7 +33,11 @@ public class CarDriver extends Entity implements IDriver {
 
     @Override
     public List<String> init() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'init'");
+        return List.of("current: " + current, "next: " + next);
+    }
+
+    @Override
+    public void setCurrent(IField f) {
+        current = f;
     }
 }

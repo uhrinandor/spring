@@ -1,7 +1,5 @@
 package com.spring.app.skeleton.models.buildings;
 
-import java.util.List;
-
 import com.spring.app.skeleton.models.field.IField;
 import com.spring.app.skeleton.models.vehicle.Car;
 
@@ -12,16 +10,12 @@ public class Office extends Building{
         super(field);
     }
     
+    /**
+     * A kocsit leszedi a pályáról, csak arról tudja, amelyik melletti field-en van.
+     * @param c
+     */
     public void consume(Car c)
     {
-        c=null;
-        getField().setVehicle(null);
+        field.setVehicle(null);
     }
-
-
-    @Override
-    public List<String> init() {
-       return List.of("field: " + field);
-    }
-
 }
