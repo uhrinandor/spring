@@ -18,7 +18,7 @@ public abstract class Vehicle extends Entity {
     }
 
     /**
-     * Megadja, hogy az autó képes-e megmozdulni
+     * Megadja, hogy az jármű képes-e megmozdulni
      */
     abstract boolean canMove();
 

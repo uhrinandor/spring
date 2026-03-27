@@ -6,9 +6,23 @@ import com.spring.app.skeleton.models.field.IField;
 import com.spring.app.skeleton.models.head.IHead;
 import com.spring.app.skeleton.models.player.ICollector;
 
+/**
+ * Felelőssége az utak tisztán tartása. Ilyen járműveket irányítanak a hókotrós játékosok.
+ */
 public class Snowplow extends Vehicle implements ISnowPlow{
+    /**
+     * Rendelkezik egy inventory-val, amiben a hókotrófejeket tartja.
+     */
     IInventory inventory;
+
+    /**
+     * A fej, amely éppen fel van szerelve rá.
+     */
     IHead activeHead;
+
+    /**
+     * Neki tudja átadni a pontokat, amiket szerzett.
+     */
     ICollector collector;
 
     public Snowplow(IDriver driver, IInventory inventory, IHead defaultHead, ICollector collector) {
@@ -62,7 +76,11 @@ public class Snowplow extends Vehicle implements ISnowPlow{
         if(activeHead.interact(f, inventory)) collector.give(1);
     }
     
-
+    /**
+     * Lehetővé teszi a Visitor számára, hogy műveletet hajtson végre
+     * ezen a hókotrón. (IceSlipVisitor, SnowExitVisitor)
+     * @param visitor akinek a hókotró engedélyezi a visit műveletet.
+     */
     @Override
     public void accept(IVehicleVisitor visitor) {
         visitor.visit(this);
