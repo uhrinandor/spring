@@ -8,6 +8,7 @@ import com.spring.app.skeleton.models.vehicle.Vehicle;
 import com.spring.app.skeleton.utils.IEntity;
 
 public interface IField extends IEntity {
+    public IRoad getFront();
     public IField getRight();
     public ILayer getLayer();
     public void setLayer(ILayer layer);

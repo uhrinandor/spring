@@ -32,6 +32,10 @@ public class Field extends Entity implements IField {
         this.salt = salt;
     }
 
+    public IRoad getRoad(){
+        return front;
+    }
+
     public IField getRight(){
         return right;
     }
