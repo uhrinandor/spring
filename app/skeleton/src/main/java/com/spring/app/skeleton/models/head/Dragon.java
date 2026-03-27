@@ -48,11 +48,15 @@ public class Dragon extends Entity implements IHead, ShopItem{
 
     @Override
     public int price() {
-        return Tracer.getInstance().askInt("Mennyibe kerül a Dragon?");
+        Tracer.getInstance().enterFunction(this, "price");
+        int tmp = Tracer.getInstance().askInt("Mennyibe kerül a Dragon?");
+        Tracer.getInstance().exitFunction(tmp);
+        return tmp;
     }
 
     @Override
     public void apply(PurchaseContext ctx, int amount) {
+        Tracer.getInstance().enterFunction(this, "apply",ctx,amount);
         ISnowPlow sp = ctx.snowPlow();
         IInventory inventory = sp.getInventory();
         inventory.addItem(this, amount);

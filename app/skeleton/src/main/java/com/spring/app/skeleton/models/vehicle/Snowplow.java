@@ -78,6 +78,8 @@ public class Snowplow extends Vehicle implements ISnowPlow{
 
     @Override
     public IInventory getInventory() {
+        Tracer.getInstance().enterFunction(this, "getInventory");
+        Tracer.getInstance().exitFunction(inventory);
         return inventory;
     }
     
