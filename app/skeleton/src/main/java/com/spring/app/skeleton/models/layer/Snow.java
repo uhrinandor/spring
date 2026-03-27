@@ -46,6 +46,7 @@ public class Snow extends Entity implements ILayer {
         SnowExitVisitor visitor = new SnowExitVisitor(this);
         Tracer.getInstance().newObject(visitor);
         v.accept(visitor);
+        Tracer.getInstance().exitFunction(visitor.getResult());
         return visitor.getResult();
     }
 
