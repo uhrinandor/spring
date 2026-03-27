@@ -2,6 +2,7 @@ package com.spring.app.skeleton.models.buildings;
 
 import com.spring.app.skeleton.models.field.IField;
 import com.spring.app.skeleton.models.vehicle.Bus;
+import com.spring.app.skeleton.utils.Tracer;
 
 /**
  * A játék kezdetekor a buszok legenerálásáért felel, ilyenkor a buszhoz rendelt két végállomás 
@@ -22,6 +23,8 @@ public class Station extends Building{
 
     public Station getPair()
     {
+        Tracer.getInstance().enterFunction(this, "getPair");
+        Tracer.getInstance().exitFunction(pair);
         return pair;
     }
 
