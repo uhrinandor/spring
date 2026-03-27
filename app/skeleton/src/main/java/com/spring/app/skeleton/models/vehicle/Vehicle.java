@@ -2,6 +2,7 @@ package com.spring.app.skeleton.models.vehicle;
 
 import com.spring.app.skeleton.models.field.IField;
 import com.spring.app.skeleton.utils.Entity;
+import com.spring.app.skeleton.utils.Tracer;
 
 public abstract class Vehicle extends Entity {
     IDriver driver;
@@ -19,12 +20,17 @@ public abstract class Vehicle extends Entity {
     }
 
     public void step(boolean forced){
-        if(!canMove()) return;
+        Tracer.getInstance().enterFunction(this, "step",forced);
+        
+        if(!canMove()){
+            Tracer.getInstance().exitFunction();
+            return;
+        } 
 
         IField next = forced ? driver.getNext() : driver.nextMove();
         IField current = driver.getCurrent();
-
         current.tryExit(next);
+        Tracer.getInstance().exitFunction();
     }
 
     public abstract void interact(IField f);

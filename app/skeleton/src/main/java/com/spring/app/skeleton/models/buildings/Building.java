@@ -14,6 +14,7 @@ public abstract class Building extends Entity{
     }
 
     public IField getField() {
+        
         return field;
     }
 

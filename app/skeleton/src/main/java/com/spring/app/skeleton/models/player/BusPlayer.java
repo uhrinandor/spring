@@ -5,6 +5,7 @@ import java.util.List;
 import com.spring.app.skeleton.models.vehicle.Bus;
 import com.spring.app.skeleton.models.vehicle.Vehicle;
 import com.spring.app.skeleton.utils.Entity;
+import com.spring.app.skeleton.utils.Tracer;
 
 public class BusPlayer extends Entity implements IPlayer{
     private Bus bus;
@@ -29,7 +30,9 @@ public class BusPlayer extends Entity implements IPlayer{
 
     @Override
     public void give(int amount) {
+        Tracer.getInstance().enterFunction(this, "give",amount);
         point += amount;
+        Tracer.getInstance().exitFunction();
     }
 
 }

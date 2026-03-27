@@ -5,6 +5,7 @@ import java.util.List;
 import com.spring.app.skeleton.models.random.IRandom;
 import com.spring.app.skeleton.models.vehicle.Vehicle;
 import com.spring.app.skeleton.utils.Entity;
+import com.spring.app.skeleton.utils.Tracer;
 
 
 public class Snow extends Entity implements ILayer {
@@ -41,19 +42,25 @@ public class Snow extends Entity implements ILayer {
 
     @Override
     public boolean canExit(Vehicle v) {
+        Tracer.getInstance().enterFunction(this, "canExit",v);
         SnowExitVisitor visitor = new SnowExitVisitor(this);
+        Tracer.getInstance().newObject(visitor);
         v.accept(visitor);
         return visitor.getResult();
     }
 
     @Override
     public ILayer enter() {
+        Tracer.getInstance().enterFunction(this, "enter");
         if(level > 1){
             level--;
+            Tracer.getInstance().exitFunction(this);
             return this;
         }
-        
-        return new Ice(false);
+        Ice tmp = new Ice();
+        Tracer.getInstance().newObject(tmp);
+        Tracer.getInstance().exitFunction();
+        return tmp;
         
     }
 

@@ -8,6 +8,7 @@ import com.spring.app.skeleton.models.random.IRandom;
 import com.spring.app.skeleton.models.vehicle.IDriver;
 import com.spring.app.skeleton.models.vehicle.Vehicle;
 import com.spring.app.skeleton.utils.Entity;
+import com.spring.app.skeleton.utils.Tracer;
 
 public class Field extends Entity implements IField {
     
@@ -80,9 +81,11 @@ public class Field extends Entity implements IField {
 
     @Override
     public boolean tryEnter(Vehicle v) {
+        Tracer.getInstance().enterFunction(this, "tryEnter", v);
         if(vehicle != null){
             vehicle.contact(v);
             v.contact(vehicle);
+            Tracer.getInstance().exitFunction(false);
             return false;
         }
 
@@ -105,10 +108,17 @@ public class Field extends Entity implements IField {
 
     @Override
     public void tryExit(IField f) {
-        if(!layer.canExit(vehicle)) return;
+        Tracer.getInstance().enterFunction(this, "tryExit",f);
+        if(!layer.canExit(vehicle)){
+            Tracer.getInstance().exitFunction();
+            return;
+        } 
 
-        if(!f.tryEnter(vehicle)) return;
-        
+        if(!f.tryEnter(vehicle)){
+            Tracer.getInstance().exitFunction();
+            return;
+        } 
+        Tracer.getInstance().exitFunction();
         vehicle = null;
     }
 

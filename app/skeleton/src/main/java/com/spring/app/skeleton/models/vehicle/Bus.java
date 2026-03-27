@@ -28,7 +28,10 @@ public class Bus extends Vehicle {
      */
     @Override
     boolean canMove() {
-        return Tracer.getInstance().askInt("Mennyi ideig van lerobbanva a busz?") == 0;
+        Tracer.getInstance().enterFunction(this, "canMove");
+        boolean tmp = Tracer.getInstance().askInt("Mennyi ideig van lerobbanva a busz?") == 0;
+        Tracer.getInstance().exitFunction(tmp);
+        return tmp;
     }
 
     /**
@@ -37,7 +40,9 @@ public class Bus extends Vehicle {
      */
     @Override
     public void contact(Vehicle v) {
+        Tracer.getInstance().enterFunction(this, "contact",v);
         immobileTurnsLeft = 3;
+        Tracer.getInstance().exitFunction();
     }
 
     /**
@@ -46,18 +51,25 @@ public class Bus extends Vehicle {
      */
     @Override
     public void interact(IField f) {
-        if(station.getField() != f) return;
-
+        Tracer.getInstance().enterFunction(this, "interact",f);
+        if(station.getField() != f){
+            Tracer.getInstance().exitFunction();
+            return;
+        } 
+        
         Station pair = station.getPair();
         station = pair;
 
         collector.give(1);
+        Tracer.getInstance().exitFunction();
     }
     
 
     @Override
     public void accept(IVehicleVisitor visitor) {
+        Tracer.getInstance().enterFunction(this, "accept",visitor);
         visitor.visit(this);
+        Tracer.getInstance().exitFunction();
     }
 
 

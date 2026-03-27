@@ -2,6 +2,7 @@ package com.spring.app.skeleton.models.buildings;
 
 import com.spring.app.skeleton.models.field.IField;
 import com.spring.app.skeleton.models.vehicle.Bus;
+import com.spring.app.skeleton.utils.Tracer;
 
 public class Station extends Building{
 
@@ -13,6 +14,8 @@ public class Station extends Building{
 
     public Station getPair()
     {
+        Tracer.getInstance().enterFunction(this, "getPair");
+        Tracer.getInstance().exitFunction(pair);
         return pair;
     }
 
