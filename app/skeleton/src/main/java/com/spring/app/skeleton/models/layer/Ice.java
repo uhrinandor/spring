@@ -20,6 +20,8 @@ public class Ice extends Entity implements ILayer {
     }
 
     public boolean getBroken(){
+        Tracer.getInstance().enterFunction(this, "getBroken");
+        Tracer.getInstance().exitFunction(broken);
         return broken;
     }
 

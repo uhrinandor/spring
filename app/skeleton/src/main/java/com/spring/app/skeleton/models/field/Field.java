@@ -50,6 +50,8 @@ public class Field extends Entity implements IField {
 
     @Override
     public IField getRight(){
+        Tracer.getInstance().enterFunction(this, "getRight");
+        Tracer.getInstance().exitFunction(right);
         return right;
     }
     
@@ -66,7 +68,9 @@ public class Field extends Entity implements IField {
     }
 
     public void setLayer(ILayer layer){
+        Tracer.getInstance().enterFunction(this, "setLayer",layer);
         this.layer = layer;
+        Tracer.getInstance().exitFunction();
     }
 
     public void setRight(IField field)
