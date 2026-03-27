@@ -20,4 +20,9 @@ public class IceBreaker extends Entity implements IHead{
         throw new UnsupportedOperationException("Unimplemented method 'init'");
     }
 
+    @Override
+    public Item key() {
+        return Item.ICEBREAKER;
+    }
+
 }

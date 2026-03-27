@@ -27,4 +27,9 @@ public class SaltSpreader extends Entity implements IHead{
         return List.of();
     }
 
+    @Override
+    public Item key() {
+        return Item.SALTSPREADER;
+    }
+
 }

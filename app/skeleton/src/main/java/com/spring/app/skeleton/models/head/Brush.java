@@ -1,6 +1,5 @@
 package com.spring.app.skeleton.models.head;
 
-import java.lang.reflect.Field;
 import java.util.List;
 
 import com.spring.app.skeleton.models.field.IField;
@@ -29,8 +28,12 @@ public class Brush extends Entity implements IHead{
 
     @Override
     public List<String> init() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'init'");
+        return List.of();
+    }
+
+    @Override
+    public Item key() {
+        return Item.BRUSH;
     }
     
 }
