@@ -13,8 +13,20 @@ import com.spring.app.skeleton.models.vehicle.ISnowPlow;
 import com.spring.app.skeleton.utils.Entity;
 import com.spring.app.skeleton.utils.Tracer;
 
+/**
+ * A sárkány az úton levő havat/jeget felolvasztja.
+ * Ehhez a hókotrónak biokerozint kell birtokolnia az IInventory-jában.
+ */
 public class Dragon extends Entity implements IHead, ShopItem{
 
+    /**
+     * Ez a metódus felel a hókotró és a mezőn lévő réteg interakciójának kezeléséért.
+     * Rétegtől függően más-más interakció történik.
+     * Az inventory-ból kivesz egy Biokerosene-t, ha nincs akkor nem takarít.
+     * @param field a mező amivel kezdi a takarítást, amin áll.
+     * További két mezőt is letakarít maga előtt.
+     * @return false ha nincs Biokerosene, true ha sikerült letakarítani
+     */
     @Override
     public boolean interact(IField field, IInventory inventory) {
         if (!inventory.removeItem(new Biokerosene(), 1)) return false;
@@ -33,17 +45,28 @@ public class Dragon extends Entity implements IHead, ShopItem{
         return List.of();
     }
 
+    /**
+     * @return Visszaadja az nevét.
+     */
     @Override
     public Item key() {
         return Item.DRAGON;
     }
 
-
+    /**
+     * @return Visszaadja egy megvásárolható Dragon árát.
+     */
     @Override
     public int price() {
         return Tracer.getInstance().askInt("Mennyibe kerül a Dragon?");
     }
 
+    /**
+     * Alkalmazza a vásárlást.
+     * Jelzi az aktív hókotró inventory-jának, hogy adjon hozzá egy elemet a típusából.
+     * @param ctx visszaadja azt a hókotrót, amire történik a vásárlás
+     * @param amount a megvásárolni kívánt Dragon-ok száma
+     */
     @Override
     public void apply(PurchaseContext ctx, int amount) {
         ISnowPlow sp = ctx.snowPlow();

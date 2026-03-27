@@ -44,6 +44,7 @@ public class BroomClearLayerVisitor extends Entity implements ILayerVisitor{
     /**
      * Eldönti, hogy a hányófej letakaríthatja-e a sima utat.
      * Le tudja takarítani minden esetben.
+     * @param l a sima út
      */
     @Override
     public void visit(Layer l) {

@@ -29,13 +29,12 @@ public class Broom extends Entity implements IHead, ShopItem{
      * Ez a metódus felel a hókotró és a mezőn lévő réteg interakciójának kezeléséért.
      * A havat és a tört jeget eltakarítja kettővel jobbra lévő útra vagy ha nincs ilyen
      * akkor eltűnteti. A sima jégre nem tud hatással lenni.
-     * @param field amit le kéne takarítani
+     * @param field amit le kéne takarítani, amin áll a hókotró.
      * @return ha a visitor szerint nem takaríthatja le a mezőt, hamissal tér vissza,
      * ha letakarította igazzal
      */
     @Override
     public boolean interact(IField field, IInventory inventory) {
-        //TODO: itt az inventory felesleges paraméter? Nem kéne ellenőrizni, hogy van-e broom feje a hókotrónak?
         ILayer current = field.getLayer();
         BroomClearLayerVisitor visitor = new BroomClearLayerVisitor();
         current.accept(visitor);
