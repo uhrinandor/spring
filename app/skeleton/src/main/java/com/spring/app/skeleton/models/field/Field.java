@@ -43,6 +43,8 @@ public class Field extends Entity implements IField {
      */
     @Override
     public IRoad getFront(){
+        Tracer.getInstance().enterFunction(this,"getFront");
+        Tracer.getInstance().exitFunction(front);
         return front;
     }
 
@@ -58,6 +60,8 @@ public class Field extends Entity implements IField {
     
     @Override
     public ILayer getLayer(){
+        Tracer.getInstance().enterFunction(this, "getLayer");
+        Tracer.getInstance().exitFunction(layer);
         return layer;
     }
 

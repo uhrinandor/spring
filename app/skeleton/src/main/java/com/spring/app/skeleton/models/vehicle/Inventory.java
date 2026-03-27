@@ -18,11 +18,14 @@ public class Inventory extends Entity implements IInventory{
 
     @Override
     public boolean removeItem(IInventoryItem i, int amount) {
+        Tracer.getInstance().enterFunction(this, "removeItem",i,amount);
         int available = Tracer.getInstance().askInt("Mennyi van belőle? "+i.key());
         if(available >= amount){
             items.put(i.key(), available-amount);
+            Tracer.getInstance().exitFunction(true);
             return true;
         }
+        Tracer.getInstance().exitFunction(false);
         return false;
     }
 

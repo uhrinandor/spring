@@ -5,6 +5,7 @@ import java.util.List;
 import com.spring.app.skeleton.models.field.IField;
 import com.spring.app.skeleton.models.head.IHead;
 import com.spring.app.skeleton.models.player.ICollector;
+import com.spring.app.skeleton.utils.Tracer;
 
 public class Snowplow extends Vehicle implements ISnowPlow{
     IInventory inventory;
@@ -59,7 +60,9 @@ public class Snowplow extends Vehicle implements ISnowPlow{
      */
     @Override
     public  void interact(IField f) {
+        Tracer.getInstance().enterFunction(this, "interact",f);
         if(activeHead.interact(f, inventory)) collector.give(1);
+        Tracer.getInstance().exitFunction();
     }
     
 
