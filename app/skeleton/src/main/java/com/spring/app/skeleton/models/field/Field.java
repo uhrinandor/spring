@@ -75,6 +75,8 @@ public class Field extends Entity implements IField {
 
     @Override
     public List<IField> getAvailable() {
+        Tracer.getInstance().enterFunction(this, "getAvailable");
+        Tracer.getInstance().exitFunction(List.of(this));
        return List.of(this);
     }
 

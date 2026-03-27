@@ -37,6 +37,8 @@ public abstract class Vehicle extends Entity {
     public abstract void accept(IVehicleVisitor visitor);
   
     public IDriver getDriver(){
+        Tracer.getInstance().enterFunction(this, "getDriver");
+        Tracer.getInstance().exitFunction(driver);
         return driver;
     }
 }
