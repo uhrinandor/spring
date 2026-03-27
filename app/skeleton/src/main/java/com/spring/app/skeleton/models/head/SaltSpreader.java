@@ -4,10 +4,14 @@ import java.util.List;
 
 import com.spring.app.skeleton.models.field.IField;
 import com.spring.app.skeleton.models.layer.Salt;
+import com.spring.app.skeleton.models.shop.PurchaseContext;
+import com.spring.app.skeleton.models.shop.ShopItem;
 import com.spring.app.skeleton.models.vehicle.IInventory;
+import com.spring.app.skeleton.models.vehicle.ISnowPlow;
 import com.spring.app.skeleton.utils.Entity;
+import com.spring.app.skeleton.utils.Tracer;
 
-public class SaltSpreader extends Entity implements IHead{
+public class SaltSpreader extends Entity implements IHead, ShopItem{
 
     /**
      * Ha van az inventory-ban só akkor lerakja
@@ -30,6 +34,18 @@ public class SaltSpreader extends Entity implements IHead{
     @Override
     public Item key() {
         return Item.SALTSPREADER;
+    }
+
+        @Override
+    public int price() {
+        return Tracer.getInstance().askInt("Mennyibe kerül a SaltSpreader?");
+    }
+
+    @Override
+    public void apply(PurchaseContext ctx, int amount) {
+        ISnowPlow sp = ctx.snowPlow();
+        IInventory inventory = sp.getInventory();
+        inventory.addItem(this, amount);
     }
 
 }
