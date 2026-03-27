@@ -24,7 +24,9 @@ public class Ice extends Entity implements ILayer {
     }
 
     public void setBroken(boolean tmp){
+        Tracer.getInstance().enterFunction(this, "setBroken",tmp);
         broken = tmp;
+        Tracer.getInstance().exitFunction();
     }
 
     @Override
@@ -36,7 +38,9 @@ public class Ice extends Entity implements ILayer {
 
     @Override
     public void accept(ILayerVisitor visitor) {
+        Tracer.getInstance().enterFunction(this, "accept",visitor);
         visitor.visit(this);
+        Tracer.getInstance().exitFunction();
     }
 
     @Override

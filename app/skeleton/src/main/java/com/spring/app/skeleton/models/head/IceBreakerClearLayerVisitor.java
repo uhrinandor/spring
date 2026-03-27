@@ -7,6 +7,7 @@ import com.spring.app.skeleton.models.layer.Ice;
 import com.spring.app.skeleton.models.layer.Layer;
 import com.spring.app.skeleton.models.layer.Snow;
 import com.spring.app.skeleton.utils.Entity;
+import com.spring.app.skeleton.utils.Tracer;
 
 public class IceBreakerClearLayerVisitor extends Entity implements ILayerVisitor{
     Ice result = null; 
@@ -23,8 +24,10 @@ public class IceBreakerClearLayerVisitor extends Entity implements ILayerVisitor
      */
     @Override
     public void visit(Ice i) {
+        Tracer.getInstance().enterFunction(this, "visit",i);
         i.setBroken(true);
         result = i;
+        Tracer.getInstance().exitFunction();
     }
 
     /**
@@ -34,6 +37,8 @@ public class IceBreakerClearLayerVisitor extends Entity implements ILayerVisitor
     public void visit(Layer l) {}
 
     public Ice getResult() {
+        Tracer.getInstance().enterFunction(this, "gerResult");
+        Tracer.getInstance().exitFunction(result);
         return result;
     }
 
