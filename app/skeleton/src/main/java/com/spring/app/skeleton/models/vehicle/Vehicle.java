@@ -17,6 +17,9 @@ public abstract class Vehicle extends Entity {
         this.driver = driver;
     }
 
+    /**
+     * Megadja, hogy az autó képes-e megmozdulni
+     */
     abstract boolean canMove();
 
     /**
