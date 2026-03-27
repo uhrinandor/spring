@@ -34,7 +34,9 @@ public class SnowplowPlayer extends Entity implements PurchaseContext, IPlayer{
 
     @Override
     public void give(int amount) {
+        Tracer.getInstance().enterFunction(this, "give", amount);
         money += amount;
+        Tracer.getInstance().exitFunction();
     }
 
     @Override

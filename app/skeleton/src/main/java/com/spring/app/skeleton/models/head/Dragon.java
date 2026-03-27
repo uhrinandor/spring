@@ -17,14 +17,21 @@ public class Dragon extends Entity implements IHead, ShopItem{
 
     @Override
     public boolean interact(IField field, IInventory inventory) {
-        if (!inventory.removeItem(new Biokerosene(), 1)) return false;
+        Tracer.getInstance().enterFunction(this, "interact",field,inventory);
+
+        if (!inventory.removeItem(new Biokerosene(), 1)){
+            Tracer.getInstance().exitFunction(false);
+            return false;
+        } 
         field.setLayer(new Layer());
         IRoad nextRoad = field.getFront();
         IField nextField = nextRoad.getAvailable().get(0);
         nextField.setLayer(new Layer());
+
         IRoad nextnextRoad = nextField.getFront();
         IField nextnextField = nextnextRoad.getAvailable().get(0);
         nextnextField.setLayer(new Layer());
+        Tracer.getInstance().exitFunction(true);
         return true;
     }
 
