@@ -32,11 +32,15 @@ public class Snow extends Entity implements ILayer {
 
     @Override
     public void accept(ILayerVisitor visitor) {
+        Tracer.getInstance().enterFunction(this, "accept",visitor);
         visitor.visit(this);
+        Tracer.getInstance().exitFunction();
     }
 
     @Override
     public boolean slip(Vehicle v, IRandom random) {
+        Tracer.getInstance().enterFunction(this, "slip",v, random);
+        Tracer.getInstance().exitFunction(false);
         return false;
     }
 
