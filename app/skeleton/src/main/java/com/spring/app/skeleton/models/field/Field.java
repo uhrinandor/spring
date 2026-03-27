@@ -9,6 +9,10 @@ import com.spring.app.skeleton.models.vehicle.IDriver;
 import com.spring.app.skeleton.models.vehicle.Vehicle;
 import com.spring.app.skeleton.utils.Entity;
 
+/**
+ * Egy, a járművek által léphető mezőt jelent. Felelőssége a rajta lévő jármű és rétegek közötti 
+ * interakció, ezektől függően a jármű kényszerített áthelyezése.
+ */
 public class Field extends Entity implements IField {
     
     private ILayer layer;
@@ -20,6 +24,7 @@ public class Field extends Entity implements IField {
     private boolean underground;
     private ISalt salt;
 
+    
     public Field(ILayer layer, Vehicle vehicle, IRoad front, IField left, IField right, IRandom random, ISalt salt, boolean underground)
     {
         this.layer=layer;
@@ -32,6 +37,9 @@ public class Field extends Entity implements IField {
         this.salt = salt;
     }
     
+    /**
+     * @return megadja, hogy mi van a mező előtt. (Lehet CrossRoad is, ezért IRoad-ot ad vissza.)
+     */
     @Override
     public IRoad getFront(){
         return front;
@@ -41,7 +49,7 @@ public class Field extends Entity implements IField {
     public IField getRight(){
         return right;
     }
-
+    
     public void setLeft(IField field)
     {
         left=field;
@@ -71,13 +79,25 @@ public class Field extends Entity implements IField {
     {
         return underground;
     }
-
+    
+    /**
+     * @return visszaadja önmagát egy listában. (Azért egy listában, mert a kereszteződés esetén egynél több
+     * mező lehetne a listában.)
+    */
     @Override
     public List<IField> getAvailable() {
        return List.of(this);
     }
 
-
+    /**
+     * Egy jármű be szeretne lépni erre a mezőre. Ha már áll rajta jármű, a contact függvény
+     * kezeli a járművek ütköztetését. Ha nincs, a réteggel való interaktálást végzi el (enter).
+     * Ha kell, megcsúsztatja a járművet. Engedélyezi, hogy a jármű is interaktálhat vele,
+     * miután sikeres volt a fellépés.
+     * @param v a belépni próbáló jármű
+     * @return true ha a jármű sikeresen belépett, különben false
+     */
+    
     @Override
     public boolean tryEnter(Vehicle v) {
         if(vehicle != null){
@@ -102,7 +122,13 @@ public class Field extends Entity implements IField {
         
         return true;   
     }
-
+    
+    /**
+     * A Field-en tartózkodó jármű szeretne lelépni. Először megnézi,
+     * hogy legális-e a következő lépés, majd ha igen, akkor kezdeményezi a másik mezőnél
+     * hogy szeretne belépni a jármű, ha sikeres, akkor leveszi magáról a járművet.
+     * @param f a mező amire a jármű lépni szeretne erről a mezőről
+     */
     @Override
     public void tryExit(IField f) {
         if(!layer.canExit(vehicle)) return;
@@ -112,6 +138,9 @@ public class Field extends Entity implements IField {
         vehicle = null;
     }
 
+    /**
+     * Lecseréli a réteget, ha van rajta só.
+     */
     @Override
     public void melt() {
         if(salt == null) return;
