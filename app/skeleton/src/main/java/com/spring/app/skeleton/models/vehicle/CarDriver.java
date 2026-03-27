@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.spring.app.skeleton.models.field.IField;
 import com.spring.app.skeleton.utils.Entity;
+import com.spring.app.skeleton.utils.Tracer;
 
 public class CarDriver extends Entity implements IDriver {
     IField current;
@@ -11,7 +12,9 @@ public class CarDriver extends Entity implements IDriver {
 
     @Override
     public IField nextMove() {
+        Tracer.getInstance().enterFunction(this, "nextMove");
         // TODO: ez itt a kalkulált
+        Tracer.getInstance().exitFunction();
         return next;
     }
 

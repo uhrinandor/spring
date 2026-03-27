@@ -178,7 +178,9 @@ public class Field extends Entity implements IField {
     @Override
     public void setVehicle(Vehicle v)
     {
+        Tracer.getInstance().enterFunction(this, "setVehicle",v);
         this.vehicle=v;
+        Tracer.getInstance().exitFunction();
     }
 
     @Override

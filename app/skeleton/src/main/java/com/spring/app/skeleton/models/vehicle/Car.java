@@ -25,7 +25,10 @@ public class Car extends Vehicle {
      */
     @Override
     boolean canMove() {
-        return Tracer.getInstance().askInt("Mennyi ideig van lerobbanva az autó?") == 0;
+        Tracer.getInstance().enterFunction(this, "canMove");
+        boolean tmp = Tracer.getInstance().askInt("Mennyi ideig van lerobbanva az autó?") == 0;
+        Tracer.getInstance().exitFunction(tmp);
+        return tmp;
     }
 
     @Override
@@ -48,10 +51,12 @@ public class Car extends Vehicle {
 
     @Override
     public void accept(IVehicleVisitor visitor) {
+        Tracer.getInstance().enterFunction(this, "accept",visitor);
         visitor.visit(this);
+        Tracer.getInstance().exitFunction();
     }
 
-    public void setDestination(Office destination  )
+    public void setDestination(Office destination)
     {
         this.destination = destination;
     }
