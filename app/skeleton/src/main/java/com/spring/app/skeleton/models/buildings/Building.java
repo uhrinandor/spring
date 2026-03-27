@@ -8,7 +8,7 @@ import com.spring.app.skeleton.utils.Entity;
 public abstract class Building extends Entity{
     protected IField field;
     
-    public Building(IField field)
+    protected Building(IField field)
     {
         this.field=field;
     }
