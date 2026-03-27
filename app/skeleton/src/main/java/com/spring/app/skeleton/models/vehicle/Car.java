@@ -25,7 +25,7 @@ public class Car extends Vehicle {
      */
     @Override
     boolean canMove() {
-        return Tracer.getInstance().askInt("Mennyi ideig van lerobbanva a busz?") == 0;
+        return Tracer.getInstance().askInt("Mennyi ideig van lerobbanva az autó?") == 0;
     }
 
     @Override

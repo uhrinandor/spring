@@ -48,7 +48,7 @@ public class Salt extends Entity implements ShopItem, IInventoryItem, ISalt{
 
     @Override
     public int price() {
-        return Tracer.getInstance().askInt("Mennyibe kerul?");
+        return Tracer.getInstance().askInt("Mennyibe kerül a Salt?");
     }
 
     @Override
