@@ -11,7 +11,13 @@ import com.spring.app.skeleton.models.vehicle.ISnowPlow;
 import com.spring.app.skeleton.utils.Entity;
 import com.spring.app.skeleton.utils.Tracer;
 
+/**
+ * Olvasztja a rétegeket.
+ */
 public class Salt extends Entity implements ShopItem, IInventoryItem, ISalt{
+    /**
+     * Megadja hogy a só hány körig lesz még érvényes.
+     */
     private int timer;
 
     public Salt() {
@@ -30,6 +36,12 @@ public class Salt extends Entity implements ShopItem, IInventoryItem, ISalt{
         this.timer = timer;
     }
 
+    /**
+     * Ez a függvény végzi a hó vagy jég olvasztását. 
+     * @param Paraméternek egy ILayer-t fogad
+     * @return Azzal a réteggel tér vissza ami a kapott layer-ből lesz a só olvasztása után.
+     * A sónak csökken a körideje.
+     */
     @Override
     public ILayer melt(ILayer layer) {
         if(Tracer.getInstance().askInt("Meddig érvényes a só?") <= 0) return layer;
@@ -41,16 +53,28 @@ public class Salt extends Entity implements ShopItem, IInventoryItem, ISalt{
         return visitor.getResult();
     }
 
+    /**
+     * @return Visszaadja az nevét.
+     */
     @Override
     public Item key() {
         return Item.SALT;
     }
 
+    /**
+     * @return Visszaadja egy megvásárolható Salt árát.
+     */
     @Override
     public int price() {
         return Tracer.getInstance().askInt("Mennyibe kerül a Salt?");
     }
 
+    /**
+     * Alkalmazza a vásárlást.
+     * Jelzi az aktív hókotró inventory-jának, hogy adjon hozzá egy elemet a típusából.
+     * @param ctx visszaadja azt a hókotrót, amire történik a vásárlás
+     * @param amount a megvásárolni kívánt Salt-ok száma
+     */
     @Override
     public void apply(PurchaseContext ctx, int amount) {
         ISnowPlow sp = ctx.snowPlow();
