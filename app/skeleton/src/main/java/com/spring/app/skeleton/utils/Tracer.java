@@ -117,7 +117,7 @@ public class Tracer {
      * Külön implementálandó az Entity osztályból
      * @param object Az objektum, amit létrehozunk, csak Entity típusokat követjük le
      */
-    public void newObject(Entity object){
+    public void newObject(IEntity object){
         printIndent();
         stream.println("[+] "+ object);
         List<String> properties = object.init();

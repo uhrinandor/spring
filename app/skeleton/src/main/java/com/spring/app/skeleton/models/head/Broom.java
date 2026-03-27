@@ -34,7 +34,6 @@ public class Broom extends Entity implements IHead{
 
     @Override
     public Item key() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'key'");
+        return Item.BROOM;
     }
 }

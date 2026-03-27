@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.spring.app.skeleton.models.head.Item;
 import com.spring.app.skeleton.utils.Entity;
+import com.spring.app.skeleton.utils.Tracer;
 
 public class Inventory extends Entity implements IInventory{
 
@@ -17,8 +18,9 @@ public class Inventory extends Entity implements IInventory{
 
     @Override
     public boolean removeItem(IInventoryItem i, int amount) {
-        if(items.get(i.key()) >= amount){
-            items.put(i.key(), items.get(i.key())-amount);
+        int available = Tracer.getInstance().askInt("Mennyi van belőle? "+i.key());
+        if(available >= amount){
+            items.put(i.key(), available-amount);
             return true;
         }
         return false;
@@ -31,8 +33,7 @@ public class Inventory extends Entity implements IInventory{
 
     @Override
     public List<String> init() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'init'");
+        return List.of("items: "+items.toString());
     }
     
 }
