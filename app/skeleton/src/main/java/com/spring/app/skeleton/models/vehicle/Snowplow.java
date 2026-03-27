@@ -5,9 +5,11 @@ import java.util.List;
 import com.spring.app.skeleton.models.field.IField;
 import com.spring.app.skeleton.models.head.IHead;
 import com.spring.app.skeleton.models.player.ICollector;
+import com.spring.app.skeleton.models.shop.PurchaseContext;
+import com.spring.app.skeleton.models.shop.ShopItem;
 import com.spring.app.skeleton.utils.Tracer;
 
-public class Snowplow extends Vehicle implements ISnowPlow{
+public class Snowplow extends Vehicle implements ISnowPlow, ShopItem{
     IInventory inventory;
     IHead activeHead;
     ICollector collector;
@@ -38,6 +40,8 @@ public class Snowplow extends Vehicle implements ISnowPlow{
         Tracer.getInstance().exitFunction(false);
         return false;
     }
+
+    
 
     @Override
     public List<String> init() {
@@ -81,6 +85,21 @@ public class Snowplow extends Vehicle implements ISnowPlow{
         Tracer.getInstance().enterFunction(this, "getInventory");
         Tracer.getInstance().exitFunction(inventory);
         return inventory;
+    }
+
+    @Override
+    public int price() {
+        Tracer.getInstance().enterFunction(this, "price");
+        int tmp = Tracer.getInstance().askInt("Mennyibe kerül a Hokotro?");
+        Tracer.getInstance().exitFunction(tmp);
+        return tmp;
+    }
+
+    @Override
+    public void apply(PurchaseContext ctx, int amount) {
+        Tracer.getInstance().enterFunction(this, "apply",ctx,amount);
+        ctx.addVehicle(this);
+        Tracer.getInstance().exitFunction();
     }
     
 }
