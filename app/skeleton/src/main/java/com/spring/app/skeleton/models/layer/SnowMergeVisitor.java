@@ -5,8 +5,17 @@ import java.util.List;
 
 import com.spring.app.skeleton.utils.Entity;
 
+/**
+ * Megvalósítja a havas út felszín és a rá kerülő út takarók interakcióját.
+ */
 public class SnowMergeVisitor extends Entity implements ILayerVisitor{
+    /**
+     * Az alap hóréteg.
+     */
     private Snow base;
+    /**
+     * A hóréteg és a rákerülő másik réteg együttes eredménye.
+     */
     private ILayer result;
 
     public SnowMergeVisitor(Snow base){
@@ -14,23 +23,40 @@ public class SnowMergeVisitor extends Entity implements ILayerVisitor{
         this.result = base;
     }
 
+    /**
+     * Az alap hórétegre újabb hóréteg kerül. Ekkor az eredmény egy hóréteg,
+     * menynek magassága a két hóréteg összesített magassága.
+     * @param s az alapra kerülő újabb hóréteg
+     */
     @Override
     public void visit(Snow s) {
         base.setLevel(base.getLevel() + s.getLevel());
         result = base; 
     }
 
+    /**
+     * Az alap hórétegre jég kerül. Ekkor a hóréteg szintje 1-el növekszik. Az eredmény egy hóréteg.
+     */
     @Override
     public void visit(Ice i) {
         base.setLevel(base.getLevel() + 1);
         result = base;
     }
 
+    /**
+     * Az alap hórétegre semmi nem kerül. Az eredmény ugyanaz a hóréteg ami eddig volt.
+     * @param l alapvetően a Layer az aszfaltnak felel meg, de ilyen formában nem tud egy másik
+     * réteg fölé kerülni
+     */
     @Override
     public void visit(Layer l) {
         result = base;
     }
 
+    /**
+     * Visszaadja a rétegek egyesítésének eredményét.
+     * @return az egyesített réteg
+     */
     public ILayer getResult() {
         return result;
     }
