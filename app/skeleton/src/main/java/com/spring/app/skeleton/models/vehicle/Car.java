@@ -43,8 +43,12 @@ public class Car extends Vehicle {
      */
     @Override
     public void interact(IField f) {
-        if(destination.getField() != f) return;
-
+        Tracer.getInstance().enterFunction(this, "interact",f);
+        if(destination.getField() != f){
+            Tracer.getInstance().exitFunction();
+            return;
+        } 
+        Tracer.getInstance().exitFunction();
         destination.consume(this);
     }
     

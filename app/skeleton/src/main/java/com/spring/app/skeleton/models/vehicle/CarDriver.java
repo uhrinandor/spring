@@ -20,17 +20,23 @@ public class CarDriver extends Entity implements IDriver {
 
     @Override
     public void setNext(IField f) {
+        Tracer.getInstance().enterFunction(this, "setNext",f);
         current = next;
         next = f;
+        Tracer.getInstance().exitFunction();
     }
 
     @Override
     public IField getCurrent() {
-      return current;
+        Tracer.getInstance().enterFunction(this, "getCurrnt");
+        Tracer.getInstance().exitFunction(current);
+        return current;
     }
 
     @Override
     public IField getNext() {
+        Tracer.getInstance().enterFunction(this, "getNext");
+        Tracer.getInstance().exitFunction(next);
         return next;
     }
 
