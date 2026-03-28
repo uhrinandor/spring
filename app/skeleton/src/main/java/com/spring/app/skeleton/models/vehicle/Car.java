@@ -48,8 +48,8 @@ public class Car extends Vehicle {
             Tracer.getInstance().exitFunction();
             return;
         } 
-        Tracer.getInstance().exitFunction();
         destination.consume(this);
+        Tracer.getInstance().exitFunction();
     }
     
 

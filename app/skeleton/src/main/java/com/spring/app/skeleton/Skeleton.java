@@ -3,21 +3,21 @@ package com.spring.app.skeleton;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.spring.app.skeleton.models.buildings.Office;
+import com.spring.app.skeleton.models.buildings.Station;
+import com.spring.app.skeleton.models.field.CrossRoad;
+import com.spring.app.skeleton.models.field.Field;
 import com.spring.app.skeleton.models.field.IField;
-import com.spring.app.skeleton.models.field.IRoad;
 import com.spring.app.skeleton.models.head.Broom;
 import com.spring.app.skeleton.models.head.Brush;
 import com.spring.app.skeleton.models.head.Dragon;
 import com.spring.app.skeleton.models.head.IceBreaker;
 import com.spring.app.skeleton.models.head.SaltSpreader;
-import com.spring.app.skeleton.models.layer.ILayer;
-import com.spring.app.skeleton.models.layer.ISalt;
 import com.spring.app.skeleton.models.layer.Ice;
 import com.spring.app.skeleton.models.layer.Layer;
 import com.spring.app.skeleton.models.layer.Snow;
 import com.spring.app.skeleton.models.player.BusPlayer;
 import com.spring.app.skeleton.models.player.SnowplowPlayer;
-import com.spring.app.skeleton.models.random.IRandom;
 import com.spring.app.skeleton.models.random.Random;
 import com.spring.app.skeleton.models.vehicle.Bus;
 import com.spring.app.skeleton.models.vehicle.Car;
@@ -26,9 +26,7 @@ import com.spring.app.skeleton.models.vehicle.Inventory;
 import com.spring.app.skeleton.models.vehicle.PlayerDriver;
 import com.spring.app.skeleton.models.vehicle.Snowplow;
 import com.spring.app.skeleton.models.vehicle.Vehicle;
-import com.spring.app.skeleton.models.buildings.Office;
-import com.spring.app.skeleton.models.buildings.Station;
-import com.spring.app.skeleton.models.field.Field;
+import com.spring.app.skeleton.utils.Entity;
 import com.spring.app.skeleton.utils.MenuItem;
 import com.spring.app.skeleton.utils.Tracer;
 
@@ -39,6 +37,7 @@ public class Skeleton {
 
     public Skeleton() {
         menuItems.add(new MenuItem("Exit", this::exit));
+        menuItems.add(new MenuItem("StepCarFromSnow", this::stepCarFromSnow));
     }
 
     /**
@@ -73,6 +72,16 @@ public class Skeleton {
     private void exit(){
         tracer.info("Exiting...");
         end = true;
+    }
+
+    private void stepCarFromSnow(){
+        IField start = getCar();
+        Tracer.hide();
+        Vehicle car = start.getVehicle();
+        Tracer.show();
+
+        car.step();
+        Entity.reset();
     }
 
     private IField getSnowPlow(){
@@ -239,6 +248,7 @@ public class Skeleton {
         return f1;
     }
    private IField getCar(){
+        Tracer.hide();
         Random r = new Random();
         Field f1 = new Field(null, null, null, null, null, r, null, false);
         Field f2 = new Field(null, null, null, null, null, r, null, false);
@@ -247,6 +257,7 @@ public class Skeleton {
         Field f5 = new Field(null, null, null, null, null, r, null, false);
         Field f6 = new Field(null, null, null, null, null, r, null, false);
         Field f7 = new Field(null, null, null, null, null, r, null, false);
+        CrossRoad cr1 = new CrossRoad(List.of(f5));
 
         f1.setLayer(new Snow(2));
         f2.setLayer(new Snow(2));
@@ -257,6 +268,7 @@ public class Skeleton {
         f7.setLayer(new Layer());   
 
         f1.setFront(f2);
+        f2.setFront(cr1);
         f3.setFront(f4);
         f4.setFront(f5);
         f6.setFront(f7);
@@ -268,15 +280,15 @@ public class Skeleton {
         CarDriver d2 = new CarDriver();
         CarDriver d3 = new CarDriver();
 
-        d1.setCurrent(f1);
-        d2.setCurrent(f3);
-        d3.setCurrent(f6);
-
         d1.setNext(f2);
         d2.setNext(f4);
         d3.setNext(f7);
 
-        Office o1 = new Office(f3);
+        d1.setCurrent(f1);
+        d2.setCurrent(f3);
+        d3.setCurrent(f6);
+
+        Office o1 = new Office(f2);
 
         Car c1 = new Car(null, null);
         Car c2 = new Car(null, null);
@@ -289,6 +301,11 @@ public class Skeleton {
         c1.setDestination(o1);
         c2.setDestination(o1);
         c3.setDestination(o1);
+
+        f1.setVehicle(c1);
+        f3.setVehicle(c2);
+        f6.setVehicle(c3);
+        Tracer.show();
         
         return f1;
    }

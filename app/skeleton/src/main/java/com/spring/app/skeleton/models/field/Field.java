@@ -120,7 +120,8 @@ public class Field extends Entity implements IField {
         }
 
         layer = layer.enter();
-
+        vehicle = v;
+        
         if(layer.slip(v, random)){
             IDriver driver = v.getDriver();
             List<IField> available = front.getAvailable();
@@ -130,7 +131,7 @@ public class Field extends Entity implements IField {
             return true;
         }
 
-        vehicle = v;
+        
         vehicle.interact(this);
         
         return true;   
@@ -170,9 +171,9 @@ public class Field extends Entity implements IField {
 
     @Override
     public List<String> init() {
-       return List.of("layer: " + layer.toString() + "vehicle: " + vehicle.toString() +
-       "road: " + front.toString() + "left: " + left.toString() + "right: " + right.toString() +
-       "random: " + random.toString());
+       return List.of("layer: " + layer, "vehicle: " + vehicle,
+       "front: " + front, "left: " + left, "right: " + right,
+       "random: " + random);
     }
 
     @Override
@@ -188,6 +189,11 @@ public class Field extends Entity implements IField {
         Tracer.getInstance().enterFunction(this, "setSalt",salt);
         this.salt = salt;
         Tracer.getInstance().exitFunction();
+    }
+
+    @Override
+    public Vehicle getVehicle() {
+        return vehicle;
     }
 
     

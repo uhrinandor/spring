@@ -53,8 +53,9 @@ public class Ice extends Entity implements ILayer {
         Tracer.getInstance().newObject(visitor);
         
         v.accept(visitor);
-        Tracer.getInstance().exitFunction(visitor.getResult());
-        return visitor.getResult();
+        boolean result = visitor.getResult();
+        Tracer.getInstance().exitFunction(result);
+        return result;
     }
 
     @Override
