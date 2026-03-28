@@ -13,14 +13,19 @@ import com.spring.app.skeleton.models.head.SaltSpreader;
 import com.spring.app.skeleton.models.layer.ILayer;
 import com.spring.app.skeleton.models.layer.ISalt;
 import com.spring.app.skeleton.models.layer.Ice;
+import com.spring.app.skeleton.models.layer.Layer;
 import com.spring.app.skeleton.models.layer.Snow;
+import com.spring.app.skeleton.models.player.BusPlayer;
 import com.spring.app.skeleton.models.player.SnowplowPlayer;
 import com.spring.app.skeleton.models.random.IRandom;
 import com.spring.app.skeleton.models.random.Random;
+import com.spring.app.skeleton.models.vehicle.Bus;
+import com.spring.app.skeleton.models.vehicle.Car;
 import com.spring.app.skeleton.models.vehicle.Inventory;
 import com.spring.app.skeleton.models.vehicle.PlayerDriver;
 import com.spring.app.skeleton.models.vehicle.Snowplow;
 import com.spring.app.skeleton.models.vehicle.Vehicle;
+import com.spring.app.skeleton.models.buildings.Station;
 import com.spring.app.skeleton.models.field.Field;
 import com.spring.app.skeleton.utils.MenuItem;
 import com.spring.app.skeleton.utils.Tracer;
@@ -159,7 +164,78 @@ public class Skeleton {
 
         return f1;
     }
-    //private IField getBus(){}
+    private IField getBus(){
+        Random r = new Random();
+        Field f1 = new Field(null, null, null, null, null, r, null, false);
+        Field f2 = new Field(null, null, null, null, null, r, null, false);
+        Field f3 = new Field(null, null, null, null, null, r, null, false);
+        Field f4 = new Field(null, null, null, null, null, r, null, false);
+        Field f5 = new Field(null, null, null, null, null, r, null, false);
+        Field f6 = new Field(null, null, null, null, null, r, null, false);
+        Field f7 = new Field(null, null, null, null, null, r, null, false);
+
+        f1.setLayer(new Snow(2));
+        f2.setLayer(new Snow(2));
+        f3.setLayer(new Ice());
+        f4.setLayer(new Ice());
+        f5.setLayer(new Snow(2));
+        f6.setLayer(new Layer());
+        f7.setLayer(new Layer());
+
+        f1.setFront(f2);
+        f3.setFront(f4);
+        f4.setFront(f5);
+        f6.setFront(f7);
+
+        f1.setRight(f3);
+        f3.setRight(f6);
+        
+        PlayerDriver d1 = new PlayerDriver();
+        PlayerDriver d2 = new PlayerDriver();
+        PlayerDriver d3 = new PlayerDriver();
+
+        d1.setCurrent(f1);
+        d2.setCurrent(f3);
+        d3.setCurrent(f6);
+
+        d1.setNext(f2);
+        d2.setNext(f4);
+        d3.setNext(f7);
+
+        Station s1 = new Station(f2);
+        Station s2 = new Station(f6);
+
+        s1.setPair(s2);
+        s2.setPair(s1);
+
+        BusPlayer bp1 = new BusPlayer();
+        BusPlayer bp2 = new BusPlayer();
+        BusPlayer bp3 = new BusPlayer();
+
+        Bus b1 = new Bus(null, null, null);
+        Bus b2 = new Bus(null, null, null);
+        Bus b3 = new Bus(null, null, null);
+        Car c1 = new Car(null, null);
+
+        b1.setDriver(d1);
+        b2.setDriver(d2);
+        b3.setDriver(d3);
+
+        b1.setStation(s1);
+        b2.setStation(s1);
+        b3.setStation(s1);
+
+        f1.setVehicle(b1);
+        f3.setVehicle(b2);
+        f6.setVehicle(b3);
+        f7.setVehicle(c1);
+
+        b1.setCollector(bp1);
+        b2.setCollector(bp2);
+        b3.setCollector(bp3);
+
+        return f1;
+    }
    // private IField getCar(){}
 
 }
