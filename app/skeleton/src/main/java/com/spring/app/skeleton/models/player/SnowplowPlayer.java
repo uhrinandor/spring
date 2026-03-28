@@ -9,10 +9,14 @@ import com.spring.app.skeleton.models.vehicle.Vehicle;
 import com.spring.app.skeleton.utils.Entity;
 import com.spring.app.skeleton.utils.Tracer;
 
-public class SnowplowPlayer extends Entity implements PurchaseContext, IPlayer{
+public class SnowplowPlayer extends Entity implements PurchaseContext, IPlayer, ICollector{
     private List<Vehicle> snowPlows = new ArrayList<>();
     private ISnowPlow active;
     private int money;
+
+    public SnowplowPlayer(){
+        money = 0;
+    }
 
     public void setsnowPlow(List<Vehicle> tmp){
         this.snowPlows = tmp;

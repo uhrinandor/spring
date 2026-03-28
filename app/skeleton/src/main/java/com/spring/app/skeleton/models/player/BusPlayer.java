@@ -7,7 +7,7 @@ import com.spring.app.skeleton.models.vehicle.Vehicle;
 import com.spring.app.skeleton.utils.Entity;
 import com.spring.app.skeleton.utils.Tracer;
 
-public class BusPlayer extends Entity implements IPlayer{
+public class BusPlayer extends Entity implements IPlayer, ICollector{
     private Bus bus;
     private int point;
 
