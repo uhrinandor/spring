@@ -7,6 +7,8 @@ import com.spring.app.skeleton.utils.Tracer;
 
 public class Random extends Entity implements IRandom{
 
+    public Random() {}
+
     @Override
     public List<String> init() {
         return List.of();
