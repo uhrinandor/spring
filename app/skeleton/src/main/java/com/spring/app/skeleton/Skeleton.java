@@ -3,8 +3,12 @@ package com.spring.app.skeleton;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.spring.app.skeleton.models.player.SnowplowPlayer;
+import com.spring.app.skeleton.models.shop.IShop;
+import com.spring.app.skeleton.models.shop.Shop;
 import com.spring.app.skeleton.utils.MenuItem;
 import com.spring.app.skeleton.utils.Tracer;
+import com.spring.app.skeleton.models.vehicle.*;
 
 public class Skeleton {
     private final List<MenuItem> menuItems = new ArrayList<>();
@@ -47,5 +51,18 @@ public class Skeleton {
     private void exit(){
         tracer.info("Exiting...");
         end = true;
+    }
+
+    public static IShop initShop(){
+        /*
+            Inicializál egy Shop objektumot és visszaadja annak IShop interface-t.
+        */
+        Shop shop = new Shop();
+        return shop;
+    }
+
+    public static SnowplowPlayer getPurchasContext(){
+        var spp = new SnowplowPlayer();
+        var sp = new Snowplow(spp);
     }
 }
