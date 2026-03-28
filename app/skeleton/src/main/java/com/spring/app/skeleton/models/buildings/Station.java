@@ -28,6 +28,10 @@ public class Station extends Building{
         return pair;
     }
 
+    public void setPair(Station s){
+        pair = s;
+    }
+    
     /**
      * Lerakja a megadott buszt maga mellé
      * @param bus A busz, amit le akarunk rakni

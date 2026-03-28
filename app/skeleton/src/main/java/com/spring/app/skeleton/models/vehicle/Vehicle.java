@@ -11,6 +11,10 @@ public abstract class Vehicle extends Entity {
         this.driver = driver;
     }
 
+    public void setDriver(IDriver d){
+        driver = d;
+    }
+
     abstract boolean canMove();
 
     public abstract void contact(Vehicle v);
