@@ -17,6 +17,10 @@ public abstract class Entity implements IEntity {
     public String toString(){
         return getClass().getSimpleName() + "@" + id;
     }
+
+    public static void reset(){
+        nextId = 0;
+    }
 }
 
 

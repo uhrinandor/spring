@@ -14,7 +14,7 @@ public class CarDriver extends Entity implements IDriver {
     public IField nextMove() {
         Tracer.getInstance().enterFunction(this, "nextMove");
         // TODO: ez itt a kalkulált
-        Tracer.getInstance().exitFunction();
+        Tracer.getInstance().exitFunction(next);
         return next;
     }
 
@@ -28,7 +28,7 @@ public class CarDriver extends Entity implements IDriver {
 
     @Override
     public IField getCurrent() {
-        Tracer.getInstance().enterFunction(this, "getCurrnt");
+        Tracer.getInstance().enterFunction(this, "getCurrent");
         Tracer.getInstance().exitFunction(current);
         return current;
     }

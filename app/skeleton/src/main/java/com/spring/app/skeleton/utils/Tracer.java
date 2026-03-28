@@ -1,5 +1,6 @@
 package com.spring.app.skeleton.utils;
 
+import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.List;
 import java.util.Scanner;
@@ -8,7 +9,7 @@ public class Tracer {
     private static Tracer instance;
     private int indentationLevel = 0;
     private static final String INDENT = "    ";
-    private static final PrintStream stream = System.out;
+    private static PrintStream stream = System.out;
     private Tracer(){}
 
     /**
@@ -51,6 +52,7 @@ public class Tracer {
      * @param message Az üzenet, amit ki szeretnénk írni    
      */
     private void input(String message){
+        printIndent();
         stream.print("[?] "+message+": ");
     }
 
@@ -123,7 +125,7 @@ public class Tracer {
         List<String> properties = object.init();
         for(String property: properties){
             printIndent(1);
-            stream.print("- "+property);
+            stream.println("- "+property);
         }
     }
 
@@ -133,4 +135,12 @@ public class Tracer {
         indentationLevel++;
     }
 
+
+    public static void hide(){
+        stream = new PrintStream(new ByteArrayOutputStream());
+    }
+
+    public static void show(){
+        stream = System.out;
+    }
 }
