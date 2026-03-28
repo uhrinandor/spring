@@ -75,8 +75,9 @@ public class Skeleton {
     }
 
     private void stepCarFromSnow(){
-        IField start = getCar();
         Tracer.hide();
+        IField start = getCar();
+        
         Vehicle car = start.getVehicle();
         Tracer.show();
 
@@ -248,7 +249,6 @@ public class Skeleton {
         return f1;
     }
    private IField getCar(){
-        Tracer.hide();
         Random r = new Random();
         Field f1 = new Field(null, null, null, null, null, r, null, false);
         Field f2 = new Field(null, null, null, null, null, r, null, false);
@@ -305,7 +305,6 @@ public class Skeleton {
         f1.setVehicle(c1);
         f3.setVehicle(c2);
         f6.setVehicle(c3);
-        Tracer.show();
         
         return f1;
    }
