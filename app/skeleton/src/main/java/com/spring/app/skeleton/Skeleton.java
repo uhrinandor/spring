@@ -3,39 +3,29 @@ package com.spring.app.skeleton;
 import java.util.ArrayList;
 import java.util.List;
 
-<<<<<<< HEAD
-import com.spring.app.skeleton.models.player.SnowplowPlayer;
-import com.spring.app.skeleton.models.shop.IShop;
-import com.spring.app.skeleton.models.shop.Shop;
-=======
+import com.spring.app.skeleton.models.buildings.Station;
+import com.spring.app.skeleton.models.field.Field;
 import com.spring.app.skeleton.models.field.IField;
-import com.spring.app.skeleton.models.field.IRoad;
 import com.spring.app.skeleton.models.head.Broom;
 import com.spring.app.skeleton.models.head.Brush;
 import com.spring.app.skeleton.models.head.Dragon;
 import com.spring.app.skeleton.models.head.IceBreaker;
 import com.spring.app.skeleton.models.head.SaltSpreader;
-import com.spring.app.skeleton.models.layer.ILayer;
-import com.spring.app.skeleton.models.layer.ISalt;
 import com.spring.app.skeleton.models.layer.Ice;
 import com.spring.app.skeleton.models.layer.Layer;
 import com.spring.app.skeleton.models.layer.Snow;
 import com.spring.app.skeleton.models.player.BusPlayer;
 import com.spring.app.skeleton.models.player.SnowplowPlayer;
-import com.spring.app.skeleton.models.random.IRandom;
 import com.spring.app.skeleton.models.random.Random;
+import com.spring.app.skeleton.models.shop.IShop;
+import com.spring.app.skeleton.models.shop.Shop;
 import com.spring.app.skeleton.models.vehicle.Bus;
 import com.spring.app.skeleton.models.vehicle.Car;
 import com.spring.app.skeleton.models.vehicle.Inventory;
 import com.spring.app.skeleton.models.vehicle.PlayerDriver;
 import com.spring.app.skeleton.models.vehicle.Snowplow;
-import com.spring.app.skeleton.models.vehicle.Vehicle;
-import com.spring.app.skeleton.models.buildings.Station;
-import com.spring.app.skeleton.models.field.Field;
->>>>>>> origin/getSBC
 import com.spring.app.skeleton.utils.MenuItem;
 import com.spring.app.skeleton.utils.Tracer;
-import com.spring.app.skeleton.models.vehicle.*;
 
 public class Skeleton {
     private final List<MenuItem> menuItems = new ArrayList<>();
@@ -80,20 +70,20 @@ public class Skeleton {
         end = true;
     }
 
-<<<<<<< HEAD
     public static IShop initShop(){
-        /*
-            Inicializál egy Shop objektumot és visszaadja annak IShop interface-t.
-        */
         Shop shop = new Shop();
         return shop;
     }
 
     public static SnowplowPlayer getPurchasContext(){
+  
         var spp = new SnowplowPlayer();
-        var sp = new Snowplow(spp);
+        var inv = new Inventory();
+        var sp = new Snowplow(null, inv, null, spp);
+
+        spp.addVehicle(sp);
+        return spp;
     }
-=======
     private IField getSnowPlow(){
 
         //alapobjektumok létrehozása
@@ -259,5 +249,4 @@ public class Skeleton {
     }
    // private IField getCar(){}
 
->>>>>>> origin/getSBC
 }
