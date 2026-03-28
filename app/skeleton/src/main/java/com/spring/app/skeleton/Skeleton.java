@@ -21,10 +21,12 @@ import com.spring.app.skeleton.models.random.IRandom;
 import com.spring.app.skeleton.models.random.Random;
 import com.spring.app.skeleton.models.vehicle.Bus;
 import com.spring.app.skeleton.models.vehicle.Car;
+import com.spring.app.skeleton.models.vehicle.CarDriver;
 import com.spring.app.skeleton.models.vehicle.Inventory;
 import com.spring.app.skeleton.models.vehicle.PlayerDriver;
 import com.spring.app.skeleton.models.vehicle.Snowplow;
 import com.spring.app.skeleton.models.vehicle.Vehicle;
+import com.spring.app.skeleton.models.buildings.Office;
 import com.spring.app.skeleton.models.buildings.Station;
 import com.spring.app.skeleton.models.field.Field;
 import com.spring.app.skeleton.utils.MenuItem;
@@ -236,6 +238,59 @@ public class Skeleton {
 
         return f1;
     }
-   // private IField getCar(){}
+   private IField getCar(){
+        Random r = new Random();
+        Field f1 = new Field(null, null, null, null, null, r, null, false);
+        Field f2 = new Field(null, null, null, null, null, r, null, false);
+        Field f3 = new Field(null, null, null, null, null, r, null, false);
+        Field f4 = new Field(null, null, null, null, null, r, null, false);
+        Field f5 = new Field(null, null, null, null, null, r, null, false);
+        Field f6 = new Field(null, null, null, null, null, r, null, false);
+        Field f7 = new Field(null, null, null, null, null, r, null, false);
+
+        f1.setLayer(new Snow(2));
+        f2.setLayer(new Snow(2));
+        f3.setLayer(new Ice());
+        f4.setLayer(new Ice());
+        f5.setLayer(new Snow(2));
+        f6.setLayer(new Layer());
+        f7.setLayer(new Layer());   
+
+        f1.setFront(f2);
+        f3.setFront(f4);
+        f4.setFront(f5);
+        f6.setFront(f7);
+
+        f1.setRight(f3);
+        f3.setRight(f6);
+
+        CarDriver d1 = new CarDriver();
+        CarDriver d2 = new CarDriver();
+        CarDriver d3 = new CarDriver();
+
+        d1.setCurrent(f1);
+        d2.setCurrent(f3);
+        d3.setCurrent(f6);
+
+        d1.setNext(f2);
+        d2.setNext(f4);
+        d3.setNext(f7);
+
+        Office o1 = new Office(f3);
+
+        Car c1 = new Car(null, null);
+        Car c2 = new Car(null, null);
+        Car c3 = new Car(null, null);
+
+        c1.setDriver(d1);
+        c2.setDriver(d2);
+        c3.setDriver(d3);
+
+        c1.setDestination(o1);
+        c2.setDestination(o1);
+        c3.setDestination(o1);
+        
+        return f1;
+   }
 
 }
