@@ -10,6 +10,8 @@ public class PlayerDriver extends Entity implements IDriver {
     IField current;
     IField next;
 
+    public PlayerDriver(){}
+
     @Override
     public IField nextMove() {
         Tracer.getInstance().enterFunction(this, "nextMove");

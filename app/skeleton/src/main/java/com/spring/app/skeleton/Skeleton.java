@@ -3,9 +3,36 @@ package com.spring.app.skeleton;
 import java.util.ArrayList;
 import java.util.List;
 
+<<<<<<< HEAD
 import com.spring.app.skeleton.models.player.SnowplowPlayer;
 import com.spring.app.skeleton.models.shop.IShop;
 import com.spring.app.skeleton.models.shop.Shop;
+=======
+import com.spring.app.skeleton.models.field.IField;
+import com.spring.app.skeleton.models.field.IRoad;
+import com.spring.app.skeleton.models.head.Broom;
+import com.spring.app.skeleton.models.head.Brush;
+import com.spring.app.skeleton.models.head.Dragon;
+import com.spring.app.skeleton.models.head.IceBreaker;
+import com.spring.app.skeleton.models.head.SaltSpreader;
+import com.spring.app.skeleton.models.layer.ILayer;
+import com.spring.app.skeleton.models.layer.ISalt;
+import com.spring.app.skeleton.models.layer.Ice;
+import com.spring.app.skeleton.models.layer.Layer;
+import com.spring.app.skeleton.models.layer.Snow;
+import com.spring.app.skeleton.models.player.BusPlayer;
+import com.spring.app.skeleton.models.player.SnowplowPlayer;
+import com.spring.app.skeleton.models.random.IRandom;
+import com.spring.app.skeleton.models.random.Random;
+import com.spring.app.skeleton.models.vehicle.Bus;
+import com.spring.app.skeleton.models.vehicle.Car;
+import com.spring.app.skeleton.models.vehicle.Inventory;
+import com.spring.app.skeleton.models.vehicle.PlayerDriver;
+import com.spring.app.skeleton.models.vehicle.Snowplow;
+import com.spring.app.skeleton.models.vehicle.Vehicle;
+import com.spring.app.skeleton.models.buildings.Station;
+import com.spring.app.skeleton.models.field.Field;
+>>>>>>> origin/getSBC
 import com.spring.app.skeleton.utils.MenuItem;
 import com.spring.app.skeleton.utils.Tracer;
 import com.spring.app.skeleton.models.vehicle.*;
@@ -53,6 +80,7 @@ public class Skeleton {
         end = true;
     }
 
+<<<<<<< HEAD
     public static IShop initShop(){
         /*
             Inicializál egy Shop objektumot és visszaadja annak IShop interface-t.
@@ -65,4 +93,171 @@ public class Skeleton {
         var spp = new SnowplowPlayer();
         var sp = new Snowplow(spp);
     }
+=======
+    private IField getSnowPlow(){
+
+        //alapobjektumok létrehozása
+        Random r = new Random();
+        Field f1 = new Field(null, null, null, null, null, r, null, false);
+        Field f2 = new Field(null, null, null, null, null, r, null, false);
+        Field f3 = new Field(null, null, null, null, null, r, null, false);
+        Field f4 = new Field(null, null, null, null, null, r, null, false);
+        Field f5 = new Field(null, null, null, null, null, r, null, false);
+        Field f6 = new Field(null, null, null, null, null, r, null, false);
+        Field f7 = new Field(null, null, null, null, null, r, null, false);
+        Field f8 = new Field(null, null, null, null, null, r, null, false);
+        Field f9 = new Field(null, null, null, null, null, r, null, false);
+
+        //Layerek beállítása
+        f1.setLayer(new Snow(2));
+        f2.setLayer(new Snow(2));
+        f3.setLayer(new Ice());
+        f4.setLayer(new Ice());
+        f5.setLayer(new Ice());
+        f6.setLayer(new Snow(2));
+        f7.setLayer(new Snow(2));
+        f8.setLayer(new Ice());
+        f9.setLayer(new Ice());
+
+        //A Fieldek egymáshoz való viszony beállítása
+        f1.setFront(f2);
+        f2.setFront(f3);
+        f3.setFront(f4);
+        f8.setFront(f9);
+
+        f1.setRight(f5);
+        f5.setRight(f6);
+        f6.setRight(f7);
+        f7.setRight(f8);
+
+        //PlayerDriver-ek létrehozása
+        PlayerDriver d1 = new PlayerDriver();
+        PlayerDriver d2 = new PlayerDriver();
+        //Aktuális pozíció beállítása
+        d1.setCurrent(f1);
+        d1.setCurrent(f8);
+        //Következő lépés beállítása
+        d1.setNext(f2);
+        d2.setNext(f9);
+
+        //Hókotrók létrehozása
+        Snowplow s1 = new Snowplow(null);
+        Snowplow s2 = new Snowplow(null);
+        Snowplow s3 = new Snowplow(null);
+        Snowplow s4 = new Snowplow(null);
+        Snowplow s5 = new Snowplow(null);
+
+        //A hókotrókhoz a vezetők beállítása
+        s1.setDriver(d1);
+        s5.setDriver(d2);
+
+        f1.setVehicle(s1);
+        f5.setVehicle(s2);
+        f6.setVehicle(s3);
+        f7.setVehicle(s4);
+        f8.setVehicle(s5);
+
+        SnowplowPlayer p1 = new SnowplowPlayer();
+        SnowplowPlayer p2 = new SnowplowPlayer();
+        SnowplowPlayer p3 = new SnowplowPlayer();
+        SnowplowPlayer p4 = new SnowplowPlayer();
+        SnowplowPlayer p5 = new SnowplowPlayer();
+
+        s1.setCollector(p1);
+        s2.setCollector(p2);
+        s3.setCollector(p3);
+        s4.setCollector(p4);
+        s5.setCollector(p5);
+
+        Inventory i1 = new Inventory();
+
+        s1.setInventory(i1);
+        s2.setInventory(i1);
+        s3.setInventory(i1);
+        s4.setInventory(i1);
+        s5.setInventory(i1);
+
+        s1.setHead(new Dragon());
+        s2.setHead(new Broom());
+        s3.setHead(new Brush());
+        s4.setHead(new SaltSpreader());
+        s5.setHead(new IceBreaker());
+
+        return f1;
+    }
+    private IField getBus(){
+        Random r = new Random();
+        Field f1 = new Field(null, null, null, null, null, r, null, false);
+        Field f2 = new Field(null, null, null, null, null, r, null, false);
+        Field f3 = new Field(null, null, null, null, null, r, null, false);
+        Field f4 = new Field(null, null, null, null, null, r, null, false);
+        Field f5 = new Field(null, null, null, null, null, r, null, false);
+        Field f6 = new Field(null, null, null, null, null, r, null, false);
+        Field f7 = new Field(null, null, null, null, null, r, null, false);
+
+        f1.setLayer(new Snow(2));
+        f2.setLayer(new Snow(2));
+        f3.setLayer(new Ice());
+        f4.setLayer(new Ice());
+        f5.setLayer(new Snow(2));
+        f6.setLayer(new Layer());
+        f7.setLayer(new Layer());
+
+        f1.setFront(f2);
+        f3.setFront(f4);
+        f4.setFront(f5);
+        f6.setFront(f7);
+
+        f1.setRight(f3);
+        f3.setRight(f6);
+        
+        PlayerDriver d1 = new PlayerDriver();
+        PlayerDriver d2 = new PlayerDriver();
+        PlayerDriver d3 = new PlayerDriver();
+
+        d1.setCurrent(f1);
+        d2.setCurrent(f3);
+        d3.setCurrent(f6);
+
+        d1.setNext(f2);
+        d2.setNext(f4);
+        d3.setNext(f7);
+
+        Station s1 = new Station(f2);
+        Station s2 = new Station(f6);
+
+        s1.setPair(s2);
+        s2.setPair(s1);
+
+        BusPlayer bp1 = new BusPlayer();
+        BusPlayer bp2 = new BusPlayer();
+        BusPlayer bp3 = new BusPlayer();
+
+        Bus b1 = new Bus(null, null, null);
+        Bus b2 = new Bus(null, null, null);
+        Bus b3 = new Bus(null, null, null);
+        Car c1 = new Car(null, null);
+
+        b1.setDriver(d1);
+        b2.setDriver(d2);
+        b3.setDriver(d3);
+
+        b1.setStation(s1);
+        b2.setStation(s1);
+        b3.setStation(s1);
+
+        f1.setVehicle(b1);
+        f3.setVehicle(b2);
+        f6.setVehicle(b3);
+        f7.setVehicle(c1);
+
+        b1.setCollector(bp1);
+        b2.setCollector(bp2);
+        b3.setCollector(bp3);
+
+        return f1;
+    }
+   // private IField getCar(){}
+
+>>>>>>> origin/getSBC
 }

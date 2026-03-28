@@ -77,4 +77,8 @@ public class Bus extends Vehicle {
     {
         this.station = station;
     }
+
+    public void setCollector(ICollector c){
+        collector = c;
+    }
 }

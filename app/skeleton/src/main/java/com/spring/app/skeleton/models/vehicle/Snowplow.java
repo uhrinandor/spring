@@ -41,8 +41,14 @@ public class Snowplow extends Vehicle implements ISnowPlow, ShopItem{
         return false;
     }
 
-    
+    public void setCollector(ICollector ic){
+        collector = ic;
+    }
 
+    public void setInventory(IInventory i){
+        inventory = i;
+    }
+    
     @Override
     public List<String> init() {
         return List.of("inventory: " + inventory);
@@ -100,6 +106,10 @@ public class Snowplow extends Vehicle implements ISnowPlow, ShopItem{
         Tracer.getInstance().enterFunction(this, "apply",ctx,amount);
         ctx.addVehicle(this);
         Tracer.getInstance().exitFunction();
+    }
+
+    public void setHead(IHead h){
+        activeHead = h;
     }
     
 }
