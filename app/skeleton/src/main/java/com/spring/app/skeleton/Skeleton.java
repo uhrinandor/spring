@@ -40,6 +40,11 @@ public class Skeleton {
 
     public Skeleton() {
         menuItems.add(new MenuItem("Exit", this::exit));
+        menuItems.add(new MenuItem("StepSnowPlowToIceIceBreaker", this::StepSnowPlowToIceIceBreaker));
+        menuItems.add(new MenuItem("StepSnowPlowFromSnowDragonHead", this::StepSnowPlowFromSnowDragonHead));
+        menuItems.add(new MenuItem("ClearBrush", this::ClearBrush));
+        menuItems.add(new MenuItem("ClearBroom", this::ClearBroom));
+        menuItems.add(new MenuItem("SaltSpreader", this::SaltSpreader));
         menuItems.add(new MenuItem("StepCarFromSnow", this::stepCarFromSnow));
         menuItems.add(new MenuItem("StepCarToIce", this::StepCarToIce));
         menuItems.add(new MenuItem("StepCarToLayer", this::StepCarToLayer));
@@ -148,7 +153,62 @@ public class Skeleton {
         Entity.reset();
     }
     
+    
+    private void StepSnowPlowFromSnowDragonHead(){
+        Tracer.hide();
+        IField start = getSnowPlow();
+        
+        Vehicle sp = start.getVehicle();
+        Tracer.show();
 
+        sp.step();
+        Entity.reset();
+    }
+
+    private void ClearBroom(){
+        Tracer.hide();
+        IField start = getSnowPlow();
+        
+        Vehicle sp = start.getRight().getVehicle();
+        Tracer.show();
+
+        sp.interact(start.getRight());
+        Entity.reset();
+    }
+
+    private void ClearBrush(){
+        Tracer.hide();
+        IField start = getSnowPlow().getRight().getRight();
+        
+        Vehicle sp = start.getVehicle();
+        Tracer.show();
+
+        sp.interact(start);
+        Entity.reset();
+    }
+
+    private void SaltSpreader(){
+        Tracer.hide();
+        IField start = getSnowPlow().getRight().getRight().getRight();
+        
+        Vehicle sp = start.getVehicle();
+        Tracer.show();
+
+        sp.interact(start);
+        Entity.reset();
+    }
+
+
+    private void StepSnowPlowToIceIceBreaker(){
+        Tracer.hide();
+        IField start = getSnowPlow().getRight().getRight().getRight().getRight();
+        
+        Vehicle sp = start.getVehicle();
+        Tracer.show();
+
+        sp.step();
+        Entity.reset();
+    }
     
     
 
@@ -248,12 +308,14 @@ public class Skeleton {
         //PlayerDriver-ek létrehozása
         PlayerDriver d1 = new PlayerDriver();
         PlayerDriver d2 = new PlayerDriver();
+
+        d1.setNext(f2);
+        d2.setNext(f5);
         //Aktuális pozíció beállítása
         d1.setCurrent(f1);
-        d1.setCurrent(f8);
+        d2.setCurrent(f8);
         //Következő lépés beállítása
-        d1.setNext(f2);
-        d2.setNext(f9);
+        
 
         //Hókotrók létrehozása
         Snowplow s1 = new Snowplow(null);
