@@ -3,7 +3,6 @@ package com.spring.app.skeleton;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.spring.app.skeleton.models.buildings.Station;
 import com.spring.app.skeleton.models.buildings.Office;
 import com.spring.app.skeleton.models.buildings.Station;
 import com.spring.app.skeleton.models.field.CrossRoad;
@@ -42,7 +41,9 @@ public class Skeleton {
     public Skeleton() {
         menuItems.add(new MenuItem("Exit", this::exit));
         menuItems.add(new MenuItem("StepCarFromSnow", this::stepCarFromSnow));
-        menuItems.add(new MenuItem( "StepBusFromSnow", this::StepBusFromSnow));
+        menuItems.add(new MenuItem("StepCarToIce", this::StepCarToIce));
+        menuItems.add(new MenuItem("StepCarToLayer", this::StepCarToLayer));
+        menuItems.add(new MenuItem("StepBusFromSnow", this::StepBusFromSnow));
         menuItems.add(new MenuItem("StepBusToIce", this::StepBusToIce));
         menuItems.add(new MenuItem("StepBusWreck", this::StepBusWreck));
         menuItems.add(new MenuItem("BuyInventoryItem", this::buyInventoryItem));
@@ -99,6 +100,7 @@ public class Skeleton {
         spp.setActive(sp);
         return spp;
     }
+
     private void stepCarFromSnow(){
         Tracer.hide();
         IField start = getCar();
@@ -107,6 +109,30 @@ public class Skeleton {
         Tracer.show();
 
         car.step();
+        Entity.reset();
+    }
+
+    private void StepCarToIce(){
+        Tracer.hide();
+        IField start = getCar();
+        
+        IField field = start.getRight();
+        Vehicle Car = field.getVehicle();
+        Tracer.show();
+
+        Car.step();
+        Entity.reset();
+    }
+
+    private void StepCarToLayer(){
+        Tracer.hide();
+        IField start = getCar();
+        
+        IField field=start.getRight().getRight();
+        Vehicle Car = field.getVehicle();
+        Tracer.show();
+
+        Car.step();
         Entity.reset();
     }
 
@@ -120,6 +146,10 @@ public class Skeleton {
         bus.step();
         Entity.reset();
     }
+    
+
+    
+    
 
     private void StepBusToIce(){
         Tracer.hide();
