@@ -30,6 +30,7 @@ public class PlayerDriver extends Entity implements IDriver {
     @Override
     public IField nextMove() {
         Tracer.getInstance().enterFunction(this, "nextMove");
+        //TODO: ezt itt a játékos határozza meg
         Tracer.getInstance().exitFunction(next);
         return next;
     }
