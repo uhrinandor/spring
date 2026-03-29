@@ -21,6 +21,7 @@ import com.spring.app.skeleton.models.player.BusPlayer;
 import com.spring.app.skeleton.models.player.SnowplowPlayer;
 import com.spring.app.skeleton.models.random.Random;
 import com.spring.app.skeleton.models.shop.IShop;
+import com.spring.app.skeleton.models.shop.PurchaseContext;
 import com.spring.app.skeleton.models.shop.Shop;
 import com.spring.app.skeleton.models.vehicle.Bus;
 import com.spring.app.skeleton.models.vehicle.Car;
@@ -41,6 +42,8 @@ public class Skeleton {
     public Skeleton() {
         menuItems.add(new MenuItem("Exit", this::exit));
         menuItems.add(new MenuItem("StepCarFromSnow", this::stepCarFromSnow));
+        menuItems.add(new MenuItem("BuyInventoryItem", this::buyInventoryItem));
+        menuItems.add(new MenuItem("BuySnowplow", this::buySnowPlow));
     }
 
     /**
@@ -101,6 +104,26 @@ public class Skeleton {
         Tracer.show();
 
         car.step();
+        Entity.reset();
+    }
+
+    private void buyInventoryItem(){
+        Tracer.hide();
+        IShop shop = initShop();
+        PurchaseContext pc = getPurchasContext();
+        Tracer.show();
+
+        shop.buy(pc, new Dragon(), 1);
+        Entity.reset();
+    }
+
+    private void buySnowPlow(){
+        Tracer.hide();
+        IShop shop = initShop();
+        PurchaseContext pc = getPurchasContext();
+        Tracer.show();
+
+        shop.buy(pc, new Snowplow(null) , 1);
         Entity.reset();
     }
 

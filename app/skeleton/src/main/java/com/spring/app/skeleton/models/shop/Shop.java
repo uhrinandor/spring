@@ -20,6 +20,7 @@ public class Shop extends Entity implements IShop {
         int price = item.price();
 
         if(ctx.charge(price)) item.apply(ctx, amount);
+        Tracer.getInstance().exitFunction();
     }
 
     @Override

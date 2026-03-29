@@ -60,6 +60,7 @@ public class Dragon extends Entity implements IHead, ShopItem{
         ISnowPlow sp = ctx.snowPlow();
         IInventory inventory = sp.getInventory();
         inventory.addItem(this, amount);
+        Tracer.getInstance().exitFunction();
     }
 
 }
