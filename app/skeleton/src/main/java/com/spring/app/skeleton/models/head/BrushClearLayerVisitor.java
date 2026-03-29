@@ -3,11 +3,11 @@ package com.spring.app.skeleton.models.head;
 import java.util.List;
 
 import com.spring.app.skeleton.models.layer.ILayerVisitor;
+import com.spring.app.skeleton.models.layer.Ice;
+import com.spring.app.skeleton.models.layer.Layer;
 import com.spring.app.skeleton.models.layer.Snow;
 import com.spring.app.skeleton.utils.Entity;
 import com.spring.app.skeleton.utils.Tracer;
-import com.spring.app.skeleton.models.layer.Ice;
-import com.spring.app.skeleton.models.layer.Layer;
 
 /**
  * Eldönti, hogy a söprőfej eltakaríthatja-e az adott mezőn az út felszínt.
@@ -45,7 +45,7 @@ public class BrushClearLayerVisitor extends Entity implements ILayerVisitor{
     @Override
     public void visit(Ice i) {
         Tracer.getInstance().enterFunction(this, "visit",i);
-        result = i.getBroken();
+        result = Tracer.getInstance().askBool("Torott-e a jeg?");
         Tracer.getInstance().exitFunction();
     }
 

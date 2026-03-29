@@ -50,7 +50,7 @@ public class SnowExitVisitor extends Entity implements IVehicleVisitor{
     @Override
     public void visit(Snowplow s) {
         Tracer.getInstance().enterFunction(this, "visit", s);
-        result = false;
+        result = true;
         Tracer.getInstance().exitFunction();
     }
 

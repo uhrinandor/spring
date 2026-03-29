@@ -42,8 +42,9 @@ public class Snow extends Entity implements ILayer {
         SnowMergeVisitor visitor = new SnowMergeVisitor(this);
         Tracer.getInstance().newObject(visitor);
         layer.accept(visitor);
-        Tracer.getInstance().exitFunction(visitor.getResult());
-        return visitor.getResult();
+        ILayer result = visitor.getResult();
+        Tracer.getInstance().exitFunction(result);
+        return result;
     }
 
     /**

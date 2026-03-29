@@ -73,8 +73,8 @@ public class SnowMergeVisitor extends Entity implements ILayerVisitor{
     @Override
     public List<String> init() {
         List<String> tmp = new ArrayList<>();
-        tmp.add(base != null ? base.toString() : "null");
-        tmp.add(result != null ? result.toString() : "null");
+        tmp.add("base: " + (base != null ? base.toString() : "null"));
+        tmp.add("result: " + (result != null ? result.toString() : "null"));
         return tmp;
     }
     
