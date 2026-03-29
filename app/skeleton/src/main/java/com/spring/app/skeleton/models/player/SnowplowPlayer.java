@@ -104,7 +104,9 @@ public class SnowplowPlayer extends Entity implements PurchaseContext, IPlayer, 
      */
     @Override
     public void addVehicle(Vehicle v) {
+        Tracer.getInstance().enterFunction(this, "addVehicle",v);
         snowPlows.add(v);
+        Tracer.getInstance().exitFunction();
     }
 
     @Override
