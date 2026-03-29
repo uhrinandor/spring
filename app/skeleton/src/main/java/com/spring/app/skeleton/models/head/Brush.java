@@ -43,7 +43,7 @@ public class Brush extends Entity implements IHead, ShopItem{
         ILayer rightLayer = right.getLayer();
         rightLayer = rightLayer.merge(current);
         right.setLayer(rightLayer);
-        Tracer.getInstance().exitFunction();
+        Tracer.getInstance().exitFunction(true);
         return true;
     }
 

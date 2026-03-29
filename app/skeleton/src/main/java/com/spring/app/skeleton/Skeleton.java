@@ -177,32 +177,32 @@ public class Skeleton {
 
     private void ClearBrush(){
         Tracer.hide();
-        IField start = getSnowPlow();
+        IField start = getSnowPlow().getRight().getRight();
         
-        Vehicle sp = start.getRight().getRight().getVehicle();
+        Vehicle sp = start.getVehicle();
         Tracer.show();
 
-        sp.interact(start.getRight().getRight());
+        sp.interact(start);
         Entity.reset();
     }
 
     private void SaltSpreader(){
         Tracer.hide();
-        IField start = getSnowPlow();
+        IField start = getSnowPlow().getRight().getRight().getRight();
         
-        Vehicle sp = start.getRight().getRight().getRight().getVehicle();
+        Vehicle sp = start.getVehicle();
         Tracer.show();
 
-        sp.interact(start.getRight().getRight().getRight());
+        sp.interact(start);
         Entity.reset();
     }
 
 
     private void StepSnowPlowToIceIceBreaker(){
         Tracer.hide();
-        IField start = getSnowPlow();
+        IField start = getSnowPlow().getRight().getRight().getRight().getRight();
         
-        Vehicle sp = start.getRight().getRight().getRight().getRight().getVehicle();
+        Vehicle sp = start.getVehicle();
         Tracer.show();
 
         sp.step();
