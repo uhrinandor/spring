@@ -24,6 +24,13 @@ public class Tracer {
     }
 
     /**
+     * Hiba esetén reseteli az indentálást
+     */
+    public static void resetIndent(){
+        instance.indentationLevel = 0;
+    }
+
+    /**
      * Indentálásért felelős függvény
      * @param increase Mennyivel többre húzza be a jelenlegin felül
      */
@@ -37,6 +44,15 @@ public class Tracer {
      */
     private void printIndent(){
         printIndent(0);
+    }
+
+    /**
+     * Kiírja a hibaüzenetet konzolra
+     * @param message A hibaüzenet
+     */
+    public void error(String message){
+        printIndent();
+        stream.println("[ERR] "+message);
     }
     
     /**

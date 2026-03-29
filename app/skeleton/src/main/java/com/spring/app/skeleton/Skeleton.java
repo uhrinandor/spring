@@ -68,7 +68,21 @@ public class Skeleton {
                 tracer.info("Invalid option, try again.");
                 continue;
             }
-            menuItems.get(choice).execute();
+            try {
+                menuItems.get(choice).execute();    
+            } catch(NullPointerException e){
+                if(e.getMessage().contains("front")) tracer.error("A pálya elfogyott...");
+                else {
+                    tracer.error("Hiba történt...");
+                    if(e.getMessage() != null) tracer.error("Üzenet: "+e.getMessage());
+                }
+                Tracer.resetIndent();
+            } catch(Exception e){
+                tracer.error("Hiba történt...");
+                if(e.getMessage() != null) tracer.error("Üzenet: "+e.getMessage());
+                Tracer.resetIndent();
+            }
+            
         }
     }
 
