@@ -23,7 +23,10 @@ public class IceBreakerClearLayerVisitor extends Entity implements ILayerVisitor
      * Jégtörő hóval nem tud interaktálni
      */
     @Override
-    public void visit(Snow s) {}
+    public void visit(Snow s) {
+        Tracer.getInstance().enterFunction(this, "visit",s);
+        Tracer.getInstance().exitFunction();
+    }
 
     /**
      * Összetöri a jeget
@@ -40,10 +43,13 @@ public class IceBreakerClearLayerVisitor extends Entity implements ILayerVisitor
      * Nem tud interaktálni a réteggel
      */
     @Override
-    public void visit(Layer l) {}
+    public void visit(Layer l) {
+        Tracer.getInstance().enterFunction(this, "visit",l);
+        Tracer.getInstance().exitFunction();
+    }
 
     public Ice getResult() {
-        Tracer.getInstance().enterFunction(this, "gerResult");
+        Tracer.getInstance().enterFunction(this, "getResult");
         Tracer.getInstance().exitFunction(result);
         return result;
     }

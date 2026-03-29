@@ -40,17 +40,17 @@ public class Skeleton {
 
     public Skeleton() {
         menuItems.add(new MenuItem("Exit", this::exit));
-        menuItems.add(new MenuItem("StepSnowPlowToIceIceBreaker", this::StepSnowPlowToIceIceBreaker));
-        menuItems.add(new MenuItem("StepSnowPlowFromSnowDragonHead", this::StepSnowPlowFromSnowDragonHead));
-        menuItems.add(new MenuItem("ClearBrush", this::ClearBrush));
-        menuItems.add(new MenuItem("ClearBroom", this::ClearBroom));
-        menuItems.add(new MenuItem("SaltSpreader", this::SaltSpreader));
         menuItems.add(new MenuItem("StepCarFromSnow", this::stepCarFromSnow));
         menuItems.add(new MenuItem("StepCarToIce", this::StepCarToIce));
         menuItems.add(new MenuItem("StepCarToLayer", this::StepCarToLayer));
         menuItems.add(new MenuItem("StepBusFromSnow", this::StepBusFromSnow));
         menuItems.add(new MenuItem("StepBusToIce", this::StepBusToIce));
         menuItems.add(new MenuItem("StepBusWreck", this::StepBusWreck));
+        menuItems.add(new MenuItem("StepSnowPlowToIceIceBreaker", this::StepSnowPlowToIceIceBreaker));
+        menuItems.add(new MenuItem("StepSnowPlowFromSnowDragonHead", this::StepSnowPlowFromSnowDragonHead));
+        menuItems.add(new MenuItem("ClearBrush", this::ClearBrush));
+        menuItems.add(new MenuItem("ClearBroom", this::ClearBroom));
+        menuItems.add(new MenuItem("SaltSpreader", this::SaltSpreader));
         menuItems.add(new MenuItem("SwitchHead", this::switchHead));
         menuItems.add(new MenuItem("BuyInventoryItem", this::buyInventoryItem));
         menuItems.add(new MenuItem("BuySnowplow", this::buySnowPlow));
@@ -214,11 +214,11 @@ public class Skeleton {
 
 
     private void StepSnowPlowToIceIceBreaker(){
-        Tracer.hide();
+        //Tracer.hide();
         IField start = getSnowPlow().getRight().getRight().getRight().getRight();
         
         Vehicle sp = start.getVehicle();
-        Tracer.show();
+        //Tracer.show();
 
         sp.step();
         Entity.reset();
@@ -324,7 +324,7 @@ public class Skeleton {
         PlayerDriver d2 = new PlayerDriver();
 
         d1.setNext(f2);
-        d2.setNext(f5);
+        d2.setNext(f9);
         //Aktuális pozíció beállítása
         d1.setCurrent(f1);
         d2.setCurrent(f8);
@@ -373,6 +373,16 @@ public class Skeleton {
         s3.setHead(new Brush());
         s4.setHead(new SaltSpreader());
         s5.setHead(new IceBreaker());
+
+        Tracer.getInstance().newObject(f1);
+        Tracer.getInstance().newObject(f2);
+        Tracer.getInstance().newObject(f3);
+        Tracer.getInstance().newObject(f4);
+        Tracer.getInstance().newObject(f5);
+        Tracer.getInstance().newObject(f6);
+        Tracer.getInstance().newObject(f7);
+        Tracer.getInstance().newObject(f8);
+        Tracer.getInstance().newObject(f9);
 
         return f1;
     }
