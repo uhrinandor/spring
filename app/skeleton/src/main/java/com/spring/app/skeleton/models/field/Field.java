@@ -128,12 +128,13 @@ public class Field extends Entity implements IField {
             
             driver.setNext(available.get(0));
             v.step(true);
+            Tracer.getInstance().exitFunction(true);
             return true;
         }
 
         
         vehicle.interact(this);
-        
+        Tracer.getInstance().exitFunction(true);
         return true;   
     }
     
