@@ -12,6 +12,8 @@ public class Shop extends Entity implements IShop {
      * @param item a megvásárolni kívánt item
      * @param amount a megvásárolni kívánt item mennyisége
      */
+    public Shop(){};
+
     @Override
     public void buy(PurchaseContext ctx, ShopItem item, int amount) {
         Tracer.getInstance().enterFunction(this, "buy",ctx,item,amount);

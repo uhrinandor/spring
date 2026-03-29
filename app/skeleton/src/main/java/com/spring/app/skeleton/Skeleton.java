@@ -3,6 +3,7 @@ package com.spring.app.skeleton;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.spring.app.skeleton.models.buildings.Station;
 import com.spring.app.skeleton.models.buildings.Office;
 import com.spring.app.skeleton.models.buildings.Station;
 import com.spring.app.skeleton.models.field.CrossRoad;
@@ -19,6 +20,8 @@ import com.spring.app.skeleton.models.layer.Snow;
 import com.spring.app.skeleton.models.player.BusPlayer;
 import com.spring.app.skeleton.models.player.SnowplowPlayer;
 import com.spring.app.skeleton.models.random.Random;
+import com.spring.app.skeleton.models.shop.IShop;
+import com.spring.app.skeleton.models.shop.Shop;
 import com.spring.app.skeleton.models.vehicle.Bus;
 import com.spring.app.skeleton.models.vehicle.Car;
 import com.spring.app.skeleton.models.vehicle.CarDriver;
@@ -74,6 +77,22 @@ public class Skeleton {
         end = true;
     }
 
+    public static IShop initShop(){
+        Shop shop = new Shop();
+        return shop;
+    }
+
+    public static SnowplowPlayer getPurchasContext(){
+  
+        var spp = new SnowplowPlayer();
+        var inv = new Inventory();
+        var sp = new Snowplow(null, inv, null, spp);
+
+        
+        spp.addVehicle(sp);
+        spp.setActive(sp);
+        return spp;
+    }
     private void stepCarFromSnow(){
         Tracer.hide();
         IField start = getCar();
