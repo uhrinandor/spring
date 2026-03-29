@@ -52,7 +52,7 @@ public class Broom extends Entity implements IHead, ShopItem{
         ILayer rightLayer = rightright.getLayer();
         rightLayer = rightLayer.merge(current);
         rightright.setLayer(rightLayer);
-        Tracer.getInstance().exitFunction();
+        Tracer.getInstance().exitFunction(true);
         return true;
     }
 
