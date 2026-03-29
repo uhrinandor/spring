@@ -9,8 +9,18 @@ import com.spring.app.skeleton.models.vehicle.Snowplow;
 import com.spring.app.skeleton.utils.Entity;
 import com.spring.app.skeleton.utils.Tracer;
 
+/**
+ * Ellenőrzi, hogy egy jármű le tud-e lépni arról a havas mezőről amin áll.
+ */
 public class SnowExitVisitor extends Entity implements IVehicleVisitor{
+    /**
+     * Az eredményt, hogy a jármű leléphet-e.
+     */
     private boolean result;
+
+    /**
+     * Az alap, amiről a jármű le akar lépni.
+     */
     private Snow base;
 
     public SnowExitVisitor(Snow base) {

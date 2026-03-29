@@ -7,8 +7,15 @@ import com.spring.app.skeleton.models.vehicle.Vehicle;
 import com.spring.app.skeleton.utils.Entity;
 import com.spring.app.skeleton.utils.Tracer;
 
+/**
+ * Aszfaltként interaktál a járművekkel.
+ */
 public class Layer extends Entity implements ILayer {
 
+    /**
+     * Ez a metódus határozza meg, hogy milyen réteg lesz az eredmény,
+     * két réteg egymásra helyezése után.
+     */
     @Override
     public ILayer merge(ILayer layer) {
         Tracer.getInstance().enterFunction(this, "merge",layer);
@@ -16,6 +23,10 @@ public class Layer extends Entity implements ILayer {
         return layer;
     }
 
+    /**
+     * Lehetővé teszi a visitor számára, hogy műveletet hajtson végre ezen a rétegen.
+     * @param visitor a réteget feldolgozó visitor objektum
+     */
     @Override
     public void accept(ILayerVisitor visitor) {
         Tracer.getInstance().enterFunction(this, "accept",visitor);
@@ -23,6 +34,11 @@ public class Layer extends Entity implements ILayer {
         Tracer.getInstance().exitFunction();
     }
 
+    /**
+     * Ez a függvény meghatározza a réteg alapján, 
+     * hogy a rálépett Vehicle megcsúszik-e vagy nem.
+     * A layer osztály esetében nem fog sose megcsúszni a jármű.
+     */
     @Override
     public boolean slip(Vehicle v, IRandom random) {
         Tracer.getInstance().enterFunction(this, "slip",v,random);
@@ -30,6 +46,10 @@ public class Layer extends Entity implements ILayer {
         return false;
     }
 
+    /**
+     * Meghatározza hogy az adott jármű ki tud-e lépni a Layerből. 
+     * Ebből mindenki ki tud lépni független a járműtől.
+     */
     @Override
     public boolean canExit(Vehicle v) {
         Tracer.getInstance().enterFunction(this, "canExit",v);
@@ -37,6 +57,12 @@ public class Layer extends Entity implements ILayer {
         return true;
     }
 
+    /**
+     * A jármű belépésének a rétegre való hatását eredményezi.
+     * @return Nincs változás, visszatér saját magával.
+     * (Egy jármű más esetben ebben a metódusban taposná le, ha hó lenne.
+     * Aszfaltot nem lehet letaposni.)
+     */
     @Override
     public ILayer enter() {
         Tracer.getInstance().enterFunction(this, "enter");

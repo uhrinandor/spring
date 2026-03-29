@@ -6,10 +6,24 @@ import com.spring.app.skeleton.models.field.IField;
 import com.spring.app.skeleton.utils.Entity;
 import com.spring.app.skeleton.utils.Tracer;
 
+/**
+ * Ez az osztály felel az autó irányításáért, ez számolja ki a legrövidebb utat a munkahelyéig.
+ * Ebben az esetben a számítógép irányítja a járművet, nem játékos.
+ */
 public class CarDriver extends Entity implements IDriver {
+    /**
+     * A jelenlegi mező, amin áll.
+     */
     IField current;
+    /**
+     * A következő mező, amire lépni szeretne.
+     */
     IField next;
 
+    /**
+     * Ez a metódus generálja a legrövidebb utat és meghatározza az autó következő lépését.
+     * @return vissza is adja ezt a mezőt
+     */
     @Override
     public IField nextMove() {
         Tracer.getInstance().enterFunction(this, "nextMove");
@@ -18,6 +32,11 @@ public class CarDriver extends Entity implements IDriver {
         return next;
     }
 
+    /**
+     * Be tudjuk állítani kívülről a következő lépést.
+     * Kényszerített lépésnél tudja használni a Field.
+     * @param a következő lépés
+     */
     @Override
     public void setNext(IField f) {
         Tracer.getInstance().enterFunction(this, "setNext",f);

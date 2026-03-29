@@ -42,6 +42,9 @@ public class Skeleton {
     public Skeleton() {
         menuItems.add(new MenuItem("Exit", this::exit));
         menuItems.add(new MenuItem("StepCarFromSnow", this::stepCarFromSnow));
+        menuItems.add(new MenuItem( "StepBusFromSnow", this::StepBusFromSnow));
+        menuItems.add(new MenuItem("StepBusToIce", this::StepBusToIce));
+        menuItems.add(new MenuItem("StepBusWreck", this::StepBusWreck));
         menuItems.add(new MenuItem("BuyInventoryItem", this::buyInventoryItem));
         menuItems.add(new MenuItem("BuySnowplow", this::buySnowPlow));
     }
@@ -104,6 +107,41 @@ public class Skeleton {
         Tracer.show();
 
         car.step();
+        Entity.reset();
+    }
+
+    private void StepBusFromSnow(){
+        Tracer.hide();
+        IField start = getBus();
+        
+        Vehicle bus = start.getVehicle();
+        Tracer.show();
+
+        bus.step();
+        Entity.reset();
+    }
+
+    private void StepBusToIce(){
+        Tracer.hide();
+        IField start = getBus();
+        
+        IField field=start.getRight();
+        Vehicle bus = field.getVehicle();
+        Tracer.show();
+
+        bus.step();
+        Entity.reset();
+    }
+
+    private void StepBusWreck(){
+        Tracer.hide();
+        IField start = getBus();
+
+        IField field=start.getRight().getRight();
+        Vehicle bus = field.getVehicle();
+        Tracer.show();
+
+        bus.step();
         Entity.reset();
     }
 
@@ -248,13 +286,13 @@ public class Skeleton {
         PlayerDriver d2 = new PlayerDriver();
         PlayerDriver d3 = new PlayerDriver();
 
-        d1.setCurrent(f1);
-        d2.setCurrent(f3);
-        d3.setCurrent(f6);
-
         d1.setNext(f2);
         d2.setNext(f4);
         d3.setNext(f7);
+
+        d1.setCurrent(f1);
+        d2.setCurrent(f3);
+        d3.setCurrent(f6);
 
         Station s1 = new Station(f2);
         Station s2 = new Station(f6);

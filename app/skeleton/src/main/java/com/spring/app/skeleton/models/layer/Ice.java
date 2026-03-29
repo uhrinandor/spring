@@ -7,8 +7,14 @@ import com.spring.app.skeleton.models.vehicle.Vehicle;
 import com.spring.app.skeleton.utils.Entity;
 import com.spring.app.skeleton.utils.Tracer;
 
+/**
+ * Jégréteg. Autók és buszok megcsúszhatnak rajta.
+ */
 public class Ice extends Entity implements ILayer {
 
+    /**
+     * Megadja hogy a jég össze van-e törve.
+     */
     private boolean broken;
 
     public Ice(boolean broken){
@@ -31,6 +37,12 @@ public class Ice extends Entity implements ILayer {
         Tracer.getInstance().exitFunction();
     }
 
+    /**
+     * Ez a metódus határozza meg, hogy milyen réteg lesz az eredmény,
+     * két réteg egymásra helyezése után.
+     * @param a másik réteg
+     * @return az eredmény réteg
+     */
     @Override
     public ILayer merge(ILayer layer) {
         IceMergeVisitor visitor = new IceMergeVisitor(this);
@@ -38,6 +50,10 @@ public class Ice extends Entity implements ILayer {
         return visitor.getResult();
     }
 
+    /**
+     * Lehetővé teszi a visitor számára, hogy műveletet hajtson végre ezen a rétegen.
+     * @param visitor a réteget feldolgozó visitor objektum
+     */
     @Override
     public void accept(ILayerVisitor visitor) {
         Tracer.getInstance().enterFunction(this, "accept",visitor);
@@ -45,6 +61,10 @@ public class Ice extends Entity implements ILayer {
         Tracer.getInstance().exitFunction();
     }
 
+    /**
+     * Ez a függvény meghatározza a réteg alapján, hogy a rálépett Vehicle megcsúszik-e vagy nem.
+     * @return a visitortól függ az eredmény
+     */
     @Override
     public boolean slip(Vehicle v, IRandom random) {
         Tracer.getInstance().enterFunction(this, "slip",v,random);
@@ -58,6 +78,10 @@ public class Ice extends Entity implements ILayer {
         return result;
     }
 
+    /**
+     * Meghatározza hogy az adott jármű ki tud-e lépni a Layerből.
+     * @return Jégről mindig ki fogunk tudni.
+     */
     @Override
     public boolean canExit(Vehicle v) {
         Tracer.getInstance().enterFunction(this, "canExit",v);
@@ -65,6 +89,10 @@ public class Ice extends Entity implements ILayer {
         return true;
     }
 
+    /**
+     * @return visszatér saját magával, jeget nem tudunk letaposni.
+     * (Ha hó lenne és egy jármű letaposná az itt valósulna meg.)
+     */
     @Override
     public ILayer enter() {
         Tracer.getInstance().enterFunction(this, "enter");

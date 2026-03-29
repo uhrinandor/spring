@@ -9,9 +9,24 @@ import com.spring.app.skeleton.models.vehicle.Vehicle;
 import com.spring.app.skeleton.utils.Entity;
 import com.spring.app.skeleton.utils.Tracer;
 
+/**
+ * Ez az osztály felel azért, hogy megkülönböztessük melyik játékoshoz melyik hókotrók 
+ * tartoznak. Gyűjtik a pénzt, kontextust biztosítanak a vásárláshoz.
+ */
 public class SnowplowPlayer extends Entity implements PurchaseContext, IPlayer, ICollector{
+    /**
+     * A játékoshoz tartozó hókotrók.
+     */
     private List<Vehicle> snowPlows = new ArrayList<>();
+
+    /**
+     * A játékos által éppen használatban levő, aktív hókotró.
+     */
     private ISnowPlow active;
+
+    /**
+     * Ebben az attribútumban tárolja el, hogy mennyi pénzt szerzett.
+     */
     private int money;
 
     public SnowplowPlayer(){
@@ -36,6 +51,9 @@ public class SnowplowPlayer extends Entity implements PurchaseContext, IPlayer, 
         return money;
     }
 
+    /**
+     * Növeli a pénzét a megadott mennyiségével.
+     */
     @Override
     public void give(int amount) {
         Tracer.getInstance().enterFunction(this, "give", amount);
@@ -43,6 +61,9 @@ public class SnowplowPlayer extends Entity implements PurchaseContext, IPlayer, 
         Tracer.getInstance().exitFunction();
     }
 
+    /**
+     * @return Visszatér önmagával.
+     */
     @Override
     public IPlayer player() {
         return this;
@@ -58,6 +79,11 @@ public class SnowplowPlayer extends Entity implements PurchaseContext, IPlayer, 
         return active;
     }
 
+    /**
+     * A függvény megpróbálja levonni a játékos pénzét.
+     * @param amount a levonni kívánt mennyiség
+     * @return ha sikerül, igazzal tér vissza, ha nincs ennyi pénze, hamissal
+     */
     @Override
     public boolean charge(int amount) {
         Tracer.getInstance().enterFunction(this, "charge", amount);
@@ -72,6 +98,10 @@ public class SnowplowPlayer extends Entity implements PurchaseContext, IPlayer, 
         return true;
     }
 
+    /**
+     * Hozzáad egy járművet a játékos hókotróihoz.
+     * @param v a hozzáadandó jármű
+     */
     @Override
     public void addVehicle(Vehicle v) {
         Tracer.getInstance().enterFunction(this, "addVehicle",v);
