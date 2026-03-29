@@ -46,6 +46,7 @@ public class Skeleton {
         menuItems.add(new MenuItem("StepBusFromSnow", this::StepBusFromSnow));
         menuItems.add(new MenuItem("StepBusToIce", this::StepBusToIce));
         menuItems.add(new MenuItem("StepBusWreck", this::StepBusWreck));
+        menuItems.add(new MenuItem("SwitchHead", this::switchHead));
         menuItems.add(new MenuItem("BuyInventoryItem", this::buyInventoryItem));
         menuItems.add(new MenuItem("BuySnowplow", this::buySnowPlow));
     }
@@ -192,6 +193,19 @@ public class Skeleton {
         Tracer.show();
 
         shop.buy(pc, new Snowplow(null) , 1);
+        Entity.reset();
+    }
+
+    private void switchHead(){
+        Tracer.hide();
+        IField start = getSnowPlow();
+
+        Snowplow sp = (Snowplow) start.getRight().getRight().getVehicle();
+        Dragon head = new Dragon();
+        Tracer.show();
+
+        sp.switchHead(head);
+
         Entity.reset();
     }
 
