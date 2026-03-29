@@ -88,7 +88,9 @@ public class Skeleton {
         var inv = new Inventory();
         var sp = new Snowplow(null, inv, null, spp);
 
+        
         spp.addVehicle(sp);
+        spp.setActive(sp);
         return spp;
     }
     private void stepCarFromSnow(){
