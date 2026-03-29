@@ -5,14 +5,15 @@ import java.util.List;
 import com.spring.app.skeleton.models.vehicle.Bus;
 import com.spring.app.skeleton.models.vehicle.Vehicle;
 import com.spring.app.skeleton.utils.Entity;
+import com.spring.app.skeleton.utils.Tracer;
 
 /**
  * Ez az osztály felel azért, hogy megkülönböztessük melyik játékoshoz melyik busz tartozik. 
  * Gyűjti a pontokat.
  */
-public class BusPlayer extends Entity implements IPlayer{
+public class BusPlayer extends Entity implements IPlayer, ICollector{
     /**
-     * A játéoshoz tartozó busz.
+     * A játékoshoz tartozó busz.
      */
     private Bus bus;
 
@@ -52,7 +53,9 @@ public class BusPlayer extends Entity implements IPlayer{
      */
     @Override
     public void give(int amount) {
+        Tracer.getInstance().enterFunction(this, "give",amount);
         point += amount;
+        Tracer.getInstance().exitFunction();
     }
 
 }

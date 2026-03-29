@@ -13,7 +13,7 @@ import com.spring.app.skeleton.utils.Tracer;
  * Ez az osztály felel azért, hogy megkülönböztessük melyik játékoshoz melyik hókotrók 
  * tartoznak. Gyűjtik a pénzt, kontextust biztosítanak a vásárláshoz.
  */
-public class SnowplowPlayer extends Entity implements PurchaseContext, IPlayer{
+public class SnowplowPlayer extends Entity implements PurchaseContext, IPlayer, ICollector{
     /**
      * A játékoshoz tartozó hókotrók.
      */
@@ -28,6 +28,10 @@ public class SnowplowPlayer extends Entity implements PurchaseContext, IPlayer{
      * Ebben az attribútumban tárolja el, hogy mennyi pénzt szerzett.
      */
     private int money;
+
+    public SnowplowPlayer(){
+        money = 0;
+    }
 
     public void setsnowPlow(List<Vehicle> tmp){
         this.snowPlows = tmp;
@@ -52,7 +56,9 @@ public class SnowplowPlayer extends Entity implements PurchaseContext, IPlayer{
      */
     @Override
     public void give(int amount) {
+        Tracer.getInstance().enterFunction(this, "give", amount);
         money += amount;
+        Tracer.getInstance().exitFunction();
     }
 
     /**
@@ -68,6 +74,8 @@ public class SnowplowPlayer extends Entity implements PurchaseContext, IPlayer{
      */
     @Override
     public ISnowPlow snowPlow() {
+        Tracer.getInstance().enterFunction(this, "snowPlow");
+        Tracer.getInstance().exitFunction(active);
         return active;
     }
 
@@ -78,10 +86,15 @@ public class SnowplowPlayer extends Entity implements PurchaseContext, IPlayer{
      */
     @Override
     public boolean charge(int amount) {
+        Tracer.getInstance().enterFunction(this, "charge", amount);
         int m = Tracer.getInstance().askInt("Mennyi pénze van?");
-        if(m < amount)  return false;
+        if(m < amount){
+            Tracer.getInstance().exitFunction(false);
+            return false;
+        }  
 
         money -= m - amount;
+        Tracer.getInstance().exitFunction(true);
         return true;
     }
 

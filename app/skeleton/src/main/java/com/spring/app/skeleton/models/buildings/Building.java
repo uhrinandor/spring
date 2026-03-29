@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.spring.app.skeleton.models.field.IField;
 import com.spring.app.skeleton.utils.Entity;
+import com.spring.app.skeleton.utils.Tracer;
 
 /**
  * Absztrakt osztály melyből származik az Office, Station és Home osztály. Az osztály tárolja az 
@@ -19,6 +20,8 @@ public abstract class Building extends Entity{
     }
 
     public IField getField() {
+        Tracer.getInstance().enterFunction(this, "getField");
+        Tracer.getInstance().exitFunction(field);
         return field;
     }
 

@@ -5,11 +5,14 @@ import java.util.List;
 import com.spring.app.skeleton.models.field.IField;
 import com.spring.app.skeleton.models.head.IHead;
 import com.spring.app.skeleton.models.player.ICollector;
+import com.spring.app.skeleton.models.shop.PurchaseContext;
+import com.spring.app.skeleton.models.shop.ShopItem;
+import com.spring.app.skeleton.utils.Tracer;
 
 /**
  * Felelőssége az utak tisztán tartása. Ilyen járműveket irányítanak a hókotrós játékosok.
  */
-public class Snowplow extends Vehicle implements ISnowPlow{
+public class Snowplow extends Vehicle implements ISnowPlow, ShopItem{
     /**
      * Rendelkezik egy inventory-val, amiben a hókotrófejeket tartja.
      */
@@ -41,14 +44,25 @@ public class Snowplow extends Vehicle implements ISnowPlow{
      */
     @Override
     public boolean switchHead(IHead head) {
+        Tracer.getInstance().enterFunction(this, "switchHead",head);
         if(inventory.removeItem(head, 1)){
             inventory.addItem(activeHead, 1);
             activeHead = head;
+            Tracer.getInstance().exitFunction(true);
             return true;
         }
+        Tracer.getInstance().exitFunction(false);
         return false;
     }
 
+    public void setCollector(ICollector ic){
+        collector = ic;
+    }
+
+    public void setInventory(IInventory i){
+        inventory = i;
+    }
+    
     @Override
     public List<String> init() {
         return List.of("inventory: " + inventory);
@@ -73,7 +87,9 @@ public class Snowplow extends Vehicle implements ISnowPlow{
      */
     @Override
     public  void interact(IField f) {
+        Tracer.getInstance().enterFunction(this, "interact",f);
         if(activeHead.interact(f, inventory)) collector.give(1);
+        Tracer.getInstance().exitFunction();
     }
     
     /**
@@ -83,12 +99,35 @@ public class Snowplow extends Vehicle implements ISnowPlow{
      */
     @Override
     public void accept(IVehicleVisitor visitor) {
+        Tracer.getInstance().enterFunction(this, "accept",visitor);
         visitor.visit(this);
+        Tracer.getInstance().exitFunction();
     }
 
     @Override
     public IInventory getInventory() {
+        Tracer.getInstance().enterFunction(this, "getInventory");
+        Tracer.getInstance().exitFunction(inventory);
         return inventory;
+    }
+
+    @Override
+    public int price() {
+        Tracer.getInstance().enterFunction(this, "price");
+        int tmp = Tracer.getInstance().askInt("Mennyibe kerül a Hokotro?");
+        Tracer.getInstance().exitFunction(tmp);
+        return tmp;
+    }
+
+    @Override
+    public void apply(PurchaseContext ctx, int amount) {
+        Tracer.getInstance().enterFunction(this, "apply",ctx,amount);
+        ctx.addVehicle(this);
+        Tracer.getInstance().exitFunction();
+    }
+
+    public void setHead(IHead h){
+        activeHead = h;
     }
     
 }

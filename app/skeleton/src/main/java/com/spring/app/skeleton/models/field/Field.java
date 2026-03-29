@@ -8,6 +8,7 @@ import com.spring.app.skeleton.models.random.IRandom;
 import com.spring.app.skeleton.models.vehicle.IDriver;
 import com.spring.app.skeleton.models.vehicle.Vehicle;
 import com.spring.app.skeleton.utils.Entity;
+import com.spring.app.skeleton.utils.Tracer;
 
 /**
  * Egy, a járművek által léphető mezőt jelent. Felelőssége a rajta lévő jármű és rétegek közötti 
@@ -42,11 +43,15 @@ public class Field extends Entity implements IField {
      */
     @Override
     public IRoad getFront(){
+        Tracer.getInstance().enterFunction(this,"getFront");
+        Tracer.getInstance().exitFunction(front);
         return front;
     }
 
     @Override
     public IField getRight(){
+        Tracer.getInstance().enterFunction(this, "getRight");
+        Tracer.getInstance().exitFunction(right);
         return right;
     }
     
@@ -57,11 +62,15 @@ public class Field extends Entity implements IField {
     
     @Override
     public ILayer getLayer(){
+        Tracer.getInstance().enterFunction(this, "getLayer");
+        Tracer.getInstance().exitFunction(layer);
         return layer;
     }
 
     public void setLayer(ILayer layer){
+        Tracer.getInstance().enterFunction(this, "setLayer",layer);
         this.layer = layer;
+        Tracer.getInstance().exitFunction();
     }
 
     public void setRight(IField field)
@@ -86,6 +95,8 @@ public class Field extends Entity implements IField {
     */
     @Override
     public List<IField> getAvailable() {
+        Tracer.getInstance().enterFunction(this, "getAvailable");
+        Tracer.getInstance().exitFunction(List.of(this));
        return List.of(this);
     }
 
@@ -100,14 +111,17 @@ public class Field extends Entity implements IField {
     
     @Override
     public boolean tryEnter(Vehicle v) {
+        Tracer.getInstance().enterFunction(this, "tryEnter", v);
         if(vehicle != null){
             vehicle.contact(v);
             v.contact(vehicle);
+            Tracer.getInstance().exitFunction(false);
             return false;
         }
 
         layer = layer.enter();
-
+        vehicle = v;
+        
         if(layer.slip(v, random)){
             IDriver driver = v.getDriver();
             List<IField> available = front.getAvailable();
@@ -117,7 +131,7 @@ public class Field extends Entity implements IField {
             return true;
         }
 
-        vehicle = v;
+        
         vehicle.interact(this);
         
         return true;   
@@ -131,10 +145,17 @@ public class Field extends Entity implements IField {
      */
     @Override
     public void tryExit(IField f) {
-        if(!layer.canExit(vehicle)) return;
+        Tracer.getInstance().enterFunction(this, "tryExit",f);
+        if(!layer.canExit(vehicle)){
+            Tracer.getInstance().exitFunction();
+            return;
+        } 
 
-        if(!f.tryEnter(vehicle)) return;
-        
+        if(!f.tryEnter(vehicle)){
+            Tracer.getInstance().exitFunction();
+            return;
+        } 
+        Tracer.getInstance().exitFunction();
         vehicle = null;
     }
 
@@ -150,20 +171,29 @@ public class Field extends Entity implements IField {
 
     @Override
     public List<String> init() {
-       return List.of("layer: " + layer.toString() + "vehicle: " + vehicle.toString() +
-       "road: " + front.toString() + "left: " + left.toString() + "right: " + right.toString() +
-       "random: " + random.toString());
+       return List.of("layer: " + layer, "vehicle: " + vehicle,
+       "front: " + front, "left: " + left, "right: " + right,
+       "random: " + random);
     }
 
     @Override
     public void setVehicle(Vehicle v)
     {
+        Tracer.getInstance().enterFunction(this, "setVehicle",v);
         this.vehicle=v;
+        Tracer.getInstance().exitFunction();
     }
 
     @Override
     public void setSalt(ISalt salt) {
+        Tracer.getInstance().enterFunction(this, "setSalt",salt);
         this.salt = salt;
+        Tracer.getInstance().exitFunction();
+    }
+
+    @Override
+    public Vehicle getVehicle() {
+        return vehicle;
     }
 
     

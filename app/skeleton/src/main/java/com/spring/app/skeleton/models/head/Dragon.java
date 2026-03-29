@@ -29,14 +29,21 @@ public class Dragon extends Entity implements IHead, ShopItem{
      */
     @Override
     public boolean interact(IField field, IInventory inventory) {
-        if (!inventory.removeItem(new Biokerosene(), 1)) return false;
+        Tracer.getInstance().enterFunction(this, "interact",field,inventory);
+
+        if (!inventory.removeItem(new Biokerosene(), 1)){
+            Tracer.getInstance().exitFunction(false);
+            return false;
+        } 
         field.setLayer(new Layer());
         IRoad nextRoad = field.getFront();
         IField nextField = nextRoad.getAvailable().get(0);
         nextField.setLayer(new Layer());
+
         IRoad nextnextRoad = nextField.getFront();
         IField nextnextField = nextnextRoad.getAvailable().get(0);
         nextnextField.setLayer(new Layer());
+        Tracer.getInstance().exitFunction(true);
         return true;
     }
 
@@ -58,7 +65,10 @@ public class Dragon extends Entity implements IHead, ShopItem{
      */
     @Override
     public int price() {
-        return Tracer.getInstance().askInt("Mennyibe kerül a Dragon?");
+        Tracer.getInstance().enterFunction(this, "price");
+        int tmp = Tracer.getInstance().askInt("Mennyibe kerül a Dragon?");
+        Tracer.getInstance().exitFunction(tmp);
+        return tmp;
     }
 
     /**
@@ -69,6 +79,7 @@ public class Dragon extends Entity implements IHead, ShopItem{
      */
     @Override
     public void apply(PurchaseContext ctx, int amount) {
+        Tracer.getInstance().enterFunction(this, "apply",ctx,amount);
         ISnowPlow sp = ctx.snowPlow();
         IInventory inventory = sp.getInventory();
         inventory.addItem(this, amount);

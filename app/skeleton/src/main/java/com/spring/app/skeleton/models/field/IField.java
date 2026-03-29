@@ -37,6 +37,7 @@ public interface IField extends IRoad {
     public void tryExit(IField f);
 
     public void setVehicle(Vehicle v);
+    public Vehicle getVehicle();
     public void setSalt(ISalt salt);
 
     /**

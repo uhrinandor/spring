@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.spring.app.skeleton.models.field.IField;
 import com.spring.app.skeleton.utils.Entity;
+import com.spring.app.skeleton.utils.Tracer;
 
 /**
  * A PlayerDriver objektum felelőssége a hókotró vagy busz irányítása. Tényleges játékos 
@@ -20,13 +21,16 @@ public class PlayerDriver extends Entity implements IDriver {
      */
     IField next;
 
+    public PlayerDriver(){}
+
     /**
      * Ebben a metódusban határozza meg a játékos a következő lépését.
      * @return a játékos következő lépése (tehát nem a megcsúszás miatti kötelező előrelépés)
      */
     @Override
     public IField nextMove() {
-        //TODO: ezt itt nem a játékos határozza meg?
+        Tracer.getInstance().enterFunction(this, "nextMove");
+        Tracer.getInstance().exitFunction(next);
         return next;
     }
 
@@ -36,17 +40,23 @@ public class PlayerDriver extends Entity implements IDriver {
      */
     @Override
     public void setNext(IField f) {
+        Tracer.getInstance().enterFunction(this, "setNext",f);
         current = next;
         next = f;
+        Tracer.getInstance().exitFunction();
     }
 
     @Override
     public IField getCurrent() {
+        Tracer.getInstance().enterFunction(this, "getCurrent");
+        Tracer.getInstance().exitFunction(current);
       return current;
     }
 
     @Override
     public IField getNext() {
+        Tracer.getInstance().enterFunction(this, "getNext");
+        Tracer.getInstance().exitFunction(next);
         return next;
     }
 
@@ -57,6 +67,8 @@ public class PlayerDriver extends Entity implements IDriver {
 
     @Override
     public void setCurrent(IField f) {
+        Tracer.getInstance().enterFunction(this, "setCurrent");
+        Tracer.getInstance().exitFunction();
         current = f;
     }
 }

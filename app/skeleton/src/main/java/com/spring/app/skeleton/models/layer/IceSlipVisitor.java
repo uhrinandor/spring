@@ -8,6 +8,7 @@ import com.spring.app.skeleton.models.vehicle.Car;
 import com.spring.app.skeleton.models.vehicle.IVehicleVisitor;
 import com.spring.app.skeleton.models.vehicle.Snowplow;
 import com.spring.app.skeleton.utils.Entity;
+import com.spring.app.skeleton.utils.Tracer;
 
 /**
  * Megvalósítja a jeges úton történő előre csúszást.
@@ -31,6 +32,8 @@ public class IceSlipVisitor extends Entity implements IVehicleVisitor {
     }
 
     public boolean getResult(){
+        Tracer.getInstance().enterFunction(this, "getResult");
+        Tracer.getInstance().exitFunction(result);
         return result;
     }
 
@@ -39,7 +42,10 @@ public class IceSlipVisitor extends Entity implements IVehicleVisitor {
      */
     @Override
     public void visit(Car c) {
-        result = this.random.nextBool(0.25);
+        Tracer.getInstance().enterFunction(this, "visit",c);
+        boolean tmp = this.random.nextBool(0.25);
+        result = tmp;
+        Tracer.getInstance().exitFunction(tmp);
     }
 
     /**
@@ -47,7 +53,9 @@ public class IceSlipVisitor extends Entity implements IVehicleVisitor {
      */
     @Override
     public void visit(Snowplow s) {
+        Tracer.getInstance().enterFunction(this, "visit",s);
        result = false;
+       Tracer.getInstance().exitFunction(false);
     }
 
     /**
@@ -55,7 +63,10 @@ public class IceSlipVisitor extends Entity implements IVehicleVisitor {
      */
     @Override
     public void visit(Bus b) {
-        result = this.random.nextBool(0.25);
+        Tracer.getInstance().enterFunction(this, "visit",b);
+        boolean tmp = this.random.nextBool(0.25);
+        result = tmp;
+        Tracer.getInstance().exitFunction(tmp);
     }
 
     @Override

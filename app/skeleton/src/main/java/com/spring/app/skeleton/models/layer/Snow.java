@@ -5,6 +5,7 @@ import java.util.List;
 import com.spring.app.skeleton.models.random.IRandom;
 import com.spring.app.skeleton.models.vehicle.Vehicle;
 import com.spring.app.skeleton.utils.Entity;
+import com.spring.app.skeleton.utils.Tracer;
 
 /**
  * Hóréteg. Autók és buszok elakadhatnak benne.
@@ -20,6 +21,8 @@ public class Snow extends Entity implements ILayer {
     }
 
     public int getLevel(){
+        Tracer.getInstance().enterFunction(this, "getLevel");
+        Tracer.getInstance().exitFunction(level);
         return level;
     }
 
@@ -35,8 +38,11 @@ public class Snow extends Entity implements ILayer {
      */
     @Override
     public ILayer merge(ILayer layer) {
+        Tracer.getInstance().enterFunction(this, "merge",layer);
         SnowMergeVisitor visitor = new SnowMergeVisitor(this);
+        Tracer.getInstance().newObject(visitor);
         layer.accept(visitor);
+        Tracer.getInstance().exitFunction(visitor.getResult());
         return visitor.getResult();
     }
 
@@ -46,7 +52,9 @@ public class Snow extends Entity implements ILayer {
      */
     @Override
     public void accept(ILayerVisitor visitor) {
+        Tracer.getInstance().enterFunction(this, "accept",visitor);
         visitor.visit(this);
+        Tracer.getInstance().exitFunction();
     }
 
     /**
@@ -55,6 +63,8 @@ public class Snow extends Entity implements ILayer {
      */
     @Override
     public boolean slip(Vehicle v, IRandom random) {
+        Tracer.getInstance().enterFunction(this, "slip",v, random);
+        Tracer.getInstance().exitFunction(false);
         return false;
     }
 
@@ -64,9 +74,13 @@ public class Snow extends Entity implements ILayer {
      */
     @Override
     public boolean canExit(Vehicle v) {
+        Tracer.getInstance().enterFunction(this, "canExit",v);
         SnowExitVisitor visitor = new SnowExitVisitor(this);
+        Tracer.getInstance().newObject(visitor);
         v.accept(visitor);
-        return visitor.getResult();
+        boolean result = visitor.getResult();
+        Tracer.getInstance().exitFunction(result);
+        return result;
     }
 
     /**
@@ -75,12 +89,17 @@ public class Snow extends Entity implements ILayer {
      */
     @Override
     public ILayer enter() {
-        if(level > 1){
+        Tracer.getInstance().enterFunction(this, "enter");
+
+        if(Tracer.getInstance().askInt("Milyen magas a hó?") > 1){
             level--;
+            Tracer.getInstance().exitFunction(this);
             return this;
         }
-        
-        return new Ice(false);
+        Ice tmp = new Ice();
+        Tracer.getInstance().newObject(tmp);
+        Tracer.getInstance().exitFunction(tmp);
+        return tmp;
         
     }
 
