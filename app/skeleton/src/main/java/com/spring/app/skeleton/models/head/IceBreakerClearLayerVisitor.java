@@ -9,12 +9,18 @@ import com.spring.app.skeleton.models.layer.Snow;
 import com.spring.app.skeleton.utils.Entity;
 import com.spring.app.skeleton.utils.Tracer;
 
+/**
+ * Eldönti, hogy a jégtörőfej eltakaríthatja-e az adott mezőn az út felszínt.
+ */
 public class IceBreakerClearLayerVisitor extends Entity implements ILayerVisitor{
+    /**
+     * Megadja, hogy a fej letakaríthatja-e az adott felületet.
+     */
     Ice result = null; 
 
 
     /**
-     * Jégtörő hóval nem tud intekraktálni
+     * Jégtörő hóval nem tud interaktálni
      */
     @Override
     public void visit(Snow s) {}

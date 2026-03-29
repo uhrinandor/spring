@@ -7,9 +7,23 @@ import com.spring.app.skeleton.models.field.IField;
 import com.spring.app.skeleton.models.player.ICollector;
 import com.spring.app.skeleton.utils.Tracer;
 
+/**
+ * Célja minél több kört megtenni a két végállomása között.
+ */
 public class Bus extends Vehicle {
+    /**
+     * A végállomás, ami fele tart.
+     */
     Station station;
+
+    /**
+     * Számláló, azt számolja, hogy ütközés után még hány körön keresztül mozgásképtelen a busz.
+     */
     int immobileTurnsLeft = 0; 
+
+    /**
+     * Neki tudja átadni a pontszámait.
+     */
     ICollector collector;
 
     public Bus(IDriver driver, Station station, ICollector collector) {
@@ -64,7 +78,11 @@ public class Bus extends Vehicle {
         Tracer.getInstance().exitFunction();
     }
     
-
+    /**
+     * Lehetővé teszi a Visitor számára, hogy műveletet hajtson végre
+     * ezen a buszon. (IceSlipVisitor, SnowExitVisitor)
+     * @param visitor akinek a busz engedélyezi a visit műveletet.
+     */
     @Override
     public void accept(IVehicleVisitor visitor) {
         Tracer.getInstance().enterFunction(this, "accept",visitor);

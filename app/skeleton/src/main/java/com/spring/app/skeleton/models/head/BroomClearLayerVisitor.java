@@ -9,7 +9,13 @@ import com.spring.app.skeleton.models.layer.Snow;
 import com.spring.app.skeleton.utils.Entity;
 import com.spring.app.skeleton.utils.Tracer;
 
+/**
+ * Eldönti, hogy a hányófej eltakaríthatja-e az adott mezőn az út felszínt.
+ */
 public class BroomClearLayerVisitor extends Entity implements ILayerVisitor{
+    /**
+     * Megadja, hogy a fej letakaríthatja-e az adott felületet.
+     */
     private boolean result;
 
     public boolean getResult(){
@@ -18,6 +24,11 @@ public class BroomClearLayerVisitor extends Entity implements ILayerVisitor{
         return result;
     }
 
+    /**
+     * Eldönti, hogy a hányófej letakaríthatja-e a havat.
+     * El tudja takarítani minden esetben.
+     * @param s a hó amit el kéne takarítani
+     */
     @Override
     public void visit(Snow s) {
         Tracer.getInstance().enterFunction(this, "visit",s);
@@ -25,6 +36,11 @@ public class BroomClearLayerVisitor extends Entity implements ILayerVisitor{
         Tracer.getInstance().exitFunction();
     }
 
+    /**
+     * Eldönti, hogy a hányófej letakaríthatja-e a jeget.
+     * Ha törött, akkor igen.
+     * @param i a jég amit el kéne takarítani
+     */
     @Override
     public void visit(Ice i) {
         Tracer.getInstance().enterFunction(this, "visit",i);
@@ -32,6 +48,11 @@ public class BroomClearLayerVisitor extends Entity implements ILayerVisitor{
         Tracer.getInstance().exitFunction();
     }
 
+    /**
+     * Eldönti, hogy a hányófej letakaríthatja-e a sima utat.
+     * Le tudja takarítani minden esetben.
+     * @param l a sima út
+     */
     @Override
     public void visit(Layer l) {
         Tracer.getInstance().enterFunction(this, "visit",l);

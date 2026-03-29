@@ -6,12 +6,27 @@ import com.spring.app.skeleton.models.field.IField;
 import com.spring.app.skeleton.utils.Entity;
 import com.spring.app.skeleton.utils.Tracer;
 
+/**
+ * A PlayerDriver objektum felelőssége a hókotró vagy busz irányítása. Tényleges játékos 
+ * irányítja a járművet, nem a számítógép.
+ */
 public class PlayerDriver extends Entity implements IDriver {
+    /**
+     * a mező amin a játékos aktuálisan áll
+     */
     IField current;
+
+    /**
+     * a következő mező, amire a játékos lépni fog
+     */
     IField next;
 
     public PlayerDriver(){}
 
+    /**
+     * Ebben a metódusban határozza meg a játékos a következő lépését.
+     * @return a játékos következő lépése (tehát nem a megcsúszás miatti kötelező előrelépés)
+     */
     @Override
     public IField nextMove() {
         Tracer.getInstance().enterFunction(this, "nextMove");
@@ -19,6 +34,10 @@ public class PlayerDriver extends Entity implements IDriver {
         return next;
     }
 
+    /**
+     * Beállítja a játékos következő lépését.
+     * @param f a következő lépés mezője
+     */
     @Override
     public void setNext(IField f) {
         Tracer.getInstance().enterFunction(this, "setNext",f);
