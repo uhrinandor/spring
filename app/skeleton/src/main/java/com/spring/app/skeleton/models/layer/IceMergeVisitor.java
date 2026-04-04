@@ -76,4 +76,10 @@ public class IceMergeVisitor extends Entity implements ILayerVisitor{
         tmp.add(result != null ? result.toString() : "null");
         return tmp;
     }
+
+    @Override
+    public void visit(Stone s) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'visit'");
+    }
 }

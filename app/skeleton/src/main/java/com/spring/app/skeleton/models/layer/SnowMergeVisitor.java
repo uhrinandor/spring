@@ -60,6 +60,8 @@ public class SnowMergeVisitor extends Entity implements ILayerVisitor{
         Tracer.getInstance().exitFunction();
     }
 
+   
+
     /**
      * Visszaadja a rétegek egyesítésének eredményét.
      * @return az egyesített réteg
@@ -76,6 +78,12 @@ public class SnowMergeVisitor extends Entity implements ILayerVisitor{
         tmp.add("base: " + (base != null ? base.toString() : "null"));
         tmp.add("result: " + (result != null ? result.toString() : "null"));
         return tmp;
+    }
+
+    @Override
+    public void visit(Stone s) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'visit'");
     }
     
 }

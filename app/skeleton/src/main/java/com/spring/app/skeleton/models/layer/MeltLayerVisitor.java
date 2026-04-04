@@ -55,5 +55,10 @@ public class MeltLayerVisitor extends Entity implements ILayerVisitor {
     public List<String> init() {
         return List.of();
     }
+
+    @Override
+    public void visit(Stone s) {
+        result = s;
+    }
     
 }

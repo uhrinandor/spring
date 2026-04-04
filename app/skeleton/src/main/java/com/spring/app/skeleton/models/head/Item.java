@@ -10,5 +10,6 @@ public enum Item {
     BRUSH,
     BROOM,
     ICEBREAKER,
-    SALTSPREADER
+    SALTSPREADER,
+    STONE
 }
