@@ -11,5 +11,6 @@ public enum Item {
     BROOM,
     ICEBREAKER,
     SALTSPREADER,
-    STONE
+    STONE,
+    STONESPLASHER
 }
