@@ -44,7 +44,7 @@ public class Salt extends Entity implements ShopItem, IInventoryItem, ISalt{
      */
     @Override
     public ILayer melt(ILayer layer) {
-        if(Tracer.getInstance().askInt("Meddig érvényes a só?") <= 0) return layer;
+        if(Tracer.getInstance().askInt("Meddig érvényes a só?", timer) <= 0) return layer;
 
         MeltLayerVisitor visitor = new MeltLayerVisitor();
 
@@ -66,7 +66,7 @@ public class Salt extends Entity implements ShopItem, IInventoryItem, ISalt{
      */
     @Override
     public int price() {
-        return Tracer.getInstance().askInt("Mennyibe kerül a Salt?");
+        return Tracer.getInstance().askInt("Mennyibe kerül a Salt?", 10);
     }
 
     /**

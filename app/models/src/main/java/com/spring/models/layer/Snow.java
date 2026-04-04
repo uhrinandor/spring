@@ -92,7 +92,7 @@ public class Snow extends Entity implements ILayer {
     public ILayer enter() {
         Tracer.getInstance().enterFunction(this, "enter");
 
-        if(Tracer.getInstance().askInt("Milyen magas a hó?") > 1){
+        if(Tracer.getInstance().askInt("Milyen magas a hó?", level) > 1){
             level--;
             Tracer.getInstance().exitFunction(this);
             return this;

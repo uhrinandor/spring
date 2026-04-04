@@ -37,7 +37,7 @@ public class Car extends Vehicle {
     @Override
     boolean canMove() {
         Tracer.getInstance().enterFunction(this, "canMove");
-        boolean tmp = Tracer.getInstance().askInt("Mennyi ideig van lerobbanva az autó?") == 0;
+        boolean tmp = Tracer.getInstance().askInt("Mennyi ideig van lerobbanva az autó?", immobileTurnsLeft) == 0;
         Tracer.getInstance().exitFunction(tmp);
         return tmp;
     }

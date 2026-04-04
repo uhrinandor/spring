@@ -45,7 +45,7 @@ public class BroomClearLayerVisitor extends Entity implements ILayerVisitor{
     @Override
     public void visit(Ice i) {
         Tracer.getInstance().enterFunction(this, "visit",i);
-        result = Tracer.getInstance().askBool("Torott-e a jeg?");
+        result = Tracer.getInstance().askBool("Torott-e a jeg?", i.getBroken());
         Tracer.getInstance().exitFunction();
     }
 

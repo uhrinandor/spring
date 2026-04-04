@@ -65,7 +65,7 @@ public class Brush extends Entity implements IHead, ShopItem{
      */
     @Override
     public int price() {
-        return Tracer.getInstance().askInt("Mennyibe kerül a Brush?");
+        return Tracer.getInstance().askInt("Mennyibe kerül a Brush?", 10);
     }
 
     /**

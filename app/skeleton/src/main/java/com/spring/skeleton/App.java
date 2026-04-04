@@ -7,7 +7,7 @@ public class App
 {
     public static void main( String[] args )
     {
-        Tracer.enableSequenceDiagramMode();
+        Tracer.enableSkeletonMode();
         Skeleton skeleton = new Skeleton();
         skeleton.start();
     }

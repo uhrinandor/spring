@@ -43,7 +43,7 @@ public class Bus extends Vehicle {
     @Override
     boolean canMove() {
         Tracer.getInstance().enterFunction(this, "canMove");
-        boolean tmp = Tracer.getInstance().askInt("Mennyi ideig van lerobbanva a busz?") == 0;
+        boolean tmp = Tracer.getInstance().askInt("Mennyi ideig van lerobbanva a busz?", immobileTurnsLeft) == 0;
         Tracer.getInstance().exitFunction(tmp);
         return tmp;
     }

@@ -24,7 +24,7 @@ public class MeltLayerVisitor extends Entity implements ILayerVisitor {
      */
     @Override
     public void visit(Snow s) {
-        int level = Tracer.getInstance().askInt("Milyen magas a hó?");
+        int level = Tracer.getInstance().askInt("Milyen magas a hó?", s.getLevel());
         if(level > 1){
             s.setLevel(level - 1);
             result = s;

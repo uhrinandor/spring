@@ -40,7 +40,7 @@ public class SnowExitVisitor extends Entity implements IVehicleVisitor{
     @Override
     public void visit(Car c) {
         Tracer.getInstance().enterFunction(this, "visit", c);
-        result = Tracer.getInstance().askInt("Milyen magas a hó?") <= 1;
+        result = Tracer.getInstance().askInt("Milyen magas a hó?", base.getLevel()) <= 1;
         Tracer.getInstance().exitFunction();
     }
 
@@ -60,7 +60,7 @@ public class SnowExitVisitor extends Entity implements IVehicleVisitor{
     @Override
     public void visit(Bus b) {
         Tracer.getInstance().enterFunction(this, "visit", b);
-        result = Tracer.getInstance().askInt("Milyen magas a hó?") <= 1;
+        result = Tracer.getInstance().askInt("Milyen magas a hó?", base.getLevel()) <= 1;
         Tracer.getInstance().exitFunction();
     }
 

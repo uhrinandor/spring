@@ -70,7 +70,7 @@ public class Broom extends Entity implements IHead, ShopItem{
      */
     @Override
     public int price() {
-        return Tracer.getInstance().askInt("Mennyibe kerül a Broom?");
+        return Tracer.getInstance().askInt("Mennyibe kerül a Broom?", 10);
     }
 
     /**

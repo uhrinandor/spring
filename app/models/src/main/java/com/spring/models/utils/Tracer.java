@@ -9,15 +9,15 @@ public class Tracer {
     private static Tracer instance;
     private int indentationLevel = 0;
     private static final String INDENT = "    ";
-    private static boolean sequenceDiagramMode = false;
+    private static boolean skeletonMode = false;
     private static PrintStream stream = System.out;
     private Tracer(){}
 
     /**
-     * Engedélyezzük a szekvencia diagram módot
+     * Engedélyezzük a szkeleton módot
      */
-    public static void enableSequenceDiagramMode(){
-        sequenceDiagramMode = true;
+    public static void enableSkeletonMode(){
+        skeletonMode = true;
     }
 
     /**
@@ -84,7 +84,8 @@ public class Tracer {
      * Int típusú bemenet bekérés
      * @param message Az üzenet, amit ki szeretnénk írni    
      */
-    public int askInt(String message){
+    public int askInt(String message, int variable){
+        if(!skeletonMode) return variable;
         input(message);
         Scanner sc = new Scanner(System.in);
         return sc.nextInt();
@@ -94,7 +95,8 @@ public class Tracer {
      * Boolean típusú bemenet bekérés
      * @param message Az üzenet, amit ki szeretnénk írni    
      */
-    public boolean askBool(String message){
+    public boolean askBool(String message, boolean variable){
+        if(!skeletonMode) return variable;
         input(message+" (true/false)");
         Scanner sc = new Scanner(System.in);
         return sc.nextBoolean();
@@ -108,7 +110,7 @@ public class Tracer {
      * @param params A függvény paraméterei
      */
     public void enterFunction(IEntity base, String functionName, Object... params){
-        if(!sequenceDiagramMode)  return;
+        if(!skeletonMode)  return;
         printIndent();
         stream.print(String.format("[->] %s.%s(", base, functionName));
         for(int i=0; i<params.length; i++){
@@ -126,7 +128,7 @@ public class Tracer {
      * @param returnValue a visszatérési érték, ha van
      */
     public void exitFunction(Object returnValue){
-        if(!sequenceDiagramMode) return;
+        if(!skeletonMode) return;
         indentationLevel--;
         printIndent();
         stream.println("[<-] " + returnValue);
@@ -136,6 +138,7 @@ public class Tracer {
      * Függvénykilépés végén meghívandó void típus esetén, csökkenti az indentálást
      */
     public void exitFunction(){
+        if(!skeletonMode) return;
         exitFunction("");
     }
 
@@ -146,6 +149,7 @@ public class Tracer {
      * @param object Az objektum, amit létrehozunk, csak Entity típusokat követjük le
      */
     public void newObject(IEntity object){
+        if(!skeletonMode) return;
         printIndent();
         stream.println("[+] "+ object);
         List<String> properties = object.init();
@@ -156,7 +160,7 @@ public class Tracer {
     }
 
     public void enterFunction(IEntity base, String functionName){
-        if(!sequenceDiagramMode)  return;
+        if(!skeletonMode) return;
         printIndent();
         stream.println(String.format("[->] %s.%s()", base, functionName));
         indentationLevel++;

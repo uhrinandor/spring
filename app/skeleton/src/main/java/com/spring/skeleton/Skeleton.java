@@ -62,7 +62,7 @@ public class Skeleton {
         tracer.info("Skeleton started");
         while(!end){
             printMenu();
-            int choice = tracer.askInt("Choose an option");
+            int choice = tracer.askInt("Choose an option", 0);
             if(choice < 0 || choice >= menuItems.size()){
                 tracer.info("Invalid option, try again.");
                 continue;

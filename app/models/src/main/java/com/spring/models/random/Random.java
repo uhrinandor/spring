@@ -24,7 +24,8 @@ public class Random extends Entity implements IRandom{
      */
     @Override
     public boolean nextBool(double probability) {
-        return Tracer.getInstance().askBool("Megtörténjen?");
+        boolean realRandom = new java.util.Random().nextDouble() < probability;
+        return Tracer.getInstance().askBool("Megtörténjen?", realRandom);
     }
     
 }
