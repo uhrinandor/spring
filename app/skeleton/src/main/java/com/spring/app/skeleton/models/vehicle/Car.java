@@ -88,11 +88,11 @@ public class Car extends Vehicle {
     {
         this.destination = destination;
     }
-/**
- * AI SLOP BE CAREFUL
- * @param currentField
- * @return
- */
+    /**
+     * AI SLOP BE CAREFUL
+     * @param currentField
+     * @return
+     */
     public List<IField> calculateRoute(IField currentField) {
         if (currentField == null || destination == null) return List.of();
 
@@ -109,7 +109,10 @@ public class Car extends Vehicle {
             List<IField> path = queue.poll();
             IField last = path.get(path.size() - 1);
 
-            for (IField neighbor : getNeighbors(last)) {
+            IRoad front = last.getFront();
+            if (front == null) continue; // dead end
+
+            for (IField neighbor : front.getAvailable()) {
                 if (visited.contains(neighbor)) continue;
                 visited.add(neighbor);
 
@@ -123,26 +126,6 @@ public class Car extends Vehicle {
         }
 
         return List.of();
-    }
-
-    /**
-     * Visszaadja az adott mezőről elérhető szomszédos mezőket.
-     * getFront().getAvailable() kezeli mind a sima Field, mind a CrossRoad esetét.
-     */
-    private List<IField> getNeighbors(IField field) {
-        List<IField> neighbors = new ArrayList<>();
-
-        IRoad front = field.getFront();
-        if (front != null) {
-            neighbors.addAll(front.getAvailable());
-        }
-
-        IField right = field.getRight();
-        if (right != null) {
-            neighbors.add(right);
-        }
-
-        return neighbors;
     }
 }
 
