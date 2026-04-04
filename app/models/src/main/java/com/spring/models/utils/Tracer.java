@@ -10,6 +10,7 @@ public class Tracer {
     private int indentationLevel = 0;
     private static final String INDENT = "    ";
     private static boolean skeletonMode = false;
+    private static boolean deterministicMode = false;
     private static PrintStream stream = System.out;
     private Tracer(){}
 
@@ -18,6 +19,21 @@ public class Tracer {
      */
     public static void enableSkeletonMode(){
         skeletonMode = true;
+    }
+
+    /**
+     * 
+     */
+    public static void disableSkeletonMode(){
+        skeletonMode = false;
+    }
+
+    public static void changeDeterministicMode(boolean value){
+        deterministicMode = value;
+    }
+
+    public static boolean isDeterministicMode(){
+        return deterministicMode;
     }
 
     /**
@@ -100,7 +116,13 @@ public class Tracer {
         input(message+" (true/false)");
         Scanner sc = new Scanner(System.in);
         return sc.nextBoolean();
-    }    
+    }  
+    
+    public boolean askDeterministic(String message){
+        input(message+" (true/false)");
+        Scanner sc = new Scanner(System.in);
+        return sc.nextBoolean();
+    }
 
      /**
      * Függvényhívás előtt meghívandó, base az amin hívni fogjuk a hívást, ezt csak Entity típusokra követjük le, functionName hogy mit hívunk, Object... params pedig további listában megadhatjuk hogy milyen bemenő értékei vannak.
