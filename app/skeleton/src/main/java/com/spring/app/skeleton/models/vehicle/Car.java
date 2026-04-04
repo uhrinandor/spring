@@ -1,9 +1,14 @@
 package com.spring.app.skeleton.models.vehicle;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
-
+import java.util.Queue;
+import java.util.Set;
 import com.spring.app.skeleton.models.buildings.Office;
 import com.spring.app.skeleton.models.field.IField;
+import com.spring.app.skeleton.models.field.IRoad;
 import com.spring.app.skeleton.utils.Tracer;
 
 /**
@@ -83,4 +88,44 @@ public class Car extends Vehicle {
     {
         this.destination = destination;
     }
+    /**
+     * AI SLOP BE CAREFUL
+     * @param currentField
+     * @return
+     */
+    public List<IField> calculateRoute(IField currentField) {
+        if (currentField == null || destination == null) return List.of();
+
+        IField target = destination.getField();
+        if (currentField.equals(target)) return List.of(currentField);
+
+        Queue<List<IField>> queue = new LinkedList<>();
+        Set<IField> visited = new HashSet<>();
+
+        queue.add(new ArrayList<>(List.of(currentField)));
+        visited.add(currentField);
+
+        while (!queue.isEmpty()) {
+            List<IField> path = queue.poll();
+            IField last = path.get(path.size() - 1);
+
+            IRoad front = last.getFront();
+            if (front == null) continue; // dead end
+
+            for (IField neighbor : front.getAvailable()) {
+                if (visited.contains(neighbor)) continue;
+                visited.add(neighbor);
+
+                List<IField> newPath = new ArrayList<>(path);
+                newPath.add(neighbor);
+
+                if (neighbor.equals(target)) return newPath;
+
+                queue.add(newPath);
+            }
+        }
+
+        return List.of();
+    }
 }
+
