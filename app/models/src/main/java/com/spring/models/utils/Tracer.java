@@ -9,8 +9,16 @@ public class Tracer {
     private static Tracer instance;
     private int indentationLevel = 0;
     private static final String INDENT = "    ";
+    private static boolean sequenceDiagramMode = false;
     private static PrintStream stream = System.out;
     private Tracer(){}
+
+    /**
+     * Engedélyezzük a szekvencia diagram módot
+     */
+    public static void enableSequenceDiagramMode(){
+        sequenceDiagramMode = true;
+    }
 
     /**
      * Singleton instance-t adja vissza
@@ -100,6 +108,7 @@ public class Tracer {
      * @param params A függvény paraméterei
      */
     public void enterFunction(IEntity base, String functionName, Object... params){
+        if(!sequenceDiagramMode)  return;
         printIndent();
         stream.print(String.format("[->] %s.%s(", base, functionName));
         for(int i=0; i<params.length; i++){
@@ -117,6 +126,7 @@ public class Tracer {
      * @param returnValue a visszatérési érték, ha van
      */
     public void exitFunction(Object returnValue){
+        if(!sequenceDiagramMode) return;
         indentationLevel--;
         printIndent();
         stream.println("[<-] " + returnValue);
@@ -146,6 +156,7 @@ public class Tracer {
     }
 
     public void enterFunction(IEntity base, String functionName){
+        if(!sequenceDiagramMode)  return;
         printIndent();
         stream.println(String.format("[->] %s.%s()", base, functionName));
         indentationLevel++;
