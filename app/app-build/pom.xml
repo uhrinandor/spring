@@ -10,6 +10,8 @@
 
     <modules>
         <module>../skeleton</module>
+        <module>../controllers</module>
+        <module>../prototype</module>
         <module>../models</module>
     </modules>
 </project>
