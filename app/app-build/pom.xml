@@ -10,5 +10,6 @@
 
     <modules>
         <module>../skeleton</module>
+        <module>../models</module>
     </modules>
 </project>
