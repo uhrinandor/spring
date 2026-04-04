@@ -22,14 +22,14 @@ public class StoneSplasher extends Entity implements IHead, ShopItem{
         Tracer.getInstance().enterFunction(this, "interact",field,inventory);
         Stone stone = new Stone();
         Tracer.getInstance().newObject(stone);
-         if (!inventory.removeItem(stone, 1)){
+        if (!inventory.removeItem(stone, 1)){
             Tracer.getInstance().exitFunction(false);
             return false;
         } 
         stone.setPrevious(field.getLayer());
         field.setLayer(stone);
-        Tracer.getInstance().exitFunction(true);
-        return true;
+        Tracer.getInstance().exitFunction(false);
+        return false;
     }
 
     @Override
