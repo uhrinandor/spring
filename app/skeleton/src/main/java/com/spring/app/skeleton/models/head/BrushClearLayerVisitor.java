@@ -6,6 +6,7 @@ import com.spring.app.skeleton.models.layer.ILayerVisitor;
 import com.spring.app.skeleton.models.layer.Ice;
 import com.spring.app.skeleton.models.layer.Layer;
 import com.spring.app.skeleton.models.layer.Snow;
+import com.spring.app.skeleton.models.layer.Stone;
 import com.spring.app.skeleton.utils.Entity;
 import com.spring.app.skeleton.utils.Tracer;
 
@@ -64,5 +65,10 @@ public class BrushClearLayerVisitor extends Entity implements ILayerVisitor{
     @Override
     public List<String> init() {
         return List.of();
+    }
+
+    @Override
+    public void visit(Stone s) {
+        result = true;
     }
 }

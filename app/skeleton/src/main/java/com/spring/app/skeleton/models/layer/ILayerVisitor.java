@@ -21,4 +21,9 @@ public interface ILayerVisitor extends IEntity {
      * @param l Layer típusú argumentum esetén meghívott függvény
      */
     public void visit(Layer l);
+
+    /**
+     * @param s Stone típusú argumentum esetén meghívott függvény
+     */
+    public void visit(Stone s);
 }
