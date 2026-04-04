@@ -1,6 +1,7 @@
 package com.spring.models.utils;
 
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.List;
 import java.util.Scanner;
@@ -12,7 +13,19 @@ public class Tracer {
     private static boolean skeletonMode = false;
     private static boolean deterministicMode = false;
     private static PrintStream stream = System.out;
+    private static InputStream inputStream = System.in;
     private Tracer(){}
+
+
+    /**
+     * Megváltoztatja a kimeneti és bemeneti streamet, hogy a tesztelés során könnyebben lehessen szimulálni a bemenetet és elfogni a kimenetet
+     * @param output A kimeneti stream, ahova az üzeneteket írjuk
+     * @param input A bemeneti stream, ahonnan a bemenetet olvassuk
+     */
+    public static void changeStream(PrintStream output, InputStream input){
+        stream = output;
+        inputStream = input;
+    }
 
     /**
      * Engedélyezzük a szkeleton módot
@@ -91,7 +104,7 @@ public class Tracer {
      * Bement bekérés kiírása a konzolra
      * @param message Az üzenet, amit ki szeretnénk írni    
      */
-    private void input(String message){
+    public void input(String message){
         printIndent();
         stream.print("[?] "+message+": ");
     }
@@ -103,8 +116,18 @@ public class Tracer {
     public int askInt(String message, int variable){
         if(!skeletonMode) return variable;
         input(message);
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(inputStream);
         return sc.nextInt();
+    }
+
+    /**
+     * String típusú bemenet bekérés, nincs hatással a Skeleton mód rá
+     * @param message Az üzenet, amit ki szeretnénk írni    
+     */
+    public String askString(String message){
+        input(message);
+        Scanner sc = new Scanner(inputStream);
+        return sc.nextLine().trim();
     }
 
      /**
@@ -114,13 +137,13 @@ public class Tracer {
     public boolean askBool(String message, boolean variable){
         if(!skeletonMode) return variable;
         input(message+" (true/false)");
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(inputStream);
         return sc.nextBoolean();
     }  
     
     public boolean askDeterministic(String message){
         input(message+" (true/false)");
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(inputStream);
         return sc.nextBoolean();
     }
 

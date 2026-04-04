@@ -24,6 +24,14 @@ public class BusPlayer extends Entity implements IPlayer, ICollector{
      */
     private int point;
 
+    /**
+     * Beállítja a játékoshoz tartozó buszt.
+     * @param bus a játékoshoz tartozó busz
+     */
+    public void setBus(Bus bus) {
+        this.bus = bus;
+    }
+
     @Override
     public List<String> init() {
         return List.of("bus: " + bus + ", point: " + getPoints());

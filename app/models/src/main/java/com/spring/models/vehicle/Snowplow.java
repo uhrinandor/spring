@@ -130,4 +130,9 @@ public class Snowplow extends Vehicle implements ISnowPlow, ShopItem{
         activeHead = h;
     }
     
+    @Override
+    public IHead getHead(){
+        return activeHead;
+    }
+    
 }

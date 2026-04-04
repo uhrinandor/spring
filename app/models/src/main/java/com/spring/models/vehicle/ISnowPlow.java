@@ -20,4 +20,6 @@ public interface ISnowPlow extends IEntity {
      * @return visszaadja a hókotró Inventory-ját
      */
     public IInventory getInventory();
+
+    public IHead getHead();
 }
