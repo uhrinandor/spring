@@ -1,0 +1,40 @@
+@startuml StepsnowplowFromSnowDragonHead
+
+actor "Tesztelő" as tester
+participant "s4: SnowPlow" as snowplow
+
+participant "ss: StoneSplasher" as head
+participant "i: Inventory" as inventory
+participant "f10: Field" as f10
+participant "l10: Ice" as ice
+participant "stone: Stone " as Stone
+
+tester -> snowplow: interact(f10)
+activate snowplow
+
+snowplow -> head: interact(f10, i)
+activate head
+head -> Stone: <<create>>()
+activate Stone
+Stone --> head:
+deactivate Stone
+
+head -> inventory: removeItem(stone)
+activate inventory
+inventory --> head: vanMunicio
+deactivate inventory
+alt vanMunicio
+head -> f10: getLayer()
+f10 --> head: Ice
+head -> Stone: setPrevious(l10)
+Stone --> head:
+head -> f10: setLayer(stone)
+f10 --> head:
+end
+
+head --> snowplow: false
+deactivate head
+
+snowplow --> tester:
+
+deactivate snowplow
