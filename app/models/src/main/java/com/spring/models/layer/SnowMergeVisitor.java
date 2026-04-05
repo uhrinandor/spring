@@ -82,8 +82,7 @@ public class SnowMergeVisitor extends Entity implements ILayerVisitor{
 
     @Override
     public void visit(Stone s) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'visit'");
+        result = new Stone(base);
     }
     
 }

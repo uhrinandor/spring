@@ -41,16 +41,18 @@ public class StoneMergeVisitor extends Entity implements ILayerVisitor {
 
     @Override
     public void visit(Ice i) {
-        result = i;
+        base.setPrevious(i);
+        result = base;
     }
 
     @Override
     public void visit(Layer l) {
+        base.setPrevious(l);
         result = base;
     }
 
     @Override
     public void visit(Stone s) {
-        result = s;
+        result = new Stone(s.getPrevious().merge(base));
     }
 }

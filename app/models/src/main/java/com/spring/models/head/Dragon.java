@@ -86,4 +86,9 @@ public class Dragon extends Entity implements IHead, ShopItem{
         Tracer.getInstance().exitFunction();
     }
 
+    @Override
+    public int limit() {
+        return -1;
+    }
+
 }

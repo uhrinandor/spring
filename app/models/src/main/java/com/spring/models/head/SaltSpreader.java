@@ -69,4 +69,9 @@ public class SaltSpreader extends Entity implements IHead, ShopItem{
         inventory.addItem(this, amount);
     }
 
+    @Override
+    public int limit() {
+        return -1;
+    }
+
 }

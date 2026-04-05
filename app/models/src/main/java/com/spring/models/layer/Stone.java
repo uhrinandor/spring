@@ -14,6 +14,16 @@ import com.spring.models.utils.Entity;
 
 public class Stone extends Entity implements ILayer, IInventoryItem, ShopItem{
     private ILayer previous;
+    private int limit;
+
+    public Stone(ILayer p){
+        previous = p;
+        limit = 10;
+    }
+
+    public Stone(){
+        limit = 10;
+    }
 
     public ILayer getPrevious(){
         return previous;
@@ -73,6 +83,11 @@ public class Stone extends Entity implements ILayer, IInventoryItem, ShopItem{
     @Override
     public void accept(ILayerVisitor visitor) {
         visitor.visit(this);
+    }
+
+    @Override
+    public int limit() {
+        return limit;
     }
     
 }

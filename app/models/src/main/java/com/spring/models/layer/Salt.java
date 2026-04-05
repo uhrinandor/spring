@@ -87,4 +87,9 @@ public class Salt extends Entity implements ShopItem, IInventoryItem, ISalt{
         return List.of("timer: " + timer);
     }
 
+    @Override
+    public int limit() {
+        return -1;
+    }
+
 }

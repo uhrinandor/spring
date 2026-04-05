@@ -49,4 +49,9 @@ public class Biokerosene extends Entity implements IInventoryItem, ShopItem{
         return List.of();
     }
 
+    @Override
+    public int limit() {
+        return -1;
+    }
+
 }
