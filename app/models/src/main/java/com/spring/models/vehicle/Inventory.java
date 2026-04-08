@@ -48,14 +48,16 @@ public class Inventory extends Entity implements IInventory{
      * @param amount a megadott mennyiség
      */
     @Override
-    public void addItem(IInventoryItem i, int amount) {
+    public boolean addItem(IInventoryItem i, int amount) {
         Tracer.getInstance().enterFunction(this, "addItem",i,amount);
         int current = items.get(i.key());
         if(i.limit() != -1 && (current + amount) > i.limit()){
-            throw new IllegalStateException("Az inventory-ba nem fér bele ennyi elem, a művelet nem végrehajtható");
+            return false;
         }
         items.put(i.key(), items.get(i.key())+amount);
         Tracer.getInstance().exitFunction();
+        return true;
+        
     }
 
     @Override

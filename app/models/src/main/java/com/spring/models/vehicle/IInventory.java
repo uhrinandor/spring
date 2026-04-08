@@ -19,5 +19,5 @@ public interface IInventory extends IEntity {
      * @param i a megadott Item, amit be kell tenni az Inventory-ba
      * @param amount a megadott mennyiség amennyit be kell tenni az Inventory-ba
      */
-    public void addItem(IInventoryItem i, int amount);
+    public boolean addItem(IInventoryItem i, int amount);
 }
