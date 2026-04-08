@@ -71,6 +71,6 @@ public class IceBreaker extends Entity implements IHead, ShopItem{
 
     @Override
     public int limit() {
-        return -1;
+        return 1;
     }
 }

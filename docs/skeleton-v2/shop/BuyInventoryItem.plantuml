@@ -31,7 +31,9 @@ sp --> item: i
 deactivate sp
 item -> inventory: addItem(head, 1)
 activate inventory
-inventory --> item:
+inventory -> item: limit()
+item --> inventory:1
+inventory --> item: true
 deactivate inventory
 item --> shop:
 deactivate item
