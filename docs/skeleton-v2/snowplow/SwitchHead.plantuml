@@ -15,7 +15,9 @@ deactivate inventory
 alt success
 sp -> inventory: addItem(b, 1)
 activate inventory
-inventory --> sp:
+inventory -> sp: limit()
+sp --> inventory: 1
+inventory --> sp: true
 deactivate inventory
 end
 sp --> tester: success

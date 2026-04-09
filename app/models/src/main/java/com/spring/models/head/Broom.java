@@ -85,4 +85,9 @@ public class Broom extends Entity implements IHead, ShopItem{
         IInventory inventory = sp.getInventory();
         inventory.addItem(this, amount);
     }
+
+    @Override
+    public int limit() {
+        return 1;
+    }
 }
