@@ -3,7 +3,7 @@
 actor "Tesztelő" as tester
 participant "sp: SnowPlow" as sp
 participant "p: SnowPlowPlayer" as player
-participant "head: DragonHead" as item
+participant "stone: Stone" as item
 participant "i: Inventory" as inventory
 participant "s: Shop" as shop
 tester -> shop: buy(player, head, 1)
@@ -32,14 +32,14 @@ deactivate sp
 item -> inventory: addItem(head, 1)
 activate inventory
 inventory -> item: limit()
-item --> inventory:1
-
+item --> inventory: 10
 alt van elég hely
 inventory --> item: true
 else nincs elég hely
 inventory --> item: false
 end
 deactivate inventory
+
 item --> shop:
 deactivate item
 end
