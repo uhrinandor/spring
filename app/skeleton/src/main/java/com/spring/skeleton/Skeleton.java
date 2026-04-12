@@ -83,8 +83,8 @@ public class Skeleton {
             }
             
         }
-    }
-
+    } 
+    //
     /**
      * Kiíratja a menü lehetőségeket a konzolra
      */
