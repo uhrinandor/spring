@@ -75,12 +75,12 @@ public class Field extends Entity implements IField {
 
     public void setRight(IField field)
     {
-        right=field;
+        right = field;
     }
 
     public void setFront(IRoad front)
     {
-        this.front=front;
+        this.front = front;
     }
     
     @Override
@@ -140,7 +140,8 @@ public class Field extends Entity implements IField {
     
     /**
      * A Field-en tartózkodó jármű szeretne lelépni. Először megnézi,
-     * hogy legális-e a következő lépés, majd ha igen, akkor kezdeményezi a másik mezőnél
+     * hogy legális-e a következő lépés, vagy hogy oldalsó mezőre lép-e.
+     * majd ha igen, akkor kezdeményezi a másik mezőnél
      * hogy szeretne belépni a jármű, ha sikeres, akkor leveszi magáról a járművet.
      * @param f a mező amire a jármű lépni szeretne erről a mezőről
      */
