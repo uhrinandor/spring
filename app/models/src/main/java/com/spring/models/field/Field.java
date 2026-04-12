@@ -5,10 +5,10 @@ import java.util.List;
 import com.spring.models.layer.ILayer;
 import com.spring.models.layer.ISalt;
 import com.spring.models.random.IRandom;
-import com.spring.models.vehicle.IDriver;
-import com.spring.models.vehicle.Vehicle;
 import com.spring.models.utils.Entity;
 import com.spring.models.utils.Tracer;
+import com.spring.models.vehicle.IDriver;
+import com.spring.models.vehicle.Vehicle;
 
 /**
  * Egy, a járművek által léphető mezőt jelent. Felelőssége a rajta lévő jármű és rétegek közötti 
@@ -147,7 +147,7 @@ public class Field extends Entity implements IField {
     @Override
     public void tryExit(IField f) {
         Tracer.getInstance().enterFunction(this, "tryExit",f);
-        if(!layer.canExit(vehicle)){
+        if(!layer.canExit(vehicle)&&(f != this.right || f != this.left)){
             Tracer.getInstance().exitFunction();
             return;
         } 
