@@ -38,3 +38,10 @@ jobs:
         with:
           name: skeleton
           path: app/skeleton/target/skeleton.jar
+
+      - name: Upload Artifact - Prototype
+        if: github.event_name == 'push'
+        uses: actions/upload-artifact@v4
+        with:
+          name: prototype
+          path: app/prototype/target/prototype.jar
