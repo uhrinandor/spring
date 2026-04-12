@@ -49,7 +49,7 @@ alt üzemképes
 
     l1 --> f1: kitudlépni
     deactivate l1
-    alt kitudlépni
+    alt kitudlépni és f2 = f1.right vagy f2 = f1.left
         f1 -> f2: tryEnter(b1)
         activate f2
         'Lecsökkenti a hó vastagságát'

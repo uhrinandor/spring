@@ -1,14 +1,14 @@
-package com.spring.models.field;
+package com.spring.app.skeleton.models.field;
 
 import java.util.List;
 
-import com.spring.models.layer.ILayer;
-import com.spring.models.layer.ISalt;
-import com.spring.models.random.IRandom;
-import com.spring.models.utils.Entity;
-import com.spring.models.utils.Tracer;
-import com.spring.models.vehicle.IDriver;
-import com.spring.models.vehicle.Vehicle;
+import com.spring.app.skeleton.models.layer.ILayer;
+import com.spring.app.skeleton.models.layer.ISalt;
+import com.spring.app.skeleton.models.random.IRandom;
+import com.spring.app.skeleton.models.vehicle.IDriver;
+import com.spring.app.skeleton.models.vehicle.Vehicle;
+import com.spring.app.skeleton.utils.Entity;
+import com.spring.app.skeleton.utils.Tracer;
 
 /**
  * Egy, a járművek által léphető mezőt jelent. Felelőssége a rajta lévő jármű és rétegek közötti 
@@ -147,7 +147,7 @@ public class Field extends Entity implements IField {
     @Override
     public void tryExit(IField f) {
         Tracer.getInstance().enterFunction(this, "tryExit",f);
-        if(!layer.canExit(vehicle)&&f != right&& f != left){
+        if(!layer.canExit(vehicle)&&f!=right&&f!=left){
             Tracer.getInstance().exitFunction();
             return;
         } 
