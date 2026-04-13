@@ -5,6 +5,7 @@ skinparam linetype ortho
 
        interface IInventoryItem{
            + key(): string
+           + limit(): int
        }
 
 
@@ -20,6 +21,7 @@ skinparam linetype ortho
     +interact(field: IField, inventory: Inventory): bool
     +price(): int
     +apply(ctx: PurchaseContext, amount: int): void
+    + limit(): int
     }
     
     class Brush implements IHead, ShopItem
@@ -28,6 +30,7 @@ skinparam linetype ortho
     +interact(field: IField, inventory: Inventory): bool
     +price(): int
     +apply(ctx: PurchaseContext, amount: int): void
+    + limit(): int
     }
     
     class SaltSpreader implements IHead, ShopItem
@@ -36,6 +39,7 @@ skinparam linetype ortho
     +interact(field: IField, inventory: Inventory): bool
     +price(): int
     +apply(ctx: PurchaseContext, amount: int): void
+    + limit(): int
     }
     
     class IceBreaker implements IHead, ShopItem
@@ -44,6 +48,7 @@ skinparam linetype ortho
     +interact(field: IField, inventory: Inventory): bool
     +price(): int
     +apply(ctx: PurchaseContext, amount: int): void
+    + limit(): int
     }
     
     class Dragon implements IHead, ShopItem
@@ -52,6 +57,16 @@ skinparam linetype ortho
     +interact(field: IField, inventory: Inventory): bool
     +price(): int
     +apply(ctx: PurchaseContext, amount: int): void
+    + limit(): int
+    }
+
+    class StoneSplasher implements IHead, ShopItem
+    {
+    +key(): string
+    +interact(field: IField, inventory: Inventory): bool
+    +price(): int
+    +apply(ctx: PurchaseContext, amount: int): void
+    + limit(): int
     }
 
 
@@ -60,18 +75,19 @@ class Biokerosene implements IInventoryItem, ShopItem
     +key(): string
     +price(): int
     +apply(ctx: PurchaseContext, amount: int): void
+    + limit(): int
     }
 
-
+class Stone implements IInventoryItem, ShopItem
+    {
+    +key(): string
+    +price(): int
+    +apply(ctx: PurchaseContext, amount: int): void
+    + limit(): int
+    }
 
    interface ShopItem{
        + price(): int
        + apply(ctx: PurchaseContext, amount: int): void
    }
-
-
-
-
-
-
 @enduml
