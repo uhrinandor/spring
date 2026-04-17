@@ -1,0 +1,11 @@
+interface RPurchaseContext{
+    +player(): IPlayer
+    +snowPlow(): ISnowPlow
+}
+
+interface PurchaseContext{
+    +charge(int amount): boolean
+    +addVehicle(Vehicle v): void
+}
+
+PurchaseContext --|> RPurchaseContext

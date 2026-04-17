@@ -1,0 +1,11 @@
+interface IRDriver{
+       + getCurrent(): IField
+       + getNext(): IField
+}
+
+interface IDriver{
+       + nextMove(): IField
+       + setNext(f: IField): void
+}
+
+IDriver --|> IRDriver

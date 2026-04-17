@@ -1,0 +1,9 @@
+interface IRSnowPlow{
+    +getInventory(): IInventory
+}
+
+interface ISnowPlow{
+    +switchHead(head: IHead): bool
+}
+
+ISnowPlow --|> IRSnowPlow

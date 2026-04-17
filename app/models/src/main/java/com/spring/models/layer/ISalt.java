@@ -14,4 +14,6 @@ public interface ISalt extends IEntity {
      * @return Az eredmény réteg
      */
     public ILayer melt(ILayer layer);
+
+    public int getTimer();
 }

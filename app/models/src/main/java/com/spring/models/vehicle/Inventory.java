@@ -64,5 +64,10 @@ public class Inventory extends Entity implements IInventory{
     public List<String> init() {
         return List.of("items: "+items.toString());
     }
+
+    @Override
+    public Map<Item, Integer> getMap() {
+        return items;
+    }
      
 }

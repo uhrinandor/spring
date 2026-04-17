@@ -1,0 +1,10 @@
+interface IRInventory{
+    +getMap(): Map<Item,Integer>
+}
+
+interface IInventory{
+    +removeItem(IInventoryItem i, int amount): boolean
+    +addItem(IInventoryItem i, int amount): boolean
+}
+
+IInventory --|> IRInventory

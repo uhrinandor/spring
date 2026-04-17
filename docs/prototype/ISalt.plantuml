@@ -1,0 +1,9 @@
+interface IRSalt{
+    +getTimer(): int
+}
+
+interface ISalt{
+    +melt(ILayer layer): ILayer
+}
+
+ISalt --|> IRSalt

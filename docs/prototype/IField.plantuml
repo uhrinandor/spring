@@ -1,0 +1,24 @@
+interface IRField{
+    +getFront(): IRoad
+    +getRight(): IField
+    +isUnderGround(): bool
+    +getVehicle(): Vehicle
+    +getLayer(): ILayer
+}
+
+interface IRoad{
+    +getAvailable(): List<IField>
+}
+
+interface IField{
+    +setLayer(ILayer layer): void
+    +tryEnter(Vehicle v): bool
+    +tryExit(IField f): bool
+    +setVehicle(Vehicle v): void
+    +setSalt(ISalt salt): void
+    +melt(): void
+}
+
+IField --|> IRField
+
+IRField --|> IRoad
