@@ -40,9 +40,7 @@ public class Stone extends Entity implements ILayer, IInventoryItem, ShopItem{
 
     @Override
     public int price() {
-        //Ebben még nem allapodtunk meg
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'price'");
+        return 3;
     }
 
     @Override

@@ -66,9 +66,7 @@ public class Dragon extends Entity implements IHead, ShopItem{
     @Override
     public int price() {
         Tracer.getInstance().enterFunction(this, "price");
-        int tmp = Tracer.getInstance().askInt("Mennyibe kerül a Dragon?", 10);
-        Tracer.getInstance().exitFunction(tmp);
-        return tmp;
+        return 4;
     }
 
     /**

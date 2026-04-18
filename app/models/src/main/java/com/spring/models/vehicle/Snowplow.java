@@ -113,10 +113,7 @@ public class Snowplow extends Vehicle implements ISnowPlow, ShopItem{
 
     @Override
     public int price() {
-        Tracer.getInstance().enterFunction(this, "price");
-        int tmp = Tracer.getInstance().askInt("Mennyibe kerül a Hokotro?", 100);
-        Tracer.getInstance().exitFunction(tmp);
-        return tmp;
+        return 5;
     }
 
     @Override

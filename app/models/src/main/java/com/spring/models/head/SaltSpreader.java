@@ -53,7 +53,7 @@ public class SaltSpreader extends Entity implements IHead, ShopItem{
      */
     @Override
     public int price() {
-        return Tracer.getInstance().askInt("Mennyibe kerül a SaltSpreader?", 10);
+        return 2;
     }
 
     /**

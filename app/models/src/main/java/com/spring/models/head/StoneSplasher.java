@@ -22,14 +22,15 @@ public class StoneSplasher extends Entity implements IHead, ShopItem{
         Tracer.getInstance().enterFunction(this, "interact",field,inventory);
         Stone stone = new Stone();
         Tracer.getInstance().newObject(stone);
-         if (!inventory.removeItem(stone, 1)){
+         if (inventory.removeItem(stone, 1)){
             Tracer.getInstance().exitFunction(false);
-            return false;
+            stone.setPrevious(field.getLayer());
+            field.setLayer(stone);
         } 
-        stone.setPrevious(field.getLayer());
-        field.setLayer(stone);
+        
+        
         Tracer.getInstance().exitFunction(true);
-        return true;
+        return false;
     }
 
     @Override
@@ -50,8 +51,7 @@ public class StoneSplasher extends Entity implements IHead, ShopItem{
      */
     @Override
     public int price() {
-        //TODO 
-        return Tracer.getInstance().askInt("Mennyibe kerül a StoneSplasher?", 10);
+        return 4;
     }
 
     /**
