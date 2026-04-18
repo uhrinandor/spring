@@ -1,0 +1,10 @@
+interface IRPlayer{
+    +vehicles(): List<Vehicle>
+    +getPoints(): int
+}
+
+interface IPlayer{
+    +give(int amount): void
+}
+
+IPlayer --|> IRPlayer

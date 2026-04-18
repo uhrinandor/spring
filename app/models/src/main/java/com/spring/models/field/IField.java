@@ -7,7 +7,7 @@ import com.spring.models.vehicle.Vehicle;
 
 /**
  * Interfész, amely az IField-ek összekötésében biztosít segítséget.
- */
+ */ 
 public interface IField extends IRoad {
     /**
      * @return megadja, hogy mi van a mező előtt. (Lehet CrossRoad is, ezért IRoad-ot ad vissza.)

@@ -1,5 +1,8 @@
 package com.spring.models.vehicle;
 
+import java.util.Map;
+
+import com.spring.models.head.Item;
 import com.spring.models.utils.IEntity;
 
 /**
@@ -20,4 +23,6 @@ public interface IInventory extends IEntity {
      * @param amount a megadott mennyiség amennyit be kell tenni az Inventory-ba
      */
     public boolean addItem(IInventoryItem i, int amount);
+
+    public Map<Item,Integer> getMap();
 }

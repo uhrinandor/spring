@@ -1,0 +1,9 @@
+interface RShopItem{
+    +price(): int
+}
+
+interface ShopItem{
+    +apply(PurchaseContext ctx, int amount): void
+}
+
+ShopItem --|> RShopItem

@@ -1,0 +1,11 @@
+interface IRLayer{
+    +canExit(Vehicle v): boolean
+    +slip(Vehicle v, IRandom random): boolean
+    +accept(ILayerVisitor visitor): void
+}
+
+interface ILayer{
+    +enter(): ILayer
+}
+
+ILayer --|> IRLayer
