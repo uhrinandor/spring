@@ -19,7 +19,7 @@ public class GameContext {
 
     //Field startingField;
     List<Film> films = new ArrayList<>();
-    List<Home> homes = new ArrayList<>();
+    List<Office> offices
     List<Office> offices = new ArrayList<>();
     // Itt elég, ha csak az egyiket tároljuk a párból
     List<Station> stations = new ArrayList<>();

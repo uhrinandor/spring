@@ -11,7 +11,7 @@ import com.spring.models.utils.Tracer;
  * Ez az osztály felel azért, hogy megkülönböztessük melyik játékoshoz melyik busz tartozik. 
  * Gyűjti a pontokat.
  */
-public class BusPlayer extends Entity implements IPlayer, ICollector{
+public class BusPlayer extends Entity implements IPlayer{
     /**
      * A játékoshoz tartozó busz.
      */
