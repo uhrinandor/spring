@@ -2,9 +2,10 @@
 start
 if(cars.IsEmpty) then (no)
     repeat
+    :get car[i];
     :subscribe to car[i];
     :subscribe to car[i].driver;
-repeat while (more fields?) is (yes) not (no)
+repeat while (more cars?) is (yes i++) not (no)
 endif
 stop
 @enduml

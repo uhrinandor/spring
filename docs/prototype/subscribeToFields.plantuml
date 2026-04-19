@@ -8,7 +8,7 @@ if(fields.isEmpty) then (no)
     if(field[i] has Salt) then (yes)
         :subrscibe to field[i].Salt;
     endif
-repeat while (more fields?) is (yes) not (no)
+repeat while (more fields?) is (yes i++) not (no)
 endif
 stop
 @enduml
