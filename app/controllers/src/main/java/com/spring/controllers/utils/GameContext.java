@@ -9,6 +9,7 @@ import com.spring.models.buildings.Station;
 import com.spring.models.field.Field;
 import com.spring.models.player.BusPlayer;
 import com.spring.models.player.SnowplowPlayer;
+import com.spring.models.vehicle.Car;
 import com.spring.models.vehicle.CarDriver;
 
 // TODO: átdolgozandó, csak játék flow-hoz használtam, kibővíthető, újragondolható, két játékos listának kell itt maradnia és az increaseRound-nak
@@ -66,4 +67,12 @@ public class GameContext {
         }
         return false;
     }
+
+    private void subscribeToAll(){}
+
+    private void subscribeToCars(){}
+
+    private void subscribeToBusPlayers(){}
+
+    private void subscribeToSnowPlowPlayers(){}
 }

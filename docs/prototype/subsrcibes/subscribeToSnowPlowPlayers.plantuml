@@ -5,11 +5,11 @@ if(SnowPlowPlayers.isEmpty) then (no)
     :get SnowPlowPlayers[i];
     :subscribe to SnowPlowPlayers[i];
         repeat
-        :get SnowPlowPlayer.SnowPlows[i];
+        :get SnowPlowPlayer[i].SnowPlows[d];
         :Subscribe to snowPlow;
         :Subscribe to snowPlow.Inventory;
         :Subscribe to snowPlow.Driver;
-        repeat while (More SnowPlows?)
+        repeat while (More SnowPlows?) is (yes d++) not (no)
     repeat while (more SnowPlowPlayers?) is (yes i++) not (no)
 endif
 stop
