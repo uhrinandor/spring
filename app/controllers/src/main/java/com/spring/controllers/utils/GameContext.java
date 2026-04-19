@@ -11,7 +11,6 @@ import com.spring.models.player.BusPlayer;
 import com.spring.models.player.SnowplowPlayer;
 import com.spring.models.vehicle.Car;
 import com.spring.models.vehicle.CarDriver;
-import com.spring.models.
 
 // TODO: átdolgozandó, csak játék flow-hoz használtam, kibővíthető, újragondolható, két játékos listának kell itt maradnia és az increaseRound-nak
 public class GameContext {
