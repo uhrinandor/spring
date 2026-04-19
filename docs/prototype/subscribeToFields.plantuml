@@ -1,0 +1,14 @@
+@startuml
+start
+if(fields.isEmpty) then (no)
+    repeat
+    :get fields[i];
+    :subscribe to fields[i];
+    :subscribe to fields[i].Layer;
+    if(field[i] has Salt) then (yes)
+        :subrscibe to field[i].Salt;
+    endif
+repeat while (more fields?) is (yes) not (no)
+endif
+stop
+@enduml

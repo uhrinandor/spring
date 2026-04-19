@@ -1,0 +1,10 @@
+@startuml
+start
+if(cars.IsEmpty) then (no)
+    repeat
+    :subscribe to car[i];
+    :subscribe to car[i].driver;
+repeat while (more fields?) is (yes) not (no)
+endif
+stop
+@enduml
