@@ -1,0 +1,52 @@
+@startuml NextMoveCarBFS
+
+start
+
+:target = destination.getField();
+
+if (current == null\nvagy target == null\nvagy current == target) then (igen)
+    :return next;
+    stop
+else (nem)
+endif
+
+:cameFrom = {}
+queue = [current];
+
+while (queue nem üres?) is (igen)
+    :node = queue.poll();
+    :szomszédok = node.getFront().getAvailable()
+               + node.getRight();
+    while (van még szomszéd?) is (igen)
+        if (szomszéd már\ncameFrom-ban?) then (igen)
+            :skip;
+        else (nem)
+            :cameFrom[szomszéd] = node;
+            if (szomszéd == target?) then (igen)
+                :kilép a BFS-ből;
+                break
+            else (nem)
+                :queue.add(szomszéd);
+            endif
+        endif
+    endwhile
+endwhile
+
+if (target nem\nelérhető?) then (igen)
+    :return next (változatlan);
+    stop
+else (nem)
+endif
+
+:step = target;
+
+while (cameFrom[step] != current?) is (igen)
+    :step = cameFrom[step];
+endwhile
+
+:next = step;
+:return next;
+
+stop
+
+@enduml

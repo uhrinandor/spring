@@ -1,6 +1,7 @@
 package com.spring.models.vehicle;
 
 import com.spring.models.field.IField;
+import com.spring.models.buildings.Building;
 import com.spring.models.utils.IEntity;
 
 /**
@@ -8,12 +9,15 @@ import com.spring.models.utils.IEntity;
  * kiszámolt érték, más esetben a játékos adja meg.
  */
 public interface IDriver extends IEntity {
+
     /**
      * Ebben a metódusban határozza meg a játékos a következő lépését.
      * Autó esetében ez a metódus generálja a legrövidebb utat.
      * @return visszaadja a következő lépés mezőjét
      */
     public IField nextMove();
+
+    public void setDestination(Building b);
 
     /**
      * Csúszás esetén beállítjuk a Vehicle következő lépését.
