@@ -87,6 +87,7 @@ public class CarDriver extends Entity implements IDriver {
             step = cameFrom.get(step);
         }
 
+        current = next;
         next = step;
 
         Tracer.getInstance().exitFunction(next);
