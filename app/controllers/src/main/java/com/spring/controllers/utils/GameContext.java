@@ -11,6 +11,7 @@ import com.spring.models.player.BusPlayer;
 import com.spring.models.player.SnowplowPlayer;
 import com.spring.models.vehicle.Car;
 import com.spring.models.vehicle.CarDriver;
+import com.spring.models.
 
 // TODO: átdolgozandó, csak játék flow-hoz használtam, kibővíthető, újragondolható, két játékos listának kell itt maradnia és az increaseRound-nak
 public class GameContext {
@@ -18,7 +19,7 @@ public class GameContext {
     int currentRound;
 
     //Field startingField;
-    List<Film> films = new ArrayList<>();
+    List<Field> fields = new ArrayList<>();
     List<Office> offices;
     List<Office> offices = new ArrayList<>();
     // Itt elég, ha csak az egyiket tároljuk a párból
@@ -38,10 +39,10 @@ public class GameContext {
         this.busPlayers = busPlayers;
     }
 
-    public GameContext(int rounds, List<Film> films, List<SnowplowPlayer> snowplowPlayers, List<BusPlayer> busPlayers, List<Car> cars) {
+    public GameContext(int rounds, List<Field> filds, List<SnowplowPlayer> snowplowPlayers, List<BusPlayer> busPlayers, List<Car> cars) {
         this.rounds = rounds;
         this.currentRound = 1;
-        this.films = films;
+        this.fild = filds;
         this.snowplowPlayers = snowplowPlayers;
         this.busPlayers = busPlayers;
         this.cars = cars;
