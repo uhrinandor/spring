@@ -9,25 +9,41 @@ import com.spring.models.buildings.Station;
 import com.spring.models.field.Field;
 import com.spring.models.player.BusPlayer;
 import com.spring.models.player.SnowplowPlayer;
+import com.spring.models.vehicle.CarDriver;
 
 // TODO: átdolgozandó, csak játék flow-hoz használtam, kibővíthető, újragondolható, két játékos listának kell itt maradnia és az increaseRound-nak
 public class GameContext {
     int rounds;
     int currentRound;
 
-    Field startingField;
+    //Field startingField;
+    List<Film> films = new ArrayList<>();
     List<Home> homes = new ArrayList<>();
     List<Office> offices = new ArrayList<>();
     // Itt elég, ha csak az egyiket tároljuk a párból
     List<Station> stations = new ArrayList<>();
     List<SnowplowPlayer> snowplowPlayers = new ArrayList<>();
     List<BusPlayer> busPlayers = new ArrayList<>();
+    List<Car> cars = new ArrayList<>();
+
+    /**
+     * Ez volt az eredeti ctr, nem tudom hogy van-e valami ami használja ilyen formátumban, úgyhogy egyelőre benthagyom
+     */
 
     public GameContext(int rounds, List<SnowplowPlayer> snowplowPlayers, List<BusPlayer> busPlayers) {
         this.rounds = rounds;
         this.currentRound = 1;
         this.snowplowPlayers = snowplowPlayers;
         this.busPlayers = busPlayers;
+    }
+
+    public GameContext(int rounds, List<Film> films, List<SnowplowPlayer> snowplowPlayers, List<BusPlayer> busPlayers, List<Car> cars) {
+        this.rounds = rounds;
+        this.currentRound = 1;
+        this.films = films;
+        this.snowplowPlayers = snowplowPlayers;
+        this.busPlayers = busPlayers;
+        this.cars = cars;
     }
 
 
