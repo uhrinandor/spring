@@ -1,0 +1,67 @@
+@startuml
+participant "Car" as Car
+participant "CarDriver" as CarDriver
+participant "Building" as Building
+participant "IField (current)" as Current
+participant "IField (neighbor)" as Neighbor
+participant "IRoad (front)" as Front
+
+Car -> CarDriver : nextMove()
+activate CarDriver
+
+CarDriver -> Building : getField()
+activate Building
+Building --> CarDriver : target
+deactivate Building
+
+alt current == null || target == null || current == target
+    CarDriver --> Car : next (változatlan)
+else BFS indul
+    CarDriver -> CarDriver : cameFrom.put(current, null)
+    CarDriver -> CarDriver : queue.add(current)
+
+    loop amíg queue nem üres && target nincs cameFrom-ban
+        CarDriver -> CarDriver : node = queue.poll()
+
+        CarDriver -> Current : getFront()
+        activate Current
+        Current --> CarDriver : front (IRoad)
+        deactivate Current
+
+        CarDriver -> Front : getAvailable()
+        activate Front
+        Front --> CarDriver : List<IField>
+        deactivate Front
+
+        CarDriver -> Current : getRight()
+        activate Current
+        Current --> CarDriver : right (IField)
+        deactivate Current
+
+        loop minden neighbor-ra
+            alt neighbor már ismert
+                CarDriver -> CarDriver : skip
+            else neighbor új
+                CarDriver -> CarDriver : cameFrom.put(neighbor, node)
+                alt neighbor == target
+                    CarDriver -> CarDriver : kilép a BFS-ből
+                else
+                    CarDriver -> CarDriver : queue.add(neighbor)
+                end
+            end
+        end
+    end
+
+    alt target nem elérhető
+        CarDriver --> Car : next (változatlan)
+    else út visszakövetése
+        loop amíg cameFrom.get(step) != current
+            CarDriver -> CarDriver : step = cameFrom.get(step)
+        end
+        CarDriver -> CarDriver : next = step
+        CarDriver --> Car : next
+    end
+end
+
+deactivate CarDriver
+@enduml
