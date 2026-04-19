@@ -112,6 +112,11 @@ public class CarDriver extends Entity implements IDriver {
             neighbors.add(right);
         }
 
+        IField left = node.getLeft();  
+        if (left != null) {
+            neighbors.add(left);
+        }
+
         return neighbors;
     }
 

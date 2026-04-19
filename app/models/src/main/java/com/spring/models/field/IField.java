@@ -13,7 +13,7 @@ public interface IField extends IRoad {
      * @return megadja, hogy mi van a mező előtt. (Lehet CrossRoad is, ezért IRoad-ot ad vissza.)
      */
     public IRoad getFront();
-
+    public IField getLeft();
     public IField getRight();
     public ILayer getLayer();
     public void setLayer(ILayer layer);
