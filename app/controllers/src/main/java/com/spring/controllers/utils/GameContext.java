@@ -19,7 +19,6 @@ public class GameContext {
 
     //Field startingField;
     List<Field> fields = new ArrayList<>();
-    List<Office> offices;
     List<Office> offices = new ArrayList<>();
     // Itt elég, ha csak az egyiket tároljuk a párból
     List<Station> stations = new ArrayList<>();
@@ -38,10 +37,10 @@ public class GameContext {
         this.busPlayers = busPlayers;
     }
 
-    public GameContext(int rounds, List<Field> filds, List<SnowplowPlayer> snowplowPlayers, List<BusPlayer> busPlayers, List<Car> cars) {
+    public GameContext(int rounds, List<Field> fields, List<SnowplowPlayer> snowplowPlayers, List<BusPlayer> busPlayers, List<Car> cars) {
         this.rounds = rounds;
         this.currentRound = 1;
-        this.fild = filds;
+        this.fields = fields;
         this.snowplowPlayers = snowplowPlayers;
         this.busPlayers = busPlayers;
         this.cars = cars;
