@@ -1,15 +1,10 @@
 package com.spring.models.shop;
 
-import com.spring.models.utils.IEntity;
 
 /**
  * Az ilyen interfészt megvalósító osztályokat lehet vásárolni a boltban.
- */
-public interface ShopItem extends IEntity {
-    /**
-     * @return Visszaadja egy megvásárolható ShopItem árát.
-     */
-    public int price();
+ */ 
+public interface ShopItem extends RShopItem {
 
     /**
      * Adott kontextusra alkalmazza a vásárlást

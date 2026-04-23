@@ -47,7 +47,7 @@ public class Snow extends Entity implements ILayer {
         return result;
     }
 
-    /**
+    /** 
      * Lehetővé teszi a visitor számára, hogy műveletet hajtson végre ezen a rétegen.
      * @param visitor a réteget feldolgozó visitor objektum
      */

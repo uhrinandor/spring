@@ -1,15 +1,13 @@
 package com.spring.models.vehicle;
 
-import com.spring.models.field.IField;
 import com.spring.models.buildings.Building;
-import com.spring.models.utils.IEntity;
+import com.spring.models.field.IField;
 
 /**
  * Ez az interfész határozza meg a Vehicle következő lépésének helyét. Ez autó esetében egy
  * kiszámolt érték, más esetben a játékos adja meg.
  */
-public interface IDriver extends IEntity {
-
+public interface IDriver extends IRDriver {
     /**
      * Ebben a metódusban határozza meg a játékos a következő lépését.
      * Autó esetében ez a metódus generálja a legrövidebb utat.
@@ -30,14 +28,4 @@ public interface IDriver extends IEntity {
      * @param f
      */
     public void setCurrent(IField f);
-
-    /**
-     * @return Ez a metódus megadja, hogy a játékos melyik mezőn áll.
-     */
-    public IField getCurrent();
-
-    /**
-     * @return Ez a metódus visszaadja a játékos következő lépését.
-     */
-    public IField getNext();
 }
