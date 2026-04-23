@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.spring.models.shop.PurchaseContext;
-import com.spring.models.vehicle.ISnowPlow;
-import com.spring.models.vehicle.Vehicle;
 import com.spring.models.utils.Entity;
 import com.spring.models.utils.Tracer;
+import com.spring.models.vehicle.ISnowPlow;
+import com.spring.models.vehicle.Vehicle;
 
 /**
  * Ez az osztály felel azért, hogy megkülönböztessük melyik játékoshoz melyik hókotrók 
  * tartoznak. Gyűjtik a pénzt, kontextust biztosítanak a vásárláshoz.
  */
-public class SnowplowPlayer extends Entity implements PurchaseContext, IPlayer, ICollector{
+public class SnowplowPlayer extends Entity implements PurchaseContext, IPlayer{
     /**
      * A játékoshoz tartozó hókotrók.
      */

@@ -1,0 +1,12 @@
+@startuml
+start
+if(BusPlayers.isEmpty) then (no)
+    repeat
+    :get BusPlayers[i];
+    :subscribe to BusPlayers[i];
+    :Subscribe to BusPlayers[i].Bus;
+    :Subscribe to Bus.Driver;
+    repeat while (more BusPlayers?) is (yes i++) not (no)
+endif
+stop
+@enduml

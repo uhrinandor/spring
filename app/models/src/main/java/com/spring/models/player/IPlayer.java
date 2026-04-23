@@ -3,7 +3,6 @@ package com.spring.models.player;
 import java.util.List;
 
 import com.spring.models.vehicle.Vehicle;
-import com.spring.models.utils.IEntity;
 
 /**
  * Ezen interfész alatt kezeljük a játékosainkat. Ezen kívül, ez az interfész kezeli a játékosok 
