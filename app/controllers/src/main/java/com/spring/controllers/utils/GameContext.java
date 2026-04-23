@@ -3,6 +3,7 @@ package com.spring.controllers.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.spring.models.buildings.Home;
 import com.spring.models.buildings.Office;
 import com.spring.models.buildings.Station;
 import com.spring.models.field.IField;
@@ -17,6 +18,7 @@ public class GameContext {
     
     List<IField> fields;
     List<IRoad> crossRoads = new ArrayList<>();
+    List<Home> homes = new ArrayList<>();
     List<Office> offices = new ArrayList<>();
     // Itt elég, ha csak az egyiket tároljuk a párból
     List<Station> stations = new ArrayList<>();
@@ -48,6 +50,7 @@ public class GameContext {
 
     public GameContext() {
         this.fields = new ArrayList<>();
+        this.currentRound = 1;
         //TODO Auto-generated constructor stub
     }
 
@@ -73,6 +76,14 @@ public class GameContext {
 
     public List<BusPlayer> getBusPlayers() {
         return busPlayers;
+    }
+
+    public List<Home> getHomes() {
+        return homes;
+    }
+
+    public void setRounds(int rounds){
+        this.rounds = rounds;
     }
     
     /**
