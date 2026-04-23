@@ -6,7 +6,11 @@ import com.spring.controllers.controllers.CycleController;
 import com.spring.controllers.controllers.InitController;
 import com.spring.controllers.listeners.GameStartedListener;
 import com.spring.controllers.utils.GameContext;
+import com.spring.prototype.menuitems.init.AddCrossRoad;
+import com.spring.prototype.menuitems.init.AddField;
+import com.spring.prototype.menuitems.init.AddOffice;
 import com.spring.prototype.menuitems.init.AddPlayer;
+import com.spring.prototype.menuitems.init.AddStations;
 import com.spring.prototype.menuitems.init.Rounds;
 import com.spring.prototype.menuitems.init.Start;
 import com.spring.prototype.utils.Navigator;
@@ -22,7 +26,11 @@ public class InitView extends BaseView implements GameStartedListener{
         super(navigator, List.of(
             new Rounds(controller),
             new Start(controller), 
-            new AddPlayer(controller)
+            new AddPlayer(controller),
+			new AddField(controller),
+			new AddCrossRoad(controller),
+			new AddOffice(controller),
+			new AddStations(controller)
         ), controller);
         this.controller = controller;
         controller.addListener(this);

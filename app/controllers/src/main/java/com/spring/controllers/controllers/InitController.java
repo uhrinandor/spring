@@ -6,6 +6,10 @@ import java.util.List;
 import com.spring.controllers.listeners.GameStartedListener;
 import com.spring.controllers.utils.GameContext;
 import com.spring.models.buildings.Station;
+import com.spring.models.buildings.Building;
+import com.spring.models.buildings.Home;
+import com.spring.models.buildings.Office;
+import com.spring.models.field.CrossRoad;
 import com.spring.models.field.Field;
 import com.spring.models.field.IField;
 import com.spring.models.field.IRField;
@@ -25,11 +29,6 @@ import com.spring.models.vehicle.Snowplow;
 
 public class InitController extends BaseController {
     List<GameStartedListener> initListeners = new ArrayList<>();
-
-    int rounds;
-
-    List<SnowplowPlayer> snowplowPlayers = new ArrayList<>();
-    List<BusPlayer> busPlayers = new ArrayList<>();
     
     GameContext ctx = new GameContext();
 
@@ -42,12 +41,8 @@ public class InitController extends BaseController {
      * @param rounds A körszám
      */
     public void rounds(int rounds){
-        if(rounds < 1) {
-            error("Number of rounds must be at least 1");
-            return;
-        }
+        ctx.setRounds(rounds);
         tracer.info("Rounds set to " + rounds);
-        this.rounds = rounds;
     }
 
     /**
@@ -64,7 +59,7 @@ public class InitController extends BaseController {
         Snowplow snowplow = new Snowplow(driver, inventory, head, player);
         player.addVehicle(snowplow);
 
-        snowplowPlayers.add(player);
+        ctx.getSnowplowPlayers().add(player);
         tracer.info(String.format("%s added", player));
     }
 
@@ -77,7 +72,7 @@ public class InitController extends BaseController {
         Bus bus = new Bus(driver, null, player);
         player.setBus(bus);
 
-        busPlayers.add(player);
+        ctx.getBusPlayers().add(player);
         tracer.info(String.format("%s added", player));
     }
 
@@ -103,9 +98,8 @@ public class InitController extends BaseController {
             Tracer.changeDeterministicMode(deterministicMode);
         }
 
-        GameContext context = new GameContext(rounds, snowplowPlayers, busPlayers);
         for(GameStartedListener listener : initListeners){
-            listener.onGameStarted(context);
+            listener.onGameStarted(ctx);
         }
     }
 
@@ -171,6 +165,74 @@ public class InitController extends BaseController {
         spp.addVehicle(sp);
         PlayerDriver playerDriver = (PlayerDriver)sp.getDriver();
         playerDriver.setNext(fields.get(field));
+    }
+    /**
+     * Egy kereszteződést ad a pályához a megadott kimenő mezőkkel. A kimenő mezők indexét kapja meg, és ellenőrzi, hogy érvényesek-e.
+     * @param outFields a kimenő mezők indexei
+     * @return létrehozott CrossRoad
+     */
+    public IRoad addCrossRoad(List<Integer> outFields){
+        if(!outFields.stream().allMatch(i -> i < ctx.getFields().size())){
+            error("Invalid field index");
+            return null;
+        }
 
+        List<IField> fields = outFields.stream().map(i -> ctx.getFields().get(i)).toList();
+        IRoad crossRoad = new CrossRoad(fields);
+        ctx.getCrossRoads().add(crossRoad);
+        return crossRoad;
+    }
+
+    /**
+     * Egy otthont ad a pályához a megadott indexű mező mellé
+     * @param serial
+     * @return
+     */
+    public Building addHome(int serial){
+        if(serial >= ctx.getFields().size()){
+            error("Invalid field index");
+            return null;
+        }
+
+        Home home = new Home(ctx.getFields().get(serial));
+        ctx.getHomes().add(home);
+        return home;
+    }
+
+    /**
+     * Egy irodát ad a pályához a megadott indexű mező mellé
+     * @param serial A mező sorszáma
+     * @return Létrehozott Office
+     */
+    public Building addOffice(int serial){
+        if(serial >= ctx.getFields().size()){
+            error("Invalid field index");
+            return null;
+        }
+
+        Office office = new Office(ctx.getFields().get(serial));
+        ctx.getOffices().add(office);
+        return office;
+    }
+
+    /**
+     * Két végállomást ad a pályához a megadott indexű mezők mellé, és összepárosítja őket. A buszok ezek között ingáznak majd.
+     * @param serial1 Az első mező sorszáma
+     * @param serial2 A második mező sorszáma
+     * @return
+     */
+    public List<Building> addStations(int serial1, int serial2){
+        if(serial1 >= ctx.getFields().size() || serial2 >= ctx.getFields().size()){
+            error("Invalid field index");
+            return null;
+        }
+
+        Station station1 = new Station(ctx.getFields().get(serial1));
+        Station station2 = new Station(ctx.getFields().get(serial2));
+        station1.setPair(station2);
+        station2.setPair(station1);
+        ctx.getStations().add(station1);
+        ctx.getStations().add(station2);
+        return List.of(station1, station2);
     }
 }
