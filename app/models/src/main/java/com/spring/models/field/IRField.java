@@ -18,4 +18,5 @@ public interface IRField extends IRoad{
 
     public Vehicle getVehicle();
 
+    public IField getLeft();
 }
