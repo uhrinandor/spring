@@ -32,6 +32,10 @@ public class Bus extends Vehicle {
         this.collector = collector;
     }
 
+    public Station geStation(){
+        return station;
+    }
+
     @Override
     public List<String> init() {
         return List.of("driver: "+driver, "station: " + station);
