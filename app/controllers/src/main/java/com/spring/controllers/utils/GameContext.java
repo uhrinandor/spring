@@ -17,6 +17,8 @@ public class GameContext {
     int rounds;
     int currentRound;
 
+    
+
     //Field startingField;
     List<Field> fields = new ArrayList<>();
     List<Office> offices = new ArrayList<>();

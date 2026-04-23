@@ -22,8 +22,7 @@ public class InitController extends BaseController {
 
     int rounds;
 
-    List<SnowplowPlayer> snowplowPlayers = new ArrayList<>();
-    List<BusPlayer> busPlayers = new ArrayList<>();
+    
 
     public void addListener(GameStartedListener listener){
         initListeners.add(listener);
@@ -109,4 +108,6 @@ public class InitController extends BaseController {
             listener.onGameStarted(context);
         }
     }
+
+    public 
 }
