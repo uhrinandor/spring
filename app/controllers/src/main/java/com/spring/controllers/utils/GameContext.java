@@ -3,24 +3,20 @@ package com.spring.controllers.utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.spring.models.buildings.Home;
 import com.spring.models.buildings.Office;
 import com.spring.models.buildings.Station;
-import com.spring.models.field.Field;
+import com.spring.models.field.IField;
+import com.spring.models.field.IRoad;
 import com.spring.models.player.BusPlayer;
 import com.spring.models.player.SnowplowPlayer;
 import com.spring.models.vehicle.Car;
-import com.spring.models.vehicle.CarDriver;
 
-// TODO: átdolgozandó, csak játék flow-hoz használtam, kibővíthető, újragondolható, két játékos listának kell itt maradnia és az increaseRound-nak
 public class GameContext {
     int rounds;
     int currentRound;
-
     
-
-    //Field startingField;
-    List<Field> fields = new ArrayList<>();
+    List<IField> fields;
+    List<IRoad> crossRoads = new ArrayList<>();
     List<Office> offices = new ArrayList<>();
     // Itt elég, ha csak az egyiket tároljuk a párból
     List<Station> stations = new ArrayList<>();
@@ -33,13 +29,14 @@ public class GameContext {
      */
 
     public GameContext(int rounds, List<SnowplowPlayer> snowplowPlayers, List<BusPlayer> busPlayers) {
+        this.fields = new ArrayList<>();
         this.rounds = rounds;
         this.currentRound = 1;
         this.snowplowPlayers = snowplowPlayers;
         this.busPlayers = busPlayers;
     }
 
-    public GameContext(int rounds, List<Field> fields, List<SnowplowPlayer> snowplowPlayers, List<BusPlayer> busPlayers, List<Car> cars) {
+    public GameContext(int rounds, List<IField> fields, List<SnowplowPlayer> snowplowPlayers, List<BusPlayer> busPlayers, List<Car> cars) {
         this.rounds = rounds;
         this.currentRound = 1;
         this.fields = fields;
@@ -48,6 +45,27 @@ public class GameContext {
         this.cars = cars;
     }
 
+
+    public GameContext() {
+        this.fields = new ArrayList<>();
+        //TODO Auto-generated constructor stub
+    }
+
+    public List<IField> getFields() {
+        return fields;
+    }
+
+    public List<IRoad> getCrossRoads() {
+        return crossRoads;
+    }
+
+    public List<Office> getOffices() {
+        return offices;
+    }
+
+    public List<Station> getStations() {
+        return stations;
+    }
 
     public List<SnowplowPlayer> getSnowplowPlayers() {
         return snowplowPlayers;
