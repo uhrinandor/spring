@@ -5,9 +5,13 @@ import java.util.List;
 
 import com.spring.controllers.listeners.GameStartedListener;
 import com.spring.controllers.utils.GameContext;
+import com.spring.models.field.Field;
+import com.spring.models.field.IField;
+import com.spring.models.field.IRField;
 import com.spring.models.head.Broom;
 import com.spring.models.head.Brush;
 import com.spring.models.head.IHead;
+import com.spring.models.layer.ILayer;
 import com.spring.models.player.BusPlayer;
 import com.spring.models.player.SnowplowPlayer;
 import com.spring.models.random.Random;
@@ -24,6 +28,8 @@ public class InitController extends BaseController {
 
     List<SnowplowPlayer> snowplowPlayers = new ArrayList<>();
     List<BusPlayer> busPlayers = new ArrayList<>();
+    
+    GameContext ctx = new GameContext();
 
     public void addListener(GameStartedListener listener){
         initListeners.add(listener);
@@ -83,15 +89,6 @@ public class InitController extends BaseController {
      * amit átad a CycleControllernek, hogy átvegye a játék irányítását.
      */
     public void start(boolean deterministicMode){
-        if(snowplowPlayers.isEmpty()) {
-            error("At least one snowplow player is required to start the game!");
-            return;
-        }
-        
-        if(busPlayers.isEmpty()) {
-            error("At least one bus player is required to start the game!");
-            return;
-        }
         // TODO:
         // Validation
         // Generate map
@@ -108,5 +105,16 @@ public class InitController extends BaseController {
         for(GameStartedListener listener : initListeners){
             listener.onGameStarted(context);
         }
+    }
+
+    /**
+     * Egy field-et ad a pályához
+     * @param layer a layer amit rárakunk
+     * @param underGround aluljáró-e a mező
+     */
+    public IRField addField(ILayer layer, boolean underGround){
+        IField field = new Field(layer, null, null, null, null, null, null, underGround);
+        ctx.getFields().add(field);
+        return field;
     }
 }
