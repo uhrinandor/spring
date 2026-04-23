@@ -1,8 +1,6 @@
 package com.spring.models.player;
 
 import com.spring.models.utils.IEntity;
-import com.spring.models.utils.Tracer;
-
 /**
  * Feladata a jutalmak összegyűjtése, pl.: busz pontjai vagy hókotró által szerzett pénz.
  */

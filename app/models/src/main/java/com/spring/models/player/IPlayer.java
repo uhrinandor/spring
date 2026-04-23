@@ -3,13 +3,12 @@ package com.spring.models.player;
 import java.util.List;
 
 import com.spring.models.vehicle.Vehicle;
-import com.spring.models.utils.IEntity;
 
 /**
  * Ezen interfész alatt kezeljük a játékosainkat. Ezen kívül, ez az interfész kezeli a játékosok 
  * pontjait.
  */
-public interface IPlayer extends IEntity{
+public interface IPlayer extends ICollector{
     /**
      * @return Ez a metódus visszaadja a játékos által vezetett Vehicle-ket egy lista formában.
      * (Csak a SnowPlowPlayer-nél lehet itt egynél több jármű,
