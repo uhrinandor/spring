@@ -1,10 +1,12 @@
 package com.spring.models.shop;
 
+import com.spring.models.utils.IEntity;
+
 /**
  * Ez az interfész felel a boltból történő vásárlás lebonyolításáért.
  * Innen tudnak vásárolni a játékosok.
  */
-public interface IShop {
+public interface IShop extends IEntity{
     /**
      * Ez a metódus felel a boltból történő vásárlásért, paraméterként egy PurchaseContext-et,
      * egy ShopItem-et és egy amount-ot kap amik meghatározzák,

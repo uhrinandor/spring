@@ -1,11 +1,10 @@
 package com.spring.models.layer;
 
-import com.spring.models.utils.IEntity;
 
 /**
  * Ez az interfész felel a só kezeléséért, mezőről történő eltűnéséért.
  */
-public interface ISalt extends IEntity {
+public interface ISalt extends IRSalt {
     /**
      * Ez a függvény végzi a hó vagy jég, só általi olvasztását. 
      * Paraméternek egy ILayer-t fogad és azzal a réteggel tér vissza
@@ -14,6 +13,6 @@ public interface ISalt extends IEntity {
      * @return Az eredmény réteg
      */
     public ILayer melt(ILayer layer);
-
-    public int getTimer();
+ 
+    
 }
