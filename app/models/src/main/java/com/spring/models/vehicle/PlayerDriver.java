@@ -5,6 +5,7 @@ import java.util.List;
 import com.spring.models.field.IField;
 import com.spring.models.utils.Entity;
 import com.spring.models.utils.Tracer;
+import com.spring.models.buildings.Building;
 
 /**
  * A PlayerDriver objektum felelőssége a hókotró vagy busz irányítása. Tényleges játékos 
@@ -72,4 +73,7 @@ public class PlayerDriver extends Entity implements IDriver {
         Tracer.getInstance().exitFunction();
         current = f;
     }
+
+    @Override
+    public void setDestination(Building b){}
 }

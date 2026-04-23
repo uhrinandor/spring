@@ -55,6 +55,13 @@ public class Field extends Entity implements IField {
         return right;
     }
     
+    @Override
+    public IField getLeft(){
+        Tracer.getInstance().enterFunction(this, "getLeft");
+        Tracer.getInstance().exitFunction(left);
+        return left;
+    }
+
     public void setLeft(IField field)
     {
         left=field;

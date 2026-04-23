@@ -1,5 +1,6 @@
 package com.spring.models.vehicle;
 
+import com.spring.models.buildings.Building;
 import com.spring.models.field.IField;
 
 /**
@@ -13,6 +14,8 @@ public interface IDriver extends IRDriver {
      * @return visszaadja a következő lépés mezőjét
      */
     public IField nextMove();
+
+    public void setDestination(Building b);
 
     /**
      * Csúszás esetén beállítjuk a Vehicle következő lépését.
