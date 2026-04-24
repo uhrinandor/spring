@@ -11,7 +11,14 @@ import com.spring.prototype.menuitems.init.AddField;
 import com.spring.prototype.menuitems.init.AddOffice;
 import com.spring.prototype.menuitems.init.AddPlayer;
 import com.spring.prototype.menuitems.init.AddStations;
+import com.spring.prototype.menuitems.init.ListCrossRoad;
+import com.spring.prototype.menuitems.init.ListField;
+import com.spring.prototype.menuitems.init.PlaceBus;
+import com.spring.prototype.menuitems.init.PlaceSp;
 import com.spring.prototype.menuitems.init.Rounds;
+import com.spring.prototype.menuitems.init.SetFrontCrossRoad;
+import com.spring.prototype.menuitems.init.SetFrontField;
+import com.spring.prototype.menuitems.init.SetSide;
 import com.spring.prototype.menuitems.init.Start;
 import com.spring.prototype.utils.Navigator;
 
@@ -30,7 +37,15 @@ public class InitView extends BaseView implements GameStartedListener{
 			new AddField(controller),
 			new AddCrossRoad(controller),
 			new AddOffice(controller),
-			new AddStations(controller)
+			new AddStations(controller),
+			new ListCrossRoad(controller),
+			new ListField(controller),
+			new SetSide(controller),
+			new SetFrontCrossRoad(controller),
+			new SetFrontField(controller),
+			new PlaceBus(controller),
+			new PlaceSp(controller)
+			
         ), controller);
         this.controller = controller;
         controller.addListener(this);
