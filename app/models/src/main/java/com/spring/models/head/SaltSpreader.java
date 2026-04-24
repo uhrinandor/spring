@@ -6,10 +6,10 @@ import com.spring.models.field.IField;
 import com.spring.models.layer.Salt;
 import com.spring.models.shop.PurchaseContext;
 import com.spring.models.shop.ShopItem;
-import com.spring.models.vehicle.IInventory;
-import com.spring.models.vehicle.ISnowPlow;
 import com.spring.models.utils.Entity;
 import com.spring.models.utils.Tracer;
+import com.spring.models.vehicle.IInventory;
+import com.spring.models.vehicle.ISnowPlow;
 
 /**
  * A sószórófej feladata az, hogy a hókotróra szerelve az útra sót szórjon és
@@ -26,7 +26,6 @@ public class SaltSpreader extends Entity implements IHead, ShopItem{
     public boolean interact(IField field, IInventory inventory) {
         Tracer.getInstance().enterFunction(this, "interact",field,inventory);
         Salt salt = new Salt();
-        Tracer.getInstance().newObject(salt);
         if(inventory.removeItem(salt, 1)){
             field.setSalt(salt);
         }

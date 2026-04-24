@@ -6,10 +6,10 @@ import com.spring.models.field.IField;
 import com.spring.models.layer.ILayer;
 import com.spring.models.shop.PurchaseContext;
 import com.spring.models.shop.ShopItem;
-import com.spring.models.vehicle.IInventory;
-import com.spring.models.vehicle.ISnowPlow;
 import com.spring.models.utils.Entity;
 import com.spring.models.utils.Tracer;
+import com.spring.models.vehicle.IInventory;
+import com.spring.models.vehicle.ISnowPlow;
 
 /**
  * A jégtörőfej feladata az, hogy a hókotróra szerelve, az úton levő jeget feltöri,
@@ -27,7 +27,6 @@ public class IceBreaker extends Entity implements IHead, ShopItem{
         Tracer.getInstance().enterFunction(this, "getInstance",field,inventory);
         ILayer layer = field.getLayer();
         IceBreakerClearLayerVisitor visitor = new IceBreakerClearLayerVisitor();
-        Tracer.getInstance().newObject(visitor);
         layer.accept(visitor);
 
         boolean tmp = visitor.getResult() != null;

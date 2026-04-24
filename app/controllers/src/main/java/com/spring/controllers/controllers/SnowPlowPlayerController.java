@@ -13,6 +13,7 @@ import com.spring.models.shop.Shop;
 import com.spring.models.vehicle.Inventory;
 import com.spring.models.vehicle.PlayerDriver;
 import com.spring.models.vehicle.Snowplow;
+import com.spring.models.vehicle.Vehicle;
 
 public class SnowPlowPlayerController extends BaseController {
     List<SnowPlowPlayerListener> snowPlowPlayerListeners = new ArrayList<>();
@@ -54,7 +55,9 @@ public class SnowPlowPlayerController extends BaseController {
      * Lépések végrehajtása, feltételezzük, hogy már beállította mindre a következő mezőt
      */
     public void stepAll(){
-        // TODO:
+        for (Vehicle snowplow : player.vehicles()) {
+            snowplow.step();
+        }
         // lépések végrehajtása stb.
         cycleController.nextPlayer();
     }
@@ -69,12 +72,26 @@ public class SnowPlowPlayerController extends BaseController {
             return;
         }
         Snowplow selected = (Snowplow)player.vehicles().get(serial);
-        tracer.info("Selected snowplow: "+selected);
 
         player.setActive(selected);
 
         for(SnowPlowPlayerListener listener : snowPlowPlayerListeners){
             listener.onSnowPlowSelected();
         }
+    }
+
+    /**
+     * Pénz hozzáadása a játékoshoz
+     * @param amount A mennyiség
+     */
+    public void addMoney(int amount){
+        player.give(amount);
+    }
+
+    /**
+     * Következő játékosra lép
+     */
+    public void nextPlayer(){
+        cycleController.nextPlayer();
     }
 }

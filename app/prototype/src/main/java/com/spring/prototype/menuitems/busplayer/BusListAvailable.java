@@ -23,8 +23,8 @@ public class BusListAvailable extends MenuItem{
         List<IField> fields = controller.listAvailable();
         Tracer tracer = Tracer.getInstance();
         for(int i = 0; i < fields.size(); i++) {
-            // TODO: széleskörűbb információ, Tracer.newObject használható
-            tracer.info(String.format("[%d] %s", i, fields.get(i).toString()));
+            tracer.info(String.format("[%d]", i));
+            tracer.newObject(fields.get(i));
         }
     }
 

@@ -22,6 +22,8 @@ public class CycleView extends BaseView implements CycleListener {
 	BusPlayerController busPlayerController;
 	BusPlayerView busPlayerView;
 
+	CycleController controller;
+
 	protected CycleView(Navigator navigator, CycleController controller) {
 		super(navigator, List.of(), controller);
 
@@ -30,7 +32,7 @@ public class CycleView extends BaseView implements CycleListener {
 
 		busPlayerController = new BusPlayerController(controller);
 		busPlayerView = new BusPlayerView(navigator, busPlayerController);
-
+		this.controller = controller;
         controller.addCycleListener(this);
 	}
 
@@ -53,7 +55,8 @@ public class CycleView extends BaseView implements CycleListener {
 
 	@Override
 	public void onGameEnd(SnowplowPlayer winner1, BusPlayer winner2) {
-		EndController endController = new EndController(winner1, winner2);
+		tracer.info("The game has ended!");
+		EndController endController = new EndController(winner1, winner2, controller.getContext());
 		navigator.navigateTo(new EndView(navigator, endController));
 	}
 }
