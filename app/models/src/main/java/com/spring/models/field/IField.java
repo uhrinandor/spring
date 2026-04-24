@@ -33,4 +33,10 @@ public interface IField extends IRField {
      * @param f a következő mező amire a jármű lépni szeretne
      */
     public void tryExit(IField f);
+
+    public void setRight(IField f);
+
+    public void setLeft(IField f);
+
+    public void setFront(IRoad r);
 }
