@@ -1,7 +1,7 @@
 package com.spring.prototype.menuitems.busplayer;
 
 import com.spring.controllers.controllers.BusPlayerController;
-import com.spring.models.player.BusPlayer;
+import com.spring.models.player.IRPlayer;
 import com.spring.models.utils.Tracer;
 import com.spring.prototype.menuitems.MenuItem;
 
@@ -17,9 +17,8 @@ public class BusPlayerInfo extends MenuItem {
 
 	@Override
 	public void execute() {
-		BusPlayer player = controller.info();
-        Tracer.getInstance().info(player.toString());
-		//TODO:
+		IRPlayer player = controller.info();
+        Tracer.getInstance().newObject(player);
 	}
 
 	@Override

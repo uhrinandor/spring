@@ -5,10 +5,10 @@ import java.util.List;
 
 import com.spring.controllers.listeners.GameStartedListener;
 import com.spring.controllers.utils.GameContext;
-import com.spring.models.buildings.Station;
 import com.spring.models.buildings.Building;
 import com.spring.models.buildings.Home;
 import com.spring.models.buildings.Office;
+import com.spring.models.buildings.Station;
 import com.spring.models.field.CrossRoad;
 import com.spring.models.field.Field;
 import com.spring.models.field.IField;
@@ -86,13 +86,6 @@ public class InitController extends BaseController {
      * amit átad a CycleControllernek, hogy átvegye a játék irányítását.
      */
     public void start(boolean deterministicMode){
-        // TODO:
-        // Validation
-        // Generate map
-        // Place vehicles
-        // Create game context
-        // Pass the responsibility to the CycleController
-
         if(deterministicMode){
             tracer.info("Starting game in deterministic mode");
             Tracer.changeDeterministicMode(deterministicMode);
@@ -145,9 +138,10 @@ public class InitController extends BaseController {
         
         ctx.getFields().get(field).setVehicle(ctx.getBusPlayers().get(busplayer).vehicles().get(0));
         ctx.getBusPlayers().get(busplayer).vehicles().get(0).getDriver().setNext(ctx.getFields().get(field));
+        ctx.getBusPlayers().get(busplayer).vehicles().get(0).getDriver().setCurrent(ctx.getFields().get(field));
 
         List<IField> fields = ctx.getFields();
-        IField currentField = ctx.getFields().get(field);
+        IField currentField = fields.get(field);
         Bus bus = (Bus)ctx.getBusPlayers().get(busplayer).vehicles().get(0);
         List<Station> stations = ctx.getStations();
 
@@ -224,7 +218,7 @@ public class InitController extends BaseController {
     public List<Building> addStations(int serial1, int serial2){
         if(serial1 >= ctx.getFields().size() || serial2 >= ctx.getFields().size()){
             error("Invalid field index");
-            return null;
+            return List.of();
         }
 
         Station station1 = new Station(ctx.getFields().get(serial1));
@@ -234,5 +228,14 @@ public class InitController extends BaseController {
         ctx.getStations().add(station1);
         ctx.getStations().add(station2);
         return List.of(station1, station2);
+
+    }
+
+    /**
+     * Beállítja, hogy havazik-e. Ez hatással lehet a játék menetére, például a hókotrók hatékonyságára.
+     * @param isSnowing havazzon-e
+     */
+    public void setSnowing(boolean isSnowing){
+        ctx.setIsSnowing(isSnowing);
     }
 }

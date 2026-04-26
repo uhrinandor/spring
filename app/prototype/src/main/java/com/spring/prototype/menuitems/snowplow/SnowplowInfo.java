@@ -17,9 +17,7 @@ public class SnowplowInfo extends MenuItem {
 	public void execute() {
 		ISnowPlow snowplow = controller.info();
         Tracer tracer = Tracer.getInstance();
-        tracer.info(snowplow.toString());
-        tracer.info("HEAD: "+snowplow.getHead().toString());
-        //TODO: inventory
+        tracer.newObject(snowplow);
 	}
 
 	@Override

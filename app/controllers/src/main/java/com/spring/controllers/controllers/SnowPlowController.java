@@ -9,7 +9,9 @@ import com.spring.models.head.IHead;
 import com.spring.models.player.SnowplowPlayer;
 import com.spring.models.shop.Shop;
 import com.spring.models.shop.ShopItem;
+import com.spring.models.vehicle.IInventoryItem;
 import com.spring.models.vehicle.ISnowPlow;
+import com.spring.models.vehicle.Vehicle;
 
 public class SnowPlowController extends BaseController {
     SnowplowPlayer player;
@@ -53,22 +55,43 @@ public class SnowPlowController extends BaseController {
         ShopItem item = shopItems.get(serial);
         Shop shop = new Shop();
         shop.buy(player, item, 1);
+        //TODO: itt nem tudunk visszajelezni hogy mizu
     }
 
     /**
      * Lecseréli a hókotró fejét a megadott fejre
      * @param head a fej, amire cserélni szeretnénk
      */
-    public void switchHead(IHead head){
-        player.snowPlow().switchHead(head);
+    public boolean switchHead(IHead head){
+        return player.snowPlow().switchHead(head);
+    }
+
+     /**
+     * Legális lépések listázása a busz kontextusában
+     * @return Egy lista a legális lépésekről
+     */
+    public List<IField> listAvailable(){
+        Vehicle vehicle = (Vehicle)player.snowPlow();
+        IField current = vehicle.getDriver().getCurrent();
+        IField next = vehicle.getDriver().getCurrent();
+        if(current != null && current.getVehicle().equals(vehicle)) return listAvailable(current);
+        else if(next != null && next.getVehicle().equals(vehicle)) return listAvailable(next);
+        return List.of();
     }
 
     /**
-     * Visszaadja a legális lépéseit a hókotrónak
-     * @return
+     * Vissazaadja a legális lépéseket egy adott mezőről
+     * @param field A mező
+     * @return A mezők listája
      */
-    public List<IField> listAvailable(){
-        return List.of(); // TODO:
+    private List<IField> listAvailable(IField field){
+        List<IField> front = field.getAvailable();
+        List<IField> result = new ArrayList<>();
+        result.addAll(front);
+        if(field.getRight() != null) result.add(field.getRight());
+        if(field.getLeft() != null) result.add(field.getLeft());
+
+        return result;
     }
 
     /**
@@ -85,7 +108,23 @@ public class SnowPlowController extends BaseController {
      * Beállítja a következő mezőt a sorszám alapján
      * @param serial A sorszám
      */
-    public void setNext(int serial){
-        //TODO: mező beállítása
+    public IField setNext(int serial){
+        if(serial < 0 || serial >= listAvailable().size()){
+            error("Invalid field serial: "+serial);
+            return null;
+        }
+        IField next = listAvailable().get(serial);
+        Vehicle vehicle = (Vehicle)player.snowPlow();
+        vehicle.getDriver().setNext(next);
+        return next;
+    }
+
+    /**
+     * Hozzáad egy tárgyat a hókotró készletéhez
+     * @param item a tárgy
+     * @return sikeres volt-e a hozzáadás
+     */
+    public boolean addInventory(IInventoryItem item){
+        return player.snowPlow().getInventory().addItem(item, 1);
     }
 }

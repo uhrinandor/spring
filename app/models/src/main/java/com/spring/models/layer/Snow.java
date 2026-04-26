@@ -3,9 +3,9 @@ package com.spring.models.layer;
 import java.util.List;
 
 import com.spring.models.random.IRandom;
-import com.spring.models.vehicle.Vehicle;
 import com.spring.models.utils.Entity;
 import com.spring.models.utils.Tracer;
+import com.spring.models.vehicle.Vehicle;
 
 /**
  * Hóréteg. Autók és buszok elakadhatnak benne.
@@ -40,7 +40,6 @@ public class Snow extends Entity implements ILayer {
     public ILayer merge(ILayer layer) {
         Tracer.getInstance().enterFunction(this, "merge",layer);
         SnowMergeVisitor visitor = new SnowMergeVisitor(this);
-        Tracer.getInstance().newObject(visitor);
         layer.accept(visitor);
         ILayer result = visitor.getResult();
         Tracer.getInstance().exitFunction(result);
@@ -77,7 +76,6 @@ public class Snow extends Entity implements ILayer {
     public boolean canExit(Vehicle v) {
         Tracer.getInstance().enterFunction(this, "canExit",v);
         SnowExitVisitor visitor = new SnowExitVisitor(this);
-        Tracer.getInstance().newObject(visitor);
         v.accept(visitor);
         boolean result = visitor.getResult();
         Tracer.getInstance().exitFunction(result);
@@ -98,7 +96,6 @@ public class Snow extends Entity implements ILayer {
             return this;
         }
         Ice tmp = new Ice();
-        Tracer.getInstance().newObject(tmp);
         Tracer.getInstance().exitFunction(tmp);
         return tmp;
         

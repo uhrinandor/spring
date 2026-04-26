@@ -1,5 +1,6 @@
 package com.spring.models.field;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.spring.models.layer.ILayer;
@@ -74,6 +75,7 @@ public class Field extends Entity implements IField {
         return layer;
     }
 
+    @Override
     public void setLayer(ILayer layer){
         Tracer.getInstance().enterFunction(this, "setLayer",layer);
         this.layer = layer;
@@ -180,9 +182,16 @@ public class Field extends Entity implements IField {
 
     @Override
     public List<String> init() {
-       return List.of("layer: " + layer, "vehicle: " + vehicle,
+       List<String> base =  new ArrayList<>(List.of( "vehicle: " + vehicle,
        "front: " + front, "left: " + left, "right: " + right,
-       "random: " + random);
+       "random: " + random));
+
+       base.add("layer: "+layer);
+       for(String s : layer.init()){
+            base.add("  "+s);
+       }
+
+       return base;
     }
 
     @Override

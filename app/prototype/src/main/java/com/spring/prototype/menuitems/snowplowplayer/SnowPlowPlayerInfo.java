@@ -1,9 +1,8 @@
 package com.spring.prototype.menuitems.snowplowplayer;
 
 import com.spring.controllers.controllers.SnowPlowPlayerController;
-import com.spring.models.player.SnowplowPlayer;
+import com.spring.models.player.IRPlayer;
 import com.spring.models.utils.Tracer;
-import com.spring.models.vehicle.Vehicle;
 import com.spring.prototype.menuitems.MenuItem;
 
 /**
@@ -18,17 +17,12 @@ public class SnowPlowPlayerInfo extends MenuItem {
 
 	@Override
 	public void execute() {
-		SnowplowPlayer player = controller.info();
-        Tracer.getInstance().info(player.toString());
-		for(int i=0; i<player.vehicles().size(); i++){
-			Vehicle v = player.vehicles().get(i);
-			Tracer.getInstance().info(String.format("[%d] %s", i, v.toString()));
-		}
+		IRPlayer player = controller.info();
+        Tracer.getInstance().newObject(player);
 	}
 
 	@Override
 	public boolean parse(String input) {
 		return input.trim().equalsIgnoreCase("INFO");
 	}
-    
 }

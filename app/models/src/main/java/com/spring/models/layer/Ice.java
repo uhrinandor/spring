@@ -3,9 +3,9 @@ package com.spring.models.layer;
 import java.util.List;
 
 import com.spring.models.random.IRandom;
-import com.spring.models.vehicle.Vehicle;
 import com.spring.models.utils.Entity;
 import com.spring.models.utils.Tracer;
+import com.spring.models.vehicle.Vehicle;
 
 /**
  * Jégréteg. Autók és buszok megcsúszhatnak rajta.
@@ -70,7 +70,6 @@ public class Ice extends Entity implements ILayer {
         Tracer.getInstance().enterFunction(this, "slip",v,random);
 
         IceSlipVisitor visitor = new IceSlipVisitor(random);
-        Tracer.getInstance().newObject(visitor);
         
         v.accept(visitor);
         boolean result = visitor.getResult();

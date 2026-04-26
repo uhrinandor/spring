@@ -7,10 +7,10 @@ import com.spring.models.layer.ILayer;
 import com.spring.models.layer.Layer;
 import com.spring.models.shop.PurchaseContext;
 import com.spring.models.shop.ShopItem;
-import com.spring.models.vehicle.IInventory;
-import com.spring.models.vehicle.ISnowPlow;
 import com.spring.models.utils.Entity;
 import com.spring.models.utils.Tracer;
+import com.spring.models.vehicle.IInventory;
+import com.spring.models.vehicle.ISnowPlow;
 
 /**
  * A hókotróra szerelve a havat az adott mező jobb oldali szomszédjára tudja söpörni,
@@ -30,7 +30,6 @@ public class Brush extends Entity implements IHead, ShopItem{
         Tracer.getInstance().enterFunction(this, "interact",field,inventory);
         ILayer current = field.getLayer();
         BrushClearLayerVisitor visitor = new BrushClearLayerVisitor();
-        Tracer.getInstance().newObject(visitor);
         current.accept(visitor);
 
         if(!visitor.getResult()){

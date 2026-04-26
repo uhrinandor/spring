@@ -194,7 +194,6 @@ public class Tracer {
      * @param object Az objektum, amit létrehozunk, csak Entity típusokat követjük le
      */
     public void newObject(IEntity object){
-        if(!skeletonMode) return;
         printIndent();
         stream.println("[+] "+ object);
         List<String> properties = object.init();

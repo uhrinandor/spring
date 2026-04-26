@@ -5,8 +5,9 @@ import java.util.List;
 import com.spring.controllers.controllers.SnowPlowController;
 import com.spring.controllers.controllers.SnowPlowPlayerController;
 import com.spring.controllers.listeners.SnowPlowPlayerListener;
-import com.spring.models.vehicle.Snowplow;
+import com.spring.prototype.menuitems.snowplowplayer.AddMoney;
 import com.spring.prototype.menuitems.snowplowplayer.BuySnowPlow;
+import com.spring.prototype.menuitems.snowplowplayer.NextPlayer;
 import com.spring.prototype.menuitems.snowplowplayer.SelectSnowPlow;
 import com.spring.prototype.menuitems.snowplowplayer.SnowPlowPlayerInfo;
 import com.spring.prototype.menuitems.snowplowplayer.StepAll;
@@ -21,7 +22,12 @@ public class SnowPlowPlayerView extends BaseView implements SnowPlowPlayerListen
 	SnowPlowPlayerController playerController;
 
     protected SnowPlowPlayerView(Navigator navigator, SnowPlowPlayerController controller) {
-		super(navigator, List.of(new SnowPlowPlayerInfo(controller), new StepAll(controller), new SelectSnowPlow(controller), new BuySnowPlow(controller)), controller);
+		super(navigator, List.of(new SnowPlowPlayerInfo(controller),
+			new NextPlayer(controller),
+			new StepAll(controller),
+			new SelectSnowPlow(controller),
+			new BuySnowPlow(controller),
+			new AddMoney(controller)), controller);
 		controller.addSnowPlowPlayerListener(this);
 		this.playerController = controller;
 		this.snowPlowController = new SnowPlowController();
@@ -35,6 +41,7 @@ public class SnowPlowPlayerView extends BaseView implements SnowPlowPlayerListen
 
 	@Override
 	public void onSnowPlowSelected() {
+		tracer.info("Selected snowplow: " + playerController.info().snowPlow());
 		snowPlowController.setPlayer(playerController.info());
 		navigator.navigateTo(snowPlowView);
 	}

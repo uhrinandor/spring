@@ -15,6 +15,7 @@ import com.spring.models.vehicle.Car;
 public class GameContext {
     int rounds;
     int currentRound;
+    boolean isSnowing = false;
     
     List<IField> fields;
     List<IRoad> crossRoads = new ArrayList<>();
@@ -82,6 +83,10 @@ public class GameContext {
         return homes;
     }
 
+    public List<Car> getCars() {
+        return cars;
+    }
+
     public void setRounds(int rounds){
         this.rounds = rounds;
     }
@@ -96,6 +101,14 @@ public class GameContext {
             return true;
         }
         return false;
+    }
+
+    public boolean getIsSnowing() {
+        return isSnowing;
+    }
+
+    public void setIsSnowing(boolean isSnowing) {
+        this.isSnowing = isSnowing;
     }
 
 //TODO: 

@@ -7,10 +7,10 @@ import com.spring.models.layer.ILayer;
 import com.spring.models.layer.Layer;
 import com.spring.models.shop.PurchaseContext;
 import com.spring.models.shop.ShopItem;
-import com.spring.models.vehicle.IInventory;
-import com.spring.models.vehicle.ISnowPlow;
 import com.spring.models.utils.Entity;
 import com.spring.models.utils.Tracer;
+import com.spring.models.vehicle.IInventory;
+import com.spring.models.vehicle.ISnowPlow;
 
 /**
  * A hányófej felelőssége az, hogy a hókotróra szerelve az útról a havat vagy a feltört jeget
@@ -38,7 +38,6 @@ public class Broom extends Entity implements IHead, ShopItem{
         Tracer.getInstance().enterFunction(this, "interact",field,inventory);
         ILayer current = field.getLayer();
         BroomClearLayerVisitor visitor = new BroomClearLayerVisitor();
-        Tracer.getInstance().newObject(visitor);
         current.accept(visitor);
 
         if(!visitor.getResult()){

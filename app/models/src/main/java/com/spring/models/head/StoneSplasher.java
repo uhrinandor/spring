@@ -6,10 +6,10 @@ import com.spring.models.field.IField;
 import com.spring.models.layer.Stone;
 import com.spring.models.shop.PurchaseContext;
 import com.spring.models.shop.ShopItem;
-import com.spring.models.vehicle.IInventory;
-import com.spring.models.vehicle.ISnowPlow;
 import com.spring.models.utils.Entity;
 import com.spring.models.utils.Tracer;
+import com.spring.models.vehicle.IInventory;
+import com.spring.models.vehicle.ISnowPlow;
 
 public class StoneSplasher extends Entity implements IHead, ShopItem{
     
@@ -21,7 +21,6 @@ public class StoneSplasher extends Entity implements IHead, ShopItem{
     public boolean interact(IField field, IInventory inventory) {
         Tracer.getInstance().enterFunction(this, "interact",field,inventory);
         Stone stone = new Stone();
-        Tracer.getInstance().newObject(stone);
          if (inventory.removeItem(stone, 1)){
             Tracer.getInstance().exitFunction(false);
             stone.setPrevious(field.getLayer());
