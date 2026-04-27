@@ -66,16 +66,17 @@ public class SnowPlowController extends BaseController {
         return player.snowPlow().switchHead(head);
     }
 
-     /**
+    /**
      * Legális lépések listázása a busz kontextusában
      * @return Egy lista a legális lépésekről
      */
     public List<IField> listAvailable(){
-        Vehicle vehicle = (Vehicle)player.snowPlow();
-        IField current = vehicle.getDriver().getCurrent();
-        IField next = vehicle.getDriver().getCurrent();
-        if(current != null && current.getVehicle().equals(vehicle)) return listAvailable(current);
-        else if(next != null && next.getVehicle().equals(vehicle)) return listAvailable(next);
+        Vehicle snowplow = player.vehicles().get(0);
+        IField current = snowplow.getDriver().getCurrent();
+        IField next = snowplow.getDriver().getNext();
+
+        if(current != null && current.getVehicle().equals(snowplow)) return listAvailable(current);
+        else if(next != null && next.getVehicle().equals(snowplow)) return listAvailable(next);
         return List.of();
     }
 
@@ -85,7 +86,7 @@ public class SnowPlowController extends BaseController {
      * @return A mezők listája
      */
     private List<IField> listAvailable(IField field){
-        List<IField> front = field.getAvailable();
+        List<IField> front = field.getFront().getAvailable();
         List<IField> result = new ArrayList<>();
         result.addAll(front);
         if(field.getRight() != null) result.add(field.getRight());

@@ -80,7 +80,6 @@ public class CycleController extends BaseController{
         if(snowplowPhase) {
             if(spIter.hasNext()) {
                 SnowplowPlayer player = spIter.next();
-                tracer.info("Next player: "+ player);
                 for(CycleListener listener : cycleListeners){
                     listener.nextSnowPlowPlayer(player);
                 }
@@ -92,7 +91,6 @@ public class CycleController extends BaseController{
         } else {
             if (bpIter.hasNext()) {
                 BusPlayer player = bpIter.next();
-                tracer.info("Next player: "+ player);
                 for(CycleListener listener : cycleListeners){
                     listener.nextBusPlayer(player);
                 }

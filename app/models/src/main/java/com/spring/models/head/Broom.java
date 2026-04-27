@@ -47,7 +47,9 @@ public class Broom extends Entity implements IHead, ShopItem{
 
         field.setLayer(new Layer());
         IField right = field.getRight();
+        if(right == null) return true;
         IField rightright = right.getRight();
+        if(rightright == null) return true;
         ILayer rightLayer = rightright.getLayer();
         rightLayer = rightLayer.merge(current);
         rightright.setLayer(rightLayer);
