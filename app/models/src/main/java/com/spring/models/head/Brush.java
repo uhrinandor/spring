@@ -39,6 +39,7 @@ public class Brush extends Entity implements IHead, ShopItem{
 
         field.setLayer(new Layer());
         IField right = field.getRight();
+        if(right == null) return true;
         ILayer rightLayer = right.getLayer();
         rightLayer = rightLayer.merge(current);
         right.setLayer(rightLayer);

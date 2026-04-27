@@ -156,9 +156,11 @@ public class InitController extends BaseController {
         List<IField> fields = ctx.getFields();
         SnowplowPlayer spp = ctx.getSnowplowPlayers().get(snowPlowplayer);
         Snowplow sp = (Snowplow)spp.vehicles().get(0);
-        spp.addVehicle(sp);
+
         PlayerDriver playerDriver = (PlayerDriver)sp.getDriver();
         playerDriver.setNext(fields.get(field));
+        playerDriver.setCurrent(fields.get(field));
+        fields.get(field).setVehicle(sp);
     }
     /**
      * Egy kereszteződést ad a pályához a megadott kimenő mezőkkel. A kimenő mezők indexét kapja meg, és ellenőrzi, hogy érvényesek-e.
