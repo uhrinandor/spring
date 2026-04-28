@@ -31,7 +31,12 @@ public class App
                 continue;
             }
 
-            currentView.handle(input);
+            try{
+                currentView.handle(input);
+            }catch(Exception e){
+                Tracer.getInstance().error("Unhandled exception occured!" + e.getMessage());
+            }
+            
         }
     }
 }
