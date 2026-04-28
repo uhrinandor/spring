@@ -30,8 +30,13 @@ public class App
                 currentView.showCommands();
                 continue;
             }
-
-            currentView.handle(input);
+            
+            try{
+                currentView.handle(input);
+            }catch(Exception e){
+                Tracer.getInstance().error("Unhandled exception occured!");
+            }
+            
         }
     }
 }
