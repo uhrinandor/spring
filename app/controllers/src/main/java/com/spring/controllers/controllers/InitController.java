@@ -102,7 +102,7 @@ public class InitController extends BaseController {
      * @param underGround aluljáró-e a mező
      */
     public IRField addField(ILayer layer, boolean underGround){
-        IField field = new Field(layer, null, null, null, null, null, null, underGround);
+        IField field = new Field(layer, null, null, null, null, new Random(), null, underGround);
         ctx.getFields().add(field);
         return field;
     }
