@@ -23,9 +23,11 @@ import com.spring.models.player.SnowplowPlayer;
 import com.spring.models.random.Random;
 import com.spring.models.utils.Tracer;
 import com.spring.models.vehicle.Bus;
+import com.spring.models.vehicle.IDriver;
 import com.spring.models.vehicle.Inventory;
 import com.spring.models.vehicle.PlayerDriver;
 import com.spring.models.vehicle.Snowplow;
+import com.spring.models.vehicle.Vehicle;
 
 public class InitController extends BaseController {
     List<GameStartedListener> initListeners = new ArrayList<>();
@@ -155,9 +157,9 @@ public class InitController extends BaseController {
     public void placeSp(int snowPlowplayer, int field){
         List<IField> fields = ctx.getFields();
         SnowplowPlayer spp = ctx.getSnowplowPlayers().get(snowPlowplayer);
-        Snowplow sp = (Snowplow)spp.vehicles().get(0);
+        Vehicle sp = spp.vehicles().get(0);
 
-        PlayerDriver playerDriver = (PlayerDriver)sp.getDriver();
+        IDriver playerDriver = sp.getDriver();
         playerDriver.setNext(fields.get(field));
         playerDriver.setCurrent(fields.get(field));
         fields.get(field).setVehicle(sp);
