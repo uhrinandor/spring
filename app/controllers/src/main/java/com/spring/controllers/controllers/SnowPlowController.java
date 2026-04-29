@@ -97,7 +97,7 @@ public class SnowPlowController extends BaseController {
         IField current = snowplow.getDriver().getCurrent();
         IField next = snowplow.getDriver().getNext();
 
-        if(current != null && current.getVehicle().equals(snowplow)) return listAvailable(current);
+        if(current != null &&  current.getVehicle().equals(snowplow)) return listAvailable(current);
         else if(next != null && next.getVehicle().equals(snowplow)) return listAvailable(next);
         return List.of();
     }
