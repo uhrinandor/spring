@@ -112,10 +112,8 @@ public class CycleController extends BaseController{
      * Játék vége
      */
     private void endGame(){
-        // TODO:
-        // Eredményszámítás
-        SnowplowPlayer winner1 = null;
-        BusPlayer winner2 = null;
+        SnowplowPlayer winner1 = context.getSnowplowPlayers().stream().max((p1, p2) -> p1.getPoints() - p2.getPoints()).orElse(null);
+        BusPlayer winner2 = context.getBusPlayers().stream().max((p1, p2) -> p1.getPoints() - p2.getPoints()).orElse(null);
         for(CycleListener listener : cycleListeners){
             listener.onGameEnd(winner1, winner2);
         }
