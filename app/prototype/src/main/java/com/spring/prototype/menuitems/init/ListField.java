@@ -1,9 +1,12 @@
 package com.spring.prototype.menuitems.init;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.spring.controllers.controllers.InitController;
+import com.spring.models.field.IField;
+import com.spring.models.utils.Tracer;
 import com.spring.prototype.menuitems.MenuItem;
 
 /**
@@ -26,6 +29,11 @@ public class ListField extends MenuItem {
 
     @Override
     public void execute() {
-        controller.listFields();
+        List<IField> fields = controller.listFields();
+        Tracer tracer = Tracer.getInstance();
+        for(int i = 0; i < fields.size(); i++) {
+            tracer.info(String.format("[%d]", i));
+            tracer.newObject(fields.get(i));
+        }
     }
 }

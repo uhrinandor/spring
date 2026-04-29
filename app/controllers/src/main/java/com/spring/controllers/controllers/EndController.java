@@ -29,7 +29,10 @@ public class EndController extends BaseController{
     }
 
     public List<IPlayer> winners(){
-        return List.of(winner1, winner2);
+        List<IPlayer> winners = new ArrayList<>();
+        if(winner1 != null) winners.add(winner1);
+        if(winner2 != null) winners.add(winner2);
+        return winners;
     }
 
     public void newGame(){
