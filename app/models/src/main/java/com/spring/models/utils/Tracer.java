@@ -14,6 +14,7 @@ public class Tracer {
     private static boolean deterministicMode = false;
     private static PrintStream stream = System.out;
     private static InputStream inputStream = System.in;
+    private static Scanner scanner = new Scanner(inputStream);
     private Tracer(){}
 
 
@@ -25,6 +26,7 @@ public class Tracer {
     public static void changeStream(PrintStream output, InputStream input){
         stream = output;
         inputStream = input;
+        scanner = new Scanner(inputStream);
     }
 
     /**
@@ -116,8 +118,8 @@ public class Tracer {
     public int askInt(String message, int variable){
         if(!skeletonMode) return variable;
         input(message);
-        Scanner sc = new Scanner(inputStream);
-        return sc.nextInt();
+        
+        return scanner.nextInt();
     }
 
     /**
@@ -126,8 +128,7 @@ public class Tracer {
      */
     public String askString(String message){
         input(message);
-        Scanner sc = new Scanner(inputStream);
-        return sc.nextLine().trim();
+        return scanner.nextLine().trim();
     }
 
      /**
@@ -137,14 +138,12 @@ public class Tracer {
     public boolean askBool(String message, boolean variable){
         if(!skeletonMode) return variable;
         input(message+" (true/false)");
-        Scanner sc = new Scanner(inputStream);
-        return sc.nextBoolean();
+        return scanner.nextBoolean();
     }  
     
     public boolean askDeterministic(String message){
         input(message+" (true/false)");
-        Scanner sc = new Scanner(inputStream);
-        return sc.nextBoolean();
+        return scanner.nextBoolean();
     }
 
      /**
