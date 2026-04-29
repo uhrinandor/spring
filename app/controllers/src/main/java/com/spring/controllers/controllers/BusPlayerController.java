@@ -40,8 +40,8 @@ public class BusPlayerController extends BaseController {
         IField current = bus.getDriver().getCurrent();
         IField next = bus.getDriver().getNext();
 
-        if(current != null && current.getVehicle().equals(bus)) return listAvailable(current);
-        else if(next != null && next.getVehicle().equals(bus)) return listAvailable(next);
+        if(current != null && bus.equals(current.getVehicle())) return listAvailable(current);
+        else if(next != null && bus.equals(next.getVehicle())) return listAvailable(next);
         return List.of();
     }
 
