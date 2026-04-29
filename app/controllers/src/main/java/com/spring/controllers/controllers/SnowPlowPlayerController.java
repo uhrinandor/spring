@@ -49,6 +49,7 @@ public class SnowPlowPlayerController extends BaseController {
 
         Shop shop = new Shop();
         shop.buy(player, snowplow, 1);
+        // TODO: le kéne raknixd
     }
 
     /**
