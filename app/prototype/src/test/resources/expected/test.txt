@@ -1,0 +1,80 @@
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Field@2 added with Layer@0
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Field@5 added with Ice@3
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Field@8 added with Layer@6
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] BusPlayer@10 added
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Stations Station@12 and Station@13 added at fields Field@2 and Field@8
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] BusPlayer@15 added
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Starting game in deterministic mode
+[INFO] -- BUS PLAYER --
+[?] ENTER: 
+[?] Megtörténjen? (true/false): 
+[INFO] -- BUS PLAYER --
+[?] ENTER: 
+[ERR] Invalid command!
+[INFO] -- BUS PLAYER --
+[?] ENTER: 
+[INFO] The game has ended!
+[INFO] -- GAME END --
+[?] ENTER: 
+[+] Field@2
+    - vehicle: null
+    - front: Field@5
+    - left: null
+    - right: null
+    - random: Random@1
+    - layer: Layer@0
+[INFO] -- GAME END --
+[?] ENTER: 
+[+] Field@5
+    - vehicle: Bus@11
+    - front: Field@8
+    - left: null
+    - right: null
+    - random: Random@4
+    - layer: Ice@3
+    -   broken: false
+[INFO] -- GAME END --
+[?] ENTER: 
+[+] Field@8
+    - vehicle: Bus@16
+    - front: null
+    - left: null
+    - right: null
+    - random: Random@7
+    - layer: Layer@6
+[INFO] -- GAME END --
+[?] ENTER: 
+[+] Bus@11
+    - driver: PlayerDriver@9
+    - station: Station@12
+    - wrecked: false
+[INFO] -- GAME END --
+[?] ENTER: 
+[+] Bus@16
+    - driver: PlayerDriver@14
+    - station: Station@13
+    - wrecked: false
+[INFO] -- GAME END --
+[?] ENTER: 
