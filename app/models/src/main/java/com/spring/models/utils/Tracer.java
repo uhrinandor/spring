@@ -108,7 +108,7 @@ public class Tracer {
      */
     public void input(String message){
         printIndent();
-        stream.print("[?] "+message+": ");
+        stream.println("[?] "+message+": ");
     }
 
     /**
