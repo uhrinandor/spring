@@ -28,7 +28,7 @@ public class Car extends Vehicle {
 
     @Override
     public List<String> init() {
-       return List.of("driver: " + driver, "destination: " + destination);  
+       return List.of("driver: " + driver, "destination: " + destination, "immobileTurnsLeft: " + immobileTurnsLeft);  
     }
 
     /**
