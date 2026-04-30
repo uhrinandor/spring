@@ -79,18 +79,25 @@ public class InitController extends BaseController {
     }
 
     /**
-     * Elindítja a játékot, ha minden feltétel teljesül. Ezek az alábbiak:
-     * - Legalább egy hókotrós játékos
-     * - Legalább egy buszos játékos
-     * - Kör beállítva
-     * 
-     * Ezután legenerálja a játék térképet, letelepsíti a járműveket és létrehozza a GameContext-et, 
+     * Elindítja a játékot,
+     * Legenerálja az autókat
      * amit átad a CycleControllernek, hogy átvegye a játék irányítását.
      */
     public void start(boolean deterministicMode){
         if(deterministicMode){
             tracer.info("Starting game in deterministic mode");
             Tracer.changeDeterministicMode(deterministicMode);
+        }
+
+        if(!ctx.getOffices().isEmpty()){
+            for(Home h : ctx.getHomes()){
+                if(h.getField().getVehicle() == null){
+                    int officeSerial = new java.util.Random().nextInt(0, ctx.getOffices().size());
+                    h.generateCar(ctx.getOffices().get(officeSerial));
+                }
+            }
+        }else if(!ctx.getHomes().isEmpty()) {
+            tracer.info("No offices added, skipping car generation");
         }
 
         for(GameStartedListener listener : initListeners){
@@ -139,7 +146,6 @@ public class InitController extends BaseController {
     public void placeBus(int busplayer, int field){
         
         ctx.getFields().get(field).setVehicle(ctx.getBusPlayers().get(busplayer).vehicles().get(0));
-        ctx.getBusPlayers().get(busplayer).vehicles().get(0).getDriver().setNext(ctx.getFields().get(field));
         ctx.getBusPlayers().get(busplayer).vehicles().get(0).getDriver().setCurrent(ctx.getFields().get(field));
 
         List<IField> fields = ctx.getFields();
@@ -160,7 +166,6 @@ public class InitController extends BaseController {
         Vehicle sp = spp.vehicles().get(0);
 
         IDriver playerDriver = sp.getDriver();
-        playerDriver.setNext(fields.get(field));
         playerDriver.setCurrent(fields.get(field));
         fields.get(field).setVehicle(sp);
     }

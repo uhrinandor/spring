@@ -1,12 +1,15 @@
 package com.spring.controllers.controllers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import com.spring.controllers.listeners.CycleListener;
 import com.spring.controllers.utils.GameContext;
 import com.spring.controllers.utils.PickCarVisitor;
+import com.spring.models.buildings.Home;
 import com.spring.models.field.IField;
 import com.spring.models.layer.ILayer;
 import com.spring.models.layer.Snow;
@@ -34,6 +37,7 @@ public class CycleController extends BaseController{
      * - Havazás
      * - Olvasztás
      * - Autók mozgása
+     * - Új autók létrehozása a Home-ok mellett, ha nincs elég autó a pályán
      * Ezután átadja a vezérlést a játékosoknak
      * Ha megvolt az összes hókotrós, utána jönnek a buszosok, majd újra az egész
      */
@@ -42,6 +46,7 @@ public class CycleController extends BaseController{
         PickCarVisitor pickCarVisitor = new PickCarVisitor();
         int carsOnField = 0;
 
+        Map<Car, Boolean> moved = new HashMap<>();
         // Havazás és autók begyűjtése
         for(IField field : context.getFields()){
             if(context.getIsSnowing() && !field.isUnderGround() && rand.nextBool(0.5)){
@@ -61,12 +66,29 @@ public class CycleController extends BaseController{
                     carsOnField++;
                     if(!context.getCars().contains(picked))
                         context.getCars().add(picked);
-                    picked.step();
+
+                    if(!moved.containsKey(picked)){
+                        picked.step();
+                        moved.put(picked, true);
+                    }
                 }
             }
         }
 
-        // TODO: Autó generálás, az autó lista minden létrehozott autót tartalmazza, arra nem lehet alapozni, hogy mennyi van abban
+        if(carsOnField < context.getHomes().size() && !context.getOffices().isEmpty()){
+            for(Home h : context.getHomes()){
+                if(carsOnField >= context.getHomes().size()) break;
+                if(h.getField().getVehicle() == null){
+                    int officeSerial = new java.util.Random().nextInt(0, context.getOffices().size());
+                    h.generateCar(context.getOffices().get(officeSerial));
+                    carsOnField++;
+                    for(CycleListener listener : cycleListeners){
+                        listener.onCarPlaced(h);
+                    }
+                }
+            }
+        }
+
 
         snowplowPhase = true;
         spIter = context.getSnowplowPlayers().iterator();

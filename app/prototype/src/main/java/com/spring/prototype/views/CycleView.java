@@ -7,6 +7,7 @@ import com.spring.controllers.controllers.CycleController;
 import com.spring.controllers.controllers.EndController;
 import com.spring.controllers.controllers.SnowPlowPlayerController;
 import com.spring.controllers.listeners.CycleListener;
+import com.spring.models.buildings.Building;
 import com.spring.models.player.BusPlayer;
 import com.spring.models.player.SnowplowPlayer;
 import com.spring.prototype.utils.Navigator;
@@ -58,5 +59,10 @@ public class CycleView extends BaseView implements CycleListener {
 		tracer.info("The game has ended!");
 		EndController endController = new EndController(winner1, winner2, controller.getContext());
 		navigator.navigateTo(new EndView(navigator, endController));
+	}
+
+	@Override
+	public void onCarPlaced(Building building) {
+		tracer.info("A new car has been placed at " + building.getField());
 	}
 }

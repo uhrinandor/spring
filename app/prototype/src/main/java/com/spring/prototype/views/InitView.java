@@ -8,6 +8,7 @@ import com.spring.controllers.listeners.GameStartedListener;
 import com.spring.controllers.utils.GameContext;
 import com.spring.prototype.menuitems.init.AddCrossRoad;
 import com.spring.prototype.menuitems.init.AddField;
+import com.spring.prototype.menuitems.init.AddHome;
 import com.spring.prototype.menuitems.init.AddOffice;
 import com.spring.prototype.menuitems.init.AddPlayer;
 import com.spring.prototype.menuitems.init.AddStations;
@@ -35,6 +36,7 @@ public class InitView extends BaseView implements GameStartedListener{
             new Rounds(controller),
             new Start(controller), 
             new AddPlayer(controller),
+			new AddHome(controller),
 			new AddField(controller),
 			new AddCrossRoad(controller),
 			new AddOffice(controller),
