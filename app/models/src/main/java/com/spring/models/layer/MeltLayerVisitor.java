@@ -58,6 +58,8 @@ public class MeltLayerVisitor extends Entity implements ILayerVisitor {
 
     @Override
     public void visit(Stone s) {
+        s.getPrevious().accept(this);
+        s.setPrevious(result);
         result = s;
     }
     

@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import com.spring.models.utils.Entity;
 import com.spring.models.utils.Tracer;
 
 class IntegrationTest {
@@ -24,7 +25,7 @@ class IntegrationTest {
     @ParameterizedTest(name = "CLI test with: {0}")
     @MethodSource("inputFiles")
     void testAppWithInputFile(String fileName) throws Exception {
-
+        Entity.reset();
         // 📥 input betöltése
         String input = readResource(fileName);
 
