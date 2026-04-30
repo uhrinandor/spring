@@ -143,7 +143,9 @@ public class Tracer {
     
     public boolean askDeterministic(String message){
         input(message+" (true/false)");
-        return scanner.nextBoolean();
+        boolean val =  scanner.nextBoolean();
+        scanner.nextLine();
+        return val;
     }
 
      /**
