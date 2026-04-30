@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.spring.controllers.controllers.SnowPlowController;
 import com.spring.controllers.listeners.SnowPlowListener;
+import com.spring.prototype.menuitems.snowplow.AddInventory;
 import com.spring.prototype.menuitems.snowplow.Back;
 import com.spring.prototype.menuitems.snowplow.Buy;
 import com.spring.prototype.menuitems.snowplow.SnowPlowListAvailable;
@@ -20,7 +21,7 @@ import com.spring.prototype.utils.Navigator;
 public class SnowPlowView extends BaseView implements SnowPlowListener {
     SnowPlowPlayerView playerView;
 	protected SnowPlowView(Navigator navigator, SnowPlowPlayerView playerView, SnowPlowController controller) {
-		super(navigator, List.of(new SnowplowInfo(controller), new Shop(controller), new SnowPlowListAvailable(controller), new Buy(controller), new SwitchHead(controller), new SnowplowSetNext(controller), new Back(controller)), controller);
+		super(navigator, List.of(new SnowplowInfo(controller), new Shop(controller), new SnowPlowListAvailable(controller), new Buy(controller), new SwitchHead(controller), new SnowplowSetNext(controller), new Back(controller), new AddInventory(controller)), controller);
         this.playerView = playerView;
 		controller.addSnowPlowListener(this);
 	}
