@@ -51,7 +51,9 @@ public class BusPlayerController extends BaseController {
      * @return A mezők listája
      */
     private List<IField> listAvailable(IField field){
-        List<IField> front = field.getFront().getAvailable();
+        List<IField> front = new ArrayList<>();
+        if(field.getFront() != null) front = field.getFront().getAvailable();
+        
         List<IField> result = new ArrayList<>();
         result.addAll(front);
         if(field.getRight() != null) result.add(field.getRight());
