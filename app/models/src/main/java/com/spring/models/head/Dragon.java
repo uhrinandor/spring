@@ -5,13 +5,12 @@ import java.util.List;
 import com.spring.models.field.IField;
 import com.spring.models.field.IRoad;
 import com.spring.models.layer.Biokerosene;
-import com.spring.models.layer.Layer;
 import com.spring.models.shop.PurchaseContext;
 import com.spring.models.shop.ShopItem;
-import com.spring.models.vehicle.IInventory;
-import com.spring.models.vehicle.ISnowPlow;
 import com.spring.models.utils.Entity;
 import com.spring.models.utils.Tracer;
+import com.spring.models.vehicle.IInventory;
+import com.spring.models.vehicle.ISnowPlow;
 
 /**
  * A sárkány az úton levő havat/jeget felolvasztja.
@@ -30,20 +29,23 @@ public class Dragon extends Entity implements IHead, ShopItem{
     @Override
     public boolean interact(IField field, IInventory inventory) {
         Tracer.getInstance().enterFunction(this, "interact",field,inventory);
+        DragonClearLayerVisitor v = new DragonClearLayerVisitor();
 
         if (!inventory.removeItem(new Biokerosene(), 1)){
             Tracer.getInstance().exitFunction(false);
             return false;
-        } 
-        field.setLayer(new Layer());
+        }
+        field.getLayer().accept(v);
+        field.setLayer(v.getResult());
         IRoad nextRoad = field.getFront();
         IField nextField = nextRoad.getAvailable().get(0);
-        nextField.setLayer(new Layer());
+        nextField.getLayer().accept(v);
+        nextField.setLayer(v.getResult());
 
         IRoad nextnextRoad = nextField.getFront();
         IField nextnextField = nextnextRoad.getAvailable().get(0);
-        nextnextField.setLayer(new Layer());
-        Tracer.getInstance().exitFunction(true);
+        nextnextField.getLayer().accept(v);
+        nextnextField.setLayer(v.getResult());
         return true;
     }
 
