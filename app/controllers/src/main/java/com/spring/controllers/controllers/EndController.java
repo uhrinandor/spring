@@ -41,6 +41,10 @@ public class EndController extends BaseController{
         }
     }
 
+    public List<IRField> listFields(){
+        return context.getFields().stream().map(f -> (IRField)f).toList();
+    }
+
     public IRField getField(int serial){
         if(serial < 0 || serial >= context.getFields().size()){
             error("Invalid field serial: "+serial);

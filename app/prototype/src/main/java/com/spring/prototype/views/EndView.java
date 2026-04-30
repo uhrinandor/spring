@@ -11,6 +11,7 @@ import com.spring.prototype.menuitems.end.GetCar;
 import com.spring.prototype.menuitems.end.GetField;
 import com.spring.prototype.menuitems.end.GetSnowplow;
 import com.spring.prototype.menuitems.end.GetSnowplowPlayer;
+import com.spring.prototype.menuitems.end.ListField;
 import com.spring.prototype.menuitems.end.NewGame;
 import com.spring.prototype.menuitems.end.Winners;
 import com.spring.prototype.utils.Navigator;
@@ -28,7 +29,8 @@ public class EndView extends BaseView implements EndListener{
         new GetField(controller),
         new GetSnowplowPlayer(controller),
         new GetSnowplow(controller),
-        new GetBus(controller)
+        new GetBus(controller),
+        new ListField(controller)
         ), controller);
         controller.addEndListener(this);
     }
