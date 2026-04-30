@@ -8,7 +8,7 @@ import com.spring.models.utils.Tracer;
 import com.spring.prototype.menuitems.MenuItem;
 
 /**
- * Parancs: START <deterministicMode>
+ * Parancs: SET-SNOWING <isSnowing>
  * Ezzel tudjuk elindítani a játékot, determinisztikus módban vagy véletlenszerűen.
  */
 public class SetSnowing extends MenuItem{

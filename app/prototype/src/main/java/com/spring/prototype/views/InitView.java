@@ -19,6 +19,7 @@ import com.spring.prototype.menuitems.init.Rounds;
 import com.spring.prototype.menuitems.init.SetFrontCrossRoad;
 import com.spring.prototype.menuitems.init.SetFrontField;
 import com.spring.prototype.menuitems.init.SetSide;
+import com.spring.prototype.menuitems.init.SetSnowing;
 import com.spring.prototype.menuitems.init.Start;
 import com.spring.prototype.utils.Navigator;
 
@@ -44,8 +45,8 @@ public class InitView extends BaseView implements GameStartedListener{
 			new SetFrontCrossRoad(controller),
 			new SetFrontField(controller),
 			new PlaceBus(controller),
-			new PlaceSp(controller)
-			
+			new PlaceSp(controller),
+			new SetSnowing(controller)
         ), controller);
         this.controller = controller;
         controller.addListener(this);
