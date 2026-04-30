@@ -80,24 +80,12 @@ public class InitController extends BaseController {
 
     /**
      * Elindítja a játékot,
-     * Legenerálja az autókat
      * amit átad a CycleControllernek, hogy átvegye a játék irányítását.
      */
     public void start(boolean deterministicMode){
         if(deterministicMode){
             tracer.info("Starting game in deterministic mode");
             Tracer.changeDeterministicMode(deterministicMode);
-        }
-
-        if(!ctx.getOffices().isEmpty()){
-            for(Home h : ctx.getHomes()){
-                if(h.getField().getVehicle() == null){
-                    int officeSerial = new java.util.Random().nextInt(0, ctx.getOffices().size());
-                    h.generateCar(ctx.getOffices().get(officeSerial));
-                }
-            }
-        }else if(!ctx.getHomes().isEmpty()) {
-            tracer.info("No offices added, skipping car generation");
         }
 
         for(GameStartedListener listener : initListeners){
