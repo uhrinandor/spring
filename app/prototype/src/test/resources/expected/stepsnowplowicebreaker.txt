@@ -1,0 +1,279 @@
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Rounds set to 9
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Field@2 added with Layer@0
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Field@5 added with Ice@3
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Field@8 added with Snow@6
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Field@12 added with Stone@9
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Field@15 added with Layer@13
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Field@18 added with Snow@16
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Field@21 added with Ice@19
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Field@25 added with Stone@22
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Field@29 added with Stone@26
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Field@33 added with Stone@30
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] SnowplowPlayer@34 added
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Starting game in deterministic mode
+[INFO] -- SNOWPLOW PLAYER --
+[?] ENTER: 
+[INFO] Added 2 money to player SnowplowPlayer@34
+[INFO] -- SNOWPLOW PLAYER --
+[?] ENTER: 
+[INFO] Selected snowplow: Snowplow@39
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[INFO] [0] Dragon@42 - 4 pt
+[INFO] [1] Broom@43 - 2 pt
+[INFO] [2] Brush@44 - 2 pt
+[INFO] [3] IceBreaker@45 - 2 pt
+[INFO] [4] StoneSplasher@46 - 4 pt
+[INFO] [5] SaltSpreader@47 - 2 pt
+[INFO] [6] Salt@48 - 1 pt
+[INFO] [7] Stone@49 - 3 pt
+[INFO] [8] Biokerosene@50 - 2 pt
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[INFO] -- SNOWPLOW PLAYER --
+[?] ENTER: 
+[INFO] -- SNOWPLOW PLAYER --
+[?] ENTER: 
+[INFO] Selected snowplow: Snowplow@39
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[INFO] -- SNOWPLOW PLAYER --
+[?] ENTER: 
+[INFO] -- SNOWPLOW PLAYER --
+[?] ENTER: 
+[INFO] Selected snowplow: Snowplow@39
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[INFO] -- SNOWPLOW PLAYER --
+[?] ENTER: 
+[INFO] -- SNOWPLOW PLAYER --
+[?] ENTER: 
+[INFO] Selected snowplow: Snowplow@39
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[INFO] -- SNOWPLOW PLAYER --
+[?] ENTER: 
+[INFO] -- SNOWPLOW PLAYER --
+[?] ENTER: 
+[INFO] Selected snowplow: Snowplow@39
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[INFO] -- SNOWPLOW PLAYER --
+[?] ENTER: 
+[INFO] -- SNOWPLOW PLAYER --
+[?] ENTER: 
+[INFO] Selected snowplow: Snowplow@39
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[INFO] -- SNOWPLOW PLAYER --
+[?] ENTER: 
+[INFO] -- SNOWPLOW PLAYER --
+[?] ENTER: 
+[INFO] Selected snowplow: Snowplow@39
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[INFO] -- SNOWPLOW PLAYER --
+[?] ENTER: 
+[INFO] -- SNOWPLOW PLAYER --
+[?] ENTER: 
+[INFO] Selected snowplow: Snowplow@39
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[INFO] -- SNOWPLOW PLAYER --
+[?] ENTER: 
+[INFO] -- SNOWPLOW PLAYER --
+[?] ENTER: 
+[INFO] Selected snowplow: Snowplow@39
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[INFO] -- SNOWPLOW PLAYER --
+[?] ENTER: 
+[INFO] The game has ended!
+[INFO] -- GAME END --
+[?] ENTER: 
+[+] SnowplowPlayer@34
+    - snowPlows: Snowplow@39
+    - active: null
+    - money: 5
+[INFO] -- GAME END --
+[?] ENTER: 
+[+] Snowplow@39
+    - activeHead: IceBreaker@61
+    - inventory: Inventory@37
+    -   SALT: 0
+    -   ICEBREAKER: 0
+    -   BIOKEROSENE: 0
+    -   BRUSH: 1
+    -   BROOM: 0
+    -   SALTSPREADER: 0
+    -   DRAGON: 0
+    -   STONE: 0
+    -   STONESPLASHER: 0
+[INFO] -- GAME END --
+[?] ENTER: 
+[+] Field@2
+    - vehicle: null
+    - front: Field@5
+    - left: null
+    - right: null
+    - random: Random@1
+    - layer: Layer@0
+[INFO] -- GAME END --
+[?] ENTER: 
+[+] Field@5
+    - vehicle: null
+    - front: Field@8
+    - left: null
+    - right: null
+    - random: Random@4
+    - layer: Ice@3
+    -   broken: true
+[INFO] -- GAME END --
+[?] ENTER: 
+[+] Field@8
+    - vehicle: null
+    - front: Field@12
+    - left: null
+    - right: null
+    - random: Random@7
+    - layer: Ice@66
+    -   broken: true
+[INFO] -- GAME END --
+[?] ENTER: 
+[+] Field@12
+    - vehicle: null
+    - front: Field@15
+    - left: null
+    - right: null
+    - random: Random@11
+    - layer: Stone@9
+    -   previous: Ice@10
+[INFO] -- GAME END --
+[?] ENTER: 
+[+] Field@15
+    - vehicle: null
+    - front: Field@18
+    - left: null
+    - right: null
+    - random: Random@14
+    - layer: Layer@13
+[INFO] -- GAME END --
+[?] ENTER: 
+[+] Field@18
+    - vehicle: null
+    - front: Field@21
+    - left: null
+    - right: null
+    - random: Random@17
+    - layer: Snow@16
+    -   level: 1
+[INFO] -- GAME END --
+[?] ENTER: 
+[+] Field@21
+    - vehicle: null
+    - front: Field@25
+    - left: null
+    - right: null
+    - random: Random@20
+    - layer: Ice@19
+    -   broken: true
+[INFO] -- GAME END --
+[?] ENTER: 
+[+] Field@25
+    - vehicle: null
+    - front: Field@29
+    - left: null
+    - right: null
+    - random: Random@24
+    - layer: Stone@22
+    -   previous: Snow@23
+[INFO] -- GAME END --
+[?] ENTER: 
+[+] Field@29
+    - vehicle: null
+    - front: Field@33
+    - left: null
+    - right: null
+    - random: Random@28
+    - layer: Stone@26
+    -   previous: Snow@27
+[INFO] -- GAME END --
+[?] ENTER: 
+[+] Field@33
+    - vehicle: Snowplow@39
+    - front: null
+    - left: null
+    - right: null
+    - random: Random@32
+    - layer: Stone@30
+    -   previous: Layer@31
+[INFO] -- GAME END --
+[?] ENTER: 

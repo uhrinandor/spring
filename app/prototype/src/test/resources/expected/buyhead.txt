@@ -1,0 +1,70 @@
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Rounds set to 1
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Field@2 added with Layer@0
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] SnowplowPlayer@3 added
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Starting game in deterministic mode
+[INFO] -- SNOWPLOW PLAYER --
+[?] ENTER: 
+[INFO] Selected snowplow: Snowplow@8
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[+] Snowplow@8
+    - activeHead: Brush@7
+    - inventory: Inventory@6
+    -   SALT: 0
+    -   ICEBREAKER: 0
+    -   BIOKEROSENE: 0
+    -   BRUSH: 0
+    -   BROOM: 0
+    -   SALTSPREADER: 0
+    -   DRAGON: 0
+    -   STONE: 0
+    -   STONESPLASHER: 0
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[INFO] [0] Dragon@11 - 4 pt
+[INFO] [1] Broom@12 - 2 pt
+[INFO] [2] Brush@13 - 2 pt
+[INFO] [3] IceBreaker@14 - 2 pt
+[INFO] [4] StoneSplasher@15 - 4 pt
+[INFO] [5] SaltSpreader@16 - 2 pt
+[INFO] [6] Salt@17 - 1 pt
+[INFO] [7] Stone@18 - 3 pt
+[INFO] [8] Biokerosene@19 - 2 pt
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[INFO] -- SNOWPLOW PLAYER --
+[?] ENTER: 
+[INFO] Added 4 money to player SnowplowPlayer@3
+[INFO] -- SNOWPLOW PLAYER --
+[?] ENTER: 
+[INFO] Selected snowplow: Snowplow@8
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[+] Snowplow@8
+    - activeHead: Brush@7
+    - inventory: Inventory@6
+    -   SALT: 0
+    -   ICEBREAKER: 0
+    -   BIOKEROSENE: 0
+    -   BRUSH: 0
+    -   BROOM: 0
+    -   SALTSPREADER: 0
+    -   DRAGON: 1
+    -   STONE: 0
+    -   STONESPLASHER: 0
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[INFO] -- SNOWPLOW PLAYER --
+[?] ENTER: 
