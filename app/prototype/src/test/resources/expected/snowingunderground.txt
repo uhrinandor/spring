@@ -1,0 +1,128 @@
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Rounds set to 1
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Field@2 added with Snow@0
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Field@5 added with Snow@3
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Field@8 added with Ice@6
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Field@11 added with Ice@9
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Field@14 added with Layer@12
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Field@18 added with Stone@15
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Field@22 added with Stone@19
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Field@26 added with Stone@23
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Field@30 added with Stone@27
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Snowing set to: true
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Starting game in deterministic mode
+[INFO] The game has ended!
+[INFO] -- GAME END --
+[?] ENTER: 
+[+] Field@2
+    - vehicle: null
+    - front: null
+    - left: null
+    - right: null
+    - random: Random@1
+    - layer: Snow@0
+    -   level: 1
+[INFO] -- GAME END --
+[?] ENTER: 
+[+] Field@5
+    - vehicle: null
+    - front: null
+    - left: null
+    - right: null
+    - random: Random@4
+    - layer: Snow@3
+    -   level: 2
+[INFO] -- GAME END --
+[?] ENTER: 
+[+] Field@8
+    - vehicle: null
+    - front: null
+    - left: null
+    - right: null
+    - random: Random@7
+    - layer: Ice@6
+    -   broken: false
+[INFO] -- GAME END --
+[?] ENTER: 
+[+] Field@11
+    - vehicle: null
+    - front: null
+    - left: null
+    - right: null
+    - random: Random@10
+    - layer: Ice@9
+    -   broken: true
+[INFO] -- GAME END --
+[?] ENTER: 
+[+] Field@14
+    - vehicle: null
+    - front: null
+    - left: null
+    - right: null
+    - random: Random@13
+    - layer: Layer@12
+[INFO] -- GAME END --
+[?] ENTER: 
+[+] Field@18
+    - vehicle: null
+    - front: null
+    - left: null
+    - right: null
+    - random: Random@17
+    - layer: Stone@15
+    -   previous: Ice@16
+[INFO] -- GAME END --
+[?] ENTER: 
+[+] Field@22
+    - vehicle: null
+    - front: null
+    - left: null
+    - right: null
+    - random: Random@21
+    - layer: Stone@19
+    -   previous: Snow@20
+[INFO] -- GAME END --
+[?] ENTER: 
+[+] Field@26
+    - vehicle: null
+    - front: null
+    - left: null
+    - right: null
+    - random: Random@25
+    - layer: Stone@23
+    -   previous: Snow@24
+[INFO] -- GAME END --
+[?] ENTER: 
+[+] Field@30
+    - vehicle: null
+    - front: null
+    - left: null
+    - right: null
+    - random: Random@29
+    - layer: Stone@27
+    -   previous: Layer@28
+[INFO] -- GAME END --
+[?] ENTER: 

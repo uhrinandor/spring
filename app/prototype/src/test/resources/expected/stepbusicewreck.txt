@@ -26,13 +26,24 @@
 [?] ENTER: 
 [INFO] -- INIT --
 [?] ENTER: 
+[INFO] Rounds set to 1
+[INFO] -- INIT --
+[?] ENTER: 
 [INFO] Starting game in deterministic mode
 [INFO] -- BUS PLAYER --
 [?] ENTER: 
-[?] Megtörténjen? (true/false): 
+[INFO] [0]
+[+] Field@5
+    - vehicle: null
+    - front: Field@8
+    - left: null
+    - right: null
+    - random: Random@4
+    - layer: Ice@3
+    -   broken: false
 [INFO] -- BUS PLAYER --
 [?] ENTER: 
-[ERR] Invalid command!
+[?] Megtörténjen? (true/false): 
 [INFO] -- BUS PLAYER --
 [?] ENTER: 
 [INFO] The game has ended!
@@ -66,15 +77,23 @@
     - layer: Layer@6
 [INFO] -- GAME END --
 [?] ENTER: 
+[+] BusPlayer@10
+    - bus: Bus@11, point: 0
+[INFO] -- GAME END --
+[?] ENTER: 
+[+] BusPlayer@15
+    - bus: Bus@16, point: 0
+[INFO] -- GAME END --
+[?] ENTER: 
 [+] Bus@11
     - driver: PlayerDriver@9
     - station: Station@12
-    - wrecked: false
+    - immobileTurnsLeft: 3
 [INFO] -- GAME END --
 [?] ENTER: 
 [+] Bus@16
     - driver: PlayerDriver@14
     - station: Station@13
-    - wrecked: false
+    - immobileTurnsLeft: 3
 [INFO] -- GAME END --
-[?] ENTER: 
+[?] ENTER:

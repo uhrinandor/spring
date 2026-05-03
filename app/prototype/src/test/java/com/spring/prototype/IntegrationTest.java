@@ -25,29 +25,23 @@ class IntegrationTest {
     @ParameterizedTest(name = "CLI test with: {0}")
     @MethodSource("inputFiles")
     void testAppWithInputFile(String fileName) throws Exception {
+        Tracer.changeDeterministicMode(false);
         Entity.reset();
-        // 📥 input betöltése
         String input = readResource(fileName);
 
-        // stream-ek előkészítése
         ByteArrayInputStream inStream =
                 new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8));
 
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
 
-        // 🔁 Tracer stream csere
         Tracer.changeStream(new PrintStream(outStream), inStream);
 
-        // 🚀 APP FUTTATÁS
         App.main(new String[]{});
 
-        // 📤 output kinyerése
         String output = outStream.toString(StandardCharsets.UTF_8);
 
-        // fájlba írás
         writeOutput(fileName, output);
 
-        // opcionális expected check
         Path expectedPath = getResourcePath("expected/" + fileName);
         if (Files.exists(expectedPath)) {
             String expected = Files.readString(expectedPath);
@@ -55,7 +49,6 @@ class IntegrationTest {
         }
     }
 
-    // 📂 paraméterek
     static Stream<String> inputFiles() throws IOException {
         Path dir = getResourcePath(INPUT_DIR);
 
@@ -64,7 +57,6 @@ class IntegrationTest {
                 .map(p -> p.getFileName().toString());
     }
 
-    // 📥 resource olvasás
     private static String readResource(String path) throws IOException {
         return Files.readString(getResourcePath(path), StandardCharsets.UTF_8);
     }
@@ -82,7 +74,6 @@ class IntegrationTest {
         }
     }
 
-    // 📤 output írás
     private static void writeOutput(String fileName, String content) throws IOException {
         Path dir = Paths.get(OUTPUT_DIR);
         Files.createDirectories(dir);
