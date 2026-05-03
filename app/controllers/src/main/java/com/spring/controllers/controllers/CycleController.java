@@ -14,6 +14,7 @@ import com.spring.models.field.IField;
 import com.spring.models.layer.ILayer;
 import com.spring.models.layer.Snow;
 import com.spring.models.player.BusPlayer;
+import com.spring.models.player.IPlayer;
 import com.spring.models.player.SnowplowPlayer;
 import com.spring.models.random.Random;
 import com.spring.models.vehicle.Car;
@@ -42,6 +43,11 @@ public class CycleController extends BaseController{
      * Ha megvolt az összes hókotrós, utána jönnek a buszosok, majd újra az egész
      */
     public void cycle(){
+        snowplowPhase = true;
+        spIter = context.getSnowplowPlayers().iterator();
+        IPlayer player = nextPlayer();
+        if(player == null) return;
+
         Random rand = new Random();
         PickCarVisitor pickCarVisitor = new PickCarVisitor();
         int carsOnField = 0;
@@ -90,25 +96,24 @@ public class CycleController extends BaseController{
         }
 
 
-        snowplowPhase = true;
-        spIter = context.getSnowplowPlayers().iterator();
-        nextPlayer();
+        
     }
 
     /**
      * Az új játékosra állítás és jelzés a view-nak, hogy új játékos következik
      */
-    public void nextPlayer(){
+    public IPlayer nextPlayer(){
         if(snowplowPhase) {
             if(spIter.hasNext()) {
                 SnowplowPlayer player = spIter.next();
                 for(CycleListener listener : cycleListeners){
                     listener.nextSnowPlowPlayer(player);
                 }
+                return player;
             } else {
                 snowplowPhase = false;
                 bpIter = context.getBusPlayers().iterator();
-                nextPlayer(); // átállunk buszosokra
+                return nextPlayer(); // átállunk buszosokra
             }
         } else {
             if (bpIter.hasNext()) {
@@ -116,8 +121,10 @@ public class CycleController extends BaseController{
                 for(CycleListener listener : cycleListeners){
                     listener.nextBusPlayer(player);
                 }
+                return player;
             } else {
                 endRound();         
+                return null;
             }
         }
     }
