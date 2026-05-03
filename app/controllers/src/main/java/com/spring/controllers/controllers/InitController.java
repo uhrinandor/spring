@@ -52,11 +52,10 @@ public class InitController extends BaseController {
      */
     public void addSnowplowPlayer(){
         SnowplowPlayer player = new SnowplowPlayer();
-
         Random rand = new Random();
         PlayerDriver driver = new PlayerDriver();
         Inventory inventory = new Inventory();
-        IHead head = rand.nextBool(0.5) ? new Brush() : new Broom();
+        IHead head = new Brush();
 
         Snowplow snowplow = new Snowplow(driver, inventory, head, player);
         player.addVehicle(snowplow);
