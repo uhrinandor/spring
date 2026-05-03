@@ -1,0 +1,258 @@
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Rounds set to 5
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Snowing set to: true
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Field@2 added with Snow@0
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Field@5 added with Layer@3
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Field@9 added with Stone@6
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Field@12 added with Snow@10
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Field@15 added with Snow@13
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Field@18 added with Layer@16
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] [0]
+[+] Field@2
+    - vehicle: null
+    - front: null
+    - left: Field@5
+    - right: null
+    - random: Random@1
+    - layer: Snow@0
+    -   level: 2
+[INFO] [1]
+[+] Field@5
+    - vehicle: null
+    - front: Field@9
+    - left: null
+    - right: Field@2
+    - random: Random@4
+    - layer: Layer@3
+[INFO] [2]
+[+] Field@9
+    - vehicle: null
+    - front: Field@12
+    - left: null
+    - right: null
+    - random: Random@8
+    - layer: Stone@6
+    -   previous: Ice@7
+[INFO] [3]
+[+] Field@12
+    - vehicle: null
+    - front: Field@15
+    - left: null
+    - right: null
+    - random: Random@11
+    - layer: Snow@10
+    -   level: 2
+[INFO] [4]
+[+] Field@15
+    - vehicle: null
+    - front: Field@18
+    - left: null
+    - right: null
+    - random: Random@14
+    - layer: Snow@13
+    -   level: 2
+[INFO] [5]
+[+] Field@18
+    - vehicle: null
+    - front: null
+    - left: null
+    - right: null
+    - random: Random@17
+    - layer: Layer@16
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Stations Station@19 and Station@20 added at fields Field@2 and Field@18
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] BusPlayer@22 added
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Starting game in deterministic mode
+[?] Megtörténjen? (true/false): 
+[?] Megtörténjen? (true/false): 
+[?] Megtörténjen? (true/false): 
+[?] Megtörténjen? (true/false): 
+[?] Megtörténjen? (true/false): 
+[?] Megtörténjen? (true/false): 
+[INFO] -- BUS PLAYER --
+[?] ENTER: 
+[INFO] [0]
+[+] Field@5
+    - vehicle: null
+    - front: Field@9
+    - left: null
+    - right: Field@2
+    - random: Random@4
+    - layer: Layer@3
+[INFO] -- BUS PLAYER --
+[?] ENTER: 
+[?] Megtörténjen? (true/false): 
+[?] Megtörténjen? (true/false): 
+[?] Megtörténjen? (true/false): 
+[?] Megtörténjen? (true/false): 
+[?] Megtörténjen? (true/false): 
+[?] Megtörténjen? (true/false): 
+[INFO] -- BUS PLAYER --
+[?] ENTER: 
+[INFO] [0]
+[+] Field@9
+    - vehicle: null
+    - front: Field@12
+    - left: null
+    - right: null
+    - random: Random@8
+    - layer: Stone@6
+    -   previous: Ice@7
+[INFO] [1]
+[+] Field@2
+    - vehicle: null
+    - front: null
+    - left: Field@5
+    - right: null
+    - random: Random@1
+    - layer: Snow@0
+    -   level: 2
+[INFO] -- BUS PLAYER --
+[?] ENTER: 
+[?] Megtörténjen? (true/false): 
+[?] Megtörténjen? (true/false): 
+[?] Megtörténjen? (true/false): 
+[?] Megtörténjen? (true/false): 
+[?] Megtörténjen? (true/false): 
+[?] Megtörténjen? (true/false): 
+[INFO] -- BUS PLAYER --
+[?] ENTER: 
+[INFO] [0]
+[+] Field@12
+    - vehicle: null
+    - front: Field@15
+    - left: null
+    - right: null
+    - random: Random@11
+    - layer: Snow@10
+    -   level: 2
+[INFO] -- BUS PLAYER --
+[?] ENTER: 
+[?] Megtörténjen? (true/false): 
+[?] Megtörténjen? (true/false): 
+[?] Megtörténjen? (true/false): 
+[?] Megtörténjen? (true/false): 
+[?] Megtörténjen? (true/false): 
+[?] Megtörténjen? (true/false): 
+[INFO] -- BUS PLAYER --
+[?] ENTER: 
+[INFO] [0]
+[+] Field@15
+    - vehicle: null
+    - front: Field@18
+    - left: null
+    - right: null
+    - random: Random@14
+    - layer: Snow@13
+    -   level: 2
+[INFO] -- BUS PLAYER --
+[?] ENTER: 
+[?] Megtörténjen? (true/false): 
+[?] Megtörténjen? (true/false): 
+[?] Megtörténjen? (true/false): 
+[?] Megtörténjen? (true/false): 
+[?] Megtörténjen? (true/false): 
+[?] Megtörténjen? (true/false): 
+[INFO] -- BUS PLAYER --
+[?] ENTER: 
+[INFO] [0]
+[+] Field@18
+    - vehicle: null
+    - front: null
+    - left: null
+    - right: null
+    - random: Random@17
+    - layer: Layer@16
+[INFO] -- BUS PLAYER --
+[?] ENTER: 
+[INFO] The game has ended!
+[INFO] -- GAME END --
+[?] ENTER: 
+[INFO] [0]
+[+] Field@2
+    - vehicle: null
+    - front: null
+    - left: Field@5
+    - right: null
+    - random: Random@1
+    - layer: Snow@0
+    -   level: 2
+[INFO] [1]
+[+] Field@5
+    - vehicle: null
+    - front: Field@9
+    - left: null
+    - right: Field@2
+    - random: Random@4
+    - layer: Layer@3
+[INFO] [2]
+[+] Field@9
+    - vehicle: null
+    - front: Field@12
+    - left: null
+    - right: null
+    - random: Random@8
+    - layer: Stone@6
+    -   previous: Ice@7
+[INFO] [3]
+[+] Field@12
+    - vehicle: null
+    - front: Field@15
+    - left: null
+    - right: null
+    - random: Random@11
+    - layer: Snow@10
+    -   level: 1
+[INFO] [4]
+[+] Field@15
+    - vehicle: Bus@23
+    - front: Field@18
+    - left: null
+    - right: null
+    - random: Random@14
+    - layer: Snow@13
+    -   level: 2
+[INFO] [5]
+[+] Field@18
+    - vehicle: null
+    - front: null
+    - left: null
+    - right: null
+    - random: Random@17
+    - layer: Layer@16
+[INFO] -- GAME END --
+[?] ENTER: 
