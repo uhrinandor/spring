@@ -2,7 +2,7 @@ package com.spring.models.vehicle;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map.Entry;
+import java.util.Map;
 
 import com.spring.models.field.IField;
 import com.spring.models.head.IHead;
@@ -71,8 +71,9 @@ public class Snowplow extends Vehicle implements ISnowPlow, ShopItem{
         List<String> info = new ArrayList<>();
         info.add("activeHead: " + activeHead);
         info.add("inventory: " + inventory);
-        for(Entry<Item, Integer> entry : inventory.getMap().entrySet()) {
-            info.add("  "+entry.getKey() + ": " + entry.getValue());
+        Map<Item, Integer> inv = inventory.getMap();
+        for(Item item: List.of(Item.SALT, Item.ICEBREAKER, Item.BIOKEROSENE, Item.BRUSH, Item.BROOM, Item.SALTSPREADER, Item.DRAGON, Item.STONE, Item.STONESPLASHER)) {
+            info.add("  "+item + ": " + inv.getOrDefault(item, 0));
         }
         return info;
     }
