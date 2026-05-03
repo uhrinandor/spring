@@ -157,10 +157,14 @@ public class Field extends Entity implements IField {
     @Override
     public void tryExit(IField f) {
         Tracer.getInstance().enterFunction(this, "tryExit",f);
-        if(!layer.canExit(vehicle)&&(f != this.right && f != this.left)){
+        if(!layer.canExit(vehicle)&& (f != this.right && f != this.left) ){
             Tracer.getInstance().exitFunction();
             return;
         } 
+
+        if((f == this.right && !f.getLayer().canExit(vehicle)) || (f == this.left && !f.getLayer().canExit(vehicle))){
+            return;
+        }
 
         if(!f.tryEnter(vehicle)){
             Tracer.getInstance().exitFunction();
