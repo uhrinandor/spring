@@ -30,6 +30,9 @@
 [INFO] Field@30 added with Stone@27
 [INFO] -- INIT --
 [?] ENTER: 
+[INFO] BusPlayer@32 added
+[INFO] -- INIT --
+[?] ENTER: 
 [INFO] Snowing set to: true
 [INFO] -- INIT --
 [?] ENTER: 
@@ -43,6 +46,8 @@
 [?] Megtörténjen? (true/false): 
 [?] Megtörténjen? (true/false): 
 [?] Megtörténjen? (true/false): 
+[INFO] -- BUS PLAYER --
+[?] ENTER: 
 [INFO] The game has ended!
 [INFO] -- GAME END --
 [?] ENTER: 
@@ -92,7 +97,7 @@
     - left: null
     - right: null
     - random: Random@13
-    - layer: Snow@41
+    - layer: Snow@44
     -   level: 1
 [INFO] -- GAME END --
 [?] ENTER: 
@@ -102,7 +107,7 @@
     - left: null
     - right: null
     - random: Random@17
-    - layer: Snow@42
+    - layer: Snow@45
     -   level: 1
 [INFO] -- GAME END --
 [?] ENTER: 
@@ -112,7 +117,7 @@
     - left: null
     - right: null
     - random: Random@21
-    - layer: Snow@44
+    - layer: Snow@47
     -   level: 1
 [INFO] -- GAME END --
 [?] ENTER: 
@@ -122,7 +127,7 @@
     - left: null
     - right: null
     - random: Random@25
-    - layer: Snow@46
+    - layer: Snow@49
     -   level: 1
 [INFO] -- GAME END --
 [?] ENTER: 
@@ -132,7 +137,7 @@
     - left: null
     - right: null
     - random: Random@29
-    - layer: Snow@48
+    - layer: Snow@51
     -   level: 1
 [INFO] -- GAME END --
 [?] ENTER: 
