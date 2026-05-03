@@ -130,9 +130,9 @@ public class Field extends Entity implements IField {
 
         layer = layer.enter();
         vehicle = v;
-        
+        IDriver driver = v.getDriver();
+        driver.setCurrent(this);
         if(layer.slip(v, random)){
-            IDriver driver = v.getDriver();
             List<IField> available = front.getAvailable();
             
             driver.setNext(available.get(0));

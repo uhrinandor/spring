@@ -2,6 +2,7 @@ package com.spring.models.buildings;
 
 import com.spring.models.field.IField;
 import com.spring.models.vehicle.Car;
+import com.spring.models.vehicle.CarDriver;
 
 /**
  * A játék kezdetekor minden autó egy Home objektum mellett fog megjelenni, a Home hozza 
@@ -15,10 +16,15 @@ public class Home extends Building{
         super(field);
     }
 
-    //TODO: Ezt most nem hasznaljuk és változtatasra szorul
     public void generateCar(Office destination)
     {
-        Car c=new Car(null, null);
+        
+        CarDriver driver = new CarDriver();
+        
+        driver.setCurrent(field);
+
+        driver.setDestination(destination);
+        Car c = new Car(driver, destination);
         c.setDestination(destination);
         getField().setVehicle(c);
     }
