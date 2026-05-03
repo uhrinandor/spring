@@ -55,6 +55,7 @@ public abstract class Vehicle extends Entity {
         } 
 
         IField next = forced ? driver.getNext() : driver.nextMove();
+        if(next == null) return;
         IField current = driver.getCurrent();
         current.tryExit(next);
         Tracer.getInstance().exitFunction();

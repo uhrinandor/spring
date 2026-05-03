@@ -38,8 +38,7 @@ public class CarDriver extends Entity implements IDriver {
     /**
      * Ez a metódus generálja a legrövidebb utat és meghatározza az autó következő lépését.
      * @return vissza is adja ezt a mezőt
-     */
-    /**
+     *
      * BFS-sel megkeresi a legrövidebb utat a current mezőtől a destination
      * melletti mezőig, és beállítja a next-et az első lépésre.
      * Ha nincs elérhető út (pl. minden sáv járhatatlan), next változatlan marad.
@@ -87,7 +86,6 @@ public class CarDriver extends Entity implements IDriver {
             step = cameFrom.get(step);
         }
 
-        current = next;
         next = step;
 
         Tracer.getInstance().exitFunction(next);
@@ -128,7 +126,6 @@ public class CarDriver extends Entity implements IDriver {
     @Override
     public void setNext(IField f) {
         Tracer.getInstance().enterFunction(this, "setNext",f);
-        current = next;
         next = f;
         Tracer.getInstance().exitFunction();
     }

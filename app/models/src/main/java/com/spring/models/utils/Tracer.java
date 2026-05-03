@@ -108,7 +108,7 @@ public class Tracer {
      */
     public void input(String message){
         printIndent();
-        stream.print("[?] "+message+": ");
+        stream.println("[?] "+message+": ");
     }
 
     /**
@@ -143,7 +143,9 @@ public class Tracer {
     
     public boolean askDeterministic(String message){
         input(message+" (true/false)");
-        return scanner.nextBoolean();
+        boolean val =  scanner.nextBoolean();
+        scanner.nextLine();
+        return val;
     }
 
      /**

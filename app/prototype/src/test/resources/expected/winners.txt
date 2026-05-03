@@ -1,0 +1,170 @@
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Rounds set to 3
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Field@2 added with Layer@0
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Field@5 added with Layer@3
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Field@8 added with Layer@6
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Field@11 added with Layer@9
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Field@14 added with Layer@12
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Field@17 added with Snow@15
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Field@20 added with Ice@18
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Field@23 added with Snow@21
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Field@26 added with Layer@24
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] SnowplowPlayer@27 added
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] SnowplowPlayer@33 added
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] BusPlayer@40 added
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] BusPlayer@43 added
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Stations Station@45 and Station@46 added at fields Field@2 and Field@5
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Stations Station@47 and Station@48 added at fields Field@8 and Field@11
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] -- INIT --
+[?] ENTER: 
+[INFO] Starting game in deterministic mode
+[INFO] -- SNOWPLOW PLAYER --
+[?] ENTER: 
+[INFO] Added 2 money to player SnowplowPlayer@27
+[INFO] -- SNOWPLOW PLAYER --
+[?] ENTER: 
+[INFO] Selected snowplow: Snowplow@32
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[INFO] -- SNOWPLOW PLAYER --
+[?] ENTER: 
+[INFO] -- SNOWPLOW PLAYER --
+[?] ENTER: 
+[INFO] -- BUS PLAYER --
+[?] ENTER: 
+[INFO] -- BUS PLAYER --
+[?] ENTER: 
+[INFO] -- SNOWPLOW PLAYER --
+[?] ENTER: 
+[INFO] Added 6 money to player SnowplowPlayer@27
+[INFO] -- SNOWPLOW PLAYER --
+[?] ENTER: 
+[INFO] Selected snowplow: Snowplow@32
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[INFO] -- SNOWPLOW PLAYER --
+[?] ENTER: 
+[INFO] -- SNOWPLOW PLAYER --
+[?] ENTER: 
+[INFO] -- BUS PLAYER --
+[?] ENTER: 
+[INFO] -- BUS PLAYER --
+[?] ENTER: 
+[INFO] -- SNOWPLOW PLAYER --
+[?] ENTER: 
+[INFO] Added 2 money to player SnowplowPlayer@27
+[INFO] -- SNOWPLOW PLAYER --
+[?] ENTER: 
+[INFO] Selected snowplow: Snowplow@32
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[INFO] -- SNOWPLOW --
+[?] ENTER: 
+[INFO] -- SNOWPLOW PLAYER --
+[?] ENTER: 
+[INFO] -- SNOWPLOW PLAYER --
+[?] ENTER: 
+[INFO] -- BUS PLAYER --
+[?] ENTER: 
+[INFO] -- BUS PLAYER --
+[?] ENTER: 
+[INFO] The game has ended!
+[INFO] -- GAME END --
+[?] ENTER: 
+[+] SnowplowPlayer@27
+    - snowPlows: Snowplow@32
+    - active: null
+    - money: 3
+[INFO] -- GAME END --
+[?] ENTER: 
+[+] SnowplowPlayer@33
+    - snowPlows: Snowplow@38
+    - active: null
+    - money: 0
+[INFO] -- GAME END --
+[?] ENTER: 
+[+] BusPlayer@40
+    - bus: Bus@41, point: 1
+[INFO] -- GAME END --
+[?] ENTER: 
+[+] BusPlayer@43
+    - bus: Bus@44, point: 0
+[INFO] -- GAME END --
+[?] ENTER: 
+[INFO] SnowplowPlayer@27
+[INFO] BusPlayer@40
+[INFO] -- GAME END --
+[?] ENTER: 

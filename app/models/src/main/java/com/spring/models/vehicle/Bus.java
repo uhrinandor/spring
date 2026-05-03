@@ -38,7 +38,8 @@ public class Bus extends Vehicle {
 
     @Override
     public List<String> init() {
-        return List.of("driver: "+driver, "station: " + station);
+        
+        return List.of("driver: "+driver, "station: " + station, "immobileTurnsLeft: " + immobileTurnsLeft);
     }
 
     /**

@@ -130,9 +130,9 @@ public class Field extends Entity implements IField {
 
         layer = layer.enter();
         vehicle = v;
-        
+        IDriver driver = v.getDriver();
+        driver.setCurrent(this);
         if(layer.slip(v, random)){
-            IDriver driver = v.getDriver();
             List<IField> available = front.getAvailable();
             
             driver.setNext(available.get(0));
@@ -157,7 +157,7 @@ public class Field extends Entity implements IField {
     @Override
     public void tryExit(IField f) {
         Tracer.getInstance().enterFunction(this, "tryExit",f);
-        if(!layer.canExit(vehicle)&&(f != this.right || f != this.left)){
+        if(!layer.canExit(vehicle)&&(f != this.right && f != this.left)){
             Tracer.getInstance().exitFunction();
             return;
         } 
