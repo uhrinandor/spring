@@ -213,15 +213,15 @@
 [+] Snowplow@66
     - activeHead: Brush@88
     - inventory: Inventory@64
-    -   STONESPLASHER: 0
-    -   BRUSH: 1
-    -   STONE: 0
     -   SALT: 0
-    -   BIOKEROSENE: 0
-    -   DRAGON: 0
-    -   SALTSPREADER: 0
     -   ICEBREAKER: 0
+    -   BIOKEROSENE: 0
+    -   BRUSH: 1
     -   BROOM: 0
+    -   SALTSPREADER: 0
+    -   DRAGON: 0
+    -   STONE: 0
+    -   STONESPLASHER: 0
 [INFO] -- GAME END --
 [?] ENTER: 
 [+] Field@2
@@ -402,4 +402,4 @@
     - layer: Stone@30
     -   previous: Layer@31
 [INFO] -- GAME END --
-[?] ENTER:
+[?] ENTER: 

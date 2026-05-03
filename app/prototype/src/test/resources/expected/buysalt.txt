@@ -18,17 +18,17 @@
 [INFO] -- SNOWPLOW --
 [?] ENTER: 
 [+] Snowplow@8
-    - activeHead: Broom@7
+    - activeHead: Brush@7
     - inventory: Inventory@6
+    -   SALT: 0
     -   ICEBREAKER: 0
-    -   SALTSPREADER: 0
-    -   STONESPLASHER: 0
-    -   BROOM: 0
-    -   DRAGON: 0
     -   BIOKEROSENE: 0
     -   BRUSH: 0
+    -   BROOM: 0
+    -   SALTSPREADER: 0
+    -   DRAGON: 0
     -   STONE: 0
-    -   SALT: 0
+    -   STONESPLASHER: 0
 [INFO] -- SNOWPLOW --
 [?] ENTER: 
 [INFO] [0] Dragon@11 - 4 pt
@@ -57,16 +57,16 @@
 [INFO] -- SNOWPLOW --
 [?] ENTER: 
 [+] Snowplow@8
-    - activeHead: Broom@7
+    - activeHead: Brush@7
     - inventory: Inventory@6
+    -   SALT: 3
     -   ICEBREAKER: 0
-    -   SALTSPREADER: 0
-    -   STONESPLASHER: 0
-    -   BROOM: 0
-    -   DRAGON: 0
     -   BIOKEROSENE: 0
     -   BRUSH: 0
+    -   BROOM: 0
+    -   SALTSPREADER: 0
+    -   DRAGON: 0
     -   STONE: 0
-    -   SALT: 3
+    -   STONESPLASHER: 0
 [INFO] -- SNOWPLOW --
-[?] ENTER:
+[?] ENTER: 
