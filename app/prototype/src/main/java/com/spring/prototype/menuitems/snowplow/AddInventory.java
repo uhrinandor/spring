@@ -4,12 +4,14 @@ import com.spring.controllers.controllers.InitController;
 import com.spring.prototype.menuitems.MenuItem;
 
 public class AddInventory extends MenuItem{
-    protected AddInventory(InitController controller) {
-        super("ADD-INVENTORY <item>");
-    }
 
     InitController controller;
     String item;
+
+    public AddInventory(InitController controller) {
+        super("ADD-INVENTORY <item>");
+        this.controller = controller;
+    }
 
     @Override
     public void execute() {
