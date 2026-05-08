@@ -20,7 +20,6 @@ public class InitView extends JPanel {
 
         JButton addFieldBtn = new JButton("Add field");
         addFieldBtn.addActionListener(e -> map.waitForPoint(this::handleAddField));
-
         add(addFieldBtn);
     }
 
@@ -30,5 +29,4 @@ public class InitView extends JPanel {
         IRField field = controller.addField(layer, isUnderground);
         map.addField(field, point);
     }
-    
 }

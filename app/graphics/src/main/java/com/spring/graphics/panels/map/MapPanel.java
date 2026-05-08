@@ -9,7 +9,9 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 import com.spring.graphics.enums.SelectorMode;
+import com.spring.models.buildings.Building;
 import com.spring.models.field.IRField;
+import com.spring.models.field.IRoad;
 
 public class MapPanel extends JPanel implements IMap {
     SelectorMode selectorMode = SelectorMode.POINT;
@@ -49,5 +51,23 @@ public class MapPanel extends JPanel implements IMap {
         add(fieldView);
         revalidate();
         repaint();
+    }
+
+    @Override
+    public void addCrossRoad(IRoad field, Point location) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'addCrossRoad'");
+    }
+
+    @Override
+    public void addBuilding(Building building) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'addBuilding'");
+    }
+
+    @Override
+    public void renderArrows() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'renderArrows'");
     }
 }
