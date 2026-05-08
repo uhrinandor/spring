@@ -3,20 +3,6 @@
 ** MenuBar 
 'Ez itt nem külön objektum, közös interfész?
 *** InitView
-**** AddFieldButton
-**** AddCrossRoadButton
-**** AddSnowplowPlayerButton
-**** AddBusPlayerButton
-**** AddStationsButton
-**** AddHomeButton
-**** AddOfficeButton
-**** PlaceSnowplowButton
-**** PlaceBusButton
-**** SetFrontButton
-**** SetRoundsButton
-**** SetSideButton
-**** SetSnowing
-**** StartButton
 *** SnowplowPlayerView
 *** SnowplowView
 *** BusPlayerView
