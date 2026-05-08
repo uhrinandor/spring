@@ -104,10 +104,6 @@ public class InitController extends BaseController {
         IField field = new Field(layer, null, null, null, null, new Random(), null, underGround);
         ctx.getFields().add(field);
 
-        for(InitListener listener : initListeners){
-            listener.onFieldAdded(field);
-        }
-
         return field;
     }
 
@@ -195,10 +191,6 @@ public class InitController extends BaseController {
         Home home = new Home(ctx.getFields().get(serial));
         ctx.getHomes().add(home);
 
-        for(InitListener listener : initListeners){
-            listener.onBuildingAdded(home);
-        }
-
         return home;
     }
 
@@ -215,10 +207,6 @@ public class InitController extends BaseController {
 
         Office office = new Office(ctx.getFields().get(serial));
         ctx.getOffices().add(office);
-
-        for(InitListener listener : initListeners){
-            listener.onBuildingAdded(office);
-        }
         return office;
     }
 
@@ -241,10 +229,6 @@ public class InitController extends BaseController {
         ctx.getStations().add(station1);
         ctx.getStations().add(station2);
 
-        for(InitListener listener : initListeners){
-            listener.onBuildingAdded(station1);
-            listener.onBuildingAdded(station2);
-        }
         return List.of(station1, station2);
 
     }
