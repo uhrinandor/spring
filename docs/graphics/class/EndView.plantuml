@@ -1,0 +1,12 @@
+class EndView{
+    + EndController endController
+
+    + handleWinners(): void
+    + handleNewGame(): void
+    + handleGetField(int f1): void
+    + handleGetSnowplow(int f1): void
+    + handleGetSnowplowPlayer(): void
+    + handleGetBus(int f1): void
+    + handleGetCar(int f1): void
+    + handleGetBusPlayer(): void
+}
