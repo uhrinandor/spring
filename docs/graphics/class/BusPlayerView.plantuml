@@ -1,0 +1,6 @@
+class BusPlayerView{
+    + BusPlayerController busPlayerController
+
+    + handleSetNext(int f1): void
+    + handleNextPlayer(): void
+}
