@@ -1,0 +1,33 @@
+@startwbs
+* MainWindow
+** MenuBar 
+'Ez itt nem külön objektum, közös interfész?
+*** InitView
+**** AddFieldButton
+**** AddCrossRoadButton
+**** AddSnowplowPlayerButton
+**** AddBusPlayerButton
+**** AddStationsButton
+**** AddHomeButton
+**** AddOfficeButton
+**** PlaceSnowplowButton
+**** PlaceBusButton
+**** SetFrontFieldButton
+**** SetFrontCrossRoadButton
+**** SetRoundsButton
+**** SetSideButton
+**** SetSnowing
+**** StartButton
+*** SnowplowPlayerView
+*** SnowplowView
+*** BusPlayerView
+*** EndView
+** Map
+*** FieldView
+**** VehicleView
+**** BuildingView
+**** SaltStoneView
+*** Arrow
+*** CrossRoadView
+
+@endwbs

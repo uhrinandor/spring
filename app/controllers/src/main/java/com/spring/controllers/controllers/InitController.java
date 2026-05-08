@@ -3,7 +3,7 @@ package com.spring.controllers.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.spring.controllers.listeners.GameStartedListener;
+import com.spring.controllers.listeners.InitListener;
 import com.spring.controllers.utils.GameContext;
 import com.spring.models.buildings.Building;
 import com.spring.models.buildings.Home;
@@ -14,7 +14,6 @@ import com.spring.models.field.Field;
 import com.spring.models.field.IField;
 import com.spring.models.field.IRField;
 import com.spring.models.field.IRoad;
-import com.spring.models.head.Broom;
 import com.spring.models.head.Brush;
 import com.spring.models.head.IHead;
 import com.spring.models.layer.ILayer;
@@ -30,12 +29,16 @@ import com.spring.models.vehicle.Snowplow;
 import com.spring.models.vehicle.Vehicle;
 
 public class InitController extends BaseController {
-    List<GameStartedListener> initListeners = new ArrayList<>();
+    List<InitListener> initListeners = new ArrayList<>();
     
-    GameContext ctx = new GameContext();
+    GameContext ctx;
 
-    public void addListener(GameStartedListener listener){
+    public void addListener(InitListener listener){
         initListeners.add(listener);
+    }
+
+    public InitController(GameContext ctx){
+        this.ctx = ctx;
     }
 
     /**
@@ -87,7 +90,7 @@ public class InitController extends BaseController {
             Tracer.changeDeterministicMode(deterministicMode);
         }
 
-        for(GameStartedListener listener : initListeners){
+        for(InitListener listener : initListeners){
             listener.onGameStarted(ctx);
         }
     }
@@ -100,6 +103,11 @@ public class InitController extends BaseController {
     public IRField addField(ILayer layer, boolean underGround){
         IField field = new Field(layer, null, null, null, null, new Random(), null, underGround);
         ctx.getFields().add(field);
+
+        for(InitListener listener : initListeners){
+            listener.onFieldAdded(field);
+        }
+
         return field;
     }
 
@@ -186,6 +194,11 @@ public class InitController extends BaseController {
 
         Home home = new Home(ctx.getFields().get(serial));
         ctx.getHomes().add(home);
+
+        for(InitListener listener : initListeners){
+            listener.onBuildingAdded(home);
+        }
+
         return home;
     }
 
@@ -202,6 +215,10 @@ public class InitController extends BaseController {
 
         Office office = new Office(ctx.getFields().get(serial));
         ctx.getOffices().add(office);
+
+        for(InitListener listener : initListeners){
+            listener.onBuildingAdded(office);
+        }
         return office;
     }
 
@@ -223,6 +240,11 @@ public class InitController extends BaseController {
         station2.setPair(station1);
         ctx.getStations().add(station1);
         ctx.getStations().add(station2);
+
+        for(InitListener listener : initListeners){
+            listener.onBuildingAdded(station1);
+            listener.onBuildingAdded(station2);
+        }
         return List.of(station1, station2);
 
     }

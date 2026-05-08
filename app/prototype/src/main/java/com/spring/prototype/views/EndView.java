@@ -5,6 +5,7 @@ import java.util.List;
 import com.spring.controllers.controllers.EndController;
 import com.spring.controllers.controllers.InitController;
 import com.spring.controllers.listeners.EndListener;
+import com.spring.controllers.utils.GameContext;
 import com.spring.prototype.menuitems.end.GetBus;
 import com.spring.prototype.menuitems.end.GetBusPlayer;
 import com.spring.prototype.menuitems.end.GetCar;
@@ -42,7 +43,7 @@ public class EndView extends BaseView implements EndListener{
 
 	@Override
 	public void onNewGame() {
-        InitController initController = new InitController();
+        InitController initController = new InitController(new GameContext());
 		InitView initView = new InitView(navigator, initController);
         navigator.navigateTo(initView);
 	}
