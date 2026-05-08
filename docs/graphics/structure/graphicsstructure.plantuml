@@ -11,8 +11,9 @@
 *** FieldView
 **** VehicleView
 **** BuildingView
-**** SaltStoneView
-*** Arrow
+**** SaltView
+**** Pin
+*** Arrows
 *** CrossRoadView
 
 @endwbs

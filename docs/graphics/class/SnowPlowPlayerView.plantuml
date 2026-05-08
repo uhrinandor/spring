@@ -1,7 +1,5 @@
 class SnowplowPlayerView{
-    + SnowPlowController snowPlowController
     + SnowPlowPlayerController snowPlowPlayerController
-    + SnowplowView snowplowView
 
     + handleSelect(int sp1): void
     + handleBuySnowplow(): void

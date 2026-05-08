@@ -1,0 +1,22 @@
+@startuml
+
+class MainWindow implements InitListener, CycleListener, OnErrorListener, SnowplowPlayerListener, SnowplowListener  {
+    - menuBar: MenuBar
+    - mapPanel: MapPanel
+    - cycleController: CycleController
+
+    + nextSnowplowPlayer(SnowplowPlayer player): void
+    + nextBusPlayer(BusPlayer player): void
+    + onGameEnd(SnowplowPlayer winner1, BusPlayer winner2): void
+    + onCarPlaced(Building building): void
+    + onNewGame(): void
+    + onGameStarted(GameContext context): void
+    + onSnowplowClosed(): void
+    + onError(String message): void
+}
+
+class MenuBar {
+    + change(JPanel newPanel): void
+}
+
+@enduml

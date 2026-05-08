@@ -122,7 +122,7 @@ public class SnowPlowController extends BaseController {
     public void back(){
         player.setActive(null);
         for(SnowPlowListener listener : snowPlowListeners){
-            listener.onExit();
+            listener.onSnowplowClosed();
         }
     }
 
