@@ -1,0 +1,74 @@
+@startuml
+class BusPlayerView{
+    + BusPlayerController busPlayerController
+
+    + handleSetNext(int f1): void
+    + handleNextPlayer(): void
+}
+
+class EndView{
+    + EndController endController
+
+    + handleWinners(): void
+    + handleNewGame(): void
+    + handleGetField(int f1): void
+    'itt mezot kell kijelolni és megnézi hogy mi áll rajta 
+    + handleGetSnowplow(int f1): void
+    + handleGetSnowplowPlayer(): void
+    + handleGetBus(int f1): void 
+    'itt mezot kell kijelolni és megnézi hogy mi áll rajta
+    + handleGetCar(int f1): void
+    'itt mezot kell kijelolni és megnézi hogy mi áll rajta
+    + handleGetBusPlayer(): void 
+    
+}
+
+class InitView{
+    + map: IMap
+    + controller: InitController
+
+    
+    + handleAddField(Point point): void
+    + handleSetFrontFieldField(int f1, int f2): void
+    + handleSetFrontFieldCrossRoad(int f1, int f2): void
+    + handleSetFrontCrossRoadField(int f1, int f2): void
+    + handleAddCrossRoad(Point point): void
+    + handleAddSnowplowPlayer(): void
+    + handleAddBusPlayer(): void
+    + handleAddStations(int f1, int f2): void
+    + handleAddHome(int f1): void
+    + handleAddOffice(int f1): void
+    + handlePlaceSnowplow(int f1): void
+    + handlePlaceBus(int f1): void
+    + handleSetRound(): void
+    + handleSetSide(int f1, int f2): void
+    + handleSetSnowing(): void
+    + handleStart(): void
+}
+
+class SnowplowPlayerView{
+    + SnowPlowPlayerController snowPlowPlayerController
+
+    + handleSelect(int sp1): void
+    + handleBuySnowplow(): void
+    + handleInfo(): void
+    + handleStepAll(): void
+    + handleAddMoney(int money): void
+}
+
+class SnowplowView{
+    + SnowPlowController snowPlowController
+
+    + handleInfo(): void
+    + handleBuy(): void
+    + handleShop(): void
+    + handleBack(): void
+    + handleSetNext(int f1): void
+    + handleSwitchHead(): void
+}
+
+class LegendDialog{
+    
+}
+
+@enduml
