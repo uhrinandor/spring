@@ -1,0 +1,36 @@
+@startuml
+
+actor "user" as user
+participant "init: InitView" as init
+participant "map: Map" as map
+participant "controller: InitController" as controller
+participant "layer: Layer" as layer
+participant "field: Field" as field
+participant "fieldView: FieldView" as fieldView
+
+user -> init: click "Add Field button"
+
+init -> map: waitForPoint(handleAddField)
+map --> init:
+init --> user:
+
+... waiting for map click ...
+
+user -> map: click(point)
+map ->> init: handleAddField(point)
+
+... dialog: isUnderGround, layer ...
+
+init -> layer: <<create>>
+layer --> init: layer
+
+init -> controller: addField(layer, isUnderGround)
+controller --> init: field
+
+init -> map: addField(field, point)
+map -> fieldView: <<create>>(field)
+fieldView --> map: fieldView
+map --> init:
+init --> user:
+
+@enduml
