@@ -3,7 +3,6 @@ class SnowplowView{
 
     + handleInfo(): void
     + handleBuy(): void
-    + handleShop(): void
     + handleBack(): void
     + handleSetNext(int f1): void
     + handleSwitchHead(): void

@@ -5,5 +5,5 @@ class SnowplowPlayerView{
     + handleBuySnowplow(): void
     + handleInfo(): void
     + handleStepAll(): void
-    + handleAddMoney(int money): void
+    + handleAddMoney(): void
 }
