@@ -2,7 +2,7 @@ class InitView{
     + map: IMap
     + controller: InitController
 
-
+    
     + handleAddField(Point point): void
     + handleSetFrontFieldField(int f1, int f2): void
     + handleSetFrontFieldCrossRoad(int f1, int f2): void
@@ -15,8 +15,10 @@ class InitView{
     + handleAddOffice(int f1): void
     + handlePlaceSnowplow(int f1): void
     + handlePlaceBus(int f1): void
-    + handleSetRound(int r): void
+    + handleSetRound(): void
     + handleSetSide(int f1, int f2): void
-    + handleSetSnowing(boolean isSnow): void
-    + handleStart(boolean isDeterministic): void
+    + handleSetSnowing(): void
+    + handleStart(): void
 }
+
+

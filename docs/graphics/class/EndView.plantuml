@@ -4,9 +4,13 @@ class EndView{
     + handleWinners(): void
     + handleNewGame(): void
     + handleGetField(int f1): void
+    'itt mezot kell kijelolni és megnézi hogy mi áll rajta 
     + handleGetSnowplow(int f1): void
     + handleGetSnowplowPlayer(): void
-    + handleGetBus(int f1): void
+    + handleGetBus(int f1): void 
+    'itt mezot kell kijelolni és megnézi hogy mi áll rajta
     + handleGetCar(int f1): void
-    + handleGetBusPlayer(): void
+    'itt mezot kell kijelolni és megnézi hogy mi áll rajta
+    + handleGetBusPlayer(): void 
+    
 }
