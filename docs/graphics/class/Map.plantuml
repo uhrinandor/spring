@@ -1,5 +1,5 @@
 @startuml
-
+left to right direction
 interface RoadViewListener{
     + onFieldClicked(IRField field): void
     + onCrossRoadClicked(IRoad crossRoad): void
@@ -66,7 +66,7 @@ class VehicleView extends Pin{
 }
 
 class SaltView extends Pin{
-    - salt: Salt
+    - salt: IRSalt
 }
 
 class CrossRoadView {
