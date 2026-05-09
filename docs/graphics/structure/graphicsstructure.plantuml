@@ -1,0 +1,19 @@
+@startwbs
+* MainWindow
+** MenuBar 
+'Ez itt nem külön objektum, közös interfész?
+*** InitView
+*** SnowplowPlayerView
+*** SnowplowView
+*** BusPlayerView
+*** EndView
+** Map
+*** FieldView
+**** VehicleView
+**** BuildingView
+**** SaltView
+**** Pin
+*** Arrows
+*** CrossRoadView
+
+@endwbs

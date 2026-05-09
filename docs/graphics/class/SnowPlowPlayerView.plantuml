@@ -1,0 +1,9 @@
+class SnowplowPlayerView{
+    + SnowPlowPlayerController snowPlowPlayerController
+
+    + handleSelect(int sp1): void
+    + handleBuySnowplow(): void
+    + handleInfo(): void
+    + handleStepAll(): void
+    + handleAddMoney(int money): void
+}

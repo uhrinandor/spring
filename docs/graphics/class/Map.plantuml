@@ -1,0 +1,78 @@
+@startuml
+
+interface RoadViewListener{
+    + onFieldClicked(IRField field): void
+    + onCrossRoadClicked(IRoad crossRoad): void
+}
+
+enum SelectorMode{
+    POINT,
+    ROADS,
+    FIELD,
+    TWO_FIELD,
+    BUS,
+    CAR,
+    SNOWPLOW
+}
+
+interface IMap {
+    +void waitForPoint(Consumer<Point> callback);
+    +void waitForRoads(Consumer<int, int> twoFieldCallback, Consumer<int, int> firstCrossRoadCallback, Consumer<int, int> firstFieldCallback);
+    +void waitForField(Consumer<int> callback);
+    +void waitForTwoField(Consumer<int, int> callback);
+    +void waitForBus(Consumer<int> callback);
+    +void waitForCar(Consumer<int> callback);
+    +void waitForSnowplow(Consumer<int> callback);
+    +void addField(IRField field, Point location);
+    +void addCrossRoad(IRoad field, Point location);
+    +void addBuilding(Building building);
+    +void recalculateArrows();
+}
+
+class MapPanel implements IMap, RoadViewListener {
+    - pointPicker: Consumer<Point>
+    - twoFieldPicker: Consumer<int, int>
+    - firstCrossRoadPicker: Consumer<int, int>
+    - firstFieldPicker: Consumer<int, int>
+    - fieldPicker: Consumer<int>
+    - busPicker: Consumer<int>
+    - carPicker: Consumer<int>
+    - snowplowPicker: Consumer<int>
+    - selectorMode: SelectorMode
+    - ctx: GameContext
+    - lines: List<Line2D>
+    - fieldViews: List<FieldView>
+    - crossRoadViews: List<CrossRoadView>
+}
+
+class FieldView implements IObserver{
+    - listener: RoadViewListener
+    - field: IRField
+    - location: Point
+    - pins: List<Pin>
+}
+
+'Stone és Salt-ot ebben tudjuk megjeleníteni, ezt a generikust tároljuk a FieldView-ban
+class Pin {
+    + Pin()
+}
+
+class BuildingView extends Pin{
+    - building: Building
+}
+
+class VehicleView extends Pin{
+    - vehicle: Vehicle
+}
+
+class SaltView extends Pin{
+    - salt: Salt
+}
+
+class CrossRoadView {
+    - listener: RoadViewListener
+    - crossRoad: IRoad
+    - location: Point
+}
+
+@enduml

@@ -1,0 +1,19 @@
+@startuml
+
+[*] --> Init
+Init --> Cycle: start
+
+state Cycle{
+    [*] --> SnowplowPlayer
+    SnowplowPlayer --> Snowplow: select
+    Snowplow --> SnowplowPlayer: back
+    SnowplowPlayer --> BusPlayer: stepAll
+    BusPlayer --> SnowplowPlayer: setNext [hasNext]
+    BusPlayer --> [*]: setNext [!hasNext]
+}
+
+Cycle --> End
+End --> [*]
+End --> Init: new
+
+@enduml

@@ -4,8 +4,10 @@ import java.util.List;
 
 import com.spring.controllers.controllers.CycleController;
 import com.spring.controllers.controllers.InitController;
-import com.spring.controllers.listeners.GameStartedListener;
+import com.spring.controllers.listeners.InitListener;
 import com.spring.controllers.utils.GameContext;
+import com.spring.models.buildings.Building;
+import com.spring.models.field.IRField;
 import com.spring.prototype.menuitems.init.AddCrossRoad;
 import com.spring.prototype.menuitems.init.AddField;
 import com.spring.prototype.menuitems.init.AddHome;
@@ -28,7 +30,7 @@ import com.spring.prototype.utils.Navigator;
  * Az INIT állapot megjelenítéséért felelős osztály. Itt tudjuk beállítani a játék paramétereit, hozzáadni játékosokat és elindítani a játékot.
  * Amint a játék elindul, ez a nézet eltűnik és megjelenik a CycleView
  */
-public class InitView extends BaseView implements GameStartedListener{
+public class InitView extends BaseView implements InitListener{
     InitController controller;
 	
 	public InitView(Navigator navigator, InitController controller) {
@@ -65,6 +67,24 @@ public class InitView extends BaseView implements GameStartedListener{
 		CycleView cycleView = new CycleView(navigator, cycleController);
 		navigator.navigateTo(cycleView);
 		cycleController.cycle();
+	}
+
+	@Override
+	public void onFieldAdded(IRField field) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'onFieldAdded'");
+	}
+
+	@Override
+	public void onCrossRoadAdded(IRField field) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'onCrossRoadAdded'");
+	}
+
+	@Override
+	public void onBuildingAdded(Building building) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'onBuildingAdded'");
 	}
 
 }

@@ -32,7 +32,7 @@ public class SnowPlowView extends BaseView implements SnowPlowListener {
 	}
 
 	@Override
-	public void onExit() {
+	public void onSnowplowClosed() {
 		navigator.navigateTo(playerView);
 	}
     
