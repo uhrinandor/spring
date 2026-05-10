@@ -1,0 +1,16 @@
+@startuml
+
+actor "user" as user
+participant "view: SnowplowView" as view
+participant "controller: SnowplowController" as controller
+participant "snowplow: Snowplow"    as snowplow
+
+
+user -> view: click "Info" button
+view -> controller: info()
+controller --> view: snowplow
+... dialog about informations ...
+view --> user:
+
+
+@enduml
