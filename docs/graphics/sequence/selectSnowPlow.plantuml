@@ -1,0 +1,24 @@
+@startuml
+
+actor "user" as user
+participant "sppv: SnowPlowPlayer View" as sppv
+participant "map: Map" as map
+participant "controller: SnowPlowPlayerController" as controller
+participant "snowplow: snowplow" as 1
+participant "field: Field" as field1
+
+user -> sppv: click "Select SnowPlow button"
+sppv -> map: waitForField(handleSelect)
+
+map --> sppv:
+sppv --> user:
+   ... click field ...
+user -> map: click(field)
+map ->> sppv: handleSelect(index)
+alt indexed snowplow in spp's inventory
+sppv -> controller: handleSelect(index)
+controller --> sppv:
+end
+sppv --> user:
+
+@enduml
