@@ -4,6 +4,7 @@ class BusPlayerView{
 
     + handleSetNext(int f1): void
     + handleNextPlayer(): void
+    + handleInfo(): void
 }
 
 class EndView{
@@ -13,9 +14,9 @@ class EndView{
     + handleNewGame(): void
     + handleGetField(int f1): void
     'itt mezot kell kijelolni és megnézi hogy mi áll rajta 
-    + handleGetSnowplow(int f1): void
+    + handleGetSnowplows(): void
     + handleGetSnowplowPlayer(): void
-    + handleGetBus(int f1): void 
+    + handleGetBus(): void 
     'itt mezot kell kijelolni és megnézi hogy mi áll rajta
     + handleGetCar(int f1): void
     'itt mezot kell kijelolni és megnézi hogy mi áll rajta
@@ -53,7 +54,7 @@ class SnowplowPlayerView{
     + handleBuySnowplow(): void
     + handleInfo(): void
     + handleStepAll(): void
-    + handleAddMoney(int money): void
+    + handleAddMoney(): void
 }
 
 class SnowplowView{
@@ -61,7 +62,6 @@ class SnowplowView{
 
     + handleInfo(): void
     + handleBuy(): void
-    + handleShop(): void
     + handleBack(): void
     + handleSetNext(int f1): void
     + handleSwitchHead(): void

@@ -1,0 +1,7 @@
+actor "user" as user
+participant "playerView: SnowplowPlayerView" as pv
+participant "controller: SnowplowPlayerController" as controller
+
+user -> pv: click "Legend"
+... dialog: legend...
+pv --> user
