@@ -1,0 +1,16 @@
+@startuml
+
+actor "user" as user
+participant "view: SnowplowView" as view
+participant "controller: SnowplowController" as controller
+
+user -> view: click "Buy" button
+view -> controller: shop()
+controller --> view: shopItems
+... dialog: Select shopItem to buy ...
+view -> controller: buy(itemIndex)
+controller --> view:
+view --> user:
+
+
+@enduml

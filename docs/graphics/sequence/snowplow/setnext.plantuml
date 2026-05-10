@@ -1,0 +1,29 @@
+@startuml
+
+actor "user" as user
+participant "view: SnowplowView" as view
+participant "controller: SnowplowController" as controller
+participant "map: IMap" as map
+
+
+user -> view: click "SetNext" button
+view -> map: waitForField(handleSetNext)
+map --> view: 
+
+view --> user:
+user -> map: click on field
+map ->> view: handleSetNext(fieldIndex)
+view -> controller: listAvailable()
+controller --> view: availableFields
+
+... convert index to listavailable index ...
+
+view -> controller: setNext(availableIndex)
+controller --> view:
+
+view --> map:
+
+view --> user:
+
+
+@enduml

@@ -1,0 +1,16 @@
+@startuml
+
+actor "user" as user
+participant "view: SnowplowView" as view
+participant "controller: SnowplowController" as controller
+participant "head: Dragon" as head
+
+
+user -> view: click "SwitchHead" button
+... dialog: select from all head...
+view -> controller: switchHead(head)
+controller --> view:
+view --> user:
+
+
+@enduml

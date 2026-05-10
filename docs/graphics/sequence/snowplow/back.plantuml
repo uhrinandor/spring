@@ -1,0 +1,28 @@
+@startuml
+
+actor "user" as user
+participant "view: SnowplowView" as view
+participant "controller: SnowplowController" as controller
+participant "snowplow: Snowplow"    as snowplow
+participant "window: MainWindow" as mainWindow
+participant "menu: MenuBar" as menuBar
+participant "snowplowPlayerView: SnowplowPlayerView" as snowplowPlayerView
+participant "snowplowPlayerController: SnowplowPlayerController" as snowplowPlayerController
+
+
+user -> view: click "Back" button
+view -> controller: back()
+... navigate back to SnowplowPlayerView ...
+controller -> mainWindow: onSnowplowClosed()
+mainWindow -> snowplowPlayerController: <<create>>(cycleController)
+snowplowPlayerController -> mainWindow: snowplowPlayerController
+mainWindow -> snowplowPlayerView: <<create>>(snowplowPlayerController)
+snowplowPlayerView --> mainWindow: snowplowPlayerView
+mainWindow -> menuBar: change(snowplowPlayerView)
+menuBar --> mainWindow:
+mainWindow --> controller
+controller --> view:
+view --> user:
+
+
+@enduml
