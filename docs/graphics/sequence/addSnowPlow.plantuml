@@ -1,0 +1,28 @@
+@startuml
+
+actor "user" as user
+participant "init: InitView" as init
+participant "map: Map" as map
+participant "controller: InitController" as controller
+participant "snowplow: SnowPlow" as 1
+participant "field1: Field" as field1
+participant "vehicleView: vehicleView" as vehicleView
+
+user -> init: click "Add Bus button"
+init -> map: waitForField(handlePlaceSnowPlow)
+   ... dialog: index...
+map --> init: handlePlaceSnowPlow(index)
+
+init -> controller:
+controller -> 1: <<create and set for field1>>
+1 --> controller: snowplow
+
+controller --> init: snowplow
+
+init -> map: addVehicle(snowplow)
+map -> vehicleView: <<create>>(snowplow)
+vehicleView --> map: vehicleView
+map --> init:
+init --> user:
+
+@enduml

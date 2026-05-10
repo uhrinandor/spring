@@ -1,0 +1,33 @@
+@startuml
+
+actor "user" as user
+participant "init: InitView" as init
+participant "map: Map" as map
+participant "controller: InitController" as controller
+participant "Crossroad: crossroad" as crossroad
+participant "fieldView: FieldView" as fieldView
+
+user -> init: click "Add CrossRoad button"
+
+init -> map: waitForPoint(handleAddCrossRoad)
+map --> init:
+init --> user:
+
+... waiting for map click ...
+
+user -> map: click(point)
+map ->> init: handleAddCrossRoad(point)
+
+init -> crossroad: <<create>>
+crossroad --> init: crossroad
+
+init -> controller: addCrossRoad(null)
+controller --> init: crossroad
+
+init -> map: addCrossRoad(crossroad, point)
+map -> fieldView: <<create>>(crossroad)
+fieldView --> map: fieldView
+map --> init:
+init --> user:
+
+@enduml

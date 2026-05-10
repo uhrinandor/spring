@@ -1,0 +1,15 @@
+@startuml
+
+actor "user" as user
+participant "init: InitView" as init
+
+participant "controller: InitController" as controller
+
+
+user -> init: click "Add SnowPlow Player button"
+
+init -> controller: addSnowPlowPlayer()
+controller --> init:
+init --> user:
+
+@enduml
