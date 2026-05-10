@@ -1,0 +1,16 @@
+@startuml
+
+actor "user" as user
+participant "view: EndView" as view
+participant "controller: EndController" as controller
+
+
+user -> view: click "Get Bus Player" button
+view -> controller: getBusPlayers()
+controller --> view: busPlayers
+... dialog: select bus player ...
+... dialog: info of selected bus player...
+view --> user:
+
+
+@enduml

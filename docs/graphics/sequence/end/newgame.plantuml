@@ -1,0 +1,17 @@
+@startuml
+
+actor "user" as user
+participant "view: EndView" as view
+participant "controller: EndController" as controller
+participant "window: MainWindow" as window
+
+user -> view: click "New Game" button
+view -> controller: newGame()
+controller -> window: onNewGame()
+... recreate map, clear gamecontext and change back to init view ...
+window --> controller:
+controller --> view:
+view --> user:
+
+
+@enduml
