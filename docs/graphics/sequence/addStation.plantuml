@@ -1,0 +1,37 @@
+@startuml
+
+actor "user" as user
+participant "init: InitView" as init
+participant "map: Map" as map
+participant "controller: InitController" as controller
+participant "station1: Station" as 1
+participant "station2: Station" as 2
+participant "field1: Field" as field1
+participant "field2: Field" as field2
+participant "buildingView1: BuildingView" as buildingView1
+participant "buildingView2: BuildingView" as buildingView2
+
+user -> init: click "Add Stations button"
+init -> map: waitForTwoField(handleAddStations)
+   ... pick two field ...
+map --> init: handleAddStations(index1, index2)
+
+init -> controller:
+controller -> 1: <<create and set for field1>>
+1 --> controller: station1
+controller -> 2: <<create and set for field2>>
+2 --> controller: station2
+
+controller --> init: List<Station>
+
+init -> map: addBuilding(station1)
+map -> buildingView1: <<create>>(station1)
+buildingView1 --> map: buildingView1
+map --> init:
+init -> map: addBuilding(station2)
+map -> buildingView2: <<create>>(station2)
+buildingView2 --> map: buildingView2
+map --> init:
+init --> user:
+
+@enduml

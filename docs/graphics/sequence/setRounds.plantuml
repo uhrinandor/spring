@@ -1,0 +1,15 @@
+@startuml
+
+actor "user" as user
+participant "init: InitView" as init
+
+participant "controller: InitController" as controller
+
+
+user -> init: click "Set Rounds button"
+   ... dialog: rounds...
+init -> controller: rounds(roundNumber)
+controller --> init:
+init --> user:
+
+@enduml

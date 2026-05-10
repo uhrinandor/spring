@@ -1,0 +1,28 @@
+@startuml
+
+actor "user" as user
+participant "init: InitView" as init
+participant "map: Map" as map
+participant "controller: InitController" as controller
+participant "home: Home" as 1
+participant "field1: Field" as field1
+participant "buildingView: BuildingView" as buildingView
+
+user -> init: click "Add Home button"
+init -> map: waitForField(handleAddHome)
+   ... click field...
+map --> init: handleAddHome(index)
+
+init -> controller:
+controller -> 1: <<create and set for field1>>
+1 --> controller: home
+
+controller --> init: home
+
+init -> map: addBuilding(home)
+map -> buildingView: <<create>>(home)
+buildingView --> map: buildingView
+map --> init:
+init --> user:
+
+@enduml
