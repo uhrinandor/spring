@@ -6,23 +6,20 @@ participant "map: Map" as map
 participant "controller: InitController" as controller
 participant "snowplow: SnowPlow" as 1
 participant "field1: Field" as field1
-participant "vehicleView: vehicleView" as vehicleView
 
 user -> init: click "Add Bus button"
 init -> map: waitForField(handlePlaceSnowPlow)
-   ... dialog: index...
+   ... click field ...
 map --> init: handlePlaceSnowPlow(index)
-
-init -> controller:
-controller -> 1: <<create and set for field1>>
+   ... dialog: player select ...
+init -> controller: placeSp(player, field)
+controller -> 1: <<set for field1>>
 1 --> controller: snowplow
 
-controller --> init: snowplow
+controller --> init:
 
-init -> map: addVehicle(snowplow)
-map -> vehicleView: <<create>>(snowplow)
-vehicleView --> map: vehicleView
-map --> init:
+... observer is notified, updates the vehicle UI ...
+
 init --> user:
 
 @enduml

@@ -10,7 +10,7 @@ participant "buildingView: BuildingView" as buildingView
 
 user -> init: click "Add Office button"
 init -> map: waitForField(handleAddOffice)
-   ... dialog: index...
+   ... click field ...
 map --> init: handleAddOffice(index)
 
 init -> controller:

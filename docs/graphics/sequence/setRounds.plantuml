@@ -7,10 +7,8 @@ participant "controller: InitController" as controller
 
 
 user -> init: click "Set Rounds button"
-init -> map: waitForField(handleAddHome)
-   ... dialog: index...
-map --> init: handleAddHome(index)
-init -> controller: addBusPlayer()
+   ... dialog: rounds...
+init -> controller: rounds(roundNumber)
 controller --> init:
 init --> user:
 

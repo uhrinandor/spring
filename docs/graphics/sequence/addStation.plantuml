@@ -12,8 +12,8 @@ participant "buildingView1: BuildingView" as buildingView1
 participant "buildingView2: BuildingView" as buildingView2
 
 user -> init: click "Add Stations button"
-init -> map:
-   ... dialog: index1, index2...
+init -> map: waitForTwoField(handleAddStations)
+   ... pick two field ...
 map --> init: handleAddStations(index1, index2)
 
 init -> controller:

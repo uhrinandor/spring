@@ -10,19 +10,16 @@ participant "vehicleView: vehicleView" as vehicleView
 
 user -> init: click "Add Bus button"
 init -> map: waitForField(handlePlaceBus)
-   ... dialog: index...
-map --> init: handlePlaceBus(index)
 
-init -> controller:
-controller -> 1: <<create and set for field1>>
-1 --> controller: bus
-
-controller --> init: bus
-
-init -> map: addVehicle(bus)
-map -> vehicleView: <<create>>(bus)
-vehicleView --> map: vehicleView
 map --> init:
+init --> user:
+   ... click field ...
+user -> map: click(field)
+map ->> init: handlePlaceBus(index)
+   ... dialog: player index...
+init -> controller: placeBus(player, field)
+controller --> init:
+   ... fieldview observes field, updates the UI ...
 init --> user:
 
 @enduml

@@ -10,7 +10,7 @@ participant "buildingView: BuildingView" as buildingView
 
 user -> init: click "Add Home button"
 init -> map: waitForField(handleAddHome)
-   ... dialog: index...
+   ... click field...
 map --> init: handleAddHome(index)
 
 init -> controller:
