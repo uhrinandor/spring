@@ -1,0 +1,17 @@
+@startuml
+
+actor "user" as user
+participant "playerView: SnowplowPlayerView" as pv
+participant "controller: SnowplowPlayerController" as controller
+participant "player: SnowplowPlayer" as player
+
+
+user -> pv: click "Add Cash"
+... dialog: amount...
+pv -> controller: addMoney(amount)
+controller -> player: give(amount)
+player --> controller
+controller --> pv
+pv --> user
+
+

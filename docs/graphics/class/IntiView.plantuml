@@ -15,6 +15,7 @@ class InitView{
     + handleAddOffice(int f1): void
     + handlePlaceSnowplow(int f1): void
     + handlePlaceBus(int f1): void
+    + handlePlaceSnowplow(int f1): void
     + handleSetRound(): void
     + handleSetSide(int f1, int f2): void
     + handleSetSnowing(): void

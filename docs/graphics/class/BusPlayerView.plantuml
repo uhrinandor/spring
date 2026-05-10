@@ -3,4 +3,5 @@ class BusPlayerView{
 
     + handleSetNext(int f1): void
     + handleNextPlayer(): void
+    + handleInfo(): void
 }
