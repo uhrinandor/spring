@@ -29,8 +29,12 @@ controller --> init: field
 
 init -> map: addField(field, point)
 map -> fieldView: <<create>>(field)
+fieldView -> field: subscribe(this)
+field --> fieldView:
 fieldView --> map: fieldView
 map --> init:
-init --> user:
+init --> map:
+map --> user:
+
 
 @enduml
