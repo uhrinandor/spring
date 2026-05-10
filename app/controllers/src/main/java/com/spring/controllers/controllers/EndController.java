@@ -69,6 +69,14 @@ public class EndController extends BaseController{
         return context.getSnowplowPlayers().get(serial);
     }
 
+    public List<BusPlayer> getBusPlayers(){
+        return context.getBusPlayers();
+    }
+
+    public List<SnowplowPlayer> getSnowpowPlayers(){
+        return context.getSnowplowPlayers();
+    }
+
     public Vehicle getCar(int serial){
         if(serial < 0 || serial >= context.getCars().size()){
             error("Invalid car serial: "+serial);

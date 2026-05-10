@@ -1,0 +1,40 @@
+@startuml
+
+actor "user" as user
+participant "view: InitView" as view
+participant "controller: InitController" as controller
+participant "map: Map" as map
+participant "fieldView1: FieldView" as fieldView
+participant "field1: Field" as field1
+participant "crossRoadView: CrossRoadView" as crossRoadView
+participant "crossRoad: CrossRoad" as crossRoad
+
+user -> view: click "Set Front"
+
+view -> map: waitForRoads(handleSetFrontFieldField, handleSetFrontCrossRoadField, handleSetFrontFieldCrossRoad)
+map --> view:
+view --> user:
+
+
+... crossroad clicked ...
+user -> crossRoadView: click
+crossRoadView -> map: onCrossRoadClicked(crossRoad)
+
+map --> crossRoadView:
+crossRoadView --> user:
+
+... field clicked ...
+user -> fieldView: click
+fieldView -> map: onFieldClicked(field1)
+
+map ->> view: handleSetFrontCrossRoadField(f1Index, f2Index)
+view -> controller: setFrontCrossRoadField(f1Index, f2Index)
+controller --> view:
+view -> map: recalculateArrows()
+map --> view:
+view --> map:
+
+map --> fieldView:
+fieldView --> user:
+
+@enduml

@@ -8,7 +8,7 @@ participant "layer: Layer" as layer
 participant "field: Field" as field
 participant "fieldView: FieldView" as fieldView
 
-user -> init: click "Add Field button"
+user -> init : click "Add Field button"
 
 init -> map: waitForPoint(handleAddField)
 map --> init:
@@ -29,8 +29,12 @@ controller --> init: field
 
 init -> map: addField(field, point)
 map -> fieldView: <<create>>(field)
+fieldView -> field: subscribe(this)
+field --> fieldView:
 fieldView --> map: fieldView
 map --> init:
-init --> user:
+init --> map:
+map --> user:
+
 
 @enduml

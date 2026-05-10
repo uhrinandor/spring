@@ -1,0 +1,25 @@
+@startuml
+
+actor "user" as user
+participant "init: InitView" as init
+participant "map: Map" as map
+participant "controller: InitController" as controller
+participant "bus: Bus" as 1
+participant "field1: Field" as field1
+participant "vehicleView: vehicleView" as vehicleView
+
+user -> init: click "Add Bus button"
+init -> map: waitForField(handlePlaceBus)
+
+map --> init:
+init --> user:
+   ... click field ...
+user -> map: click(field)
+map ->> init: handlePlaceBus(index)
+   ... dialog: player index...
+init -> controller: placeBus(player, field)
+controller --> init:
+   ... fieldview observes field, updates the UI ...
+init --> user:
+
+@enduml

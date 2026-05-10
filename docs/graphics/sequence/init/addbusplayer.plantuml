@@ -1,0 +1,15 @@
+@startuml
+
+actor "user" as user
+participant "init: InitView" as init
+
+participant "controller: InitController" as controller
+
+
+user -> init: click "Add Bus Player button"
+
+init -> controller: addBusPlayer()
+controller --> init:
+init --> user:
+
+@enduml

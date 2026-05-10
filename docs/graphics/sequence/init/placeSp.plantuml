@@ -1,0 +1,25 @@
+@startuml
+
+actor "user" as user
+participant "init: InitView" as init
+participant "map: Map" as map
+participant "controller: InitController" as controller
+participant "snowplow: SnowPlow" as 1
+participant "field1: Field" as field1
+
+user -> init: click "Add Bus button"
+init -> map: waitForField(handlePlaceSnowPlow)
+   ... click field ...
+map --> init: handlePlaceSnowPlow(index)
+   ... dialog: player select ...
+init -> controller: placeSp(player, field)
+controller -> 1: <<set for field1>>
+1 --> controller: snowplow
+
+controller --> init:
+
+... observer is notified, updates the vehicle UI ...
+
+init --> user:
+
+@enduml

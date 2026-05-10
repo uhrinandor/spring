@@ -1,9 +1,0 @@
-class SnowplowView{
-    + SnowPlowController snowPlowController
-
-    + handleInfo(): void
-    + handleBuy(): void
-    + handleBack(): void
-    + handleSetNext(int f1): void
-    + handleSwitchHead(): void
-}
