@@ -16,13 +16,13 @@ init -> map: waitForTwoField(handleAddStations)
    ... pick two field ...
 map --> init: handleAddStations(index1, index2)
 
-init -> controller:
+init -> controller: addStations(index1, index2)
 controller -> 1: <<create and set for field1>>
 1 --> controller: station1
 controller -> 2: <<create and set for field2>>
 2 --> controller: station2
 
-controller --> init: List<Station>
+controller --> init: stations
 
 init -> map: addBuilding(station1)
 map -> buildingView1: <<create>>(station1)
