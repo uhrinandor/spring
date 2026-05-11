@@ -47,14 +47,11 @@ public class Snowplow extends Vehicle implements ISnowPlow, ShopItem{
      */
     @Override
     public boolean switchHead(IHead head) {
-        Tracer.getInstance().enterFunction(this, "switchHead",head);
         if(inventory.removeItem(head, 1)){
             inventory.addItem(activeHead, 1);
             activeHead = head;
-            Tracer.getInstance().exitFunction(true);
             return true;
         }
-        Tracer.getInstance().exitFunction(false);
         return false;
     }
 
@@ -97,9 +94,7 @@ public class Snowplow extends Vehicle implements ISnowPlow, ShopItem{
      */
     @Override
     public  void interact(IField f) {
-        Tracer.getInstance().enterFunction(this, "interact",f);
         if(activeHead.interact(f, inventory)) collector.give(1);
-        Tracer.getInstance().exitFunction();
     }
     
     /**
@@ -109,15 +104,11 @@ public class Snowplow extends Vehicle implements ISnowPlow, ShopItem{
      */
     @Override
     public void accept(IVehicleVisitor visitor) {
-        Tracer.getInstance().enterFunction(this, "accept",visitor);
         visitor.visit(this);
-        Tracer.getInstance().exitFunction();
     }
 
     @Override
     public IInventory getInventory() {
-        Tracer.getInstance().enterFunction(this, "getInventory");
-        Tracer.getInstance().exitFunction(inventory);
         return inventory;
     }
 
@@ -128,9 +119,7 @@ public class Snowplow extends Vehicle implements ISnowPlow, ShopItem{
 
     @Override
     public void apply(PurchaseContext ctx, int amount) {
-        Tracer.getInstance().enterFunction(this, "apply",ctx,amount);
         ctx.addVehicle(this);
-        Tracer.getInstance().exitFunction();
     }
 
     public void setHead(IHead h){

@@ -61,9 +61,7 @@ public class BusPlayer extends Entity implements IPlayer{
      */
     @Override
     public void give(int amount) {
-        Tracer.getInstance().enterFunction(this, "give",amount);
         point += amount;
-        Tracer.getInstance().exitFunction();
     }
 
 }

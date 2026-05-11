@@ -27,13 +27,11 @@ public class Brush extends Entity implements IHead, ShopItem{
      */
     @Override
     public boolean interact(IField field, IInventory inventory) {
-        Tracer.getInstance().enterFunction(this, "interact",field,inventory);
         ILayer current = field.getLayer();
         BrushClearLayerVisitor visitor = new BrushClearLayerVisitor();
         current.accept(visitor);
 
         if(!visitor.getResult()){
-            Tracer.getInstance().exitFunction(false);
             return false;
         } 
 
@@ -43,7 +41,6 @@ public class Brush extends Entity implements IHead, ShopItem{
         ILayer rightLayer = right.getLayer();
         rightLayer = rightLayer.merge(current);
         right.setLayer(rightLayer);
-        Tracer.getInstance().exitFunction(true);
         return true;
     }
 

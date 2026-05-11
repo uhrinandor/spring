@@ -20,8 +20,6 @@ public class Office extends Building{
      */
     public void consume(Car c)
     {
-        Tracer.getInstance().enterFunction(this, "consume",c);
         field.setVehicle(null);
-        Tracer.getInstance().exitFunction();
     }
 }

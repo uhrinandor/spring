@@ -19,16 +19,11 @@ public class StoneSplasher extends Entity implements IHead, ShopItem{
      */
     @Override
     public boolean interact(IField field, IInventory inventory) {
-        Tracer.getInstance().enterFunction(this, "interact",field,inventory);
         Stone stone = new Stone();
          if (inventory.removeItem(stone, 1)){
-            Tracer.getInstance().exitFunction(false);
             stone.setPrevious(field.getLayer());
             field.setLayer(stone);
         } 
-        
-        
-        Tracer.getInstance().exitFunction(true);
         return false;
     }
 

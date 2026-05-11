@@ -47,10 +47,8 @@ public abstract class Vehicle extends Entity {
      * határozza meg a következő lépést (nextMove).
      */
     public void step(boolean forced){
-        Tracer.getInstance().enterFunction(this, "step",forced);
         
         if(!canMove()){
-            Tracer.getInstance().exitFunction();
             return;
         } 
 
@@ -58,7 +56,6 @@ public abstract class Vehicle extends Entity {
         if(next == null) return;
         IField current = driver.getCurrent();
         current.tryExit(next);
-        Tracer.getInstance().exitFunction();
     }
 
     /**
@@ -75,8 +72,6 @@ public abstract class Vehicle extends Entity {
     public abstract void accept(IVehicleVisitor visitor);
   
     public IDriver getDriver(){
-        Tracer.getInstance().enterFunction(this, "getDriver");
-        Tracer.getInstance().exitFunction(driver);
         return driver;
     }
 }

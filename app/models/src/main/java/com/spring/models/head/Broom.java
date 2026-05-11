@@ -35,13 +35,11 @@ public class Broom extends Entity implements IHead, ShopItem{
      */
     @Override
     public boolean interact(IField field, IInventory inventory) {
-        Tracer.getInstance().enterFunction(this, "interact",field,inventory);
         ILayer current = field.getLayer();
         BroomClearLayerVisitor visitor = new BroomClearLayerVisitor();
         current.accept(visitor);
 
         if(!visitor.getResult()){
-            Tracer.getInstance().exitFunction(false);
             return false;
         }
 
@@ -53,7 +51,6 @@ public class Broom extends Entity implements IHead, ShopItem{
         ILayer rightLayer = rightright.getLayer();
         rightLayer = rightLayer.merge(current);
         rightright.setLayer(rightLayer);
-        Tracer.getInstance().exitFunction(true);
         return true;
     }
 

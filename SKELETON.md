@@ -45,9 +45,7 @@ class HeadTracer implements IHead{
         this.service = service;
     }
     void interact(IInventory inventory, IField field){
-        Tracer.getInstance().enterFunction("interact("+inventory.getId()+", "+field.getId()+")");
         service.interact(inventory, field);
-        Tracer.getInstance().exitFunction();
     }
 }
 

@@ -18,8 +18,6 @@ public class Layer extends Entity implements ILayer {
      */
     @Override
     public ILayer merge(ILayer layer) {
-        Tracer.getInstance().enterFunction(this, "merge",layer);
-        Tracer.getInstance().exitFunction(layer);
         return layer;
     }
 
@@ -29,9 +27,7 @@ public class Layer extends Entity implements ILayer {
      */
     @Override
     public void accept(ILayerVisitor visitor) {
-        Tracer.getInstance().enterFunction(this, "accept",visitor);
         visitor.visit(this);
-        Tracer.getInstance().exitFunction();
     }
 
     /**
@@ -41,8 +37,6 @@ public class Layer extends Entity implements ILayer {
      */
     @Override
     public boolean slip(Vehicle v, IRandom random) {
-        Tracer.getInstance().enterFunction(this, "slip",v,random);
-        Tracer.getInstance().exitFunction(false);
         return false;
     }
 
@@ -52,8 +46,6 @@ public class Layer extends Entity implements ILayer {
      */
     @Override
     public boolean canExit(Vehicle v) {
-        Tracer.getInstance().enterFunction(this, "canExit",v);
-        Tracer.getInstance().exitFunction(true);
         return true;
     }
 
@@ -65,8 +57,6 @@ public class Layer extends Entity implements ILayer {
      */
     @Override
     public ILayer enter() {
-        Tracer.getInstance().enterFunction(this, "enter");
-        Tracer.getInstance().exitFunction(this);
         return this;
     }
 

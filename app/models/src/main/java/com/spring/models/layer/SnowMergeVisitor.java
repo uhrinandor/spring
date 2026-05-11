@@ -31,10 +31,8 @@ public class SnowMergeVisitor extends Entity implements ILayerVisitor{
      */
     @Override
     public void visit(Snow s) {
-        Tracer.getInstance().enterFunction(this, "visit",s);
         base.setLevel(base.getLevel() + s.getLevel());
         result = base; 
-        Tracer.getInstance().exitFunction();
     }
 
     /**
@@ -42,10 +40,8 @@ public class SnowMergeVisitor extends Entity implements ILayerVisitor{
      */
     @Override
     public void visit(Ice i) {
-        Tracer.getInstance().enterFunction(this, "visit",i);
         base.setLevel(base.getLevel() + 1);
         result = base;
-        Tracer.getInstance().exitFunction();
     }
 
     /**
@@ -55,9 +51,7 @@ public class SnowMergeVisitor extends Entity implements ILayerVisitor{
      */
     @Override
     public void visit(Layer l) {
-        Tracer.getInstance().enterFunction(this, "visit",l);
         result = base;
-        Tracer.getInstance().exitFunction();
     }
 
    
@@ -67,8 +61,6 @@ public class SnowMergeVisitor extends Entity implements ILayerVisitor{
      * @return az egyesített réteg
      */
     public ILayer getResult() {
-        Tracer.getInstance().enterFunction(this, "getResult");
-        Tracer.getInstance().exitFunction(result);
         return result;
     }
 

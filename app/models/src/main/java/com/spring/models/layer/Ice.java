@@ -26,15 +26,11 @@ public class Ice extends Entity implements ILayer {
     }
 
     public boolean getBroken(){
-        Tracer.getInstance().enterFunction(this, "getBroken");
-        Tracer.getInstance().exitFunction(broken);
         return broken;
     }
 
     public void setBroken(boolean tmp){
-        Tracer.getInstance().enterFunction(this, "setBroken",tmp);
         broken = tmp;
-        Tracer.getInstance().exitFunction();
     }
 
     /**
@@ -56,9 +52,7 @@ public class Ice extends Entity implements ILayer {
      */
     @Override
     public void accept(ILayerVisitor visitor) {
-        Tracer.getInstance().enterFunction(this, "accept",visitor);
         visitor.visit(this);
-        Tracer.getInstance().exitFunction();
     }
 
     /**
@@ -67,13 +61,11 @@ public class Ice extends Entity implements ILayer {
      */
     @Override
     public boolean slip(Vehicle v, IRandom random) {
-        Tracer.getInstance().enterFunction(this, "slip",v,random);
 
         IceSlipVisitor visitor = new IceSlipVisitor(random);
         
         v.accept(visitor);
         boolean result = visitor.getResult();
-        Tracer.getInstance().exitFunction(result);
         return result;
     }
 
@@ -83,8 +75,6 @@ public class Ice extends Entity implements ILayer {
      */
     @Override
     public boolean canExit(Vehicle v) {
-        Tracer.getInstance().enterFunction(this, "canExit",v);
-        Tracer.getInstance().exitFunction(true);
         return true;
     }
 
@@ -94,8 +84,6 @@ public class Ice extends Entity implements ILayer {
      */
     @Override
     public ILayer enter() {
-        Tracer.getInstance().enterFunction(this, "enter");
-        Tracer.getInstance().exitFunction(this);
         return this;
     }
 

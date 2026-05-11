@@ -36,9 +36,7 @@ public class Car extends Vehicle {
      */
     @Override
     boolean canMove() {
-        Tracer.getInstance().enterFunction(this, "canMove");
         boolean tmp = Tracer.getInstance().askInt("Mennyi ideig van lerobbanva az autó?", immobileTurnsLeft) == 0;
-        Tracer.getInstance().exitFunction(tmp);
         return tmp;
     }
 
@@ -48,9 +46,7 @@ public class Car extends Vehicle {
      */
     @Override
     public void contact(Vehicle v) {
-        Tracer.getInstance().enterFunction(this, "contact",v);
         immobileTurnsLeft = 1;
-        Tracer.getInstance().exitFunction();
     }
 
     /**
@@ -58,13 +54,10 @@ public class Car extends Vehicle {
      */
     @Override
     public void interact(IField f) {
-        Tracer.getInstance().enterFunction(this, "interact",f);
         if(destination.getField() != f){
-            Tracer.getInstance().exitFunction();
             return;
         } 
         destination.consume(this);
-        Tracer.getInstance().exitFunction();
     }
     
     /**
@@ -74,9 +67,7 @@ public class Car extends Vehicle {
      */
     @Override
     public void accept(IVehicleVisitor visitor) {
-        Tracer.getInstance().enterFunction(this, "accept",visitor);
         visitor.visit(this);
-        Tracer.getInstance().exitFunction();
     }
 
     public void setDestination(Office destination)

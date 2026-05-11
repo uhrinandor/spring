@@ -56,9 +56,7 @@ public class SnowplowPlayer extends Entity implements PurchaseContext, IPlayer{
      */
     @Override
     public void give(int amount) {
-        Tracer.getInstance().enterFunction(this, "give", amount);
         money += amount;
-        Tracer.getInstance().exitFunction();
     }
 
     /**
@@ -74,8 +72,6 @@ public class SnowplowPlayer extends Entity implements PurchaseContext, IPlayer{
      */
     @Override
     public ISnowPlow snowPlow() {
-        Tracer.getInstance().enterFunction(this, "snowPlow");
-        Tracer.getInstance().exitFunction(active);
         return active;
     }
 
@@ -86,15 +82,12 @@ public class SnowplowPlayer extends Entity implements PurchaseContext, IPlayer{
      */
     @Override
     public boolean charge(int amount) {
-        Tracer.getInstance().enterFunction(this, "charge", amount);
         int m = Tracer.getInstance().askInt("Mennyi pénze van?", money);
         if(m < amount){
-            Tracer.getInstance().exitFunction(false);
             return false;
         }  
 
         money -= m - amount;
-        Tracer.getInstance().exitFunction(true);
         return true;
     }
 
@@ -104,9 +97,7 @@ public class SnowplowPlayer extends Entity implements PurchaseContext, IPlayer{
      */
     @Override
     public void addVehicle(Vehicle v) {
-        Tracer.getInstance().enterFunction(this, "addVehicle",v);
         snowPlows.add(v);
-        Tracer.getInstance().exitFunction();
     }
 
     @Override
