@@ -31,14 +31,11 @@ public class Inventory extends Entity implements IInventory{
      */
     @Override
     public boolean removeItem(IInventoryItem i, int amount) {
-        Tracer.getInstance().enterFunction(this, "removeItem",i,amount);
         int available = Tracer.getInstance().askInt("Mennyi van belőle? "+i.key(), items.get(i.key()));
         if(available >= amount){
             items.put(i.key(), available-amount);
-            Tracer.getInstance().exitFunction(true);
             return true;
         }
-        Tracer.getInstance().exitFunction(false);
         return false;
     }
 
@@ -49,13 +46,11 @@ public class Inventory extends Entity implements IInventory{
      */
     @Override
     public boolean addItem(IInventoryItem i, int amount) {
-        Tracer.getInstance().enterFunction(this, "addItem",i,amount);
         int current = items.get(i.key());
         if(i.limit() != -1 && (current + amount) > i.limit()){
             return false;
         }
         items.put(i.key(), items.get(i.key())+amount);
-        Tracer.getInstance().exitFunction();
         return true;
         
     }

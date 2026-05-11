@@ -16,11 +16,9 @@ public class Shop extends Entity implements IShop {
 
     @Override
     public void buy(PurchaseContext ctx, ShopItem item, int amount) {
-        Tracer.getInstance().enterFunction(this, "buy",ctx,item,amount);
         int price = item.price();
 
         if(ctx.charge(price)) item.apply(ctx, amount);
-        Tracer.getInstance().exitFunction();
     }
 
     @Override

@@ -28,11 +28,9 @@ public class Dragon extends Entity implements IHead, ShopItem{
      */
     @Override
     public boolean interact(IField field, IInventory inventory) {
-        Tracer.getInstance().enterFunction(this, "interact",field,inventory);
         DragonClearLayerVisitor v = new DragonClearLayerVisitor();
 
         if (!inventory.removeItem(new Biokerosene(), 1)){
-            Tracer.getInstance().exitFunction(false);
             return false;
         }
         field.getLayer().accept(v);
@@ -67,7 +65,6 @@ public class Dragon extends Entity implements IHead, ShopItem{
      */
     @Override
     public int price() {
-        Tracer.getInstance().enterFunction(this, "price");
         return 4;
     }
 
@@ -79,11 +76,9 @@ public class Dragon extends Entity implements IHead, ShopItem{
      */
     @Override
     public void apply(PurchaseContext ctx, int amount) {
-        Tracer.getInstance().enterFunction(this, "apply",ctx,amount);
         ISnowPlow sp = ctx.snowPlow();
         IInventory inventory = sp.getInventory();
         inventory.addItem(this, amount);
-        Tracer.getInstance().exitFunction();
     }
 
     @Override

@@ -44,22 +44,16 @@ public class Field extends Entity implements IField {
      */
     @Override
     public IRoad getFront(){
-        Tracer.getInstance().enterFunction(this,"getFront");
-        Tracer.getInstance().exitFunction(front);
         return front;
     }
 
     @Override
     public IField getRight(){
-        Tracer.getInstance().enterFunction(this, "getRight");
-        Tracer.getInstance().exitFunction(right);
         return right;
     }
     
     @Override
     public IField getLeft(){
-        Tracer.getInstance().enterFunction(this, "getLeft");
-        Tracer.getInstance().exitFunction(left);
         return left;
     }
 
@@ -70,16 +64,12 @@ public class Field extends Entity implements IField {
     
     @Override
     public ILayer getLayer(){
-        Tracer.getInstance().enterFunction(this, "getLayer");
-        Tracer.getInstance().exitFunction(layer);
         return layer;
     }
 
     @Override
     public void setLayer(ILayer layer){
-        Tracer.getInstance().enterFunction(this, "setLayer",layer);
         this.layer = layer;
-        Tracer.getInstance().exitFunction();
     }
 
     public void setRight(IField field)
@@ -104,8 +94,6 @@ public class Field extends Entity implements IField {
     */
     @Override
     public List<IField> getAvailable() {
-        Tracer.getInstance().enterFunction(this, "getAvailable");
-        Tracer.getInstance().exitFunction(List.of(this));
        return List.of(this);
     }
 
@@ -120,11 +108,9 @@ public class Field extends Entity implements IField {
     
     @Override
     public boolean tryEnter(Vehicle v) {
-        Tracer.getInstance().enterFunction(this, "tryEnter", v);
         if(vehicle != null){
             vehicle.contact(v);
             v.contact(vehicle);
-            Tracer.getInstance().exitFunction(false);
             return false;
         }
 
@@ -137,13 +123,11 @@ public class Field extends Entity implements IField {
             
             driver.setNext(available.get(0));
             v.step(true);
-            Tracer.getInstance().exitFunction(true);
             return true;
         }
 
         
         vehicle.interact(this);
-        Tracer.getInstance().exitFunction(true);
         return true;   
     }
     
@@ -156,9 +140,7 @@ public class Field extends Entity implements IField {
      */
     @Override
     public void tryExit(IField f) {
-        Tracer.getInstance().enterFunction(this, "tryExit",f);
         if(!layer.canExit(vehicle)&& (f != this.right && f != this.left) ){
-            Tracer.getInstance().exitFunction();
             return;
         } 
 
@@ -167,10 +149,8 @@ public class Field extends Entity implements IField {
         }
 
         if(!f.tryEnter(vehicle)){
-            Tracer.getInstance().exitFunction();
             return;
         } 
-        Tracer.getInstance().exitFunction();
         vehicle = null;
     }
 
@@ -201,16 +181,12 @@ public class Field extends Entity implements IField {
     @Override
     public void setVehicle(Vehicle v)
     {
-        Tracer.getInstance().enterFunction(this, "setVehicle",v);
         this.vehicle=v;
-        Tracer.getInstance().exitFunction();
     }
 
     @Override
     public void setSalt(ISalt salt) {
-        Tracer.getInstance().enterFunction(this, "setSalt",salt);
         this.salt = salt;
-        Tracer.getInstance().exitFunction();
     }
 
     @Override

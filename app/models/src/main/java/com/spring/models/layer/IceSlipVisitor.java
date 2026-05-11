@@ -32,8 +32,6 @@ public class IceSlipVisitor extends Entity implements IVehicleVisitor {
     }
 
     public boolean getResult(){
-        Tracer.getInstance().enterFunction(this, "getResult");
-        Tracer.getInstance().exitFunction(result);
         return result;
     }
 
@@ -42,10 +40,8 @@ public class IceSlipVisitor extends Entity implements IVehicleVisitor {
      */
     @Override
     public void visit(Car c) {
-        Tracer.getInstance().enterFunction(this, "visit",c);
         boolean tmp = this.random.nextBool(0.25);
         result = tmp;
-        Tracer.getInstance().exitFunction();
     }
 
     /**
@@ -53,9 +49,7 @@ public class IceSlipVisitor extends Entity implements IVehicleVisitor {
      */
     @Override
     public void visit(Snowplow s) {
-        Tracer.getInstance().enterFunction(this, "visit",s);
        result = false;
-       Tracer.getInstance().exitFunction();
     }
 
     /**
@@ -63,10 +57,8 @@ public class IceSlipVisitor extends Entity implements IVehicleVisitor {
      */
     @Override
     public void visit(Bus b) {
-        Tracer.getInstance().enterFunction(this, "visit",b);
         boolean tmp = this.random.nextBool(0.25);
         result = tmp;
-        Tracer.getInstance().exitFunction();
     }
 
     @Override

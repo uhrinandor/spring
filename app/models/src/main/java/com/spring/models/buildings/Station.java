@@ -23,8 +23,6 @@ public class Station extends Building{
 
     public Station getPair()
     {
-        Tracer.getInstance().enterFunction(this, "getPair");
-        Tracer.getInstance().exitFunction(pair);
         return pair;
     }
 

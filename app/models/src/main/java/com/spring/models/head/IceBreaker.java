@@ -24,13 +24,11 @@ public class IceBreaker extends Entity implements IHead, ShopItem{
      */
     @Override
     public boolean interact(IField field, IInventory inventory) {
-        Tracer.getInstance().enterFunction(this, "getInstance",field,inventory);
         ILayer layer = field.getLayer();
         IceBreakerClearLayerVisitor visitor = new IceBreakerClearLayerVisitor();
         layer.accept(visitor);
 
         boolean tmp = visitor.getResult() != null;
-        Tracer.getInstance().exitFunction(tmp);
         return tmp;
     }
 

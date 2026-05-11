@@ -24,13 +24,10 @@ public class SaltSpreader extends Entity implements IHead, ShopItem{
      */
     @Override
     public boolean interact(IField field, IInventory inventory) {
-        Tracer.getInstance().enterFunction(this, "interact",field,inventory);
         Salt salt = new Salt();
         if(inventory.removeItem(salt, 1)){
             field.setSalt(salt);
         }
-            
-        Tracer.getInstance().exitFunction(false);
         return false;
     }
 

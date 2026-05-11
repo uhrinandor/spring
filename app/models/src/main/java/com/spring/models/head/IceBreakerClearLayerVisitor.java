@@ -25,8 +25,6 @@ public class IceBreakerClearLayerVisitor extends Entity implements ILayerVisitor
      */
     @Override
     public void visit(Snow s) {
-        Tracer.getInstance().enterFunction(this, "visit",s);
-        Tracer.getInstance().exitFunction();
     }
 
     /**
@@ -34,10 +32,8 @@ public class IceBreakerClearLayerVisitor extends Entity implements ILayerVisitor
      */
     @Override
     public void visit(Ice i) {
-        Tracer.getInstance().enterFunction(this, "visit",i);
         i.setBroken(true);
         result = i;
-        Tracer.getInstance().exitFunction();
     }
 
     /**
@@ -45,13 +41,9 @@ public class IceBreakerClearLayerVisitor extends Entity implements ILayerVisitor
      */
     @Override
     public void visit(Layer l) {
-        Tracer.getInstance().enterFunction(this, "visit",l);
-        Tracer.getInstance().exitFunction();
     }
 
     public Ice getResult() {
-        Tracer.getInstance().enterFunction(this, "getResult");
-        Tracer.getInstance().exitFunction(result);
         return result;
     }
 

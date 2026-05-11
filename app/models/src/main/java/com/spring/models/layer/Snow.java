@@ -21,8 +21,6 @@ public class Snow extends Entity implements ILayer {
     }
 
     public int getLevel(){
-        Tracer.getInstance().enterFunction(this, "getLevel");
-        Tracer.getInstance().exitFunction(level);
         return level;
     }
 
@@ -38,11 +36,9 @@ public class Snow extends Entity implements ILayer {
      */
     @Override
     public ILayer merge(ILayer layer) {
-        Tracer.getInstance().enterFunction(this, "merge",layer);
         SnowMergeVisitor visitor = new SnowMergeVisitor(this);
         layer.accept(visitor);
         ILayer result = visitor.getResult();
-        Tracer.getInstance().exitFunction(result);
         return result;
     }
 
@@ -52,9 +48,7 @@ public class Snow extends Entity implements ILayer {
      */
     @Override
     public void accept(ILayerVisitor visitor) {
-        Tracer.getInstance().enterFunction(this, "accept",visitor);
         visitor.visit(this);
-        Tracer.getInstance().exitFunction();
     }
 
     /**
@@ -63,8 +57,6 @@ public class Snow extends Entity implements ILayer {
      */
     @Override
     public boolean slip(Vehicle v, IRandom random) {
-        Tracer.getInstance().enterFunction(this, "slip",v, random);
-        Tracer.getInstance().exitFunction(false);
         return false;
     }
 
@@ -74,11 +66,9 @@ public class Snow extends Entity implements ILayer {
      */
     @Override
     public boolean canExit(Vehicle v) {
-        Tracer.getInstance().enterFunction(this, "canExit",v);
         SnowExitVisitor visitor = new SnowExitVisitor(this);
         v.accept(visitor);
         boolean result = visitor.getResult();
-        Tracer.getInstance().exitFunction(result);
         return result;
     }
 
@@ -88,15 +78,12 @@ public class Snow extends Entity implements ILayer {
      */
     @Override
     public ILayer enter() {
-        Tracer.getInstance().enterFunction(this, "enter");
 
         if(Tracer.getInstance().askInt("Milyen magas a hó?", level) > 1){
             level--;
-            Tracer.getInstance().exitFunction(this);
             return this;
         }
         Ice tmp = new Ice();
-        Tracer.getInstance().exitFunction(tmp);
         return tmp;
         
     }

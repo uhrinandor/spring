@@ -45,12 +45,10 @@ public class CarDriver extends Entity implements IDriver {
      */
     @Override
     public IField nextMove() {
-        Tracer.getInstance().enterFunction(this, "nextMove");
 
         IField target = destination.getField();
 
         if (current == null || target == null || current == target) {
-            Tracer.getInstance().exitFunction(next);
             return next;
         }
 
@@ -76,7 +74,6 @@ public class CarDriver extends Entity implements IDriver {
 
         // Ha nem találtuk meg a célt, next marad
         if (!cameFrom.containsKey(target)) {
-            Tracer.getInstance().exitFunction(next);
             return next;
         }
 
@@ -88,7 +85,6 @@ public class CarDriver extends Entity implements IDriver {
 
         next = step;
 
-        Tracer.getInstance().exitFunction(next);
         return next;
     }
 
@@ -125,22 +121,16 @@ public class CarDriver extends Entity implements IDriver {
      */
     @Override
     public void setNext(IField f) {
-        Tracer.getInstance().enterFunction(this, "setNext",f);
         next = f;
-        Tracer.getInstance().exitFunction();
     }
 
     @Override
     public IField getCurrent() {
-        Tracer.getInstance().enterFunction(this, "getCurrent");
-        Tracer.getInstance().exitFunction(current);
         return current;
     }
 
     @Override
     public IField getNext() {
-        Tracer.getInstance().enterFunction(this, "getNext");
-        Tracer.getInstance().exitFunction(next);
         return next;
     }
 

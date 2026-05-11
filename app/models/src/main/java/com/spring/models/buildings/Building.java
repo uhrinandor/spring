@@ -20,8 +20,6 @@ public abstract class Building extends Entity{
     }
 
     public IField getField() {
-        Tracer.getInstance().enterFunction(this, "getField");
-        Tracer.getInstance().exitFunction(field);
         return field;
     }
 
