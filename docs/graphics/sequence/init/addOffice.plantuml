@@ -13,7 +13,7 @@ init -> map: waitForField(handleAddOffice)
    ... click field ...
 map --> init: handleAddOffice(index)
 
-init -> controller:
+init -> controller: addOffice(index)
 controller -> 1: <<create and set for field1>>
 1 --> controller: office
 

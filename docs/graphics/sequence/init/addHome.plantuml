@@ -13,7 +13,7 @@ init -> map: waitForField(handleAddHome)
    ... click field...
 map --> init: handleAddHome(index)
 
-init -> controller:
+init -> controller: addHome(index)
 controller -> 1: <<create and set for field1>>
 1 --> controller: home
 

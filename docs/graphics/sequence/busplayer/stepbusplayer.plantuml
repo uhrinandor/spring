@@ -10,6 +10,9 @@ user -> sppv: click "BusPlayer Step button"
 sppv -> map: waitForField(handleSetNext)
    ... click field ...
 map --> sppv: handleSetNext(index)
+sppv -> controller: listAvailable()
+controller --> sppv: availableFields
+... conversion of index to listavailable index ...
 sppv -> controller: setNext(index)
 
 controller --> sppv:

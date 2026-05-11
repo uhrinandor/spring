@@ -8,17 +8,12 @@ participant "snowplow: snowplow" as 1
 participant "field: Field" as field1
 
 user -> sppv: click "Select SnowPlow button"
-sppv -> map: waitForField(handleSelect)
-
-map --> sppv:
-sppv --> user:
-   ... click field ...
-user -> map: click(field)
-map ->> sppv: handleSelect(index)
-alt indexed snowplow in spp's inventory
-sppv -> controller: handleSelect(index)
+sppv -> controller: info()
+controller --> sppv: player
+... dialog: select snowplow ...
+sppv -> controller: select(snowplowSerial)
+... redirect to snowplow view ...
 controller --> sppv:
-end
 sppv --> user:
 
 @enduml

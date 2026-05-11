@@ -1,0 +1,38 @@
+@startuml
+
+actor "user" as user
+participant "view: InitView" as view
+participant "controller: InitController" as controller
+participant "map: Map" as map
+participant "fieldView1: FieldView" as fieldView
+participant "field1: Field" as field1
+participant "fieldView2: FieldView" as fieldView2
+participant "field2: Field" as field2
+
+user -> view: click "Set Front"
+
+view -> map: waitForTwoField(handleSetSide)
+map --> view:
+view --> user:
+
+... first field clicked ...
+user -> fieldView: click
+fieldView -> map: onFieldClicked(field1)
+
+map --> fieldView:
+fieldView --> user:
+
+... second field clicked ...
+user -> fieldView2: click
+fieldView2 -> map: onFieldClicked(field2)
+
+map ->> view: handleSetSide(f1Index, f2Index)
+view -> controller: setSide(f1Index, f2Index, true)
+controller --> view:
+view -> map: recalculateArrows()
+map --> view:
+view --> map:
+
+map --> fieldView2:
+fieldView2 --> user:
+@enduml

@@ -4,9 +4,10 @@ actor "user" as user
 participant "bv: BusPlayer View" as sppv
 participant "controller: BusPlayerController" as controller
 
-user -> sppv: click "BusPlayer Info button"
+user -> sppv: click "BusPlayer Info"  button
 sppv -> controller: info()
-controller --> sppv:
+controller --> sppv: busplayer
+... dialog about busplayer info ...
 sppv --> user:
 
 @enduml
