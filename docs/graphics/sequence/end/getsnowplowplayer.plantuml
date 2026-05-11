@@ -1,0 +1,16 @@
+@startuml
+
+actor "user" as user
+participant "view: EndView" as view
+participant "controller: EndController" as controller
+
+
+user -> view: click "Get SnowplowPlayer" button
+view -> controller: getSnowplowPlayers()
+controller --> view: snowplowPlayers
+... dialog: select snowplow player ...
+... dialog: info of selected snowplow player...
+view --> user:
+
+
+@enduml

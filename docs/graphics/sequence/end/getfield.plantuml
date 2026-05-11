@@ -1,0 +1,27 @@
+@startuml
+
+actor "user" as user
+participant "view: EndView" as view
+participant "controller: EndController" as controller
+participant "field: Field" as field
+participant "map: Map" as map
+participant "fieldView: FieldView" as fieldView
+
+user -> view: click "Get Field" button
+view -> map: waitForField(handleGetField)
+map --> view: 
+view --> user:
+... wait for field to be clicked...
+user -> fieldView: click
+fieldView -> map: onFieldClicked(field)
+map ->> view: handleGetField(fieldIndex)
+view -> controller: getField(fieldIndex)
+controller --> view: field
+... dialog about field ...
+view --> map:
+map --> fieldView:
+fieldView --> user:
+
+
+
+@enduml

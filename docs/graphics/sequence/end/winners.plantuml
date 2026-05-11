@@ -1,0 +1,15 @@
+@startuml
+
+actor "user" as user
+participant "view: EndView" as view
+participant "controller: EndController" as controller
+
+
+user -> view: click "Winners" button
+view -> controller: winners()
+controller --> view: winners
+... dialog about winners ...
+view --> user:
+
+
+@enduml
