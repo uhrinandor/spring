@@ -1,16 +1,16 @@
 package com.spring.graphics.panels.map;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
 import com.spring.graphics.panels.map.interfaces.RoadViewListener;
 import com.spring.graphics.utils.LayerImageVisitor;
@@ -34,10 +34,19 @@ public class FieldView  extends JPanel implements IObserver {
         this.location = location;
         field.subscribe(this);
         setBounds(location.x, location.y, 50, 50);
-        setLayout(new BorderLayout());
-        add(new JLabel("FIELD", SwingConstants.CENTER));
-        setBorder(BorderFactory.createLineBorder(Color.BLUE));
+        add(new JLabel(field.toString()));
+        setBorder(BorderFactory.createLineBorder(Color.BLUE));        
         loadBackground(); 
+
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent event){
+                if(roadViewListener != null){
+                     roadViewListener.onFieldClicked(field);
+                }
+            }
+        });       
+            
     }
 
     public void setListener(RoadViewListener listener) {
