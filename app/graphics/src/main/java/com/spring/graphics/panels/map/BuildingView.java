@@ -3,7 +3,7 @@ package com.spring.graphics.panels.map;
 import javax.swing.BorderFactory;
 
 import com.spring.models.buildings.Building;
-import javax.swing.BorderFactory;
+
 import java.awt.Color;
 public class BuildingView extends Pin{
     Building building;
