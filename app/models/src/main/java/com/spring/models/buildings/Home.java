@@ -28,4 +28,9 @@ public class Home extends Building{
         c.setDestination(destination);
         getField().setVehicle(c);
     }
+
+    @Override
+    public void accept(IBuildingVisitor v) {
+        v.visit(this);
+    }
 }

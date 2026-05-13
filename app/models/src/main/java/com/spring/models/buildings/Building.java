@@ -27,4 +27,7 @@ public abstract class Building extends Entity{
     public List<String> init() {
        return List.of("field: " + field);
     }
+
+    
+    public void accept(IBuildingVisitor v){};
 }
