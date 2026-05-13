@@ -3,7 +3,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.spring.controllers.controllers.InitController;
-import com.spring.graphics.panels.map.IMap;
+import com.spring.graphics.panels.map.interfaces.IMap;
 
 public class InitView extends JPanel {
     IMap map;

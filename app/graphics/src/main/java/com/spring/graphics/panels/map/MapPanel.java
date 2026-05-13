@@ -1,59 +1,44 @@
 package com.spring.graphics.panels.map;
 
 import java.awt.Point;
-import java.awt.event.MouseAdapter;
 import java.util.function.Consumer;
 
 import javax.swing.JPanel;
 
+import com.spring.controllers.utils.GameContext;
 import com.spring.graphics.enums.SelectorMode;
+import com.spring.graphics.panels.map.interfaces.IMap;
+import com.spring.graphics.panels.map.interfaces.RoadViewListener;
 import com.spring.models.buildings.Building;
 import com.spring.models.field.IRField;
 import com.spring.models.field.IRoad;
 
-public class MapPanel extends JPanel implements IMap {
-    SelectorMode selectorMode = SelectorMode.POINT;
+public class MapPanel extends JPanel implements IMap, RoadViewListener {
+    SelectorMode selectorMode = null;
+    Consumer<Integer> callback = null;
+    GameContext context;
 
-    Consumer<Point> pointCallback;
-
-    public MapPanel() {
+    public MapPanel(GameContext context) {
         super();
+        this.context = context;
         setLayout(null);
-        addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(java.awt.event.MouseEvent e) {
-             handleClick(e.getPoint());
-            }
-        });
     }
-
-    public void handleClick(Point point){
-        if(selectorMode == SelectorMode.POINT && pointCallback != null) pointCallback.accept(point);
-    }
-
-    @Override
-    public void waitForPoint(Consumer<Point> callback) {
-        selectorMode = SelectorMode.POINT;
-        pointCallback = callback;
-    }
-
-    @Override
-    public void changeSelectorMode(SelectorMode mode) {
-        selectorMode = mode;
-    }
-
+    
     @Override
     public void addField(IRField field, Point location) {
         FieldView fieldView = new FieldView(field, location);
+        fieldView.setListener(this);
         add(fieldView);
         revalidate();
         repaint();
     }
 
     @Override
-    public void addCrossRoad(IRoad field, Point location) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addCrossRoad'");
+    public void addCrossRoad(IRoad field, Point location) { 
+        CrossRoadView crossRoadView = new CrossRoadView(field, location);
+        add(crossRoadView);
+        revalidate();
+        repaint();
     }
 
     @Override
@@ -63,8 +48,34 @@ public class MapPanel extends JPanel implements IMap {
     }
 
     @Override
-    public void renderArrows() {
+    public void recalculateArrows() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'renderArrows'");
+    }
+
+    @Override
+    public void waitForField(Consumer<Integer> callback) {
+        selectorMode = SelectorMode.FIELD;
+        this.callback = callback;
+    }
+
+    @Override
+    public void waitForCar(Consumer<Integer> callback) {
+        selectorMode = SelectorMode.CAR;
+        this.callback = callback;
+    }
+
+    @Override
+    public void onFieldClicked(IRField field) {
+        System.out.println("Field clicked: " + field);
+        if(selectorMode == SelectorMode.FIELD && callback != null){
+            callback.accept(context.getFields().indexOf(field));
+            selectorMode = null;
+            callback = null;
+        }else if(selectorMode == SelectorMode.CAR && callback != null){
+            callback.accept(context.getCars().indexOf(field.getVehicle()));
+            selectorMode = null;
+            callback = null;
+        }
     }
 }
