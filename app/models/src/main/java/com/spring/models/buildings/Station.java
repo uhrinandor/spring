@@ -40,4 +40,9 @@ public class Station extends Building{
         field.setVehicle(bus);
         
     }
+
+    @Override
+    public void accept(IBuildingVisitor v) {
+        v.visit(this);
+    }
 }

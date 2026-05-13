@@ -22,4 +22,9 @@ public class Office extends Building{
     {
         field.setVehicle(null);
     }
+
+    @Override
+    public void accept(IBuildingVisitor v) {
+        v.visit(this);
+    }
 }
