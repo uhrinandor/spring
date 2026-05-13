@@ -1,11 +1,9 @@
 package com.spring.graphics.panels.map;
 
-import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.util.function.Consumer;
 
-import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 import com.spring.graphics.enums.SelectorMode;
@@ -27,7 +25,6 @@ public class MapPanel extends JPanel implements IMap {
              handleClick(e.getPoint());
             }
         });
-        setBorder(BorderFactory.createLineBorder(Color.RED));
     }
 
     public void handleClick(Point point){
