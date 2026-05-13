@@ -25,5 +25,9 @@ public class BuildingColorPickerVisitor  implements IBuildingVisitor{
     public void visit(Home h) {
         color=Color.GREEN;
     }
+
+    public Color getColor() {
+    return color;
+    }
     
 }
