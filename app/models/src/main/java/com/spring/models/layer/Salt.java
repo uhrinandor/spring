@@ -34,6 +34,7 @@ public class Salt extends Entity implements ShopItem, IInventoryItem, ISalt{
 
     public void setTimer(int timer){
         this.timer = timer;
+        notifyObservers();
     }
 
     /**
@@ -49,7 +50,7 @@ public class Salt extends Entity implements ShopItem, IInventoryItem, ISalt{
         MeltLayerVisitor visitor = new MeltLayerVisitor();
 
         layer.accept(visitor);
-
+        notifyObservers();
         return visitor.getResult();
     }
 
