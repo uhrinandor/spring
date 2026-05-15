@@ -45,7 +45,9 @@ public class Salt extends Entity implements ShopItem, IInventoryItem, ISalt{
      */
     @Override
     public ILayer melt(ILayer layer) {
-        if(Tracer.getInstance().askInt("Meddig érvényes a só?", timer) <= 0) return layer;
+        if(timer <= 0) return layer;
+
+        timer--;
 
         MeltLayerVisitor visitor = new MeltLayerVisitor();
 

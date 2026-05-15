@@ -152,4 +152,9 @@ public class MapGenerator {
         initController.addStations(28, 10);
 
     }
+
+    public void getMap2() {
+        
+
+    }
 }
