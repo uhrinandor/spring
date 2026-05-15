@@ -23,6 +23,9 @@ import com.spring.models.utils.IObserver;
 public class FieldView  extends JPanel implements IObserver {
     Point location;
     IRField field;
+    FieldView front;
+    FieldView left;
+    FieldView right;
     List<Pin> pins;
     RoadViewListener roadViewListener;
 
@@ -71,6 +74,18 @@ public class FieldView  extends JPanel implements IObserver {
         if (background != null) {
             g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
         }
+    }
+
+    public int getX(){
+        return location.x;
+    }
+
+    public int getY(){
+        return location.y;
+    }
+
+    public IRField getField(){
+        return field;
     }
 
     @Override

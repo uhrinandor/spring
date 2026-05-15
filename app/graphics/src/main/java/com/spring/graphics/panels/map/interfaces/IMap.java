@@ -1,5 +1,6 @@
 package com.spring.graphics.panels.map.interfaces;
 
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.util.function.Consumer;
 
@@ -14,5 +15,5 @@ public interface IMap {
     public void addField(IRField field, Point location);
     public void addCrossRoad(IRoad field, Point location);
     public void addBuilding(Building building);
-    public void recalculateArrows();
+    public void recalculateArrows(Graphics2D g2d);
 }

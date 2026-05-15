@@ -9,7 +9,7 @@ import com.spring.models.vehicle.IInventory;
 import com.spring.models.vehicle.IInventoryItem;
 import com.spring.models.vehicle.ISnowPlow;
 import com.spring.models.utils.Entity;
-import com.spring.models.utils.Tracer;
+
 
 /**
  * Olvasztja a rétegeket.
@@ -34,6 +34,7 @@ public class Salt extends Entity implements ShopItem, IInventoryItem, ISalt{
 
     public void setTimer(int timer){
         this.timer = timer;
+        notifyObservers();
     }
 
     /**
@@ -44,12 +45,14 @@ public class Salt extends Entity implements ShopItem, IInventoryItem, ISalt{
      */
     @Override
     public ILayer melt(ILayer layer) {
-        if(Tracer.getInstance().askInt("Meddig érvényes a só?", timer) <= 0) return layer;
+        if(timer <= 0) return layer;
+
+        timer--;
 
         MeltLayerVisitor visitor = new MeltLayerVisitor();
 
         layer.accept(visitor);
-
+        notifyObservers();
         return visitor.getResult();
     }
 

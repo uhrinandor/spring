@@ -10,10 +10,8 @@ import javax.swing.JPanel;
 
 import com.spring.graphics.panels.map.interfaces.RoadViewListener;
 import com.spring.models.field.IRoad;
-import com.spring.models.utils.IEntity;
-import com.spring.models.utils.IObserver;
 
-public class CrossRoadView extends JPanel implements IObserver{
+public class CrossRoadView extends JPanel{
     Point location;
     IRoad road;
     RoadViewListener listener;
@@ -22,19 +20,17 @@ public class CrossRoadView extends JPanel implements IObserver{
         super();
         this.road = road;
         this.location = location;
-        road.subscribe(this);
         setBounds(location.x, location.y, 50, 50);
         setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
         setBackground(Color.LIGHT_GRAY);
         this.setLayout(new GridBagLayout());
-        add(new JLabel(road.toString()));
-
-  
+        add(new JLabel(road.toString()));  
     }
-
-    @Override
-    public void notifyChange(IEntity entity) {
-        repaint();
+     public int getX(){
+        return location.x;
+    }
+    public int getY(){
+        return location.y;
     }
 
 }
