@@ -9,7 +9,7 @@ import com.spring.models.vehicle.IInventory;
 import com.spring.models.vehicle.IInventoryItem;
 import com.spring.models.vehicle.ISnowPlow;
 import com.spring.models.utils.Entity;
-import com.spring.models.utils.Tracer;
+
 
 /**
  * Olvasztja a rétegeket.

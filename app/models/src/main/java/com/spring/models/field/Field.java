@@ -7,7 +7,6 @@ import com.spring.models.layer.ILayer;
 import com.spring.models.layer.ISalt;
 import com.spring.models.random.IRandom;
 import com.spring.models.utils.Entity;
-import com.spring.models.utils.Tracer;
 import com.spring.models.vehicle.IDriver;
 import com.spring.models.vehicle.Vehicle;
 
