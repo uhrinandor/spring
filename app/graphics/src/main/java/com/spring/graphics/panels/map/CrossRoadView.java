@@ -19,4 +19,12 @@ public class CrossRoadView extends JPanel {
         setBounds(location.x, location.y, 50, 50);
         add(new JLabel(road.toString()));
     }
+     public int getX(){
+        return location.x;
+    }
+
+    public int getY(){
+        return location.y;
+    }
+
 }

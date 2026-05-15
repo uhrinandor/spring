@@ -73,6 +73,18 @@ public class FieldView  extends JPanel implements IObserver {
         }
     }
 
+    public int getX(){
+        return location.x;
+    }
+
+    public int getY(){
+        return location.y;
+    }
+
+    public IRField getField(){
+        return field;
+    }
+
     @Override
     public void notifyChange(IEntity entity) {
         loadBackground();
