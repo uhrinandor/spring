@@ -7,7 +7,6 @@ import com.spring.models.layer.ILayer;
 import com.spring.models.layer.ISalt;
 import com.spring.models.random.IRandom;
 import com.spring.models.utils.Entity;
-import com.spring.models.utils.Tracer;
 import com.spring.models.vehicle.IDriver;
 import com.spring.models.vehicle.Vehicle;
 
@@ -123,11 +122,13 @@ public class Field extends Entity implements IField {
             
             driver.setNext(available.get(0));
             v.step(true);
+            notifyObservers();
             return true;
         }
 
         
         vehicle.interact(this);
+        notifyObservers();
         return true;   
     }
     
@@ -152,6 +153,7 @@ public class Field extends Entity implements IField {
             return;
         } 
         vehicle = null;
+        notifyObservers();
     }
 
     /**
@@ -162,6 +164,7 @@ public class Field extends Entity implements IField {
         if(salt == null) return;
 
         layer = salt.melt(layer);
+        notifyObservers();
     }
 
     @Override
@@ -182,11 +185,13 @@ public class Field extends Entity implements IField {
     public void setVehicle(Vehicle v)
     {
         this.vehicle=v;
+        notifyObservers();
     }
 
     @Override
     public void setSalt(ISalt salt) {
         this.salt = salt;
+        notifyObservers();
     }
 
     @Override
