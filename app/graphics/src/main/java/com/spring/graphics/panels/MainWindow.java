@@ -4,9 +4,11 @@ import java.awt.Point;
 import java.util.Random;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import com.spring.controllers.controllers.InitController;
 import com.spring.controllers.utils.GameContext;
+import com.spring.graphics.panels.map.MapGenerator;
 import com.spring.graphics.panels.map.MapPanel;
 import com.spring.graphics.panels.map.interfaces.IMap;
 import com.spring.graphics.panels.menubars.InitView;
@@ -34,10 +36,34 @@ public class MainWindow extends JFrame {
         add(menuBar, BorderLayout.NORTH);
         add(mapPanel, BorderLayout.CENTER);
 
-        genMap(initController);
+        chooseAndGenerateMap(initController);
         renderBase(context, mapPanel);
 
         setVisible(true);
+    }
+
+    private void chooseAndGenerateMap(InitController initController) {
+        String[] maps = { "Map 1", "Map 2", "Map 3" };
+
+        String selectedMap = (String) JOptionPane.showInputDialog(
+                this,
+                "Válassz pályát:",
+                "Map választás",
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                maps,
+                maps[0]
+        );
+
+        MapGenerator mapGenerator = new MapGenerator(initController);
+
+        if (selectedMap == null || selectedMap.equals("Map 1")) {
+            mapGenerator.genMap1();
+        } else if (selectedMap.equals("Map 2")) {
+            mapGenerator.genMap2();
+        } else if (selectedMap.equals("Map 3")) {
+            mapGenerator.genMap3();
+        }
     }
 
     public void genMap(InitController initController) {
