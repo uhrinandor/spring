@@ -19,8 +19,7 @@ import com.spring.models.layer.ILayer;
 import com.spring.models.utils.IEntity;
 import com.spring.models.utils.IObserver;
 
-
-public class FieldView  extends JPanel implements IObserver {
+public class FieldView  extends JPanel implements IObserver{
     Point location;
     IRField field;
     List<Pin> pins;
@@ -71,6 +70,18 @@ public class FieldView  extends JPanel implements IObserver {
         if (background != null) {
             g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
         }
+    }
+
+    public int getX(){
+        return location.x;
+    }
+
+    public int getY(){
+        return location.y;
+    }
+
+    public IRField getField(){
+        return field;
     }
 
     @Override

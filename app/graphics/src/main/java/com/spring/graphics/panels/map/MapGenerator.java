@@ -323,6 +323,7 @@ public class MapGenerator {
         
     }
 
-    public void genMap3()
-    {}
+    public void genMap3(){
+        
+    }
 }

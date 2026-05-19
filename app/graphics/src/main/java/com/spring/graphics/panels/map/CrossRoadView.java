@@ -24,14 +24,22 @@ public class CrossRoadView extends JPanel implements IObserver{
         this.location = location;
         road.subscribe(this);
         setBounds(location.x, location.y, 50, 50);
-        setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
+        setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
         setBackground(Color.LIGHT_GRAY);
         this.setLayout(new GridBagLayout());
-        add(new JLabel(road.toString()));
-
-  
+        add(new JLabel(road.toString()));  
     }
-
+    @Override
+    public int getX(){
+        return location.x;
+    }
+    @Override
+    public int getY(){
+        return location.y;
+    }
+    public IRoad getCrossRoad(){
+        return this.road;
+    }
     @Override
     public void notifyChange(IEntity entity) {
         repaint();
