@@ -19,8 +19,7 @@ import com.spring.models.layer.ILayer;
 import com.spring.models.utils.IEntity;
 import com.spring.models.utils.IObserver;
 
-
-public class FieldView  extends JPanel implements IObserver {
+public class FieldView  extends JPanel implements IObserver{
     Point location;
     IRField field;
     FieldView front;

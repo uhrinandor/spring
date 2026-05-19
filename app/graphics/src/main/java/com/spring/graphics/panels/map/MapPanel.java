@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.RenderingHints;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -61,30 +62,47 @@ public class MapPanel extends JPanel implements IMap, RoadViewListener {
     @Override
     public void recalculateArrows(Graphics2D g2d) {
         for(FieldView from : fieldViews){
-            List<IField> available = from.getField().getFront().getAvailable();
+            boolean isCrossRoad = false;
+            IRoad front = from.getField().getFront(); 
+            List<IField> available = front.getAvailable();
             IRField right = from.getField().getRight();
             IRField left = from.getField().getLeft();
-
+            for(CrossRoadView to : crossRoadViews){
+                if(to.getCrossRoad()==front){
+                    isCrossRoad = true;
+                    drawConnection(g2d, from, to, false);
+                }
+            }
             for(FieldView to : fieldViews){
                 if(to.getField() == right || to.getField() == left){
                     drawConnection(g2d, from, to, true);
-                }else if(available.contains(to.getField())){
+                }else if(available.contains(to.getField())&& !isCrossRoad){
                     drawConnection(g2d, from, to , false);
                 }
-            }
+            }                       
+        }
+        for(CrossRoadView from : crossRoadViews ){
+            List<IField> available = from.getCrossRoad().getAvailable();
+            for(FieldView to : fieldViews){
+                if(available.contains(to.getField())){
+                    drawConnection(g2d, from, to , false);
+                }
+            }   
         }
     }
 
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g;
+        
+        Graphics2D g2d = (Graphics2D) g.create();
+
         recalculateArrows(g2d);
     }
 
 
     //Welp ehhez lehet kelleni fog egy paintComponets de idk hogy máshogy kéne vonalat rajzoltatni
-    private void drawConnection(Graphics2D g2d, FieldView from, FieldView to, boolean isSide) {
+    private void drawConnection(Graphics2D g2d, JPanel from, JPanel to, boolean isSide) {
         if (from == null || to == null) return;
 
         int x1 = from.getX() + from.getWidth() / 2;
@@ -99,28 +117,28 @@ public class MapPanel extends JPanel implements IMap, RoadViewListener {
         int my = (y1 + y2) / 2;
 
         double angle = Math.atan2(y2 - y1, x2 - x1);
-        drawArrowHead(g2d, mx, my, angle);
+        if(!isSide){
+            drawArrowHead(g2d, mx, my, angle);
+        }       
 
     }
 
     private void drawArrowHead(Graphics2D g2d, int x, int y, double angle) {
-    int size = 10;
-    double left  = angle + Math.toRadians(150);
-    double right = angle - Math.toRadians(150);
+        int size = 8;
 
-    int[] xPoints = {
-        x + (int)(Math.cos(angle) * size),
-        x + (int)(Math.cos(left)  * size),
-        x + (int)(Math.cos(right) * size)
-    };
-    int[] yPoints = {
-        y + (int)(Math.sin(angle) * size),
-        y + (int)(Math.sin(left)  * size),
-        y + (int)(Math.sin(right) * size)
-    };
+        int tipX = x + (int)(Math.cos(angle) * size);
+        int tipY = y + (int)(Math.sin(angle) * size);
 
-    g2d.fillPolygon(xPoints, yPoints, 3);
-}
+        int leftX  = x + (int)(Math.cos(angle + Math.toRadians(145)) * size);
+        int leftY  = y + (int)(Math.sin(angle + Math.toRadians(145)) * size);
+        int rightX = x + (int)(Math.cos(angle - Math.toRadians(145)) * size);
+        int rightY = y + (int)(Math.sin(angle - Math.toRadians(145)) * size);
+
+        int[] xPoints = { tipX, leftX, rightX };
+        int[] yPoints = { tipY, leftY, rightY };
+
+        g2d.fillPolygon(xPoints, yPoints, 3);
+    }
 
 
     @Override

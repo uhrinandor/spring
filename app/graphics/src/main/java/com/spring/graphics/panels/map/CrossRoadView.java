@@ -26,11 +26,16 @@ public class CrossRoadView extends JPanel{
         this.setLayout(new GridBagLayout());
         add(new JLabel(road.toString()));  
     }
-     public int getX(){
+    @Override
+    public int getX(){
         return location.x;
     }
+    @Override
     public int getY(){
         return location.y;
+    }
+    public IRoad getCrossRoad(){
+        return this.road;
     }
 
 }
