@@ -6,15 +6,21 @@ import java.util.Random;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import com.spring.controllers.controllers.CycleController;
 import com.spring.controllers.controllers.InitController;
+import com.spring.controllers.controllers.SnowPlowController;
+import com.spring.controllers.controllers.SnowPlowPlayerController;
 import com.spring.controllers.utils.GameContext;
 import com.spring.graphics.panels.map.MapGenerator;
 import com.spring.graphics.panels.map.MapPanel;
 import com.spring.graphics.panels.map.interfaces.IMap;
 import com.spring.graphics.panels.menubars.InitView;
+import com.spring.graphics.panels.menubars.SnowplowPlayerView;
+import com.spring.graphics.panels.menubars.SnowplowView;
 import com.spring.graphics.panels.menubars.MenuBar;
 import com.spring.models.field.IRField;
 import com.spring.models.layer.Layer;
+import com.spring.models.player.SnowplowPlayer;
 
 public class MainWindow extends JFrame {
     public MainWindow() {
@@ -26,13 +32,20 @@ public class MainWindow extends JFrame {
 
         GameContext context = new GameContext();
         InitController initController = new InitController(context);
+        CycleController cycleController = new CycleController(context);
+        SnowPlowController snowPlowController = new SnowPlowController();
+        snowPlowController.setPlayer(new SnowplowPlayer());
+        SnowPlowPlayerController snowPlowPlayerController = new SnowPlowPlayerController(cycleController, null);
+
         MapPanel mapPanel = new MapPanel(context);
         InitView initView = new InitView(mapPanel, initController);
+        SnowplowPlayerView snowplowPlayerView = new SnowplowPlayerView(snowPlowPlayerController);
+        SnowplowView snowplowView = new SnowplowView(snowPlowController);
 
         MenuBar menuBar = new MenuBar();
         setLayout(new BorderLayout());
 
-        menuBar.change(initView);
+        menuBar.change(snowplowView);
         add(menuBar, BorderLayout.NORTH);
         add(mapPanel, BorderLayout.CENTER);
 
