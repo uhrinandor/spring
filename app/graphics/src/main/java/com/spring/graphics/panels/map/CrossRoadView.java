@@ -45,9 +45,4 @@ public class CrossRoadView extends JPanel implements IObserver{
         repaint();
     }
 
-    @Override
-    public void notifyChange(IEntity entity) {
-        repaint();
-    }
-
 }
