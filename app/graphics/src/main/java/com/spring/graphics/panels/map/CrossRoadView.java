@@ -21,7 +21,7 @@ public class CrossRoadView extends JPanel{
         this.road = road;
         this.location = location;
         setBounds(location.x, location.y, 50, 50);
-        setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
+        setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
         setBackground(Color.LIGHT_GRAY);
         this.setLayout(new GridBagLayout());
         add(new JLabel(road.toString()));  

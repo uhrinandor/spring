@@ -153,8 +153,12 @@ public class MapGenerator {
 
     }
 
-    public void getMap2() {
+    public void genMap2() {
         
 
+    }
+
+    public void genMap3(){
+        
     }
 }

@@ -1,13 +1,11 @@
 package com.spring.graphics.panels.map;
 
 import java.awt.Color;
-import java.util.List;
-import java.awt.Point;
-import java.awt.Polygon;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.color.*;
-import java.awt.geom.AffineTransform;
+import java.awt.Point;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 
 import javax.swing.JPanel;
@@ -17,9 +15,9 @@ import com.spring.graphics.enums.SelectorMode;
 import com.spring.graphics.panels.map.interfaces.IMap;
 import com.spring.graphics.panels.map.interfaces.RoadViewListener;
 import com.spring.models.buildings.Building;
+import com.spring.models.field.IField;
 import com.spring.models.field.IRField;
 import com.spring.models.field.IRoad;
-import com.spring.models.field.IField;
 
 public class MapPanel extends JPanel implements IMap, RoadViewListener {
     SelectorMode selectorMode = null;
@@ -33,7 +31,7 @@ public class MapPanel extends JPanel implements IMap, RoadViewListener {
         this.context = context;
         setLayout(null);
         fieldViews = new ArrayList<FieldView>();
-        crossRoadViews = new ArrayList<CrossRoadView>();
+        crossRoadViews = new ArrayList<CrossRoadView>();  
     }
     
     @Override
@@ -62,25 +60,31 @@ public class MapPanel extends JPanel implements IMap, RoadViewListener {
 
     @Override
     public void recalculateArrows(Graphics2D g2d) {
-        for(int i = 0; i < fieldViews.size(); i++){
-            var from = fieldViews.get(i);
+        for(FieldView from : fieldViews){
             List<IField> available = from.getField().getFront().getAvailable();
             IRField right = from.getField().getRight();
             IRField left = from.getField().getLeft();
 
-            for(int c = 0; i+c < fieldViews.size(); c++){
-                var to = fieldViews.get(c+i);
+            for(FieldView to : fieldViews){
                 if(to.getField() == right || to.getField() == left){
-                    drawArrow(g2d, from, to, false);
+                    drawConnection(g2d, from, to, true);
+                }else if(available.contains(to.getField())){
+                    drawConnection(g2d, from, to , false);
                 }
             }
-
         }
+    }
+
+    @Override
+    public void paintComponent(Graphics g){
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g;
+        recalculateArrows(g2d);
     }
 
 
     //Welp ehhez lehet kelleni fog egy paintComponets de idk hogy máshogy kéne vonalat rajzoltatni
-    private void drawArrow(Graphics2D g2d, FieldView from, FieldView to, boolean isArrow) {
+    private void drawConnection(Graphics2D g2d, FieldView from, FieldView to, boolean isSide) {
         if (from == null || to == null) return;
 
         int x1 = from.getX() + from.getWidth() / 2;
@@ -88,30 +92,36 @@ public class MapPanel extends JPanel implements IMap, RoadViewListener {
         int x2 = to.getX() + to.getWidth() / 2;
         int y2 = to.getY() + to.getHeight() / 2;
 
-        g2d.setColor(isArrow ? Color.RED : Color.BLACK);
+        g2d.setColor(isSide ? Color.RED : Color.BLACK);
         g2d.drawLine(x1, y1, x2, y2);
 
-        if (isArrow) {
-            drawArrowHead(g2d, x1, y1, x2, y2);
-        }
-    }
+        int mx = (x1 + x2) / 2;
+        int my = (y1 + y2) / 2;
 
-    private void drawArrowHead(Graphics2D g2d, int x1, int y1, int x2, int y2) {
         double angle = Math.atan2(y2 - y1, x2 - x1);
-        int size = 12;
+        drawArrowHead(g2d, mx, my, angle);
 
-        AffineTransform tx = g2d.getTransform();
-        g2d.translate(x2, y2);
-        g2d.rotate(angle - Math.PI / 2);
-
-        Polygon head = new Polygon();
-        head.addPoint(0, 0);
-        head.addPoint(-6, -size);
-        head.addPoint(6, -size);
-
-        g2d.fill(head);
-        g2d.setTransform(tx);
     }
+
+    private void drawArrowHead(Graphics2D g2d, int x, int y, double angle) {
+    int size = 10;
+    double left  = angle + Math.toRadians(150);
+    double right = angle - Math.toRadians(150);
+
+    int[] xPoints = {
+        x + (int)(Math.cos(angle) * size),
+        x + (int)(Math.cos(left)  * size),
+        x + (int)(Math.cos(right) * size)
+    };
+    int[] yPoints = {
+        y + (int)(Math.sin(angle) * size),
+        y + (int)(Math.sin(left)  * size),
+        y + (int)(Math.sin(right) * size)
+    };
+
+    g2d.fillPolygon(xPoints, yPoints, 3);
+}
+
 
     @Override
     public void waitForField(Consumer<Integer> callback) {
