@@ -22,9 +22,6 @@ import com.spring.models.utils.IObserver;
 public class FieldView  extends JPanel implements IObserver{
     Point location;
     IRField field;
-    FieldView front;
-    FieldView left;
-    FieldView right;
     List<Pin> pins;
     RoadViewListener roadViewListener;
 

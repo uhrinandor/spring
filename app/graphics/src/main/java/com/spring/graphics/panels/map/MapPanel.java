@@ -48,6 +48,7 @@ public class MapPanel extends JPanel implements IMap, RoadViewListener {
     @Override
     public void addCrossRoad(IRoad field, Point location) { 
         CrossRoadView crossRoadView = new CrossRoadView(field, location);
+        crossRoadViews.add(crossRoadView);
         add(crossRoadView);
         revalidate();
         repaint();
