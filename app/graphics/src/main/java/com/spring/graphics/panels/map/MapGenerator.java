@@ -2,31 +2,55 @@ package com.spring.graphics.panels.map;
 
 
 
+import java.awt.Point;
 import java.util.List;
 
 import com.spring.controllers.controllers.InitController;
+import com.spring.graphics.panels.map.interfaces.IMap;
+import com.spring.models.buildings.Building;
+import com.spring.models.field.IRField;
+import com.spring.models.field.IRoad;
 import com.spring.models.layer.Ice;
 import com.spring.models.layer.Layer;
 import com.spring.models.layer.Snow;
 
 public class MapGenerator {
     private final InitController initController;
+    private final IMap map;
 
-    public MapGenerator(InitController initController) {
+    public MapGenerator(InitController initController, IMap map) {
         this.initController = initController;
+        this.map = map;
     }
 
     public void genMap1() {
-        initController.addField(new Snow(1), false); //0
-        initController.addField(new Snow(2), false); //1
-        initController.addField(new Ice(), false); //2
-        initController.addField(new Layer(), false); //3
-        initController.addField(new Snow(1), false); //4
-        initController.addField(new Ice(), false); //5
-        initController.addField(new Snow(2), false); //6
-        initController.addField(new Snow(1), false); //7
-        initController.addField(new Ice(), false); //8
-        initController.addField(new Layer(), false); //9
+        int step = 70;
+        int paddingX = 60;
+        int paddingY = 80;
+        IRField field;
+        IRoad crossRoad;
+        Building building;
+        
+        field = initController.addField(new Snow(1), false); //0
+        map.addField(field, new Point(paddingX, 4*step+paddingY));
+        field = initController.addField(new Snow(2), false); //1
+        map.addField(field, new Point(paddingX+step, 4*step+paddingY));
+        field = initController.addField(new Ice(), false); //2
+        map.addField(field, new Point(paddingX+2*step, 4*step+paddingY));
+        field = initController.addField(new Layer(), false); //3
+        map.addField(field, new Point(paddingX+3*step, 4*step+paddingY));
+        field = initController.addField(new Snow(1), false); //4
+        map.addField(field, new Point(paddingX+4*step, 4*step+paddingY));
+        field = initController.addField(new Ice(), false); //5
+        map.addField(field, new Point(paddingX, 5*step+paddingY));
+        field = initController.addField(new Snow(2), false); //6
+        map.addField(field, new Point(paddingX+step, 5*step+paddingY));
+        field = initController.addField(new Snow(1), false); //7
+        map.addField(field, new Point(paddingX+2*step, 5*step+paddingY));
+        field = initController.addField(new Ice(), false); //8
+        map.addField(field, new Point(paddingX+3*step, 5*step+paddingY));
+        field = initController.addField(new Layer(), false); //9
+        map.addField(field, new Point(paddingX+4*step, 5*step+paddingY));
 
         initController.setSide(true, 1, 0);
         initController.setSide(false, 1, 6);
@@ -43,29 +67,48 @@ public class MapGenerator {
         initController.setFrontField(7, 8);
         initController.setFrontField(8, 9);
 
-        initController.addField(new Snow(2), false); //10
-        initController.addField(new Snow(1), false); //11
-        initController.addCrossRoad(List.of(10, 11));
+        field = initController.addField(new Snow(2), false); //10
+        map.addField(field, new Point(paddingX+6*step, 4*step+paddingY));
+        field = initController.addField(new Snow(1), false); //11
+        map.addField(field, new Point(paddingX+6*step, 5*step+paddingY));
+        crossRoad = initController.addCrossRoad(List.of(10, 11));
+        map.addCrossRoad(crossRoad, new Point(paddingX+5*step, (int)(4.5*step+paddingY)));
         initController.setFrontCrossRoad(9, 0);
         initController.setFrontCrossRoad(4, 0);
         initController.setSide(true, 10, 11);
 
-        initController.addField(new Ice(), false); //12
-        initController.addField(new Layer(), false); //13
-        initController.addField(new Snow(1), false); //14
-        initController.addField(new Ice(), false); //15
-        initController.addField(new Snow(2), false); //16
-        initController.addField(new Snow(1), false); //17
-        initController.addField(new Snow(1), false); //18
-        initController.addField(new Snow(2), false); //19
-        initController.addField(new Ice(), false); //20
-        initController.addField(new Layer(), false); //21
-        initController.addField(new Snow(1), false); //22
-        initController.addField(new Ice(), false); //23
-        initController.addField(new Snow(2), false); //24
-        initController.addField(new Snow(1), false); //25
-        initController.addField(new Ice(), false); //26
-        initController.addField(new Layer(), false); //27
+        field = initController.addField(new Ice(), false); //12
+        map.addField(field, new Point(paddingX+7*step, 5*step+paddingY));
+        field = initController.addField(new Layer(), false); //13
+        map.addField(field, new Point(paddingX+8*step, 5*step+paddingY));
+        field = initController.addField(new Snow(1), false); //14
+        map.addField(field, new Point(paddingX+8*step, 4*step+paddingY));
+        field = initController.addField(new Ice(), false); //15
+        map.addField(field, new Point(paddingX+8*step, 3*step+paddingY));
+        field = initController.addField(new Snow(2), false); //16
+        map.addField(field, new Point(paddingX+8*step, 2*step+paddingY));
+        field = initController.addField(new Snow(1), false); //17
+        map.addField(field, new Point(paddingX+8*step, step+paddingY));
+        field = initController.addField(new Snow(1), false); //18
+        map.addField(field, new Point(paddingX+7*step, step+paddingY));
+        field = initController.addField(new Snow(2), false); //19
+        map.addField(field, new Point(paddingX+6*step, step+paddingY));
+        field = initController.addField(new Ice(), false); //20
+        map.addField(field, new Point(paddingX+5*step, step+paddingY));
+        field = initController.addField(new Layer(), false); //21
+        map.addField(field, new Point(paddingX+4*step, step+paddingY));
+        field = initController.addField(new Snow(1), false); //22
+        map.addField(field, new Point(paddingX+7*step, 4*step+paddingY));
+        field = initController.addField(new Ice(), false); //23
+        map.addField(field, new Point(paddingX+7*step, 3*step+paddingY));
+        field = initController.addField(new Snow(2), false); //24
+        map.addField(field, new Point(paddingX+7*step, 2*step+paddingY));
+        field = initController.addField(new Snow(1), false); //25
+        map.addField(field, new Point(paddingX+6*step, 2*step+paddingY));
+        field = initController.addField(new Ice(), false); //26
+        map.addField(field, new Point(paddingX+5*step, 2*step+paddingY));
+        field = initController.addField(new Layer(), false); //27
+        map.addField(field, new Point(paddingX+4*step, 2*step+paddingY));
         
 
         initController.setFrontField(11, 12);
@@ -95,17 +138,26 @@ public class MapGenerator {
         initController.setSide(true, 26, 20);
         initController.setSide(true, 27, 21);
 
-        initController.addField(new Ice(), false); //28
-        initController.addField(new Layer(), false); //29
+        field = initController.addField(new Ice(), false); //28
+        map.addField(field, new Point(paddingX+2*step, 2*step+paddingY));
+        field = initController.addField(new Layer(), false); //29
+        map.addField(field, new Point(paddingX+2*step, step+paddingY));
         initController.setSide(true, 28, 29);
+        
 
 
-        initController.addField(new Snow(1), false); //30
-        initController.addField(new Snow(1), false); //31
-        initController.addField(new Snow(2), false); //32
-        initController.addField(new Ice(), false); //33
-        initController.addField(new Layer(), false); //34
-        initController.addField(new Snow(1), false); //35
+        field = initController.addField(new Snow(1), false); //30
+        map.addField(field, new Point(paddingX+step, step+paddingY));
+        field = initController.addField(new Snow(1), false); //31
+        map.addField(field, new Point(paddingX, step+paddingY));
+        field = initController.addField(new Snow(2), false); //32
+        map.addField(field, new Point(paddingX, 2*step+paddingY));
+        field = initController.addField(new Ice(), false); //33
+        map.addField(field, new Point(paddingX, 3*step+paddingY));
+        field = initController.addField(new Layer(), false); //34
+        map.addField(field, new Point(paddingX+step, 2*step+paddingY));
+        field = initController.addField(new Snow(1), false); //35
+        map.addField(field, new Point(paddingX+step, 3*step+paddingY));
 
         initController.setFrontField(29, 30);
         initController.setFrontField(30, 31);
@@ -121,11 +173,15 @@ public class MapGenerator {
         initController.setSide(false, 34, 32);
         initController.setSide(true, 35, 33);
 
-        initController.addField(new Layer(), false); //36
-        initController.addField(new Snow(1), false); //37
-        initController.addField(new Ice(), false); //38
+        field = initController.addField(new Layer(), false); //36
+        map.addField(field, new Point(paddingX+3*step, 3*step+paddingY));
+        field = initController.addField(new Snow(1), false); //37
+        map.addField(field, new Point(paddingX+4*step, 3*step+paddingY));
+        field = initController.addField(new Ice(), false); //38
+        map.addField(field, new Point(paddingX+5*step, 3*step+paddingY));
 
-        initController.addCrossRoad(List.of(28, 29, 36));//1
+        crossRoad = initController.addCrossRoad(List.of(28, 29, 36));//1
+        map.addCrossRoad(crossRoad, new Point(paddingX+3*step, (int)(1.5*step+paddingY)));
         initController.setFrontCrossRoad(21, 1);
         initController.setFrontCrossRoad(27, 1);
       
@@ -134,41 +190,75 @@ public class MapGenerator {
         initController.setFrontCrossRoad(38, 0);
 
         //Buildings
-        initController.addHome(5);
-        initController.addHome(12);
-        initController.addHome(16);
-        initController.addHome(20);
-        initController.addHome(30);
-        initController.addHome(33);
+        building = initController.addHome(5);
+        map.addBuilding(building);
+        building = initController.addHome(12);
+        map.addBuilding(building);
+        building = initController.addHome(16);
+        map.addBuilding(building);
+        building = initController.addHome(20);
+        map.addBuilding(building);
+        building = initController.addHome(30);
+        map.addBuilding(building);
+        building = initController.addHome(33);
+        map.addBuilding(building);
 
-        initController.addOffice(2);
-        initController.addOffice(14);
-        initController.addOffice(19);
-        initController.addOffice(31);
-        initController.addOffice(35);
-        initController.addOffice(0);
+        building = initController.addOffice(2);
+        map.addBuilding(building);
+        building = initController.addOffice(14);
+        map.addBuilding(building);
+        building = initController.addOffice(19);
+        map.addBuilding(building);
+        building = initController.addOffice(31);
+        map.addBuilding(building);
+        building = initController.addOffice(35);
+        map.addBuilding(building);
+        building = initController.addOffice(0);
+        map.addBuilding(building);
 
-        initController.addStations(2, 24);
-        initController.addStations(28, 10);
-
+        List<Building> stations = initController.addStations(2, 24);
+        map.addBuilding(stations.get(0));
+        map.addBuilding(stations.get(1));
+        stations = initController.addStations(28, 10);
+        map.addBuilding(stations.get(0));
+        map.addBuilding(stations.get(1));
     }
 
     public void genMap2()
     {
+        int step = 70;
+        int paddingX = 20;
+        int paddingY = 20;
+        IRField field;
+        IRoad crossRoad;
+        Building building;
+
         //between crossroad 3 and 0
-        initController.addField(new Snow(1), false); //0
-        initController.addField(new Snow(2), false); //1
-        initController.addField(new Ice(), false); //2
-        initController.addField(new Layer(), false); //3
-        initController.addField(new Snow(1), false); //4
-        initController.addField(new Ice(), false); //5
-        initController.addField(new Snow(2), false); //6
-        initController.addField(new Snow(1), false); //7
-        initController.addField(new Ice(), false); //8
-        initController.addField(new Layer(), false); //9
-        initController.addField(new Snow(2), false); //10
-        initController.addField(new Snow(1), false); //11
-        
+        field = initController.addField(new Snow(1), false); //0
+        map.addField(field, new Point(paddingX+3*step, paddingY));
+        field = initController.addField(new Snow(2), false); //1
+        map.addField(field, new Point(paddingX+4*step, paddingY));
+        field = initController.addField(new Ice(), false); //2
+        map.addField(field, new Point(paddingX+5*step, paddingY));
+        field = initController.addField(new Layer(), false); //3
+        map.addField(field, new Point(paddingX+6*step, paddingY));
+        field = initController.addField(new Snow(1), false); //4
+        map.addField(field, new Point(paddingX+3*step, paddingY+step));
+
+        field = initController.addField(new Ice(), false); //5
+        map.addField(field, new Point(paddingX+4*step, paddingY+step));
+        field = initController.addField(new Snow(2), false); //6
+        map.addField(field, new Point(paddingX+5*step, paddingY+step));
+        field = initController.addField(new Snow(1), false); //7
+        map.addField(field, new Point(paddingX+6*step, paddingY+step));
+        field = initController.addField(new Ice(), false); //8
+        map.addField(field, new Point(paddingX+6*step, paddingY+2*step));
+        field = initController.addField(new Layer(), false); //9
+        map.addField(field, new Point(paddingX+5*step, paddingY+2*step));
+        field = initController.addField(new Snow(2), false); //10
+        map.addField(field, new Point(paddingX+4*step, paddingY+2*step));
+        field = initController.addField(new Snow(1), false); //11
+        map.addField(field, new Point(paddingX+3*step, paddingY+2*step));
 
         initController.setFrontField(0, 1);
         initController.setFrontField(1, 2);
@@ -185,27 +275,32 @@ public class MapGenerator {
         initController.setSide(true, 2, 6);
         initController.setSide(true, 3, 7);
 
-        initController.setSide(true, 4, 11);
-        initController.setSide(true, 5, 10);
-        initController.setSide(true, 6, 9);
-        initController.setSide(true, 7, 8);
-
         //crossroad 0
-        initController.addField(new Layer(), false); //12
-        initController.addField(new Snow(2), false); //13
-        initController.addCrossRoad(List.of(12, 13, 8));
+        field = initController.addField(new Layer(), false); //12
+        map.addField(field, new Point(paddingX+8*step, paddingY+3*step));
+        field = initController.addField(new Snow(2), false); //13
+        map.addField(field, new Point(paddingX+9*step, paddingY+3*step));
+        crossRoad = initController.addCrossRoad(List.of(12, 13, 8));
+        map.addCrossRoad(crossRoad, new Point(paddingX+8*step, paddingY+step));
         initController.setFrontCrossRoad(3, 0);
         initController.setFrontCrossRoad(7, 0);
         initController.setSide(true, 13, 12);
 
         //between crossroad 0 and 1
-        initController.addField(new Ice(), false); //14
-        initController.addField(new Layer(), false); //15
-        initController.addField(new Ice(), false); //16
-        initController.addField(new Layer(), false); //17
-        initController.addField(new Layer(), false); //18
-        initController.addField(new Ice(), false); //19
-        initController.addField(new Layer(), false); //20
+        field = initController.addField(new Ice(), false); //14
+        map.addField(field, new Point(paddingX+9*step, paddingY+4*step));
+        field = initController.addField(new Layer(), false); //15
+        map.addField(field, new Point(paddingX+9*step, paddingY+5*step));
+        field = initController.addField(new Ice(), false); //16
+        map.addField(field, new Point(paddingX+8*step, paddingY+4*step));
+        field = initController.addField(new Layer(), false); //17
+        map.addField(field, new Point(paddingX+8*step, paddingY+5*step));
+        field = initController.addField(new Layer(), false); //18
+        map.addField(field, new Point(paddingX+7*step, paddingY+5*step));
+        field = initController.addField(new Ice(), false); //19
+        map.addField(field, new Point(paddingX+7*step, paddingY+4*step));
+        field = initController.addField(new Layer(), false); //20
+        map.addField(field, new Point(paddingX+7*step, paddingY+3*step));
 
         initController.setFrontField(13, 14);
         initController.setFrontField(14, 15);
@@ -213,37 +308,48 @@ public class MapGenerator {
         initController.setFrontField(16, 17);
         initController.setFrontField(18, 19);
         initController.setFrontField(19, 20);
+
+        initController.setSide(true, 14, 16);
+        initController.setSide(true, 15, 17);
         
         initController.setFrontCrossRoad(20, 0);
 
         //crossroad 1
-        initController.addField(new Snow(1), false); //21
-        initController.addField(new Snow(2), false); //22
-        initController.addCrossRoad(List.of(21, 22, 18));
+        field = initController.addField(new Snow(1), false); //21
+        map.addField(field, new Point(paddingX+6*step, paddingY+7*step));
+        field = initController.addField(new Snow(2), false); //22
+        map.addField(field, new Point(paddingX+6*step, paddingY+8*step));
+        crossRoad = initController.addCrossRoad(List.of(21, 22, 18));
+        map.addCrossRoad(crossRoad, new Point(paddingX+8*step, paddingY+7*step));
         initController.setFrontCrossRoad(15, 1);
         initController.setFrontCrossRoad(17, 1);
         initController.setSide(true, 22, 21);
 
         //between crossroad 1 and 2
-        initController.addField(new Ice(), false); //23
-        initController.addField(new Layer(), false); //24
-        initController.addField(new Snow(1), false); //25
-        initController.addField(new Ice(), false); //26
-        initController.addField(new Snow(2), false); //27
-        initController.addField(new Snow(1), false); //28
-        initController.addField(new Ice(), false); //29
-        initController.addField(new Layer(), false); //30
-        initController.addField(new Snow(2), false); //31
-        initController.addField(new Snow(1), false); //32
+        field = initController.addField(new Ice(), false); //23
+        map.addField(field, new Point(paddingX+5*step, paddingY+8*step));
+        field = initController.addField(new Layer(), false); //24
+        map.addField(field, new Point(paddingX+4*step, paddingY+8*step));
+        field = initController.addField(new Snow(1), false); //25
+        map.addField(field, new Point(paddingX+3*step, paddingY+8*step));
+        field = initController.addField(new Ice(), false); //26
+        map.addField(field, new Point(paddingX+5*step, paddingY+7*step));
+        field = initController.addField(new Snow(2), false); //27
+        map.addField(field, new Point(paddingX+4*step, paddingY+7*step));
+        field = initController.addField(new Snow(1), false); //28
+        map.addField(field, new Point(paddingX+3*step, paddingY+7*step));
+        field = initController.addField(new Ice(), false); //29
+        map.addField(field, new Point(paddingX+3*step, paddingY+6*step));
+        field = initController.addField(new Layer(), false); //30
+        map.addField(field, new Point(paddingX+4*step, paddingY+6*step));
+        field = initController.addField(new Snow(2), false); //31
+        map.addField(field, new Point(paddingX+5*step, paddingY+6*step));
+        field = initController.addField(new Snow(1), false); //32
+        map.addField(field, new Point(paddingX+6*step, paddingY+6*step));
 
         initController.setSide(true, 23, 26);
         initController.setSide(true, 24, 27);
         initController.setSide(true, 25, 28);
-
-        initController.setSide(true, 21, 32);
-        initController.setSide(true, 26, 31);
-        initController.setSide(true, 27, 30);
-        initController.setSide(true, 28, 29);
         
         initController.setFrontField(22, 23);
         initController.setFrontField(23, 24);
@@ -260,28 +366,34 @@ public class MapGenerator {
         initController.setFrontCrossRoad(32, 1);
 
         //crossroad 2
-        initController.addField(new Ice(), false); //33
-        initController.addField(new Layer(), false); //34
-        initController.addCrossRoad(List.of(33, 34, 29));
+        field = initController.addField(new Ice(), false); //33
+        map.addField(field, new Point(paddingX+step, paddingY+5*step));
+        field = initController.addField(new Layer(), false); //34
+        map.addField(field, new Point(paddingX, paddingY+5*step));
+        crossRoad = initController.addCrossRoad(List.of(33, 34, 29));
+        map.addCrossRoad(crossRoad, new Point(paddingX+step, paddingY+7*step));
         initController.setFrontCrossRoad(28, 2);
         initController.setFrontCrossRoad(25, 2);
         initController.setSide(true, 34, 33);
 
         //between crossroad 2 and 3
-        initController.addField(new Snow(1), false); //35
-        initController.addField(new Ice(), false); //36
-        initController.addField(new Snow(2), false); //37
-        initController.addField(new Snow(1), false); //38
-        initController.addField(new Ice(), false); //39
-        initController.addField(new Layer(), false); //40
-        initController.addField(new Snow(2), false); //41
+        field = initController.addField(new Snow(1), false); //35
+        map.addField(field, new Point(paddingX, paddingY+4*step));
+        field = initController.addField(new Ice(), false); //36
+        map.addField(field, new Point(paddingX, paddingY+3*step));
+        field = initController.addField(new Snow(2), false); //37
+        map.addField(field, new Point(paddingX+step, paddingY+4*step));
+        field = initController.addField(new Snow(1), false); //38
+        map.addField(field, new Point(paddingX+step, paddingY+3*step));
+        field = initController.addField(new Ice(), false); //39
+        map.addField(field, new Point(paddingX+2*step, paddingY+3*step));
+        field = initController.addField(new Layer(), false); //40
+        map.addField(field, new Point(paddingX+2*step, paddingY+4*step));
+        field = initController.addField(new Snow(2), false); //41
+        map.addField(field, new Point(paddingX+2*step, paddingY+5*step));
 
         initController.setSide(true, 35, 37);
         initController.setSide(true, 36, 38);
-
-        initController.setSide(true, 33, 41);
-        initController.setSide(true, 37, 40);
-        initController.setSide(true, 38, 39);
        
         initController.setFrontField(34, 35);
         initController.setFrontField(35, 36);
@@ -295,30 +407,53 @@ public class MapGenerator {
         initController.setFrontCrossRoad(41, 2);
 
         //crossroad 3
-        initController.addCrossRoad(List.of(0, 4, 39));
+        crossRoad = initController.addCrossRoad(List.of(0, 4, 39));
+        map.addCrossRoad(crossRoad, new Point(paddingX+step, paddingY+step));
         initController.setFrontCrossRoad(36, 3);
         initController.setFrontCrossRoad(38, 3);
         initController.setFrontCrossRoad(11, 3);
 
         //buildings
-        initController.addHome(0);
-        initController.addHome(8);
-        initController.addHome(14);
-        initController.addHome(22);
-        initController.addHome(29);
-        initController.addHome(35);
+        
+        building = initController.addHome(0);
+        map.addBuilding(building);
+        building = initController.addHome(8);
+        map.addBuilding(building);
+        building = initController.addHome(14);
+        map.addBuilding(building);
+        building = initController.addHome(22);
+        map.addBuilding(building);
+        building = initController.addHome(29);
+        map.addBuilding(building);
+        building = initController.addHome(35);
+        map.addBuilding(building);
 
-        initController.addOffice(2);
-        initController.addOffice(13);
-        initController.addOffice(18);
-        initController.addOffice(25);
-        initController.addOffice(40);
-        initController.addOffice(34);
+        
+        building = initController.addOffice(2);
+        map.addBuilding(building);
+        building = initController.addOffice(13);
+        map.addBuilding(building);
+        building = initController.addOffice(18);
+        map.addBuilding(building);
+        building = initController.addOffice(25);
+        map.addBuilding(building);
+        building = initController.addOffice(40);
+        map.addBuilding(building);
+        building = initController.addOffice(34);
+        map.addBuilding(building);
 
-        initController.addStations(10, 31);
-        initController.addStations(15, 36);
-        initController.addStations(20, 24);
-        initController.addStations(41, 8);
+        List<Building> stations = initController.addStations(10, 31);
+        map.addBuilding(stations.get(0));
+        map.addBuilding(stations.get(1));
+        stations = initController.addStations(15, 36);
+        map.addBuilding(stations.get(0));
+        map.addBuilding(stations.get(1));
+        stations = initController.addStations(20, 24);
+        map.addBuilding(stations.get(0));
+        map.addBuilding(stations.get(1));
+        stations = initController.addStations(41, 8);
+        map.addBuilding(stations.get(0));
+        map.addBuilding(stations.get(1));
 
         
     }

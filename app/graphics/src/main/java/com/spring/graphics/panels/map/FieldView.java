@@ -1,6 +1,7 @@
 package com.spring.graphics.panels.map;
 
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
@@ -10,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.spring.graphics.panels.map.interfaces.RoadViewListener;
@@ -34,8 +34,9 @@ public class FieldView  extends JPanel implements IObserver{
         this.location = location;
         this.pins = new ArrayList<>();
         field.subscribe(this);
+        setLayout(new FlowLayout(FlowLayout.LEFT, 2, 2));
         setBounds(location.x, location.y, 50, 50);
-        add(new JLabel(String.format("%d", field.getId())));
+
         setBorder(BorderFactory.createLineBorder(Color.BLUE));        
         loadBackground(); 
 

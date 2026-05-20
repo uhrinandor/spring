@@ -1,9 +1,7 @@
 package com.spring.graphics.panels;
 import java.awt.BorderLayout;
 import java.awt.Image;
-import java.awt.Point;
 import java.util.List;
-import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -32,8 +30,6 @@ import com.spring.graphics.panels.menubars.MenuBar;
 import com.spring.graphics.panels.menubars.SnowplowPlayerView;
 import com.spring.graphics.panels.menubars.SnowplowView;
 import com.spring.models.buildings.Building;
-import com.spring.models.field.IRField;
-import com.spring.models.field.IRoad;
 import com.spring.models.player.BusPlayer;
 import com.spring.models.player.SnowplowPlayer;
 
@@ -45,7 +41,7 @@ public class MainWindow extends JFrame implements InitListener, CycleListener, O
     
     public MainWindow() {
         setTitle("Spring");
-        setSize(800, 600);
+        setSize(750, 800);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         setLocationRelativeTo(null);
@@ -68,10 +64,10 @@ public class MainWindow extends JFrame implements InitListener, CycleListener, O
         setVisible(true);
     }
 
-    private void chooseAndGenerateMap(InitController initController) {
+    private void chooseAndGenerateMap(InitController initController, MapPanel map) {
         String[] maps = { "Map 1", "Map 2", "Map 3" };
 
-        String selectedMap = (String) JOptionPane.showInputDialog(
+        String selectedMap = (String)JOptionPane.showInputDialog(
                 this,
                 "Válassz pályát:",
                 "Map választás",
@@ -81,7 +77,7 @@ public class MainWindow extends JFrame implements InitListener, CycleListener, O
                 maps[0]
         );
 
-        MapGenerator mapGenerator = new MapGenerator(initController);
+        MapGenerator mapGenerator = new MapGenerator(initController, map);
 
         if (selectedMap == null || selectedMap.equals("Map 1")) {
             mapGenerator.genMap1();
@@ -165,10 +161,10 @@ public class MainWindow extends JFrame implements InitListener, CycleListener, O
         add(menuBar, BorderLayout.NORTH);
         add(mapPanel, BorderLayout.CENTER);
 
-        chooseAndGenerateMap(initController);
+        chooseAndGenerateMap(initController, this.mapPanel);
 
         // TODO: ezt oldja meg a mapgenerator
-        for (IRField field: context.getFields()) {
+        /*for (IRField field: context.getFields()) {
             int x = new Random().nextInt(10, 700);
             int y = new Random().nextInt(10, 370);
             mapPanel.addField(field, new Point(x, y));
@@ -190,7 +186,7 @@ public class MainWindow extends JFrame implements InitListener, CycleListener, O
 
         for(Building building: context.getStations()){
             mapPanel.addBuilding(building);
-        }
+        }*/
 
         getContentPane().revalidate();
         getContentPane().repaint();

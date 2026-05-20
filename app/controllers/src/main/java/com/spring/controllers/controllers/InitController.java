@@ -137,7 +137,7 @@ public class InitController extends BaseController {
     }
 
     public void setFrontCrossRoad(int f, int r){
-        ctx.getFields().get(f).setFront(ctx.getFields().get(r));
+        ctx.getFields().get(f).setFront(ctx.getCrossRoads().get(r));
     }
 
     public void setFrontField(int f1, int f2){

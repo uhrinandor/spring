@@ -5,7 +5,6 @@ import java.awt.GridBagLayout;
 import java.awt.Point;
 
 import javax.swing.BorderFactory;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.spring.graphics.panels.map.interfaces.RoadViewListener;
@@ -27,7 +26,6 @@ public class CrossRoadView extends JPanel implements IObserver{
         setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
         setBackground(Color.LIGHT_GRAY);
         this.setLayout(new GridBagLayout());
-        add(new JLabel(String.format("%d", road.getId())));  
     }
     @Override
     public int getX(){
