@@ -99,9 +99,7 @@ public class InitController extends BaseController {
         tracer.info(String.format("%s added", player));
     }
 
-    /**
-     * Elindítja a játékot,
-     * amit átad a CycleControllernek, hogy átvegye a játék irányítását.ss
+
     public void start(){
         for(InitListener listener : initListeners){
             listener.onGameStarted(ctx);
