@@ -24,6 +24,10 @@ public class SnowPlowPlayerController extends BaseController {
         this.player = player;
     }
 
+    public SnowplowPlayer getPlayer(){
+        return player;
+    }
+
     public void addSnowPlowPlayerListener(SnowPlowPlayerListener listener){
         snowPlowPlayerListeners.add(listener);
     }
