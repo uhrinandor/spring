@@ -87,7 +87,7 @@ public class InitController extends BaseController {
         boolean found = false;
         Station station;
         for (Station s : ctx.getStations()){
-            if (s.getField().getVehicle() == null) {
+            if (s.getField().getVehicle() == null && found == false) {
                 found = true;
                 station = s;
             }
