@@ -163,31 +163,6 @@ public class MainWindow extends JFrame implements InitListener, CycleListener, O
 
         chooseAndGenerateMap(initController, this.mapPanel);
 
-        // TODO: ezt oldja meg a mapgenerator
-        /*for (IRField field: context.getFields()) {
-            int x = new Random().nextInt(10, 700);
-            int y = new Random().nextInt(10, 370);
-            mapPanel.addField(field, new Point(x, y));
-        }
-
-        for(IRoad road: context.getCrossRoads()){
-            int x = new Random().nextInt(10, 700);
-            int y = new Random().nextInt(10, 370);
-            mapPanel.addCrossRoad(road, new Point(x, y));
-        }
-
-        for(Building building: context.getHomes()){
-            mapPanel.addBuilding(building);
-        }
-
-        for(Building building: context.getOffices()){
-            mapPanel.addBuilding(building);
-        }
-
-        for(Building building: context.getStations()){
-            mapPanel.addBuilding(building);
-        }*/
-
         getContentPane().revalidate();
         getContentPane().repaint();
     }
