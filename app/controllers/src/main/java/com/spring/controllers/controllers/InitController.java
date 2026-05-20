@@ -2,6 +2,7 @@ package com.spring.controllers.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import com.spring.controllers.listeners.InitListener;
 import com.spring.controllers.utils.GameContext;
@@ -19,7 +20,6 @@ import com.spring.models.head.IHead;
 import com.spring.models.layer.ILayer;
 import com.spring.models.player.BusPlayer;
 import com.spring.models.player.SnowplowPlayer;
-import com.spring.models.random.Random;
 import com.spring.models.utils.Tracer;
 import com.spring.models.vehicle.Bus;
 import com.spring.models.vehicle.IDriver;
@@ -59,9 +59,20 @@ public class InitController extends BaseController {
         PlayerDriver driver = new PlayerDriver();
         Inventory inventory = new Inventory();
         IHead head = new Brush();
-
+        boolean searching = true;
+        int index;
+        List<IField> ListFields = ctx.getFields();
+        
         Snowplow snowplow = new Snowplow(driver, inventory, head, player);
         player.addVehicle(snowplow);
+
+        while (searching){
+            index = rand.nextInt(ctx.getFields().size());
+            if (ListFields.get(index).getVehicle() == null){
+                searching = false;
+                listFields().get(index).setVehicle(snowplow);
+            }
+        }
 
         ctx.getSnowplowPlayers().add(player);
         tracer.info(String.format("%s added", player));
@@ -73,23 +84,25 @@ public class InitController extends BaseController {
     public void addBusPlayer(){
         PlayerDriver driver = new PlayerDriver();
         BusPlayer  player = new BusPlayer();
-        Bus bus = new Bus(driver, null, player);
+        boolean found = false;
+        Station station;
+        for (Station s : ctx.getStations()){
+            if (s.getField().getVehicle() == null) {
+                found = true;
+                station = s;
+            }
+        }
+        Bus bus = new Bus(driver, station, player);
         player.setBus(bus);
-
+        station.getField().setVehicle(bus);
         ctx.getBusPlayers().add(player);
         tracer.info(String.format("%s added", player));
     }
 
     /**
      * Elindítja a játékot,
-     * amit átad a CycleControllernek, hogy átvegye a játék irányítását.
-     */
-    public void start(boolean deterministicMode){
-        if(deterministicMode){
-            tracer.info("Starting game in deterministic mode");
-            Tracer.changeDeterministicMode(deterministicMode);
-        }
-
+     * amit átad a CycleControllernek, hogy átvegye a játék irányítását.ss
+    public void start(){
         for(InitListener listener : initListeners){
             listener.onGameStarted(ctx);
         }

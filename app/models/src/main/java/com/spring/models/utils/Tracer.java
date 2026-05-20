@@ -11,7 +11,6 @@ public class Tracer {
     private int indentationLevel = 0;
     private static final String INDENT = "    ";
     private static boolean skeletonMode = false;
-    private static boolean deterministicMode = false;
     private static PrintStream stream = System.out;
     private static InputStream inputStream = System.in;
     private static Scanner scanner = new Scanner(inputStream);
@@ -41,14 +40,6 @@ public class Tracer {
      */
     public static void disableSkeletonMode(){
         skeletonMode = false;
-    }
-
-    public static void changeDeterministicMode(boolean value){
-        deterministicMode = value;
-    }
-
-    public static boolean isDeterministicMode(){
-        return deterministicMode;
     }
 
     /**
