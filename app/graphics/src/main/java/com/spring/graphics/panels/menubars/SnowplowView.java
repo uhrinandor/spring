@@ -1,14 +1,13 @@
 package com.spring.graphics.panels.menubars;
 
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import java.awt.GridLayout;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 import com.spring.controllers.controllers.SnowPlowController;
-import com.spring.controllers.controllers.SnowPlowPlayerController;
 import com.spring.graphics.components.BaseButton;
 
 public class SnowplowView extends JPanel {

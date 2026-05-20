@@ -11,7 +11,7 @@ public class MenuBar extends JPanel{
 
     public MenuBar() {
         setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(800, 150));
+        setPreferredSize(new Dimension(800, 90));
         setBackground(new Color(0xF5F5DC));
     }
 

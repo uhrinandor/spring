@@ -21,15 +21,10 @@ public class GameContext {
     List<IRoad> crossRoads = new ArrayList<>();
     List<Home> homes = new ArrayList<>();
     List<Office> offices = new ArrayList<>();
-    // Itt elég, ha csak az egyiket tároljuk a párból
     List<Station> stations = new ArrayList<>();
     List<SnowplowPlayer> snowplowPlayers = new ArrayList<>();
     List<BusPlayer> busPlayers = new ArrayList<>();
     List<Car> cars = new ArrayList<>();
-
-    /**
-     * Ez volt az eredeti ctr, nem tudom hogy van-e valami ami használja ilyen formátumban, úgyhogy egyelőre benthagyom
-     */
 
     public GameContext(int rounds, List<SnowplowPlayer> snowplowPlayers, List<BusPlayer> busPlayers) {
         this.fields = new ArrayList<>();
@@ -52,7 +47,6 @@ public class GameContext {
     public GameContext() {
         this.fields = new ArrayList<>();
         this.currentRound = 1;
-        //TODO Auto-generated constructor stub
     }
 
     public List<IField> getFields() {
@@ -110,14 +104,4 @@ public class GameContext {
     public void setIsSnowing(boolean isSnowing) {
         this.isSnowing = isSnowing;
     }
-
-//TODO: 
-
-    private void subscribeToAll(){}
-
-    private void subscribeToCars(){}
-
-    private void subscribeToBusPlayers(){}
-
-    private void subscribeToSnowPlowPlayers(){}
 }

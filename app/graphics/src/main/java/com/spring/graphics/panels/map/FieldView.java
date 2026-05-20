@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -31,9 +32,10 @@ public class FieldView  extends JPanel implements IObserver{
         super();
         this.field = field;
         this.location = location;
+        this.pins = new ArrayList<>();
         field.subscribe(this);
         setBounds(location.x, location.y, 50, 50);
-        add(new JLabel(field.toString()));
+        add(new JLabel(String.format("%d", field.getId())));
         setBorder(BorderFactory.createLineBorder(Color.BLUE));        
         loadBackground(); 
 
@@ -44,8 +46,14 @@ public class FieldView  extends JPanel implements IObserver{
                      roadViewListener.onFieldClicked(field);
                 }
             }
-        });       
-            
+        });           
+    }
+
+    public void addPin(Pin pin){
+        pins.add(pin);
+        add(pin);
+        revalidate();
+        repaint();
     }
 
     public void setListener(RoadViewListener listener) {

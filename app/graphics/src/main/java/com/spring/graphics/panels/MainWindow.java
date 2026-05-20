@@ -1,6 +1,11 @@
 package com.spring.graphics.panels;
 import java.awt.BorderLayout;
+import java.awt.Image;
+import java.awt.Point;
+import java.util.List;
+import java.util.Random;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
@@ -27,6 +32,8 @@ import com.spring.graphics.panels.menubars.MenuBar;
 import com.spring.graphics.panels.menubars.SnowplowPlayerView;
 import com.spring.graphics.panels.menubars.SnowplowView;
 import com.spring.models.buildings.Building;
+import com.spring.models.field.IRField;
+import com.spring.models.field.IRoad;
 import com.spring.models.player.BusPlayer;
 import com.spring.models.player.SnowplowPlayer;
 
@@ -42,7 +49,20 @@ public class MainWindow extends JFrame implements InitListener, CycleListener, O
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         setLocationRelativeTo(null);
+        try {
+            Image img = ImageIO.read(getClass().getResource("/logo/snowplow.jpeg"));
 
+            setIconImages(List.of(
+                img.getScaledInstance(16, 16, Image.SCALE_SMOOTH),
+                img.getScaledInstance(32, 32, Image.SCALE_SMOOTH),
+                img.getScaledInstance(64, 64, Image.SCALE_SMOOTH),
+                img.getScaledInstance(128, 128, Image.SCALE_SMOOTH)
+            ));
+
+            System.out.println("Icon loaded successfully.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         onNewGame();        
 
         setVisible(true);
@@ -146,6 +166,32 @@ public class MainWindow extends JFrame implements InitListener, CycleListener, O
         add(mapPanel, BorderLayout.CENTER);
 
         chooseAndGenerateMap(initController);
+
+        // TODO: ezt oldja meg a mapgenerator
+        for (IRField field: context.getFields()) {
+            int x = new Random().nextInt(10, 700);
+            int y = new Random().nextInt(10, 370);
+            mapPanel.addField(field, new Point(x, y));
+        }
+
+        for(IRoad road: context.getCrossRoads()){
+            int x = new Random().nextInt(10, 700);
+            int y = new Random().nextInt(10, 370);
+            mapPanel.addCrossRoad(road, new Point(x, y));
+        }
+
+        for(Building building: context.getHomes()){
+            mapPanel.addBuilding(building);
+        }
+
+        for(Building building: context.getOffices()){
+            mapPanel.addBuilding(building);
+        }
+
+        for(Building building: context.getStations()){
+            mapPanel.addBuilding(building);
+        }
+
         getContentPane().revalidate();
         getContentPane().repaint();
     }
