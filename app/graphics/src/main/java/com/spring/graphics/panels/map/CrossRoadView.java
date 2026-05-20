@@ -27,7 +27,7 @@ public class CrossRoadView extends JPanel implements IObserver{
         setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
         setBackground(Color.LIGHT_GRAY);
         this.setLayout(new GridBagLayout());
-        add(new JLabel(road.toString()));  
+        add(new JLabel(String.format("%d", road.getId())));  
     }
     @Override
     public int getX(){

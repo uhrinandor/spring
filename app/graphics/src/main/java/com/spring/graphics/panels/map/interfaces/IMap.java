@@ -2,6 +2,7 @@ package com.spring.graphics.panels.map.interfaces;
 
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.util.List;
 import java.util.function.Consumer;
 
 import com.spring.models.buildings.Building;
@@ -10,6 +11,7 @@ import com.spring.models.field.IRoad;
 
 public interface IMap {
     public void waitForField(Consumer<Integer> callback);
+    public void waitForField(Consumer<Integer> callback, List<IRField> fields);
     public void waitForCar(Consumer<Integer> callback);
     
     public void addField(IRField field, Point location);

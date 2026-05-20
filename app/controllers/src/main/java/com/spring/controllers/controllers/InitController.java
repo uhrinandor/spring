@@ -20,7 +20,6 @@ import com.spring.models.head.IHead;
 import com.spring.models.layer.ILayer;
 import com.spring.models.player.BusPlayer;
 import com.spring.models.player.SnowplowPlayer;
-import com.spring.models.utils.Tracer;
 import com.spring.models.vehicle.Bus;
 import com.spring.models.vehicle.IDriver;
 import com.spring.models.vehicle.Inventory;
@@ -85,7 +84,7 @@ public class InitController extends BaseController {
         PlayerDriver driver = new PlayerDriver();
         BusPlayer  player = new BusPlayer();
         boolean found = false;
-        Station station;
+        Station station = null;
         for (Station s : ctx.getStations()){
             if (s.getField().getVehicle() == null && found == false){
                 found = true;
@@ -112,7 +111,7 @@ public class InitController extends BaseController {
      * @param underGround aluljáró-e a mező
      */
     public IRField addField(ILayer layer, boolean underGround){
-        IField field = new Field(layer, null, null, null, null, new Random(), null, underGround);
+        IField field = new Field(layer, null, null, null, null, new com.spring.models.random.Random(), null, underGround);
         ctx.getFields().add(field);
 
         return field;

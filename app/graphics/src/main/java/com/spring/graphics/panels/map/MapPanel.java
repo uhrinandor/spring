@@ -21,6 +21,7 @@ import com.spring.models.field.IRoad;
 
 public class MapPanel extends JPanel implements IMap, RoadViewListener {
     SelectorMode selectorMode = null;
+    List<IRField> availablePicks;
     Consumer<Integer> callback = null;
     GameContext context;
     List<FieldView> fieldViews;
@@ -55,8 +56,15 @@ public class MapPanel extends JPanel implements IMap, RoadViewListener {
 
     @Override
     public void addBuilding(Building building) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addBuilding'");
+        IRField field = building.getField();
+
+        for(FieldView fieldView : fieldViews){
+            if(fieldView.getField() == field){
+                Pin buildingPin = new BuildingView(building);
+                fieldView.addPin(buildingPin);
+                break;
+            }
+        }
     }
 
     @Override
@@ -164,6 +172,17 @@ public class MapPanel extends JPanel implements IMap, RoadViewListener {
             callback.accept(context.getCars().indexOf(field.getVehicle()));
             selectorMode = null;
             callback = null;
+        }else if(selectorMode == SelectorMode.FROM_FIELD_LIST && callback != null && availablePicks != null && availablePicks.contains(field)){
+            callback.accept(availablePicks.indexOf(field));
+            selectorMode = null;
+            callback = null;            
         }
+    }
+
+    @Override
+    public void waitForField(Consumer<Integer> callback, List<IRField> fields) {
+        this.selectorMode = SelectorMode.FROM_FIELD_LIST;
+        this.availablePicks = fields;
+        this.callback = callback;
     }
 }
