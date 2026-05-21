@@ -135,15 +135,14 @@ public class MainWindow extends JFrame implements InitListener, CycleListener, O
     }
 
     @Override
-    public void onCarPlaced(Building building) {
-        JOptionPane.showMessageDialog(this, String.format("A new car has been placed next to %s", building.toString()), "New Car", JOptionPane.INFORMATION_MESSAGE);
-    }
+    public void onCarPlaced(Building building) {}
 
     @Override
     public void onGameStarted(GameContext context) {
         this.cycleController = new CycleController(context);
         cycleController.addCycleListener(this);
         cycleController.addCycleListener(this);
+        cycleController.cycle();
     }
 
     @Override
@@ -151,6 +150,7 @@ public class MainWindow extends JFrame implements InitListener, CycleListener, O
         getContentPane().removeAll();
         GameContext context = new GameContext();
         InitController initController = new InitController(context);
+        initController.addListener(this);
         this.mapPanel = new MapPanel(context);
         InitView initView = new InitView(mapPanel, initController);
 
