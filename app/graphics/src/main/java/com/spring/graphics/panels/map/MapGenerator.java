@@ -323,6 +323,168 @@ public class MapGenerator {
         
     }
 
-    public void genMap3()
-    {}
+    public void genMap3(){
+        initController.addField(new Snow(1), false); //0
+        initController.addField(new Snow(2), false); //1
+        initController.addField(new Ice(), false); //2
+        initController.addField(new Layer(), false); //3
+
+        initController.setFrontField(0 , 1);
+        initController.setFrontField(2, 3);
+
+        initController.addField(new Snow(1), false); //4
+        initController.addField(new Ice(), false); //5
+        initController.addField(new Snow(1), false); //6
+
+        initController.addCrossRoad(List.of(2, 4, 5, 6));//0
+        initController.setFrontCrossRoad(1, 0);
+
+        initController.addField(new Snow(1), false); //7
+        initController.addField(new Ice(), false); //8
+        initController.addField(new Layer(), false); //9
+
+        initController.setFrontField(4, 7);
+        initController.setFrontField(8, 9);
+        initController.setFrontCrossRoad(9, 0);
+
+        initController.addField(new Snow(2), false); //10
+        initController.addField(new Snow(1), false); //11
+        initController.addField(new Layer(), false); //12
+
+        initController.setFrontField(5, 10);
+        initController.setFrontField(11, 12);
+        initController.setFrontCrossRoad(12, 0);
+
+        initController.addField(new Snow(2), false); //13
+        initController.addField(new Ice(), false); //14
+        initController.addField(new Layer(), false); //15
+
+        initController.addCrossRoad(List.of(11, 13, 14, 15)); //1
+        initController.setFrontCrossRoad(10, 1);
+
+        initController.addField(new Ice(), false); //16
+        initController.addField(new Layer(), false); //17
+        initController.addField(new Layer(), false); //18
+
+        initController.setFrontField(13, 16);
+        initController.setFrontField(17, 18);
+        initController.setFrontCrossRoad(18, 1);
+
+        initController.addField(new Ice(), false); //19
+        initController.addField(new Layer(), false); //20
+        initController.addField(new Snow(1), false); //21
+
+        initController.setFrontField(14, 19);
+        initController.setFrontField(20, 21);
+        initController.setFrontCrossRoad(21, 1);
+
+        initController.addField(new Snow(2), false); //22
+        initController.addField(new Ice(), false); //23
+        initController.addField(new Layer(), false); //24
+
+        initController.setFrontField(15, 22);
+        initController.setFrontField(23, 24);
+        initController.setFrontCrossRoad(24, 1);
+
+        initController.addField(new Snow(1), false); //25
+        initController.addField(new Ice(), false); //26
+        initController.addField(new Snow(2), false); //27
+
+        initController.setFrontField(6, 25);
+        initController.setFrontField(26, 27);
+        initController.setFrontCrossRoad(27, 0);
+
+        //kulso kor
+        initController.addField(new Snow(1), false); //28
+        initController.addCrossRoad(List.of(26, 28));//2
+
+        initController.addField(new Ice(), false); //29
+        initController.addField(new Layer(), false); //30
+        initController.addField(new Snow(2), false); //31
+
+        initController.setFrontField(28, 29);
+        initController.setFrontField(30, 31);
+        initController.setFrontCrossRoad(31, 2);
+
+        initController.addField(new Snow(1), false); //32
+        initController.addCrossRoad(List.of(30, 23, 32)); //3
+        initController.setFrontCrossRoad(29, 3);
+        initController.setFrontCrossRoad(22, 3);
+
+        initController.addField(new Ice(), false); //33
+        initController.addField(new Layer(), false); //34
+        initController.setFrontField(32, 33);
+        initController.setFrontField(33, 34);
+
+        initController.addField(new Snow(1), false); //35
+        initController.addCrossRoad(List.of(20, 35)); //4
+        initController.setFrontCrossRoad(19, 4);
+        initController.setFrontCrossRoad(34, 4);
+
+        initController.addField(new Ice(), false); //36
+        initController.addField(new Snow(2), false); //37
+        initController.setFrontField(35, 36);
+        initController.setFrontField(36, 37);
+
+        initController.addField(new Snow(1), false); //38
+        initController.addCrossRoad(List.of(17, 38));//5
+        initController.setFrontCrossRoad(37, 5);
+        initController.setFrontCrossRoad(16, 5);
+
+        initController.addField(new Ice(), false); //39
+        initController.addField(new Layer(), false); //40
+        initController.addField(new Snow(2), false); //41
+        initController.setFrontField(38, 39);
+        initController.setFrontField(40, 41);
+        initController.setFrontCrossRoad(41, 5);
+
+        initController.addField(new Snow(1), false); //42
+        initController.addCrossRoad(List.of(40, 8, 42)); //6
+        initController.setFrontCrossRoad(7, 6);
+        initController.setFrontCrossRoad(39, 6);
+
+        initController.addField(new Snow(2), false); //43
+        initController.addField(new Snow(1), false); //44
+        initController.setFrontField(42, 43);
+        initController.setFrontField(43, 44);
+
+        initController.addField(new Snow(2), false); //45
+        initController.addCrossRoad(List.of(0, 45)); //7
+        initController.setFrontCrossRoad(44, 7);
+        initController.setFrontCrossRoad(3, 7);
+
+        initController.addField(new Ice(), false); //46
+        initController.addField(new Layer(), false); //47
+        initController.setFrontField(45, 46);
+        initController.setFrontField(46, 47);
+        initController.setFrontCrossRoad(47, 2);
+
+        //buildings
+        initController.addHome(0);
+        initController.addHome(8);
+        initController.addHome(11);
+        initController.addHome(25);
+        initController.addHome(17);
+        initController.addHome(19);
+        initController.addHome(22);
+        initController.addHome(38);
+        initController.addHome(32);
+
+        initController.addOffice(2);
+        initController.addOffice(9);
+        initController.addOffice(12);
+        initController.addOffice(27);
+        initController.addOffice(18);
+        initController.addOffice(21);
+        initController.addOffice(24);
+        initController.addOffice(47);
+        initController.addOffice(35);
+
+        initController.addStations(10, 45);
+        initController.addStations(15, 43);
+        initController.addStations(20, 0);
+        initController.addStations(41, 23);
+        initController.addStations(33, 3);
+        initController.addStations(30, 7);
+    }
 }
