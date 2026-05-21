@@ -149,4 +149,8 @@ public class SnowPlowController extends BaseController {
     public boolean addInventory(IInventoryItem item){
         return player.snowPlow().getInventory().addItem(item, 1);
     }
+
+    public SnowplowPlayer getSp(){
+        return player;
+    }
 }

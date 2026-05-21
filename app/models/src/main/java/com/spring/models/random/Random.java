@@ -3,7 +3,6 @@ package com.spring.models.random;
 import java.util.List;
 
 import com.spring.models.utils.Entity;
-import com.spring.models.utils.Tracer;
 
 /**
  * Valószínűség bekövetkezésének kiszámítása. Annak eldöntésére használja a program,
@@ -25,9 +24,7 @@ public class Random extends Entity implements IRandom{
     @Override
     public boolean nextBool(double probability) {
         boolean realRandom = new java.util.Random().nextDouble() < probability;
-        if(!Tracer.isDeterministicMode()) return realRandom;
-        
-        return Tracer.getInstance().askDeterministic("Megtörténjen?");
+        return realRandom;
     }
     
 }

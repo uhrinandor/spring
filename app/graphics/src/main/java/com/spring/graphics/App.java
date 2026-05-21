@@ -4,9 +4,6 @@ import javax.swing.SwingUtilities;
 
 import com.spring.graphics.panels.MainWindow;
 
-/**
- * Hello world!
- */
 public class App {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(MainWindow::new);
