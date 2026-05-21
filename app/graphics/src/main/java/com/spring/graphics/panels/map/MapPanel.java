@@ -67,35 +67,53 @@ public class MapPanel extends JPanel implements IMap, RoadViewListener {
         }
     }
 
+    /*
+    *   A függvény a mezők közötti nyilak összekötésére szolgál.
+    *   Ehhez először végig megy az összes Mezőhöz tartozó view-on,
+    *   kinyeri a mezőt a viewból és hogy mely másik mezőkkel kell összekötni
+    *   majd amikor talál egy mezőt, amihez hozzá kell kötni a jelenleg külső
+    *   loopban szereplőt olyankor ezekkel attribútomként meghívja az összeköttetés
+    *   rajzoló függvényt.
+    *   
+    *   A külső loop ehhez ketté van bontva, először a FIELD mezőkhöz tartozó
+    *   összeköttetéseket rajzolja ki, majd a CROSSROAD mezőkhöz tartozókat.
+    */
+
     @Override
     public void recalculateArrows(Graphics2D g2d) {
         for(FieldView from : fieldViews){
             boolean isCrossRoad = false;
             IRoad front = from.getField().getFront(); 
-            List<IField> available = front.getAvailable();
+            List<IField> available = new ArrayList<IField>(front.getAvailable());
             IRField right = from.getField().getRight();
-            IRField left = from.getField().getLeft();
             for(CrossRoadView to : crossRoadViews){
                 if(to.getCrossRoad()==front){
                     isCrossRoad = true;
                     drawConnection(g2d, from, to, false);
+                    break;
                 }
             }
             for(FieldView to : fieldViews){
-                if(to.getField() == right || to.getField() == left){
+                if(right == null && available.isEmpty()) break;
+
+                if(to.getField() == right){
                     drawConnection(g2d, from, to, true);
+                    right = null;
                 }else if(available.contains(to.getField())&& !isCrossRoad){
                     drawConnection(g2d, from, to , false);
+                    available.remove(to.getField());
                 }
             }                       
         }
         for(CrossRoadView from : crossRoadViews ){
-            List<IField> available = from.getCrossRoad().getAvailable();
+            List<IField> available = new ArrayList<IField>(from.getCrossRoad().getAvailable());
             for(FieldView to : fieldViews){
+                if(available.isEmpty()) break;
                 if(available.contains(to.getField())){
                     drawConnection(g2d, from, to , false);
+                    available.remove(to.getField());
                 }
-            }   
+            }
         }
     }
 
