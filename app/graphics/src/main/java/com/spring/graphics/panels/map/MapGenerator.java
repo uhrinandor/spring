@@ -454,7 +454,6 @@ public class MapGenerator {
         stations = initController.addStations(41, 8);
         map.addBuilding(stations.get(0));
         map.addBuilding(stations.get(1));
-
         
     }
 
