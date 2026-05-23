@@ -9,12 +9,10 @@ import javax.swing.JLabel;
 
 public class LegendButton extends BaseButton{
     int counter = 0;
-    Legend legend;
+    LegendDialog legend = new LegendDialog();
 
     public LegendButton(){
         super("Legend");
-
-        legend = new Legend();
 
         this.addActionListener(new ActionListener() {
             @Override
@@ -39,8 +37,7 @@ public class LegendButton extends BaseButton{
 
                     dialog.setVisible(true);
                 }
-                openLegend();
-                
+                openLegend();                
             }
         });
     }
