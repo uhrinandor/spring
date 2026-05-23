@@ -64,11 +64,4 @@ public class Legend extends JFrame{
         row.add(new JLabel(desc));
         return row;
     }
-
-    private void mapPicToName(){
-        Map.put("Broken ice","brokenice");
-
-    }
-
-
 }
