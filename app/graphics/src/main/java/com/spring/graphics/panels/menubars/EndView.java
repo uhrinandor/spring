@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.util.List;
 
 import javax.swing.BoxLayout;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -17,7 +18,9 @@ import com.spring.graphics.components.BaseButton;
 import com.spring.graphics.components.LegendButton;
 import com.spring.graphics.panels.map.interfaces.IMap;
 import com.spring.models.field.IRField;
-import com.spring.models.player .IPlayer;
+import com.spring.models.player.IPlayer;
+import com.spring.models.utils .IEntity;
+import com.spring.models.vehicle.Vehicle;
 
 public class EndView extends JPanel{
     EndController controller;
@@ -84,20 +87,15 @@ public class EndView extends JPanel{
 
     public void handleWinners(){
         var winners = controller.winners();
-        JPanel panel = new JPanel();
-        panel.setLayout(new FlowLayout(FlowLayout.CENTER));
         IPlayer spPlayer = winners.getFirst();
         IPlayer busPlayer = winners.getLast();
         String spWinner = spPlayer == null? "No winning Snowplow Player" : spPlayer.toString();
         String busWinner = busPlayer == null? "No winning Bus Player" : busPlayer.toString();
 
-        JLabel spWinnerLabel = new JLabel(spWinner);
-        JLabel busWinnerLabel = new JLabel(busWinner);
-
-        panel.add(spWinnerLabel);
-        panel.add(busWinnerLabel);
-
-        panel.setVisible(true);
+        JOptionPane.showMessageDialog(this, 
+            "Snowplow Winner: " + spWinner + "\n Bus Winner: " + busWinner,
+            "Winners",
+            JOptionPane.INFORMATION_MESSAGE);
     };
 
     public void handleNewGame(){
@@ -110,7 +108,7 @@ public class EndView extends JPanel{
             if (field == null) return;
 
             StringBuilder sb = new StringBuilder();
-            sb.append("Field #").append(field.getId()).append("\n\n");
+            sb.append(field.toString()).append("\n");
             List<String> props = field.init();
             for (String prop : props) {
                 sb.append("  - ").append(prop).append("\n");
@@ -120,7 +118,6 @@ public class EndView extends JPanel{
                 JTextArea textArea = new JTextArea(sb.toString());
                 textArea.setEditable(false);
                 JScrollPane scroll = new JScrollPane(textArea);
-                scroll.setPreferredSize(new java.awt.Dimension(300, 200));
 
                 JOptionPane.showMessageDialog(
                     this,
@@ -132,13 +129,79 @@ public class EndView extends JPanel{
         });
     }
 
-    public void handleGetSnowplows(){};
+    public void handleGetSnowplows(){
+        List<IEntity> items = controller.getSnowpowPlayers().stream()
+        .map(sp -> (IEntity) sp.vehicles().get(0))
+        .collect(java.util.stream.Collectors.toList());
+        showGetX("Snowplow", items);
+    };
 
-    public void handleGetSnowplowPlayer(){};
+    public void handleGetSnowplowPlayer(){
+        showGetX("Snowplow Player", new java.util.ArrayList<>(controller.getSnowpowPlayers()));
+    };
 
-    public void handleGetBus(){};
+    public void handleGetBus(){
+        List<IEntity> items = controller.getBusPlayers().stream()
+        .map(bp -> (IEntity) bp.vehicles().get(0))
+        .collect(java.util.stream.Collectors.toList());
+        showGetX("Bus", items);
+    };
 
-    public void handleGetCar(){};
+    public void handleGetCar(){
+        map.waitForCar(index ->{
+            Vehicle car = controller.getCar(index);
+            if(car == null) return;
+            StringBuilder sb = new StringBuilder();
+            sb.append(car.toString()).append("\n");
 
-    public void handleGetBusPlayer(){};
+            List<String> props = car.init();
+            for(String prop:props){
+                sb.append(" - ").append(prop).append("\n");
+            }
+
+            SwingUtilities.invokeLater(()-> {
+                JTextArea textArea = new JTextArea(sb.toString());
+                textArea.setEditable(false);
+                JScrollPane scroll = new JScrollPane(textArea);
+                JOptionPane.showMessageDialog(this, scroll, "Car info", JOptionPane.INFORMATION_MESSAGE);
+            });
+        } );
+    };
+
+    public void handleGetBusPlayer(){
+        showGetX("Bus Players", new java.util.ArrayList<>(controller.getBusPlayers()));
+    };
+
+    private void showGetX(String title, List<IEntity> items) {
+    if (items == null || items.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "No items found.", title, JOptionPane.INFORMATION_MESSAGE);
+        return;
+    }
+
+    JComboBox<IEntity> comboBox = new JComboBox<>(items.toArray( new IEntity[0]));
+    int result = JOptionPane.showConfirmDialog(
+        this,
+        comboBox,
+        title,
+        JOptionPane.OK_CANCEL_OPTION,
+        JOptionPane.PLAIN_MESSAGE
+    );
+
+    if (result != JOptionPane.OK_OPTION) return;
+
+    IEntity selected = (IEntity) comboBox.getSelectedItem();
+    if (selected == null) return;
+
+    StringBuilder sb = new StringBuilder();
+    sb.append(selected).append("\n\n");
+    for (String prop : selected.init()) {
+        sb.append("  - ").append(prop).append("\n");
+    }
+
+    JTextArea textArea = new JTextArea(sb.toString());
+    textArea.setEditable(false);
+    JScrollPane scroll = new JScrollPane(textArea);
+
+    JOptionPane.showMessageDialog(this, scroll, title + " Info", JOptionPane.INFORMATION_MESSAGE);
+}
 }
