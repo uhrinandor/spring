@@ -41,7 +41,7 @@ public class MainWindow extends JFrame implements InitListener, CycleListener, O
     
     public MainWindow() {
         setTitle("Spring");
-        setSize(750, 800);
+        setSize(860, 800);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         setLocationRelativeTo(null);
