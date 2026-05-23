@@ -42,8 +42,7 @@ public class FieldView  extends JPanel implements IObserver{
         setBounds(location.x, location.y, 50, 50);
 
         setBorder(field.isUnderGround()? BorderFactory.createLineBorder(new Color(165, 42, 42)) : BorderFactory.createLineBorder(Color.BLUE) );
-
-        setBorder(BorderFactory.createLineBorder(Color.BLUE));        
+            
         loadBackground();
 
         addMouseListener(new MouseAdapter() {
