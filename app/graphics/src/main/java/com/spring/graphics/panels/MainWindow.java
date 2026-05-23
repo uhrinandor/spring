@@ -130,7 +130,7 @@ public class MainWindow extends JFrame implements InitListener, CycleListener, O
     public void onGameEnd(SnowplowPlayer winner1, BusPlayer winner2) {
         EndController endController = new EndController(winner1, winner2, cycleController.getContext());
         endController.addEndListener(this);
-        EndView endView = new EndView(endController);
+        EndView endView = new EndView(endController,mapPanel);
         menuBar.change(endView);
     }
 
