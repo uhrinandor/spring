@@ -84,7 +84,13 @@ public class MapPanel extends JPanel implements IMap, RoadViewListener {
         for(FieldView from : fieldViews){
             boolean isCrossRoad = false;
             IRoad front = from.getField().getFront(); 
-            List<IField> available = new ArrayList<IField>(front.getAvailable());
+            List<IField> available;
+            if (front==null){
+                available=new ArrayList<IField>();
+            }
+            else{
+                available=new ArrayList<IField>(front.getAvailable());
+            }
             IRField right = from.getField().getRight();
             for(CrossRoadView to : crossRoadViews){
                 if(to.getCrossRoad()==front){
