@@ -242,22 +242,22 @@ public class MapGenerator {
         map.addField(field, new Point(paddingX+5*step, paddingY));
         field = initController.addField(new Layer(), false); //3
         map.addField(field, new Point(paddingX+6*step, paddingY));
-        field = initController.addField(new Snow(1), true); //4
+        field = initController.addField(new Snow(1), false); //4
         map.addField(field, new Point(paddingX+3*step, paddingY+step));
 
-        field = initController.addField(new Ice(), true); //5
+        field = initController.addField(new Ice(), false); //5
         map.addField(field, new Point(paddingX+4*step, paddingY+step));
-        field = initController.addField(new Snow(2), true); //6
+        field = initController.addField(new Snow(2), false); //6
         map.addField(field, new Point(paddingX+5*step, paddingY+step));
-        field = initController.addField(new Snow(1), true); //7
+        field = initController.addField(new Snow(1), false); //7
         map.addField(field, new Point(paddingX+6*step, paddingY+step));
-        field = initController.addField(new Ice(), false); //8
+        field = initController.addField(new Ice(), true); //8
         map.addField(field, new Point(paddingX+6*step, paddingY+2*step));
-        field = initController.addField(new Layer(), false); //9
+        field = initController.addField(new Layer(), true); //9
         map.addField(field, new Point(paddingX+5*step, paddingY+2*step));
-        field = initController.addField(new Snow(2), false); //10
+        field = initController.addField(new Snow(2), true); //10
         map.addField(field, new Point(paddingX+4*step, paddingY+2*step));
-        field = initController.addField(new Snow(1), false); //11
+        field = initController.addField(new Snow(1), true); //11
         map.addField(field, new Point(paddingX+3*step, paddingY+2*step));
 
         initController.setFrontField(0, 1);
@@ -315,7 +315,7 @@ public class MapGenerator {
         initController.setFrontCrossRoad(20, 0);
 
         //crossroad 1
-        field = initController.addField(new Snow(1), true); //21
+        field = initController.addField(new Snow(1), false); //21
         map.addField(field, new Point(paddingX+6*step, paddingY+7*step));
         field = initController.addField(new Snow(2), false); //22
         map.addField(field, new Point(paddingX+6*step, paddingY+8*step));
@@ -332,19 +332,19 @@ public class MapGenerator {
         map.addField(field, new Point(paddingX+4*step, paddingY+8*step));
         field = initController.addField(new Snow(1), false); //25
         map.addField(field, new Point(paddingX+3*step, paddingY+8*step));
-        field = initController.addField(new Ice(), true); //26
+        field = initController.addField(new Ice(), false); //26
         map.addField(field, new Point(paddingX+5*step, paddingY+7*step));
-        field = initController.addField(new Snow(2), true); //27
+        field = initController.addField(new Snow(2), false); //27
         map.addField(field, new Point(paddingX+4*step, paddingY+7*step));
-        field = initController.addField(new Snow(1), true); //28
+        field = initController.addField(new Snow(1), false); //28
         map.addField(field, new Point(paddingX+3*step, paddingY+7*step));
-        field = initController.addField(new Ice(), false); //29
+        field = initController.addField(new Ice(), true); //29
         map.addField(field, new Point(paddingX+3*step, paddingY+6*step));
-        field = initController.addField(new Layer(), false); //30
+        field = initController.addField(new Layer(), true); //30
         map.addField(field, new Point(paddingX+4*step, paddingY+6*step));
-        field = initController.addField(new Snow(2), false); //31
+        field = initController.addField(new Snow(2), true); //31
         map.addField(field, new Point(paddingX+5*step, paddingY+6*step));
-        field = initController.addField(new Snow(1), false); //32
+        field = initController.addField(new Snow(1), true); //32
         map.addField(field, new Point(paddingX+6*step, paddingY+6*step));
 
         initController.setSide(true, 23, 26);
