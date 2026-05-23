@@ -9,12 +9,9 @@ import javax.swing.JLabel;
 
 public class LegendButton extends BaseButton{
     int counter = 0;
-    Legend legend;
 
     public LegendButton(){
         super("Legend");
-
-        legend = new Legend();
 
         this.addActionListener(new ActionListener() {
             @Override
@@ -39,13 +36,13 @@ public class LegendButton extends BaseButton{
 
                     dialog.setVisible(true);
                 }
-                openLegend();
-                
+                openLegend();                
             }
         });
     }
 
     public void openLegend(){
+        LegendDialog legend = new LegendDialog();
         legend.setLocationRelativeTo(null);
         legend.setVisible(true);
     }
