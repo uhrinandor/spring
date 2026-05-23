@@ -6,16 +6,22 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import com.spring.models.buildings.Building;
+import com.spring.models.field.IField;
 import com.spring.models.field.IRField;
 import com.spring.models.field.IRoad;
 
 public interface IMap {
     public void waitForField(Consumer<Integer> callback);
-    public void waitForField(Consumer<Integer> callback, List<IRField> fields);
+
+    public void waitForField(Consumer<Integer> callback, List<IField> fields);
+
     public void waitForCar(Consumer<Integer> callback);
-    
+
     public void addField(IRField field, Point location);
+
     public void addCrossRoad(IRoad field, Point location);
+
     public void addBuilding(Building building);
+
     public void recalculateArrows(Graphics2D g2d);
 }

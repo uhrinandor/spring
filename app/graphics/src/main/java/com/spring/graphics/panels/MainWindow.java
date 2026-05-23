@@ -1,4 +1,5 @@
 package com.spring.graphics.panels;
+
 import java.awt.BorderLayout;
 import java.awt.Image;
 import java.util.List;
@@ -33,12 +34,13 @@ import com.spring.models.buildings.Building;
 import com.spring.models.player.BusPlayer;
 import com.spring.models.player.SnowplowPlayer;
 
-public class MainWindow extends JFrame implements InitListener, CycleListener, OnErrorListener, SnowPlowListener, SnowPlowPlayerListener, EndListener {
+public class MainWindow extends JFrame
+        implements InitListener, CycleListener, OnErrorListener, SnowPlowListener, SnowPlowPlayerListener, EndListener {
     MapPanel mapPanel;
     MenuBar menuBar;
     CycleController cycleController;
     SnowPlowPlayerController snowPlowPlayerController;
-    
+
     public MainWindow() {
         setTitle("Spring");
         setSize(750, 800);
@@ -49,17 +51,16 @@ public class MainWindow extends JFrame implements InitListener, CycleListener, O
             Image img = ImageIO.read(getClass().getResource("/logo/snowplow.jpeg"));
 
             setIconImages(List.of(
-                img.getScaledInstance(16, 16, Image.SCALE_SMOOTH),
-                img.getScaledInstance(32, 32, Image.SCALE_SMOOTH),
-                img.getScaledInstance(64, 64, Image.SCALE_SMOOTH),
-                img.getScaledInstance(128, 128, Image.SCALE_SMOOTH)
-            ));
+                    img.getScaledInstance(16, 16, Image.SCALE_SMOOTH),
+                    img.getScaledInstance(32, 32, Image.SCALE_SMOOTH),
+                    img.getScaledInstance(64, 64, Image.SCALE_SMOOTH),
+                    img.getScaledInstance(128, 128, Image.SCALE_SMOOTH)));
 
             System.out.println("Icon loaded successfully.");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        onNewGame();        
+        onNewGame();
 
         setVisible(true);
     }
@@ -67,15 +68,14 @@ public class MainWindow extends JFrame implements InitListener, CycleListener, O
     private void chooseAndGenerateMap(InitController initController, MapPanel map) {
         String[] maps = { "Map 1", "Map 2", "Map 3" };
 
-        String selectedMap = (String)JOptionPane.showInputDialog(
+        String selectedMap = (String) JOptionPane.showInputDialog(
                 this,
                 "Válassz pályát:",
                 "Map választás",
                 JOptionPane.QUESTION_MESSAGE,
                 null,
                 maps,
-                maps[0]
-        );
+                maps[0]);
 
         MapGenerator mapGenerator = new MapGenerator(initController, map);
 
@@ -111,6 +111,7 @@ public class MainWindow extends JFrame implements InitListener, CycleListener, O
 
     @Override
     public void nextSnowPlowPlayer(SnowplowPlayer player) {
+        mapPanel.refreshVehicles();
         snowPlowPlayerController = new SnowPlowPlayerController(cycleController, player);
         snowPlowPlayerController.addErrorListener(this);
         snowPlowPlayerController.addSnowPlowPlayerListener(this);
@@ -120,9 +121,11 @@ public class MainWindow extends JFrame implements InitListener, CycleListener, O
 
     @Override
     public void nextBusPlayer(BusPlayer player) {
+        mapPanel.refreshVehicles();
         BusPlayerController busPlayerController = new BusPlayerController(cycleController);
+        busPlayerController.setPlayer(player);
         busPlayerController.addErrorListener(this);
-        BusPlayerView busPlayerView = new BusPlayerView(busPlayerController);
+        BusPlayerView busPlayerView = new BusPlayerView(busPlayerController, mapPanel);
         menuBar.change(busPlayerView);
     }
 
@@ -135,7 +138,8 @@ public class MainWindow extends JFrame implements InitListener, CycleListener, O
     }
 
     @Override
-    public void onCarPlaced(Building building) {}
+    public void onCarPlaced(Building building) {
+    }
 
     @Override
     public void onGameStarted(GameContext context) {

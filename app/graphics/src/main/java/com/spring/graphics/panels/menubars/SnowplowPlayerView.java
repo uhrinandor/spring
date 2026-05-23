@@ -1,5 +1,4 @@
 package com.spring.graphics.panels.menubars;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;

@@ -3,6 +3,7 @@ package com.spring.graphics.panels.map;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
@@ -22,17 +23,19 @@ import com.spring.models.field.IRField;
 import com.spring.models.layer.ILayer;
 import com.spring.models.utils.IEntity;
 import com.spring.models.utils.IObserver;
+import com.spring.models.vehicle.Vehicle;
 
-public class FieldView  extends JPanel implements IObserver{
+public class FieldView extends JPanel implements IObserver {
     Point location;
     IRField field;
     List<Pin> pins;
     RoadViewListener roadViewListener;
     private Popup popup;
+    private VehicleView vehicleView;
 
     Image background;
 
-    public FieldView(IRField field, Point location){
+    public FieldView(IRField field, Point location) {
         super();
         this.field = field;
         this.location = location;
@@ -41,26 +44,24 @@ public class FieldView  extends JPanel implements IObserver{
         setLayout(new FlowLayout(FlowLayout.LEFT, 2, 2));
         setBounds(location.x, location.y, 50, 50);
 
-
-        setBorder(BorderFactory.createLineBorder(Color.BLUE));        
+        setBorder(BorderFactory.createLineBorder(Color.BLUE));
         loadBackground();
 
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                JLabel label = new JLabel( String.format("%d",field.getId()));
+                JLabel label = new JLabel(String.format("%d", field.getId()));
                 label.setOpaque(true);
-                label.setBackground(new Color(255,255,220));
+                label.setBackground(new Color(255, 255, 220));
                 label.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 
                 Point screen = e.getLocationOnScreen();
 
                 popup = PopupFactory.getSharedInstance().getPopup(
-                    FieldView.this,
-                    label,
-                    screen.x + 10,
-                    screen.y + 10
-                );
+                        FieldView.this,
+                        label,
+                        screen.x + 10,
+                        screen.y + 10);
 
                 popup.show();
             }
@@ -74,15 +75,15 @@ public class FieldView  extends JPanel implements IObserver{
             }
 
             @Override
-            public void mouseClicked(MouseEvent event){
-                if(roadViewListener != null){
-                     roadViewListener.onFieldClicked(field);
+            public void mouseClicked(MouseEvent event) {
+                if (roadViewListener != null) {
+                    roadViewListener.onFieldClicked(field);
                 }
             }
-        });           
+        });
     }
 
-    public void addPin(Pin pin){
+    public void addPin(Pin pin) {
         pins.add(pin);
         add(pin);
         revalidate();
@@ -93,11 +94,11 @@ public class FieldView  extends JPanel implements IObserver{
         this.roadViewListener = listener;
     }
 
-    private void loadBackground(){
+    private void loadBackground() {
         LayerImageVisitor visitor = new LayerImageVisitor();
         ILayer layer = field.getLayer();
 
-        if(layer != null){
+        if (layer != null) {
             layer.accept(visitor);
             background = visitor.getIcon().getImage();
         }
@@ -111,23 +112,31 @@ public class FieldView  extends JPanel implements IObserver{
         if (background != null) {
             g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
         }
+        if (vehicleView != null) {
+            int size = Pin.SIZE + 6;
+            int cx = (getWidth() - size) / 2;
+            int cy = (getHeight() - size) / 2;
+            vehicleView.drawOn((Graphics2D) g, cx, cy, size);
+        }
     }
 
-    public int getX(){
+    public int getX() {
         return location.x;
     }
 
-    public int getY(){
+    public int getY() {
         return location.y;
     }
 
-    public IRField getField(){
+    public IRField getField() {
         return field;
     }
 
     @Override
     public void notifyChange(IEntity entity) {
         loadBackground();
+        Vehicle v = field.getVehicle();
+        vehicleView = (v != null) ? new VehicleView(v) : null;
         repaint();
     }
 }
