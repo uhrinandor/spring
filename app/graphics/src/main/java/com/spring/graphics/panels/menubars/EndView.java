@@ -87,8 +87,8 @@ public class EndView extends JPanel{
 
     public void handleWinners(){
         var winners = controller.winners();
-        IPlayer spPlayer = winners.getFirst();
-        IPlayer busPlayer = winners.getLast();
+        IPlayer spPlayer = winners.get(0);
+        IPlayer busPlayer = winners.get(1);
         String spWinner = spPlayer == null? "No winning Snowplow Player" : spPlayer.toString();
         String busWinner = busPlayer == null? "No winning Bus Player" : busPlayer.toString();
 
@@ -183,6 +183,7 @@ public class EndView extends JPanel{
         this,
         comboBox,
         title,
+
         JOptionPane.OK_CANCEL_OPTION,
         JOptionPane.PLAIN_MESSAGE
     );
