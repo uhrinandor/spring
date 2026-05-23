@@ -46,9 +46,8 @@ public class EndView extends JPanel{
         BaseButton handleGetCar = new BaseButton("Car");
         BaseButton handleGetBusPlayer = new BaseButton("Bus Player");    
         
-        handleWinners.addActionListener(e -> handleWinners());
-        
-        handleGetField.addActionListener(e -> handleGetField());
+        handleWinners.addActionListener(e -> handleWinners());        
+        handleGetField.addActionListener(e -> map.waitForField(this::handleGetField));
         handleGetSnowplows.addActionListener(e -> handleGetSnowplows());
         handleGetSnowplowPlayer.addActionListener(e -> handleGetSnowplowPlayer());
         handleGetBus.addActionListener(e -> handleGetBus());
@@ -102,30 +101,28 @@ public class EndView extends JPanel{
         controller.newGame();
     };
 
-    public void handleGetField(){
-        map.waitForField(index -> {
-            IRField field = controller.getField(index);
-            if (field == null) return;
+    public void handleGetField(int index){
+        IRField field = controller.getField(index);
+        if (field == null) return;
 
-            StringBuilder sb = new StringBuilder();
-            sb.append(field.toString()).append("\n");
-            List<String> props = field.init();
-            for (String prop : props) {
-                sb.append("  - ").append(prop).append("\n");
-            }
+        StringBuilder sb = new StringBuilder();
+        sb.append(field.toString()).append("\n");
+        List<String> props = field.init();
+        for (String prop : props) {
+            sb.append("  - ").append(prop).append("\n");
+        }
 
-            SwingUtilities.invokeLater(() -> {
-                JTextArea textArea = new JTextArea(sb.toString());
-                textArea.setEditable(false);
-                JScrollPane scroll = new JScrollPane(textArea);
+        SwingUtilities.invokeLater(() -> {
+            JTextArea textArea = new JTextArea(sb.toString());
+            textArea.setEditable(false);
+            JScrollPane scroll = new JScrollPane(textArea);
 
-                JOptionPane.showMessageDialog(
-                    this,
-                    scroll,
-                    "Field Info",
-                    JOptionPane.INFORMATION_MESSAGE
-                );
-            });
+            JOptionPane.showMessageDialog(
+                this,
+                scroll,
+                "Field Info",
+                JOptionPane.INFORMATION_MESSAGE
+            );
         });
     }
 
