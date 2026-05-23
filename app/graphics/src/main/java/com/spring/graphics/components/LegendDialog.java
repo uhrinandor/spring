@@ -1,9 +1,9 @@
 package com.spring.graphics.components;
 
-import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 public class LegendDialog extends JDialog{
     public LegendDialog(){
         setTitle("Legend");
-        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+        setLayout(new BoxLayout(getContentPane(), BoxLayout.X_AXIS));
 
         List<Map> maps = mapMathcer();
 
@@ -25,72 +25,105 @@ public class LegendDialog extends JDialog{
         JPanel vehicles = new JPanel();
         JPanel connections = new JPanel();
 
-        fields.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        pins.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        vehicles.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        connections.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        fields.setLayout(new BoxLayout(fields, BoxLayout.Y_AXIS));
+        pins.setLayout(new BoxLayout(pins, BoxLayout.Y_AXIS));
+        vehicles.setLayout(new BoxLayout(vehicles, BoxLayout.Y_AXIS));
+        connections.setLayout(new BoxLayout(connections, BoxLayout.Y_AXIS));
 
-        fields.add(new JLabel("Fields: "));
-        pins.add(new JLabel("Pins - squares on the fields:"));        
-        vehicles.add(new JLabel("Vehicles: "));
-        connections.add(new JLabel("Connections: "));
+        JLabel fieldsLabel = new JLabel("Fields: ");
+        fieldsLabel.setAlignmentX(LEFT_ALIGNMENT);
+        JLabel pinsLabel = new JLabel("Pins - squares on the fields:");
+        pinsLabel.setAlignmentX(LEFT_ALIGNMENT);
+        JLabel vehiclesLabel = new JLabel("Vehicles: ");
+        vehiclesLabel.setAlignmentX(LEFT_ALIGNMENT);
+        JLabel connectionsLabel = new JLabel("Connections: ");
+        connectionsLabel.setAlignmentX(LEFT_ALIGNMENT);
+
+        fields.add(fieldsLabel);
+        pins.add(pinsLabel);        
+        vehicles.add(vehiclesLabel);
+        connections.add(connectionsLabel);
 
         int c = 0;
 
         for(Map<String,String> map : maps){
-            if(c<1){
-                for(String key : map.keySet()){
-                    createRowWithImage(map.get(key), key);
-                }
-                c++;
-            }else{
-                for(String key : map.keySet()){
-                    createRowWithDescription(map.get(key), key);
-                }
+            switch(c){
+                case 0: 
+                    for(String key : map.keySet()){
+                        fields.add(createRowWithImage(map.get(key), key));
+                    }
+                    c++;
+                    break;
+                case 1: 
+                    for(String key : map.keySet()){
+                        pins.add(createRowWithDescription(map.get(key), key));
+                    }
+                    c++;
+                    break;
+                case 2: 
+                    for(String key : map.keySet()){
+                        vehicles.add(createRowWithDescription(map.get(key), key));
+                    }
+                    c++;
+                    break;
+                case 3: 
+                    for(String key : map.keySet()){
+                        connections.add(createRowWithDescription(map.get(key), key));
+                    }
+                    c++;
+                    break;
+                
             }
         }
 
         add(fields);
+        add(pins);
         add(vehicles);
         add(connections);
 
-        fields.setVisible(true);
-        vehicles.setVisible(true);
-        connections.setVisible(true);
+        pack();
+        this.setVisible(false);
+        this.setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
     }
 
     private JPanel createRowWithImage(String iconPath, String labelText) {
-    JPanel row = new JPanel(new FlowLayout(FlowLayout.LEFT));
-    try {
-        ImageIcon icon = new ImageIcon(getClass().getResource(iconPath));
-        Image scaled = icon.getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH);
-        row.add(new JLabel(new ImageIcon(scaled)));
-    } catch (Exception e) {
-        row.add(new JLabel("?"));
-    }
-    row.add(new JLabel(labelText));
-    return row;
+        JPanel row = new JPanel(new GridLayout());
+        JLabel label = new JLabel(labelText);
+        label.setAlignmentX(LEFT_ALIGNMENT);
+        row.add(label);
+        try {
+            ImageIcon icon = new ImageIcon(getClass().getResource(iconPath));
+            Image scaled = icon.getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH);
+            JLabel imgLbl = new JLabel(new ImageIcon(scaled));
+            imgLbl.setAlignmentX(RIGHT_ALIGNMENT);
+            row.add(imgLbl);
+        } catch (Exception e) {
+            row.add(new JLabel("?"));
+        }
+        return row;
     }
 
     private JPanel createRowWithDescription(String desc, String label){
-        JPanel row = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel row = new JPanel(new GridLayout());
         row.add(new JLabel(label));
-        row.add(new JLabel(desc));
+        JLabel descr = new JLabel(desc);
+        descr.setAlignmentX(RIGHT_ALIGNMENT);
+        row.add(descr);
         return row;
     }
 
     private List<Map> mapMathcer(){
-        Map<String, String> fieldMap = new HashMap<>();
-        Map<String,String> pinMap = new HashMap<>();
-        Map<String,String> vehiclesMap = new HashMap<>();
-        Map<String,String> connectionsMap = new HashMap<>();
+        Map<String, String> fieldMap = new LinkedHashMap<>();
+        Map<String,String> pinMap = new LinkedHashMap<>();
+        Map<String,String> vehiclesMap = new LinkedHashMap<>();
+        Map<String,String> connectionsMap = new LinkedHashMap<>();
 
         fieldMap.put("Broken Ice","/fields/brokenice.jpeg");
         fieldMap.put("Compressed Snow","/fields/compressedsnow.jpeg");
         fieldMap.put("High Snow","/fields/highsnow.jpeg");
         fieldMap.put("Ice","/fields/ice.jpeg");
         fieldMap.put("Empty","/fields/layer.jpeg");
-        fieldMap.put("Snow","/fields/snow,jpeg");
+        fieldMap.put("Snow","/fields/snow.jpeg");
 
         pinMap.put("Station","");
         pinMap.put("Office","");

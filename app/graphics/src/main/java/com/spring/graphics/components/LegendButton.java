@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 
 public class LegendButton extends BaseButton{
     int counter = 0;
+    LegendDialog legend = new LegendDialog();
 
     public LegendButton(){
         super("Legend");
@@ -42,7 +43,6 @@ public class LegendButton extends BaseButton{
     }
 
     public void openLegend(){
-        LegendDialog legend = new LegendDialog();
         legend.setLocationRelativeTo(null);
         legend.setVisible(true);
     }
