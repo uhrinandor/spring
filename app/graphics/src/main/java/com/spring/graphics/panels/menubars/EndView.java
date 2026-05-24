@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
+import javax.swing.border.EmptyBorder;
 
 import com.spring.controllers.controllers.EndController;
 import com.spring.graphics.components.BaseButton;
@@ -74,6 +75,8 @@ public class EndView extends JPanel{
 
         bottom.add(handleNewGame, BorderLayout.WEST);
         bottom.add(legend, BorderLayout.EAST);
+
+         bottom.setBorder(new EmptyBorder(10,10,5,5));
 
         add(top);
         add(bottom);
