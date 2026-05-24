@@ -1,6 +1,7 @@
 package com.spring.models.field;
 
 import com.spring.models.layer.ILayer;
+import com.spring.models.layer.IRSalt;
 import com.spring.models.vehicle.Vehicle;
 
 public interface IRField extends IRoad{
@@ -19,4 +20,7 @@ public interface IRField extends IRoad{
     public Vehicle getVehicle();
 
     public IField getLeft();
+
+    //uj
+    public IRSalt getSalt();
 }

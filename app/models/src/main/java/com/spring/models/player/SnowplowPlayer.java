@@ -57,6 +57,7 @@ public class SnowplowPlayer extends Entity implements PurchaseContext, IPlayer{
     @Override
     public void give(int amount) {
         money += amount;
+        notifyObservers();
     }
 
     /**
@@ -88,6 +89,7 @@ public class SnowplowPlayer extends Entity implements PurchaseContext, IPlayer{
         }  
 
         money = m - amount;
+        notifyObservers();
         return true;
     }
 

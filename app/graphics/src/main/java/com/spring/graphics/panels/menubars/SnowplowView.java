@@ -22,18 +22,24 @@ import com.spring.models.head.IHead;
 import com.spring.models.head.IceBreaker;
 import com.spring.models.head.SaltSpreader;
 import com.spring.models.head.StoneSplasher;
+import com.spring.models.utils.IEntity;
+import com.spring.models.utils.IObserver;
 
-public class SnowplowView extends JPanel {
+public class SnowplowView extends JPanel implements IObserver {
     SnowPlowController controller;
     IMap map;
+
+    JLabel cashLabel;
+    JLabel playerIdLabel;
     public SnowplowView(SnowPlowController controller, IMap map){
         this.controller = controller;
         this.map = map;
         setLayout(new GridLayout(2, 6));
         JLabel menuLabel = new JLabel("Sp-selected Menu");
-        JLabel playerIdLabel = new JLabel("Player Id: " + controller.getSp().getId());
+        playerIdLabel = new JLabel("Player Id: " + controller.getSp().getId());
         
-        JLabel cashLabel = new JLabel("Cash: " + controller.getSp().getPoints());
+        cashLabel = new JLabel("Cash: " + controller.getSp().getPoints());
+        this.controller.getSp().subscribe(this);
 
         JButton stepButton = new BaseButton("Step");
         JButton shopButton = new BaseButton("Shop");
@@ -119,5 +125,14 @@ public class SnowplowView extends JPanel {
         "A fejcsere sikertelen"
             );
         }
+    }
+
+    @Override
+    public void notifyChange(IEntity entity) {
+        cashLabel.setText("Cash: " + controller.getSp().getPoints());
+        playerIdLabel.setText("Player Id: " + controller.getSp().getId());
+
+        revalidate();
+        repaint();
     }
 }

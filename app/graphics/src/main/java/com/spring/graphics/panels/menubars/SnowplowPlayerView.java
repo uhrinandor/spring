@@ -12,17 +12,22 @@ import java.awt.GridLayout;
 import com.spring.controllers.controllers.SnowPlowPlayerController;
 import com.spring.graphics.components.BaseButton;
 import com.spring.graphics.components.LegendButton;
+import com.spring.models.utils.IEntity;
+import com.spring.models.utils.IObserver;
 
-public class SnowplowPlayerView extends JPanel{
+public class SnowplowPlayerView extends JPanel implements IObserver{
     SnowPlowPlayerController controller;
+    JLabel cashLabel;
+    JLabel playerIdLabel;
 
     public SnowplowPlayerView(SnowPlowPlayerController controller){
         super();
         this.controller = controller;
         setLayout(new GridLayout(2, 6));
         JLabel menuLabel = new JLabel("Sp-player Menu");
-        JLabel playerIdLabel = new JLabel("Player Id: ");
-        JLabel cashLabel = new JLabel("Cash: ");
+        playerIdLabel = new JLabel("Player Id: " + controller.getPlayer().getId());
+        cashLabel = new JLabel("Cash: " + controller.getPlayer().getPoints());
+        this.controller.getPlayer().subscribe(this);
 
         BaseButton selectSpButton = new BaseButton("Select Sp");
         BaseButton buySpButton = new BaseButton("Buy Sp");
@@ -86,7 +91,6 @@ public class SnowplowPlayerView extends JPanel{
 
     public void handleStepAll(){
         controller.stepAll();
-        //next player-re léptet
     }
 
     public void handleAddMoney(){
@@ -107,6 +111,15 @@ public class SnowplowPlayerView extends JPanel{
                 JOptionPane.ERROR_MESSAGE
             );
         }
+    }
+
+    @Override
+    public void notifyChange(IEntity entity) {
+        playerIdLabel.setText("Player Id: " + controller.getPlayer().getId());
+        cashLabel.setText("Cash: " + controller.getPlayer().getPoints());
+
+        revalidate();
+        repaint();
     }
 
     

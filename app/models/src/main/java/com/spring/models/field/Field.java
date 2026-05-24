@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.spring.models.layer.ILayer;
+import com.spring.models.layer.IRSalt;
 import com.spring.models.layer.ISalt;
 import com.spring.models.random.IRandom;
 import com.spring.models.utils.Entity;
@@ -199,5 +200,8 @@ public class Field extends Entity implements IField {
         return vehicle;
     }
 
-    
+    @Override
+    public IRSalt getSalt() {
+        return salt;
+    }
 }

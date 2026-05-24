@@ -32,6 +32,7 @@ public class FieldView extends JPanel implements IObserver {
     RoadViewListener roadViewListener;
     private Popup popup;
     private VehicleView vehicleView;
+    SaltView saltView;
 
     Image background;
 
@@ -47,6 +48,12 @@ public class FieldView extends JPanel implements IObserver {
         setBorder(field.isUnderGround()? BorderFactory.createLineBorder(new Color(165, 42, 42)) : BorderFactory.createLineBorder(Color.BLUE) );
             
         loadBackground();
+
+        //*******
+        saltView = new SaltView();
+        saltView.setSalt(field.getSalt());
+        addPin(saltView);
+        //*******
 
         addMouseListener(new MouseAdapter() {
             @Override
@@ -138,6 +145,10 @@ public class FieldView extends JPanel implements IObserver {
         loadBackground();
         Vehicle v = field.getVehicle();
         vehicleView = (v != null) ? new VehicleView(v) : null;
+        //********** */
+        saltView.setSalt(field.getSalt());
+        revalidate();
+        //************** */
         repaint();
     }
 }
