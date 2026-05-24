@@ -19,10 +19,8 @@ import javax.swing.PopupFactory;
 
 import com.spring.graphics.panels.map.interfaces.RoadViewListener;
 import com.spring.graphics.utils.LayerImageVisitor;
-import com.spring.models.field.Field;
 import com.spring.models.field.IRField;
 import com.spring.models.layer.ILayer;
-import com.spring.models.layer.Salt;
 import com.spring.models.utils.IEntity;
 import com.spring.models.utils.IObserver;
 import com.spring.models.vehicle.Vehicle;
@@ -34,7 +32,6 @@ public class FieldView extends JPanel implements IObserver {
     RoadViewListener roadViewListener;
     private Popup popup;
     private VehicleView vehicleView;
-    SaltView saltView;
 
     Image background;
 
@@ -43,31 +40,13 @@ public class FieldView extends JPanel implements IObserver {
         this.field = field;
         this.location = location;
         this.pins = new ArrayList<>();
-       // field.subscribe(this);
+        field.subscribe(this);
         setLayout(new FlowLayout(FlowLayout.LEFT, 2, 2));
         setBounds(location.x, location.y, 50, 50);
 
         setBorder(field.isUnderGround()? BorderFactory.createLineBorder(new Color(165, 42, 42)) : BorderFactory.createLineBorder(Color.BLUE) );
             
         loadBackground();
-
-        //*******************
-
-        saltView = new SaltView();
-        addPin(saltView);
-
-        if (field instanceof Field) {
-            Object salt = ((Field) field).getSalt();
-
-            if (salt instanceof Salt) {
-                saltView.setSalt((Salt) salt);
-            } else {
-                saltView.setSalt(null);
-            }
-        }
-
-field.subscribe(this);
-        //***********
 
         addMouseListener(new MouseAdapter() {
             @Override
@@ -157,18 +136,6 @@ field.subscribe(this);
     @Override
     public void notifyChange(IEntity entity) {
         loadBackground();
-
-//***************
-if (field instanceof Field) {
-        Object salt = ((Field) field).getSalt();
-
-        if (salt instanceof Salt) {
-            saltView.setSalt((Salt) salt);
-        } else {
-            saltView.setSalt(null);
-        }
-    }
-//***************
         Vehicle v = field.getVehicle();
         vehicleView = (v != null) ? new VehicleView(v) : null;
         repaint();
