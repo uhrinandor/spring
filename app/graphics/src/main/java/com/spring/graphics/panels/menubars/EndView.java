@@ -76,7 +76,8 @@ public class EndView extends JPanel{
         bottom.add(handleNewGame, BorderLayout.WEST);
         bottom.add(legend, BorderLayout.EAST);
 
-         bottom.setBorder(new EmptyBorder(10,10,5,5));
+        bottom.setBorder(new EmptyBorder(10,10,5,5));
+        bottom.setOpaque(false);
 
         add(top);
         add(bottom);
