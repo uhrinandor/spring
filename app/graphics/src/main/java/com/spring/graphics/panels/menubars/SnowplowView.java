@@ -2,6 +2,7 @@ package com.spring.graphics.panels.menubars;
 
 
 import java.awt.GridLayout;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -92,38 +93,8 @@ public class SnowplowView extends JPanel {
                 options[0]
         );
         int index;
-        switch (choosen) {
-            case "DRAGON":
-                index = 0;
-                break;
-            case "STONESPLASHER":
-                index = 1;
-                break;
-            case "BRUSH":
-                index = 2;
-                break;
-            case "BROOM":
-                index = 3;
-                break;
-            case "SALTSPREADER":
-                index = 4;
-                break;
-            case "ICEBREAKER":
-                index = 5;
-                break;
-            case "STONE":
-                index = 6;
-                break;
-            case "SALT":
-                index = 7;
-                break;
-            case "BIOKEROSENE":
-                index = 8;
-                break;
-            default:
-                index = 0;
-                break;
-        }
+        List<String> optionsList = Arrays.asList(options);
+        index = optionsList.indexOf(choosen);
         controller.buy(index);
     }
 
@@ -152,8 +123,11 @@ public class SnowplowView extends JPanel {
                 options,
                 options[0]
         );
-        IHead head;
-        switch (choosen) {
+        List<IHead> heads = List.of(new Dragon(), new StoneSplasher(), new Brush(), new Broom(), new SaltSpreader(), new IceBreaker());
+        List<String> optionsList = Arrays.asList(options);
+        
+        IHead head = heads.get(optionsList.indexOf(choosen));
+        /*switch (choosen) {
             case "DRAGON":
                 head = new Dragon();
                 break;
@@ -175,11 +149,11 @@ public class SnowplowView extends JPanel {
             default:
                 head = new Brush();
                 break;
-        }
+        }*/
         if(!controller.switchHead(head)){
             JOptionPane.showMessageDialog(
             null,
-        "A vásárlás sikertelen"
+        "A fejcsere sikertelen"
             );
         }
     }
