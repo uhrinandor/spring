@@ -7,11 +7,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
+import com.spring.models.buildings.Building;
 import com.spring.models.field.IField;
 import com.spring.models.field.IRoad;
 import com.spring.models.utils.Entity;
-import com.spring.models.utils.Tracer;
-import com.spring.models.buildings.Building;
 
 /**
  * Ez az osztály felel az autó irányításáért, ez számolja ki a legrövidebb utat a munkahelyéig.
@@ -82,7 +81,7 @@ public class CarDriver extends Entity implements IDriver {
         while (cameFrom.get(step) != current) {
             step = cameFrom.get(step);
         }
-
+        if(step.getVehicle() != null) return null;
         next = step;
 
         return next;

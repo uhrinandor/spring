@@ -1,10 +1,10 @@
 package com.spring.graphics.panels.menubars;
 
+import java.awt.GridLayout;
+import java.util.List;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import java.awt.GridLayout;
-import java.awt.Label;
-import java.util.List;
 
 import com.spring.controllers.controllers.BusPlayerController;
 import com.spring.graphics.components.BaseButton;
@@ -26,7 +26,7 @@ public class BusPlayerView extends JPanel {
         add(new JLabel("Bus-player Menu"));
         add(new JLabel("Player Id: " + controller.info().toString()));
         add(new JLabel("Points: " + controller.info().getPoints()));
-        add(new JLabel("Target: " + controller.info().getBus().geStation().getPair().getField().getId()));
+        add(new JLabel("Target: " + controller.info().getBus().geStation().getField().getId()));
 
         BaseButton stepButton = new BaseButton("Step");
         BaseButton endTurnButton = new BaseButton("End Turn");
