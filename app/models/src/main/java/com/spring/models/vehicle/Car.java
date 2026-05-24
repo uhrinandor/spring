@@ -37,7 +37,11 @@ public class Car extends Vehicle {
      */
     @Override
     boolean canMove() {
-        return immobileTurnsLeft-- <= 0;
+        if (immobileTurnsLeft <= 0)
+            return true;
+        immobileTurnsLeft--;
+        notifyObservers();
+        return false;
     }
 
     /**
@@ -48,6 +52,7 @@ public class Car extends Vehicle {
     @Override
     public void contact(Vehicle v) {
         immobileTurnsLeft = 1;
+        notifyObservers();
     }
 
     /**
@@ -59,6 +64,7 @@ public class Car extends Vehicle {
             return;
         }
         destination.consume(this);
+        notifyObservers();
     }
 
     /**

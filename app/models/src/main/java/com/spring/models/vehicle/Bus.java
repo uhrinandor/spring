@@ -46,7 +46,11 @@ public class Bus extends Vehicle {
      */
     @Override
     boolean canMove() {
-        return immobileTurnsLeft-- <= 0;
+        if (immobileTurnsLeft <= 0)
+            return true;
+        immobileTurnsLeft--;
+        notifyObservers();
+        return false;
     }
 
     /**
@@ -57,6 +61,7 @@ public class Bus extends Vehicle {
     @Override
     public void contact(Vehicle v) {
         immobileTurnsLeft = 3;
+        notifyObservers();
     }
 
     /**
@@ -73,6 +78,7 @@ public class Bus extends Vehicle {
         station = pair;
 
         collector.give(1);
+        notifyObservers();
     }
 
     /**
