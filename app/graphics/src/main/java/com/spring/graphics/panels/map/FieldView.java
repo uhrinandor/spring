@@ -23,7 +23,6 @@ import com.spring.models.field.IRField;
 import com.spring.models.layer.ILayer;
 import com.spring.models.utils.IEntity;
 import com.spring.models.utils.IObserver;
-import com.spring.models.vehicle.Vehicle;
 
 public class FieldView extends JPanel implements IObserver {
     Point location;
@@ -31,7 +30,7 @@ public class FieldView extends JPanel implements IObserver {
     List<Pin> pins;
     RoadViewListener roadViewListener;
     private Popup popup;
-    private VehicleView vehicleView;
+    private final VehicleView vehicleView = new VehicleView();
 
     Image background;
 
@@ -44,8 +43,9 @@ public class FieldView extends JPanel implements IObserver {
         setLayout(new FlowLayout(FlowLayout.LEFT, 2, 2));
         setBounds(location.x, location.y, 50, 50);
 
-        setBorder(field.isUnderGround()? BorderFactory.createLineBorder(new Color(165, 42, 42)) : BorderFactory.createLineBorder(Color.BLUE) );
-            
+        setBorder(field.isUnderGround() ? BorderFactory.createLineBorder(new Color(165, 42, 42))
+                : BorderFactory.createLineBorder(Color.BLUE));
+
         loadBackground();
 
         addMouseListener(new MouseAdapter() {
@@ -113,12 +113,11 @@ public class FieldView extends JPanel implements IObserver {
         if (background != null) {
             g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
         }
-        if (vehicleView != null) {
-            int size = Pin.SIZE + 6;
-            int cx = (getWidth() - size) / 2;
-            int cy = (getHeight() - size) / 2;
-            vehicleView.drawOn((Graphics2D) g, cx, cy, size);
-        }
+
+        int size = Pin.SIZE + 6;
+        int cx = (getWidth() - size) / 2;
+        int cy = (getHeight() - size) / 2;
+        vehicleView.drawOn((Graphics2D) g, cx, cy, size);
     }
 
     public int getX() {
@@ -136,8 +135,7 @@ public class FieldView extends JPanel implements IObserver {
     @Override
     public void notifyChange(IEntity entity) {
         loadBackground();
-        Vehicle v = field.getVehicle();
-        vehicleView = (v != null) ? new VehicleView(v) : null;
+        vehicleView.setVehicle(field.getVehicle());
         repaint();
     }
 }

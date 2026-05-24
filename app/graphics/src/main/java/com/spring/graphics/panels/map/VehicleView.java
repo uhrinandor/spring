@@ -7,26 +7,63 @@ import java.awt.RenderingHints;
 
 import javax.swing.JPanel;
 
+import com.spring.models.utils.IEntity;
+import com.spring.models.utils.IObserver;
 import com.spring.models.vehicle.Vehicle;
 
-public class VehicleView extends JPanel {
+public class VehicleView extends JPanel implements IObserver {
 
     private static final Color IMMOBILE_COLOR = new Color(0xEA4335);
     private static final int BORDER_WIDTH = 3;
 
-    private final Color ringColor;
-    private final Color fillColor;
-    private final boolean immobile;
+    private Color ringColor = Color.GRAY;
+    private Color fillColor = Color.WHITE;
+    private boolean immobile = false;
+    private boolean active = false;
 
-    public VehicleView(Vehicle v) {
+    // CHANGE: keep reference to vehicle for unsubscribe on change
+    private Vehicle vehicle;
+
+    public VehicleView() {
+        // no-arg constructor for FieldView to create a fixed instance
+    }
+
+    /**
+     * Sets (or replaces) the vehicle this view observes.
+     * Unsubscribes from the old vehicle, subscribes to the new one.
+     */
+    public void setVehicle(Vehicle v) {
+        if (vehicle != null)
+            vehicle.unsubscribe(this);
+        vehicle = v;
+        if (vehicle != null) {
+            vehicle.subscribe(this);
+            refresh();
+            active = true;
+        } else {
+            active = false;
+        }
+    }
+
+    private void refresh() {
+        if (vehicle == null)
+            return;
         VehicleColorVisitor visitor = new VehicleColorVisitor();
-        v.accept(visitor);
-        this.ringColor = visitor.getRingColor();
-        this.fillColor = visitor.getFillColor();
-        this.immobile = visitor.isImmobile();
+        vehicle.accept(visitor);
+        ringColor = visitor.getRingColor();
+        fillColor = visitor.getFillColor();
+        immobile = visitor.isImmobile();
+    }
+
+    @Override
+    public void notifyChange(IEntity entity) {
+        refresh();
     }
 
     public void drawOn(Graphics2D g2, int cx, int cy, int size) {
+        if (!active)
+            return;
+
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         g2.setColor(fillColor);
