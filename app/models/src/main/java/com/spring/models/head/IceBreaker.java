@@ -7,7 +7,6 @@ import com.spring.models.layer.ILayer;
 import com.spring.models.shop.PurchaseContext;
 import com.spring.models.shop.ShopItem;
 import com.spring.models.utils.Entity;
-import com.spring.models.utils.Tracer;
 import com.spring.models.vehicle.IInventory;
 import com.spring.models.vehicle.ISnowPlow;
 
@@ -60,10 +59,10 @@ public class IceBreaker extends Entity implements IHead, ShopItem{
      * @param amount a megvásárolni kívánt IceBreaker-ek száma
      */
     @Override
-    public void apply(PurchaseContext ctx, int amount) {
+    public boolean apply(PurchaseContext ctx, int amount) {
         ISnowPlow sp = ctx.snowPlow();
         IInventory inventory = sp.getInventory();
-        inventory.addItem(this, amount);
+        return inventory.addItem(this, amount);
     }
 
     @Override

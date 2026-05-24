@@ -6,11 +6,11 @@ import com.spring.models.head.Item;
 import com.spring.models.random.IRandom;
 import com.spring.models.shop.PurchaseContext;
 import com.spring.models.shop.ShopItem;
+import com.spring.models.utils.Entity;
 import com.spring.models.vehicle.IInventory;
 import com.spring.models.vehicle.IInventoryItem;
 import com.spring.models.vehicle.ISnowPlow;
 import com.spring.models.vehicle.Vehicle;
-import com.spring.models.utils.Entity;
 
 public class Stone extends Entity implements ILayer, IInventoryItem, ShopItem{
     private ILayer previous;
@@ -44,10 +44,10 @@ public class Stone extends Entity implements ILayer, IInventoryItem, ShopItem{
     }
 
     @Override
-    public void apply(PurchaseContext ctx, int amount) {
+    public boolean apply(PurchaseContext ctx, int amount) {
         ISnowPlow sp = ctx.snowPlow();
         IInventory inv = sp.getInventory();
-        inv.addItem(this, amount);
+        return inv.addItem(this, amount);
     }
 
     @Override

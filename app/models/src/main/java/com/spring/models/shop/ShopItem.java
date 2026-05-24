@@ -11,5 +11,5 @@ public interface ShopItem extends RShopItem {
      * @param ctx a vásárlási kontextus, amire a vásárlás vonatkozik
      * @param amount a megvásárolni kívánt item mennyisége
      */
-    public void apply(PurchaseContext ctx, int amount);
+    public boolean apply(PurchaseContext ctx, int amount);
 }

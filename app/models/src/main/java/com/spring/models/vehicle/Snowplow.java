@@ -10,7 +10,6 @@ import com.spring.models.head.Item;
 import com.spring.models.player.ICollector;
 import com.spring.models.shop.PurchaseContext;
 import com.spring.models.shop.ShopItem;
-import com.spring.models.utils.Tracer;
 
 /**
  * Felelőssége az utak tisztán tartása. Ilyen járműveket irányítanak a hókotrós játékosok.
@@ -118,8 +117,9 @@ public class Snowplow extends Vehicle implements ISnowPlow, ShopItem{
     }
 
     @Override
-    public void apply(PurchaseContext ctx, int amount) {
+    public boolean apply(PurchaseContext ctx, int amount) {
         ctx.addVehicle(this);
+        return true;
     }
 
     public void setHead(IHead h){
