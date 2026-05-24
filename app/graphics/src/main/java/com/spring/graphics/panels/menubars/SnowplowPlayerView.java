@@ -1,12 +1,17 @@
 package com.spring.graphics.panels.menubars;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
 import com.spring.controllers.controllers.SnowPlowPlayerController;
 import com.spring.graphics.components.BaseButton;
+import com.spring.graphics.components.LegendButton;
 
 public class SnowplowPlayerView extends JPanel{
     SnowPlowPlayerController controller;
@@ -19,12 +24,18 @@ public class SnowplowPlayerView extends JPanel{
         JLabel playerIdLabel = new JLabel("Player Id: ");
         JLabel cashLabel = new JLabel("Cash: ");
 
-        JButton selectSpButton = new BaseButton("Select Sp");
-        JButton buySpButton = new BaseButton("Buy Sp");
-        JButton infoButton = new BaseButton("Info");
-        JButton endTurnButton = new BaseButton("End Turn");
-        JButton addCashButton = new BaseButton("Add Cash");
-        JButton legendButton = new BaseButton("Legend");
+        BaseButton selectSpButton = new BaseButton("Select Sp");
+        BaseButton buySpButton = new BaseButton("Buy Sp");
+        BaseButton infoButton = new BaseButton("Info");
+        BaseButton endTurnButton = new BaseButton("End Turn");
+        BaseButton addCashButton = new BaseButton("Add Cash");
+        LegendButton legendButton = new LegendButton();
+
+        buySpButton.addActionListener(e -> handleBuySnowplow());
+        selectSpButton.addActionListener(e -> handleSelect());
+        infoButton.addActionListener(e -> handleInfo());
+        endTurnButton.addActionListener(e -> handleStepAll());
+        addCashButton.addActionListener(e -> handleAddMoney());
 
         add(menuLabel);
         add(playerIdLabel);
@@ -42,10 +53,22 @@ public class SnowplowPlayerView extends JPanel{
 
     }
 
-    public void handleSelect(int sp1){
-        if(controller.getPlayer().vehicles().size() < sp1){
-            controller.select(sp1);
+    public void handleSelect(){
+        int length = controller.getPlayer().vehicles().size();
+        Integer[] indexes = new Integer[length];
+        for(int i = 0; i < length; i++){
+            indexes[i] = i+1;
         }
+        int selectedIndex = (int)JOptionPane.showInputDialog(
+                this,
+                "Válassz hókotrót",
+                "Hókotró választás",
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                indexes,
+                indexes[0]
+        );
+        controller.select(selectedIndex-1);
     }
 
     public void handleBuySnowplow(){
@@ -55,7 +78,7 @@ public class SnowplowPlayerView extends JPanel{
     public void handleInfo(){
         JOptionPane.showMessageDialog(
             null,
-            controller.getPlayer().init(),
+            "id: " + controller.info().getId() + "\nmoney: " + controller.info().getPoints() + "\n vehicles: " + controller.info().vehicles(),
             "Information",
             JOptionPane.INFORMATION_MESSAGE
         );

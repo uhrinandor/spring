@@ -43,7 +43,7 @@ public class MainWindow extends JFrame
 
     public MainWindow() {
         setTitle("Spring");
-        setSize(750, 800);
+        setSize(860, 800);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         setLocationRelativeTo(null);
@@ -133,7 +133,7 @@ public class MainWindow extends JFrame
     public void onGameEnd(SnowplowPlayer winner1, BusPlayer winner2) {
         EndController endController = new EndController(winner1, winner2, cycleController.getContext());
         endController.addEndListener(this);
-        EndView endView = new EndView(endController);
+        EndView endView = new EndView(endController,mapPanel);
         menuBar.change(endView);
     }
 
