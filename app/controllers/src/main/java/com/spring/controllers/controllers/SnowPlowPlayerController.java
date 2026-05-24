@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.spring.controllers.listeners.SnowPlowPlayerListener;
+import com.spring.controllers.utils.GameContext;
+import com.spring.models.field.IField;
 import com.spring.models.head.Broom;
 import com.spring.models.head.Brush;
 import com.spring.models.head.IHead;
@@ -19,16 +21,17 @@ public class SnowPlowPlayerController extends BaseController {
     List<SnowPlowPlayerListener> snowPlowPlayerListeners = new ArrayList<>();
     CycleController cycleController;
     SnowplowPlayer player;
+
     public SnowPlowPlayerController(CycleController cycleController, SnowplowPlayer player) {
         this.cycleController = cycleController;
         this.player = player;
     }
 
-    public SnowplowPlayer getPlayer(){
+    public SnowplowPlayer getPlayer() {
         return player;
     }
 
-    public void addSnowPlowPlayerListener(SnowPlowPlayerListener listener){
+    public void addSnowPlowPlayerListener(SnowPlowPlayerListener listener) {
         snowPlowPlayerListeners.add(listener);
     }
 
@@ -36,14 +39,14 @@ public class SnowPlowPlayerController extends BaseController {
         this.player = player;
     }
 
-    public SnowplowPlayer info(){
+    public SnowplowPlayer info() {
         return player;
     }
 
     /**
      * Új hókotró vásárlása a shopból
      */
-    public void buySnowPlow(){
+    public void buySnowPlow() {
         Random rand = new Random();
         PlayerDriver driver = new PlayerDriver();
         Inventory inventory = new Inventory();
@@ -53,13 +56,30 @@ public class SnowPlowPlayerController extends BaseController {
 
         Shop shop = new Shop();
         shop.buy(player, snowplow, 1);
-        // TODO: le kéne raknixd
+
+        if (!player.vehicles().contains(snowplow))
+            return;
+
+        GameContext context = cycleController.getContext();
+        List<IField> emptyFields = new ArrayList<>();
+        for (IField field : context.getFields()) {
+            if (field.getVehicle() == null)
+                emptyFields.add(field);
+        }
+
+        if (!emptyFields.isEmpty()) {
+            int index = (int) (Math.random() * emptyFields.size());
+            IField target = emptyFields.get(index);
+            target.setVehicle(snowplow);
+            driver.setCurrent(target);
+        }
     }
 
     /**
-     * Lépések végrehajtása, feltételezzük, hogy már beállította mindre a következő mezőt
+     * Lépések végrehajtása, feltételezzük, hogy már beállította mindre a következő
+     * mezőt
      */
-    public void stepAll(){
+    public void stepAll() {
         for (Vehicle snowplow : player.vehicles()) {
             snowplow.step();
         }
@@ -69,34 +89,36 @@ public class SnowPlowPlayerController extends BaseController {
 
     /**
      * Hókotró kiválasztása
+     * 
      * @param serial A hókotró sorszáma a készletben
      */
-    public void select(int serial){
-        if(player.vehicles().size() <= serial){
+    public void select(int serial) {
+        if (player.vehicles().size() <= serial) {
             error("No such snowplow with serial: " + serial);
             return;
         }
-        Snowplow selected = (Snowplow)player.vehicles().get(serial);
+        Snowplow selected = (Snowplow) player.vehicles().get(serial);
 
         player.setActive(selected);
 
-        for(SnowPlowPlayerListener listener : snowPlowPlayerListeners){
+        for (SnowPlowPlayerListener listener : snowPlowPlayerListeners) {
             listener.onSnowPlowSelected();
         }
     }
 
     /**
      * Pénz hozzáadása a játékoshoz
+     * 
      * @param amount A mennyiség
      */
-    public void addMoney(int amount){
+    public void addMoney(int amount) {
         player.give(amount);
     }
 
     /**
      * Következő játékosra lép
      */
-    public void nextPlayer(){
+    public void nextPlayer() {
         cycleController.nextPlayer();
     }
 }
