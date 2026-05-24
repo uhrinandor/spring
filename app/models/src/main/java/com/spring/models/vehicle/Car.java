@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.spring.models.buildings.Office;
 import com.spring.models.field.IField;
-import com.spring.models.utils.Tracer;
 
 /**
  * Az autó a pálya által irányított objektum amely egy random Home mellett
@@ -38,8 +37,7 @@ public class Car extends Vehicle {
      */
     @Override
     boolean canMove() {
-        boolean tmp = Tracer.getInstance().askInt("Mennyi ideig van lerobbanva az autó?", immobileTurnsLeft) == 0;
-        return tmp;
+        return immobileTurnsLeft-- <= 0;
     }
 
     /**

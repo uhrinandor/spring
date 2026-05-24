@@ -95,7 +95,11 @@ public class InitController extends BaseController {
                 station = s;
             }
         }
-        Bus bus = new Bus(driver, station, player);
+        if(!found){
+            error("Nincs elérhető állomás a busz számára!");
+            return;
+        }
+        Bus bus = new Bus(driver, station.getPair(), player);
         bus.getDriver().setCurrent(station.getField());
         player.setBus(bus);
         station.getField().setVehicle(bus);

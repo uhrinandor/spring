@@ -2,7 +2,6 @@ package com.spring.models.vehicle;
 
 import com.spring.models.field.IField;
 import com.spring.models.utils.Entity;
-import com.spring.models.utils.Tracer;
 
 /**
  * Absztrakt jármű ősosztály.
