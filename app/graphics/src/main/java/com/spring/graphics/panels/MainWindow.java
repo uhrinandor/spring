@@ -132,6 +132,7 @@ public class MainWindow extends JFrame
     @Override
     public void onGameEnd(SnowplowPlayer winner1, BusPlayer winner2) {
         EndController endController = new EndController(winner1, winner2, cycleController.getContext());
+        endController.addErrorListener(this);
         endController.addEndListener(this);
         EndView endView = new EndView(endController,mapPanel);
         menuBar.change(endView);
@@ -145,7 +146,7 @@ public class MainWindow extends JFrame
     public void onGameStarted(GameContext context) {
         this.cycleController = new CycleController(context);
         cycleController.addCycleListener(this);
-        cycleController.addCycleListener(this);
+        cycleController.addErrorListener(this);
         cycleController.cycle();
     }
 
@@ -155,6 +156,7 @@ public class MainWindow extends JFrame
         GameContext context = new GameContext();
         InitController initController = new InitController(context);
         initController.addListener(this);
+        initController.addErrorListener(this);
         this.mapPanel = new MapPanel(context);
         InitView initView = new InitView(mapPanel, initController);
 

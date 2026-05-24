@@ -5,7 +5,6 @@ import java.util.List;
 import com.spring.models.buildings.Station;
 import com.spring.models.field.IField;
 import com.spring.models.player.ICollector;
-import com.spring.models.utils.Tracer;
 
 /**
  * Célja minél több kört megtenni a két végállomása között.
@@ -39,7 +38,6 @@ public class Bus extends Vehicle {
 
     @Override
     public List<String> init() {
-
         return List.of("driver: " + driver, "station: " + station, "immobileTurnsLeft: " + immobileTurnsLeft);
     }
 
@@ -48,8 +46,11 @@ public class Bus extends Vehicle {
      */
     @Override
     boolean canMove() {
-        boolean tmp = Tracer.getInstance().askInt("Mennyi ideig van lerobbanva a busz?", immobileTurnsLeft) == 0;
-        return tmp;
+        if (immobileTurnsLeft <= 0)
+            return true;
+        immobileTurnsLeft--;
+        notifyObservers();
+        return false;
     }
 
     /**
@@ -60,6 +61,7 @@ public class Bus extends Vehicle {
     @Override
     public void contact(Vehicle v) {
         immobileTurnsLeft = 3;
+        notifyObservers();
     }
 
     /**
@@ -76,6 +78,7 @@ public class Bus extends Vehicle {
         station = pair;
 
         collector.give(1);
+        notifyObservers();
     }
 
     /**

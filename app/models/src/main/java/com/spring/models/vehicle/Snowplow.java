@@ -10,12 +10,12 @@ import com.spring.models.head.Item;
 import com.spring.models.player.ICollector;
 import com.spring.models.shop.PurchaseContext;
 import com.spring.models.shop.ShopItem;
-import com.spring.models.utils.Tracer;
 
 /**
- * Felelőssége az utak tisztán tartása. Ilyen járműveket irányítanak a hókotrós játékosok.
+ * Felelőssége az utak tisztán tartása. Ilyen járműveket irányítanak a hókotrós
+ * játékosok.
  */
-public class Snowplow extends Vehicle implements ISnowPlow, ShopItem{
+public class Snowplow extends Vehicle implements ISnowPlow, ShopItem {
     /**
      * Rendelkezik egy inventory-val, amiben a hókotrófejeket tartja.
      */
@@ -43,34 +43,37 @@ public class Snowplow extends Vehicle implements ISnowPlow, ShopItem{
     }
 
     /**
-     * Kicseréli a fejet a hókotrón, a régit visszateszi az inventoryba, és kiveszi az újat(ha tudja)
+     * Kicseréli a fejet a hókotrón, a régit visszateszi az inventoryba, és kiveszi
+     * az újat(ha tudja)
      */
     @Override
     public boolean switchHead(IHead head) {
-        if(inventory.removeItem(head, 1)){
+        if (inventory.removeItem(head, 1)) {
             inventory.addItem(activeHead, 1);
             activeHead = head;
+            notifyObservers();
             return true;
         }
         return false;
     }
 
-    public void setCollector(ICollector ic){
+    public void setCollector(ICollector ic) {
         collector = ic;
     }
 
-    public void setInventory(IInventory i){
+    public void setInventory(IInventory i) {
         inventory = i;
     }
-    
+
     @Override
     public List<String> init() {
         List<String> info = new ArrayList<>();
         info.add("activeHead: " + activeHead);
         info.add("inventory: " + inventory);
         Map<Item, Integer> inv = inventory.getMap();
-        for(Item item: List.of(Item.SALT, Item.ICEBREAKER, Item.BIOKEROSENE, Item.BRUSH, Item.BROOM, Item.SALTSPREADER, Item.DRAGON, Item.STONE, Item.STONESPLASHER)) {
-            info.add("  "+item + ": " + inv.getOrDefault(item, 0));
+        for (Item item : List.of(Item.SALT, Item.ICEBREAKER, Item.BIOKEROSENE, Item.BRUSH, Item.BROOM,
+                Item.SALTSPREADER, Item.DRAGON, Item.STONE, Item.STONESPLASHER)) {
+            info.add("  " + item + ": " + inv.getOrDefault(item, 0));
         }
         return info;
     }
@@ -87,19 +90,23 @@ public class Snowplow extends Vehicle implements ISnowPlow, ShopItem{
      * Hókotró nem tud összetörni
      */
     @Override
-    public void contact(Vehicle v) {}
+    public void contact(Vehicle v) {
+    }
 
     /**
-     * Hókotró interaktálás, meghívja a fejet, ha sikeres akkor a gyűjtőnek ad egy pontot
+     * Hókotró interaktálás, meghívja a fejet, ha sikeres akkor a gyűjtőnek ad egy
+     * pontot
      */
     @Override
-    public  void interact(IField f) {
-        if(activeHead.interact(f, inventory)) collector.give(1);
+    public void interact(IField f) {
+        if (activeHead.interact(f, inventory))
+            collector.give(1);
     }
-    
+
     /**
      * Lehetővé teszi a Visitor számára, hogy műveletet hajtson végre
      * ezen a hókotrón. (IceSlipVisitor, SnowExitVisitor)
+     * 
      * @param visitor akinek a hókotró engedélyezi a visit műveletet.
      */
     @Override
@@ -118,17 +125,18 @@ public class Snowplow extends Vehicle implements ISnowPlow, ShopItem{
     }
 
     @Override
-    public void apply(PurchaseContext ctx, int amount) {
+    public boolean apply(PurchaseContext ctx, int amount) {
         ctx.addVehicle(this);
+        return true;
     }
 
-    public void setHead(IHead h){
+    public void setHead(IHead h) {
         activeHead = h;
     }
-    
+
     @Override
-    public IHead getHead(){
+    public IHead getHead() {
         return activeHead;
     }
-    
+
 }
