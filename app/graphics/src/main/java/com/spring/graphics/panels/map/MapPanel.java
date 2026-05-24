@@ -21,7 +21,7 @@ import com.spring.models.field.IRoad;
 
 public class MapPanel extends JPanel implements IMap, RoadViewListener {
     SelectorMode selectorMode = null;
-    List<IRField> availablePicks;
+    List<IField> availablePicks;
     Consumer<Integer> callback = null;
     GameContext context;
     List<FieldView> fieldViews;
@@ -32,9 +32,9 @@ public class MapPanel extends JPanel implements IMap, RoadViewListener {
         this.context = context;
         setLayout(null);
         fieldViews = new ArrayList<FieldView>();
-        crossRoadViews = new ArrayList<CrossRoadView>();  
+        crossRoadViews = new ArrayList<CrossRoadView>();
     }
-    
+
     @Override
     public void addField(IRField field, Point location) {
         FieldView fieldView = new FieldView(field, location);
@@ -46,7 +46,7 @@ public class MapPanel extends JPanel implements IMap, RoadViewListener {
     }
 
     @Override
-    public void addCrossRoad(IRoad field, Point location) { 
+    public void addCrossRoad(IRoad field, Point location) {
         CrossRoadView crossRoadView = new CrossRoadView(field, location);
         crossRoadViews.add(crossRoadView);
         add(crossRoadView);
@@ -58,8 +58,8 @@ public class MapPanel extends JPanel implements IMap, RoadViewListener {
     public void addBuilding(Building building) {
         IRField field = building.getField();
 
-        for(FieldView fieldView : fieldViews){
-            if(fieldView.getField() == field){
+        for (FieldView fieldView : fieldViews) {
+            if (fieldView.getField() == field) {
                 Pin buildingPin = new BuildingView(building);
                 fieldView.addPin(buildingPin);
                 break;
@@ -68,20 +68,20 @@ public class MapPanel extends JPanel implements IMap, RoadViewListener {
     }
 
     /*
-    *   A függvény a mezők közötti nyilak összekötésére szolgál.
-    *   Ehhez először végig megy az összes Mezőhöz tartozó view-on,
-    *   kinyeri a mezőt a viewból és hogy mely másik mezőkkel kell összekötni
-    *   majd amikor talál egy mezőt, amihez hozzá kell kötni a jelenleg külső
-    *   loopban szereplőt olyankor ezekkel attribútomként meghívja az összeköttetés
-    *   rajzoló függvényt.
-    *   
-    *   A külső loop ehhez ketté van bontva, először a FIELD mezőkhöz tartozó
-    *   összeköttetéseket rajzolja ki, majd a CROSSROAD mezőkhöz tartozókat.
-    */
+     * A függvény a mezők közötti nyilak összekötésére szolgál.
+     * Ehhez először végig megy az összes Mezőhöz tartozó view-on,
+     * kinyeri a mezőt a viewból és hogy mely másik mezőkkel kell összekötni
+     * majd amikor talál egy mezőt, amihez hozzá kell kötni a jelenleg külső
+     * loopban szereplőt olyankor ezekkel attribútomként meghívja az összeköttetés
+     * rajzoló függvényt.
+     * 
+     * A külső loop ehhez ketté van bontva, először a FIELD mezőkhöz tartozó
+     * összeköttetéseket rajzolja ki, majd a CROSSROAD mezőkhöz tartozókat.
+     */
 
     @Override
     public void recalculateArrows(Graphics2D g2d) {
-        for(FieldView from : fieldViews){
+        for (FieldView from : fieldViews) {
             boolean isCrossRoad = false;
             IRoad front = from.getField().getFront(); 
             List<IField> available;
@@ -92,31 +92,33 @@ public class MapPanel extends JPanel implements IMap, RoadViewListener {
                 available=new ArrayList<IField>(front.getAvailable());
             }
             IRField right = from.getField().getRight();
-            for(CrossRoadView to : crossRoadViews){
-                if(to.getCrossRoad()==front){
+            for (CrossRoadView to : crossRoadViews) {
+                if (to.getCrossRoad() == front) {
                     isCrossRoad = true;
                     drawConnection(g2d, from, to, false);
                     break;
                 }
             }
-            for(FieldView to : fieldViews){
-                if(right == null && available.isEmpty()) break;
+            for (FieldView to : fieldViews) {
+                if (right == null && available.isEmpty())
+                    break;
 
-                if(to.getField() == right){
+                if (to.getField() == right) {
                     drawConnection(g2d, from, to, true);
                     right = null;
-                }else if(available.contains(to.getField())&& !isCrossRoad){
-                    drawConnection(g2d, from, to , false);
+                } else if (available.contains(to.getField()) && !isCrossRoad) {
+                    drawConnection(g2d, from, to, false);
                     available.remove(to.getField());
                 }
-            }                       
+            }
         }
-        for(CrossRoadView from : crossRoadViews ){
+        for (CrossRoadView from : crossRoadViews) {
             List<IField> available = new ArrayList<IField>(from.getCrossRoad().getAvailable());
-            for(FieldView to : fieldViews){
-                if(available.isEmpty()) break;
-                if(available.contains(to.getField())){
-                    drawConnection(g2d, from, to , false);
+            for (FieldView to : fieldViews) {
+                if (available.isEmpty())
+                    break;
+                if (available.contains(to.getField())) {
+                    drawConnection(g2d, from, to, false);
                     available.remove(to.getField());
                 }
             }
@@ -124,18 +126,25 @@ public class MapPanel extends JPanel implements IMap, RoadViewListener {
     }
 
     @Override
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        
+
         Graphics2D g2d = (Graphics2D) g.create();
 
         recalculateArrows(g2d);
     }
 
+    public void refreshVehicles() {
+        for (FieldView fieldView : fieldViews) {
+            fieldView.notifyChange(null);
+        }
+    }
 
-    //Welp ehhez lehet kelleni fog egy paintComponets de idk hogy máshogy kéne vonalat rajzoltatni
+    // Welp ehhez lehet kelleni fog egy paintComponets de idk hogy máshogy kéne
+    // vonalat rajzoltatni
     private void drawConnection(Graphics2D g2d, JPanel from, JPanel to, boolean isSide) {
-        if (from == null || to == null) return;
+        if (from == null || to == null)
+            return;
 
         int x1 = from.getX() + from.getWidth() / 2;
         int y1 = from.getY() + from.getHeight() / 2;
@@ -149,29 +158,28 @@ public class MapPanel extends JPanel implements IMap, RoadViewListener {
         int my = (y1 + y2) / 2;
 
         double angle = Math.atan2(y2 - y1, x2 - x1);
-        if(!isSide){
+        if (!isSide) {
             drawArrowHead(g2d, mx, my, angle);
-        }       
+        }
 
     }
 
     private void drawArrowHead(Graphics2D g2d, int x, int y, double angle) {
         int size = 8;
 
-        int tipX = x + (int)(Math.cos(angle) * size);
-        int tipY = y + (int)(Math.sin(angle) * size);
+        int tipX = x + (int) (Math.cos(angle) * size);
+        int tipY = y + (int) (Math.sin(angle) * size);
 
-        int leftX  = x + (int)(Math.cos(angle + Math.toRadians(145)) * size);
-        int leftY  = y + (int)(Math.sin(angle + Math.toRadians(145)) * size);
-        int rightX = x + (int)(Math.cos(angle - Math.toRadians(145)) * size);
-        int rightY = y + (int)(Math.sin(angle - Math.toRadians(145)) * size);
+        int leftX = x + (int) (Math.cos(angle + Math.toRadians(145)) * size);
+        int leftY = y + (int) (Math.sin(angle + Math.toRadians(145)) * size);
+        int rightX = x + (int) (Math.cos(angle - Math.toRadians(145)) * size);
+        int rightY = y + (int) (Math.sin(angle - Math.toRadians(145)) * size);
 
         int[] xPoints = { tipX, leftX, rightX };
         int[] yPoints = { tipY, leftY, rightY };
 
         g2d.fillPolygon(xPoints, yPoints, 3);
     }
-
 
     @Override
     public void waitForField(Consumer<Integer> callback) {
@@ -188,23 +196,24 @@ public class MapPanel extends JPanel implements IMap, RoadViewListener {
     @Override
     public void onFieldClicked(IRField field) {
         System.out.println("Field clicked: " + field);
-        if(selectorMode == SelectorMode.FIELD && callback != null){
+        if (selectorMode == SelectorMode.FIELD && callback != null) {
             callback.accept(context.getFields().indexOf(field));
             selectorMode = null;
             callback = null;
-        }else if(selectorMode == SelectorMode.CAR && callback != null){
+        } else if (selectorMode == SelectorMode.CAR && callback != null) {
             callback.accept(context.getCars().indexOf(field.getVehicle()));
             selectorMode = null;
             callback = null;
-        }else if(selectorMode == SelectorMode.FROM_FIELD_LIST && callback != null && availablePicks != null && availablePicks.contains(field)){
+        } else if (selectorMode == SelectorMode.FROM_FIELD_LIST && callback != null && availablePicks != null
+                && availablePicks.contains(field)) {
             callback.accept(availablePicks.indexOf(field));
             selectorMode = null;
-            callback = null;            
+            callback = null;
         }
     }
 
     @Override
-    public void waitForField(Consumer<Integer> callback, List<IRField> fields) {
+    public void waitForField(Consumer<Integer> callback, List<IField> fields) {
         this.selectorMode = SelectorMode.FROM_FIELD_LIST;
         this.availablePicks = fields;
         this.callback = callback;

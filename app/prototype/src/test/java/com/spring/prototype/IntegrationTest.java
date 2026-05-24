@@ -29,7 +29,6 @@ class IntegrationTest {
     @ParameterizedTest(name = "CLI test with: {0}")
     @MethodSource("inputFiles")
     void testAppWithInputFile(String fileName) throws Exception {
-        Tracer.changeDeterministicMode(false);
         Entity.reset();
 
         // Read input

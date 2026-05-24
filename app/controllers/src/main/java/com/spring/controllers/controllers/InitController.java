@@ -29,30 +29,33 @@ import com.spring.models.vehicle.Vehicle;
 
 public class InitController extends BaseController {
     List<InitListener> initListeners = new ArrayList<>();
-    
+
     GameContext ctx;
 
-    public void addListener(InitListener listener){
+    public void addListener(InitListener listener) {
         initListeners.add(listener);
     }
 
-    public InitController(GameContext ctx){
+    public InitController(GameContext ctx) {
         this.ctx = ctx;
     }
 
     /**
-     * Beállítja a játék körök számát. Legalább 1 körnek kell lennie, különben hibaüzenetet küldünk a nézetnek.
+     * Beállítja a játék körök számát. Legalább 1 körnek kell lennie, különben
+     * hibaüzenetet küldünk a nézetnek.
+     * 
      * @param rounds A körszám
      */
-    public void rounds(int rounds){
+    public void rounds(int rounds) {
         ctx.setRounds(rounds);
         tracer.info("Rounds set to " + rounds);
     }
 
     /**
-     * Hozzáad egy új hókotrós játékost egy hókotróval, random fejjel és üres készlettel
+     * Hozzáad egy új hókotrós játékost egy hókotróval, random fejjel és üres
+     * készlettel
      */
-    public void addSnowplowPlayer(){
+    public void addSnowplowPlayer() {
         SnowplowPlayer player = new SnowplowPlayer();
         Random rand = new Random();
         PlayerDriver driver = new PlayerDriver();
@@ -61,14 +64,15 @@ public class InitController extends BaseController {
         boolean searching = true;
         int index;
         List<IField> ListFields = ctx.getFields();
-        
+
         Snowplow snowplow = new Snowplow(driver, inventory, head, player);
         player.addVehicle(snowplow);
 
-        while (searching){
+        while (searching) {
             index = rand.nextInt(ctx.getFields().size());
-            if (ListFields.get(index).getVehicle() == null){
+            if (ListFields.get(index).getVehicle() == null) {
                 searching = false;
+                snowplow.getDriver().setCurrent(listFields().get(index));
                 listFields().get(index).setVehicle(snowplow);
             }
         }
@@ -80,88 +84,89 @@ public class InitController extends BaseController {
     /**
      * Hozzáad egy új buszos játékost egy busszal
      */
-    public void addBusPlayer(){
+    public void addBusPlayer() {
         PlayerDriver driver = new PlayerDriver();
-        BusPlayer  player = new BusPlayer();
+        BusPlayer player = new BusPlayer();
         boolean found = false;
         Station station = null;
-        for (Station s : ctx.getStations()){
-            if (s.getField().getVehicle() == null && found == false){
+        for (Station s : ctx.getStations()) {
+            if (s.getField().getVehicle() == null && found == false) {
                 found = true;
                 station = s;
             }
         }
         Bus bus = new Bus(driver, station, player);
+        bus.getDriver().setCurrent(station.getField());
         player.setBus(bus);
         station.getField().setVehicle(bus);
         ctx.getBusPlayers().add(player);
         tracer.info(String.format("%s added", player));
     }
 
-
-    public void start(){
-        for(InitListener listener : initListeners){
+    public void start() {
+        for (InitListener listener : initListeners) {
             listener.onGameStarted(ctx);
         }
     }
 
     /**
      * Egy field-et ad a pályához
-     * @param layer a layer amit rárakunk
+     * 
+     * @param layer       a layer amit rárakunk
      * @param underGround aluljáró-e a mező
      */
-    public IRField addField(ILayer layer, boolean underGround){
-        IField field = new Field(layer, null, null, null, null, new com.spring.models.random.Random(), null, underGround);
+    public IRField addField(ILayer layer, boolean underGround) {
+        IField field = new Field(layer, null, null, null, null, new com.spring.models.random.Random(), null,
+                underGround);
         ctx.getFields().add(field);
 
         return field;
     }
 
-    public List<IRoad> listCrossRoads(){
+    public List<IRoad> listCrossRoads() {
         return ctx.getCrossRoads();
     }
 
-    public List<IField> listFields(){
+    public List<IField> listFields() {
         return ctx.getFields();
     }
 
-    public void setSide(boolean right, int field1, int field2){
-        if(right){
+    public void setSide(boolean right, int field1, int field2) {
+        if (right) {
             listFields().get(field1).setRight(listFields().get(field2));
             listFields().get(field2).setLeft(listFields().get(field1));
-        }
-        else{
+        } else {
             listFields().get(field1).setLeft(listFields().get(field2));
             listFields().get(field2).setRight(listFields().get(field1));
         }
     }
 
-    public void setFrontCrossRoad(int f, int r){
+    public void setFrontCrossRoad(int f, int r) {
         ctx.getFields().get(f).setFront(ctx.getCrossRoads().get(r));
     }
 
-    public void setFrontField(int f1, int f2){
+    public void setFrontField(int f1, int f2) {
         listFields().get(f1).setFront(listFields().get(f2));
     }
 
-    public void placeBus(int busplayer, int field){
-        
+    public void placeBus(int busplayer, int field) {
+
         ctx.getFields().get(field).setVehicle(ctx.getBusPlayers().get(busplayer).vehicles().get(0));
         ctx.getBusPlayers().get(busplayer).vehicles().get(0).getDriver().setCurrent(ctx.getFields().get(field));
 
         List<IField> fields = ctx.getFields();
         IField currentField = fields.get(field);
-        Bus bus = (Bus)ctx.getBusPlayers().get(busplayer).vehicles().get(0);
+        Bus bus = (Bus) ctx.getBusPlayers().get(busplayer).vehicles().get(0);
         List<Station> stations = ctx.getStations();
 
-        for(int i = 0; i < stations.size(); i++){
-            if(stations.get(i).getField() == currentField){
+        for (int i = 0; i < stations.size(); i++) {
+            if (stations.get(i).getField() == currentField) {
                 bus.setStation(stations.get(i));
             }
         }
     }
 
-    public void placeSp(int snowPlowplayer, int field){
+    public void placeSp(int snowPlowplayer, int field) {
         List<IField> fields = ctx.getFields();
         SnowplowPlayer spp = ctx.getSnowplowPlayers().get(snowPlowplayer);
         Vehicle sp = spp.vehicles().get(0);
@@ -170,13 +175,16 @@ public class InitController extends BaseController {
         playerDriver.setCurrent(fields.get(field));
         fields.get(field).setVehicle(sp);
     }
+
     /**
-     * Egy kereszteződést ad a pályához a megadott kimenő mezőkkel. A kimenő mezők indexét kapja meg, és ellenőrzi, hogy érvényesek-e.
+     * Egy kereszteződést ad a pályához a megadott kimenő mezőkkel. A kimenő mezők
+     * indexét kapja meg, és ellenőrzi, hogy érvényesek-e.
+     * 
      * @param outFields a kimenő mezők indexei
      * @return létrehozott CrossRoad
      */
-    public IRoad addCrossRoad(List<Integer> outFields){
-        if(!outFields.stream().allMatch(i -> i < ctx.getFields().size())){
+    public IRoad addCrossRoad(List<Integer> outFields) {
+        if (!outFields.stream().allMatch(i -> i < ctx.getFields().size())) {
             error("Invalid field index");
             return null;
         }
@@ -189,11 +197,12 @@ public class InitController extends BaseController {
 
     /**
      * Egy otthont ad a pályához a megadott indexű mező mellé
+     * 
      * @param serial
      * @return
      */
-    public Building addHome(int serial){
-        if(serial >= ctx.getFields().size()){
+    public Building addHome(int serial) {
+        if (serial >= ctx.getFields().size()) {
             error("Invalid field index");
             return null;
         }
@@ -206,11 +215,12 @@ public class InitController extends BaseController {
 
     /**
      * Egy irodát ad a pályához a megadott indexű mező mellé
+     * 
      * @param serial A mező sorszáma
      * @return Létrehozott Office
      */
-    public Building addOffice(int serial){
-        if(serial >= ctx.getFields().size()){
+    public Building addOffice(int serial) {
+        if (serial >= ctx.getFields().size()) {
             error("Invalid field index");
             return null;
         }
@@ -221,13 +231,15 @@ public class InitController extends BaseController {
     }
 
     /**
-     * Két végállomást ad a pályához a megadott indexű mezők mellé, és összepárosítja őket. A buszok ezek között ingáznak majd.
+     * Két végállomást ad a pályához a megadott indexű mezők mellé, és
+     * összepárosítja őket. A buszok ezek között ingáznak majd.
+     * 
      * @param serial1 Az első mező sorszáma
      * @param serial2 A második mező sorszáma
      * @return
      */
-    public List<Building> addStations(int serial1, int serial2){
-        if(serial1 >= ctx.getFields().size() || serial2 >= ctx.getFields().size()){
+    public List<Building> addStations(int serial1, int serial2) {
+        if (serial1 >= ctx.getFields().size() || serial2 >= ctx.getFields().size()) {
             error("Invalid field index");
             return List.of();
         }
@@ -244,10 +256,12 @@ public class InitController extends BaseController {
     }
 
     /**
-     * Beállítja, hogy havazik-e. Ez hatással lehet a játék menetére, például a hókotrók hatékonyságára.
+     * Beállítja, hogy havazik-e. Ez hatással lehet a játék menetére, például a
+     * hókotrók hatékonyságára.
+     * 
      * @param isSnowing havazzon-e
      */
-    public void setSnowing(boolean isSnowing){
+    public void setSnowing(boolean isSnowing) {
         ctx.setIsSnowing(isSnowing);
     }
 }

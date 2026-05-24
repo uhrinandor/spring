@@ -17,9 +17,10 @@ public class Bus extends Vehicle {
     Station station;
 
     /**
-     * Számláló, azt számolja, hogy ütközés után még hány körön keresztül mozgásképtelen a busz.
+     * Számláló, azt számolja, hogy ütközés után még hány körön keresztül
+     * mozgásképtelen a busz.
      */
-    int immobileTurnsLeft = 0; 
+    int immobileTurnsLeft = 0;
 
     /**
      * Neki tudja átadni a pontszámait.
@@ -32,14 +33,14 @@ public class Bus extends Vehicle {
         this.collector = collector;
     }
 
-    public Station geStation(){
+    public Station geStation() {
         return station;
     }
 
     @Override
     public List<String> init() {
-        
-        return List.of("driver: "+driver, "station: " + station, "immobileTurnsLeft: " + immobileTurnsLeft);
+
+        return List.of("driver: " + driver, "station: " + station, "immobileTurnsLeft: " + immobileTurnsLeft);
     }
 
     /**
@@ -53,6 +54,7 @@ public class Bus extends Vehicle {
 
     /**
      * Összecsattan egy másik járművel, 3 körig nem tud mozogni
+     * 
      * @param v a másik jármű
      */
     @Override
@@ -66,19 +68,20 @@ public class Bus extends Vehicle {
      */
     @Override
     public void interact(IField f) {
-        if(station.getField() != f){
+        if (station.getField() != f) {
             return;
-        } 
-        
+        }
+
         Station pair = station.getPair();
         station = pair;
 
         collector.give(1);
     }
-    
+
     /**
      * Lehetővé teszi a Visitor számára, hogy műveletet hajtson végre
      * ezen a buszon. (IceSlipVisitor, SnowExitVisitor)
+     * 
      * @param visitor akinek a busz engedélyezi a visit műveletet.
      */
     @Override
@@ -86,13 +89,15 @@ public class Bus extends Vehicle {
         visitor.visit(this);
     }
 
-
-    public void setStation(Station station)
-    {
+    public void setStation(Station station) {
         this.station = station;
     }
 
-    public void setCollector(ICollector c){
+    public void setCollector(ICollector c) {
         collector = c;
+    }
+
+    public boolean isImmobile() {
+        return immobileTurnsLeft > 0;
     }
 }

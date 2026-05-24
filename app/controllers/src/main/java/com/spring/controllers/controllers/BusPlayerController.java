@@ -17,6 +17,7 @@ public class BusPlayerController extends BaseController {
 
     /**
      * A játékos beállítása, akinek a buszját irányítjuk
+     * 
      * @param player
      */
     public void setPlayer(BusPlayer player) {
@@ -25,52 +26,61 @@ public class BusPlayerController extends BaseController {
 
     /**
      * Visszaadja a buszjátékost
+     * 
      * @return A buszjátékos
      */
-    public BusPlayer info(){
+    public BusPlayer info() {
         return player;
     }
 
     /**
      * Legális lépések listázása a busz kontextusában
+     * 
      * @return Egy lista a legális lépésekről
      */
-    public List<IField> listAvailable(){
+    public List<IField> listAvailable() {
         Vehicle bus = player.vehicles().get(0);
         IField current = bus.getDriver().getCurrent();
         IField next = bus.getDriver().getNext();
 
-        if(current != null && bus.equals(current.getVehicle())) return listAvailable(current);
-        else if(next != null && bus.equals(next.getVehicle())) return listAvailable(next);
+        if (current != null && bus.equals(current.getVehicle()))
+            return listAvailable(current);
+        else if (next != null && bus.equals(next.getVehicle()))
+            return listAvailable(next);
         return List.of();
     }
 
     /**
      * Vissazaadja a legális lépéseket egy adott mezőről
+     * 
      * @param field A mező
      * @return A mezők listája
      */
-    private List<IField> listAvailable(IField field){
+    private List<IField> listAvailable(IField field) {
         List<IField> front = new ArrayList<>();
-        if(field.getFront() != null) front = field.getFront().getAvailable();
-        
+        if (field.getFront() != null)
+            front = field.getFront().getAvailable();
+
         List<IField> result = new ArrayList<>();
         result.addAll(front);
-        if(field.getRight() != null) result.add(field.getRight());
-        if(field.getLeft() != null) result.add(field.getLeft());
+        if (field.getRight() != null)
+            result.add(field.getRight());
+        if (field.getLeft() != null)
+            result.add(field.getLeft());
 
         return result;
     }
 
     /**
      * Lépés beállítása, végrehajtása, átléptetés a következő játékosra
+     * 
      * @param serial
      */
-    public void setNext(int serial){
+    public void setNext(int serial) {
         List<IField> available = listAvailable();
 
-        if(serial < 0 || serial >= available.size()){
-            error("Invalid field serial: "+serial);
+        if (serial < 0 || serial >= available.size()) {
+            error("Invalid field serial: " + serial);
             return;
         }
 
@@ -85,7 +95,7 @@ public class BusPlayerController extends BaseController {
     /**
      * A következő játékosra lépés
      */
-    public void nextPlayer(){
+    public void nextPlayer() {
         cycleController.nextPlayer();
     }
 }

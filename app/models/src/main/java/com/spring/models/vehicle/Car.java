@@ -7,7 +7,8 @@ import com.spring.models.field.IField;
 import com.spring.models.utils.Tracer;
 
 /**
- * Az autó a pálya által irányított objektum amely egy random Home mellett generálódik, célja, 
+ * Az autó a pálya által irányított objektum amely egy random Home mellett
+ * generálódik, célja,
  * hogy elérje a hozzá tartozó Office-t.
  */
 public class Car extends Vehicle {
@@ -17,7 +18,8 @@ public class Car extends Vehicle {
     Office destination;
 
     /**
-     * Számláló, azt számolja, hogy ütközés után még hány körön keresztül mozgásképtelen az autó.
+     * Számláló, azt számolja, hogy ütközés után még hány körön keresztül
+     * mozgásképtelen az autó.
      */
     int immobileTurnsLeft = 0;
 
@@ -28,7 +30,7 @@ public class Car extends Vehicle {
 
     @Override
     public List<String> init() {
-       return List.of("driver: " + driver, "destination: " + destination, "immobileTurnsLeft: " + immobileTurnsLeft);  
+        return List.of("driver: " + driver, "destination: " + destination, "immobileTurnsLeft: " + immobileTurnsLeft);
     }
 
     /**
@@ -42,6 +44,7 @@ public class Car extends Vehicle {
 
     /**
      * Ez a metódus felel az autó összetöréséért. Beállítja a számlálót.
+     * 
      * @param v a másik jármű, amivel ez az autó ütközik.
      */
     @Override
@@ -54,15 +57,16 @@ public class Car extends Vehicle {
      */
     @Override
     public void interact(IField f) {
-        if(destination.getField() != f){
+        if (destination.getField() != f) {
             return;
-        } 
+        }
         destination.consume(this);
     }
-    
+
     /**
      * Lehetővé teszi a Visitor számára, hogy műveletet hajtson végre
      * ezen az autón. (IceSlipVisitor, SnowExitVisitor)
+     * 
      * @param visitor akinek a autó engedélyezi a visit műveletet.
      */
     @Override
@@ -70,8 +74,11 @@ public class Car extends Vehicle {
         visitor.visit(this);
     }
 
-    public void setDestination(Office destination)
-    {
+    public void setDestination(Office destination) {
         this.destination = destination;
+    }
+
+    public boolean isImmobile() {
+        return immobileTurnsLeft > 0;
     }
 }
