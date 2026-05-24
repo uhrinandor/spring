@@ -43,6 +43,8 @@ public class FieldView extends JPanel implements IObserver {
         setLayout(new FlowLayout(FlowLayout.LEFT, 2, 2));
         setBounds(location.x, location.y, 50, 50);
 
+        vehicleView.setOnRepaint(this::repaint);
+
         setBorder(field.isUnderGround() ? BorderFactory.createLineBorder(new Color(165, 42, 42))
                 : BorderFactory.createLineBorder(Color.BLUE));
 
@@ -114,10 +116,10 @@ public class FieldView extends JPanel implements IObserver {
             g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
         }
 
-        int size = Pin.SIZE + 6;
-        int cx = (getWidth() - size) / 2;
-        int cy = (getHeight() - size) / 2;
-        vehicleView.drawOn((Graphics2D) g, cx, cy, size);
+        vehicleView.drawOn((Graphics2D) g, // CHANGE: draw vehicle centered under pins
+                (getWidth() - VehicleView.SIZE) / 2,
+                (getHeight() - VehicleView.SIZE) / 2,
+                VehicleView.SIZE);
     }
 
     public int getX() {

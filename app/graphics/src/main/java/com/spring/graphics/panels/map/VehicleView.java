@@ -15,23 +15,23 @@ public class VehicleView extends JPanel implements IObserver {
 
     private static final Color IMMOBILE_COLOR = new Color(0xEA4335);
     private static final int BORDER_WIDTH = 3;
+    public static final int SIZE = Pin.SIZE + 6;
 
     private Color ringColor = Color.GRAY;
     private Color fillColor = Color.WHITE;
     private boolean immobile = false;
     private boolean active = false;
 
-    // CHANGE: keep reference to vehicle for unsubscribe on change
     private Vehicle vehicle;
+    private Runnable onRepaint;
 
     public VehicleView() {
-        // no-arg constructor for FieldView to create a fixed instance
     }
 
-    /**
-     * Sets (or replaces) the vehicle this view observes.
-     * Unsubscribes from the old vehicle, subscribes to the new one.
-     */
+    public void setOnRepaint(Runnable r) {
+        this.onRepaint = r;
+    }
+
     public void setVehicle(Vehicle v) {
         if (vehicle != null)
             vehicle.unsubscribe(this);
@@ -58,6 +58,8 @@ public class VehicleView extends JPanel implements IObserver {
     @Override
     public void notifyChange(IEntity entity) {
         refresh();
+        if (onRepaint != null)
+            onRepaint.run();
     }
 
     public void drawOn(Graphics2D g2, int cx, int cy, int size) {
