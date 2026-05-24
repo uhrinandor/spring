@@ -76,8 +76,9 @@ public class SnowPlowController extends BaseController {
         
         ShopItem item = shopItems.get(serial);
         Shop shop = new Shop();
-        shop.buy(player, item, 1);
-        //TODO: itt nem tudunk visszajelezni hogy mizu
+        if(!shop.buy(player, item, 1)) {
+            error("Nincs elég pénzed ehhez a tárgyhoz!");
+        }
     }
 
     /**

@@ -5,10 +5,10 @@ import java.util.List;
 import com.spring.models.head.Item;
 import com.spring.models.shop.PurchaseContext;
 import com.spring.models.shop.ShopItem;
+import com.spring.models.utils.Entity;
 import com.spring.models.vehicle.IInventory;
 import com.spring.models.vehicle.IInventoryItem;
 import com.spring.models.vehicle.ISnowPlow;
-import com.spring.models.utils.Entity;
 
 
 /**
@@ -79,10 +79,10 @@ public class Salt extends Entity implements ShopItem, IInventoryItem, ISalt{
      * @param amount a megvásárolni kívánt Salt-ok száma
      */
     @Override
-    public void apply(PurchaseContext ctx, int amount) {
+    public boolean apply(PurchaseContext ctx, int amount) {
         ISnowPlow sp = ctx.snowPlow();
         IInventory inv = sp.getInventory();
-        inv.addItem(this, amount);
+        return inv.addItem(this, amount);
     }
 
     @Override

@@ -55,7 +55,10 @@ public class SnowPlowPlayerController extends BaseController {
         Snowplow snowplow = new Snowplow(driver, inventory, head, player);
 
         Shop shop = new Shop();
-        shop.buy(player, snowplow, 1);
+        if(!shop.buy(player, snowplow, 1)) {
+            error("Nincs elég pénzed egy új hókotróhoz!");
+            return;
+        }
 
         if (!player.vehicles().contains(snowplow))
             return;
