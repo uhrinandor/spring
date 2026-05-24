@@ -87,7 +87,7 @@ public class SnowplowPlayer extends Entity implements PurchaseContext, IPlayer{
             return false;
         }  
 
-        money -= m - amount;
+        money = m - amount;
         return true;
     }
 
