@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import com.spring.controllers.controllers.SnowPlowController;
 import com.spring.graphics.components.BaseButton;
 import com.spring.graphics.components.LegendButton;
+import com.spring.graphics.panels.map.interfaces.IMap;
 import com.spring.models.field.IField;
 import com.spring.models.head.Broom;
 import com.spring.models.head.Brush;
@@ -21,16 +22,24 @@ import com.spring.models.head.IHead;
 import com.spring.models.head.IceBreaker;
 import com.spring.models.head.SaltSpreader;
 import com.spring.models.head.StoneSplasher;
+import com.spring.models.utils.IEntity;
+import com.spring.models.utils.IObserver;
 
-public class SnowplowView extends JPanel {
+public class SnowplowView extends JPanel implements IObserver {
     SnowPlowController controller;
-    public SnowplowView(SnowPlowController controller){
+    IMap map;
+
+    JLabel cashLabel;
+    JLabel playerIdLabel;
+    public SnowplowView(SnowPlowController controller, IMap map){
         this.controller = controller;
+        this.map = map;
         setLayout(new GridLayout(2, 6));
         JLabel menuLabel = new JLabel("Sp-selected Menu");
-        JLabel playerIdLabel = new JLabel("Player Id: " + controller.getSp().getId());
+        playerIdLabel = new JLabel("Player Id: " + controller.getSp().getId());
         
-        JLabel cashLabel = new JLabel("Cash: " + controller.getSp().getPoints());
+        cashLabel = new JLabel("Cash: " + controller.getSp().getPoints());
+        this.controller.getSp().subscribe(this);
 
         JButton stepButton = new BaseButton("Step");
         JButton shopButton = new BaseButton("Shop");
@@ -59,26 +68,9 @@ public class SnowplowView extends JPanel {
         add(legendButton);
     }
 
-    public void handleStep() {
-        int size = controller.listAvailable().size();
-        IField[] fields = new IField[size];
-        for(int i = 0; i < size; i++){
-            fields[i] = controller.listAvailable().get(i);
-        }
-        IField chosen = (IField)JOptionPane.showInputDialog(
-                this,
-                "Válassz tárgyat",
-                "Tárgy választás",
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                fields,
-                fields[0]
-        );
-        for(int i = 0; i < size; i++){
-            if(chosen == fields[i]){
-                controller.setNext(i);
-            }
-        }
+    private void handleStep() {
+        List<IField> available = controller.listAvailable();
+        map.waitForField(serial -> controller.setNext(serial), available);
     }
 
     public void handleShop() {
@@ -127,34 +119,20 @@ public class SnowplowView extends JPanel {
         List<String> optionsList = Arrays.asList(options);
         
         IHead head = heads.get(optionsList.indexOf(choosen));
-        /*switch (choosen) {
-            case "DRAGON":
-                head = new Dragon();
-                break;
-            case "STONESPLASHER":
-                head = new StoneSplasher();
-                break;
-            case "BRUSH":
-                head = new Brush();
-                break;
-            case "BROOM":
-                head = new Broom();
-                break;
-            case "SALTSPREADER":
-                head = new SaltSpreader();
-                break;
-            case "ICEBREAKER":
-                head = new IceBreaker();
-                break;
-            default:
-                head = new Brush();
-                break;
-        }*/
         if(!controller.switchHead(head)){
             JOptionPane.showMessageDialog(
             null,
         "A fejcsere sikertelen"
             );
         }
+    }
+
+    @Override
+    public void notifyChange(IEntity entity) {
+        cashLabel.setText("Cash: " + controller.getSp().getPoints());
+        playerIdLabel.setText("Player Id: " + controller.getSp().getId());
+
+        revalidate();
+        repaint();
     }
 }

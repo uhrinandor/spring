@@ -14,5 +14,4 @@ public interface ISalt extends IRSalt {
      */
     public ILayer melt(ILayer layer);
  
-    
 }

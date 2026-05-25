@@ -94,7 +94,7 @@ public class MainWindow extends JFrame
         snowPlowController.setPlayer(snowPlowPlayerController.info());
         snowPlowController.addErrorListener(this);
         snowPlowController.addSnowPlowListener(this);
-        SnowplowView snowplowView = new SnowplowView(snowPlowController);
+        SnowplowView snowplowView = new SnowplowView(snowPlowController, mapPanel);
         menuBar.change(snowplowView);
     }
 
