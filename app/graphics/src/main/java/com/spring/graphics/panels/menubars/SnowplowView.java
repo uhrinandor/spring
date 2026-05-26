@@ -70,7 +70,10 @@ public class SnowplowView extends JPanel implements IObserver {
 
     private void handleStep() {
         List<IField> available = controller.listAvailable();
-        map.waitForField(serial -> controller.setNext(serial), available);
+        map.waitForField(serial -> {
+            controller.setNext(serial);
+            if(serial != -1) JOptionPane.showMessageDialog(this, "Step selected successfully!");
+        }, available);
     }
 
     public void handleShop() {

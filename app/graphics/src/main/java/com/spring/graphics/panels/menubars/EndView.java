@@ -99,11 +99,11 @@ public class EndView extends JPanel{
             "Snowplow Winner: " + spWinner + "\n Bus Winner: " + busWinner,
             "Winners",
             JOptionPane.INFORMATION_MESSAGE);
-    };
+    }
 
     public void handleNewGame(){
         controller.newGame();
-    };
+    }
 
     public void handleGetField(int index){
         IRField field = controller.getField(index);
@@ -135,18 +135,18 @@ public class EndView extends JPanel{
         .map(sp -> (IEntity) sp.vehicles().get(0))
         .collect(java.util.stream.Collectors.toList());
         showGetX("Snowplow", items);
-    };
+    }
 
     public void handleGetSnowplowPlayer(){
         showGetX("Snowplow Player", new java.util.ArrayList<>(controller.getSnowpowPlayers()));
-    };
+    }
 
     public void handleGetBus(){
         List<IEntity> items = controller.getBusPlayers().stream()
         .map(bp -> (IEntity) bp.vehicles().get(0))
         .collect(java.util.stream.Collectors.toList());
         showGetX("Bus", items);
-    };
+    }
 
     public void handleGetCar(){
         map.waitForCar(index ->{
@@ -167,43 +167,43 @@ public class EndView extends JPanel{
                 JOptionPane.showMessageDialog(this, scroll, "Car info", JOptionPane.INFORMATION_MESSAGE);
             });
         } );
-    };
+    }
 
     public void handleGetBusPlayer(){
         showGetX("Bus Players", new java.util.ArrayList<>(controller.getBusPlayers()));
-    };
+    }
 
     private void showGetX(String title, List<IEntity> items) {
-    if (items == null || items.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "No items found.", title, JOptionPane.INFORMATION_MESSAGE);
-        return;
+        if (items == null || items.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No items found.", title, JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        JComboBox<IEntity> comboBox = new JComboBox<>(items.toArray( new IEntity[0]));
+        int result = JOptionPane.showConfirmDialog(
+            this,
+            comboBox,
+            title,
+
+            JOptionPane.OK_CANCEL_OPTION,
+            JOptionPane.PLAIN_MESSAGE
+        );
+
+        if (result != JOptionPane.OK_OPTION) return;
+
+        IEntity selected = (IEntity) comboBox.getSelectedItem();
+        if (selected == null) return;
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(selected).append("\n\n");
+        for (String prop : selected.init()) {
+            sb.append("  - ").append(prop).append("\n");
+        }
+
+        JTextArea textArea = new JTextArea(sb.toString());
+        textArea.setEditable(false);
+        JScrollPane scroll = new JScrollPane(textArea);
+
+        JOptionPane.showMessageDialog(this, scroll, title + " Info", JOptionPane.INFORMATION_MESSAGE);
     }
-
-    JComboBox<IEntity> comboBox = new JComboBox<>(items.toArray( new IEntity[0]));
-    int result = JOptionPane.showConfirmDialog(
-        this,
-        comboBox,
-        title,
-
-        JOptionPane.OK_CANCEL_OPTION,
-        JOptionPane.PLAIN_MESSAGE
-    );
-
-    if (result != JOptionPane.OK_OPTION) return;
-
-    IEntity selected = (IEntity) comboBox.getSelectedItem();
-    if (selected == null) return;
-
-    StringBuilder sb = new StringBuilder();
-    sb.append(selected).append("\n\n");
-    for (String prop : selected.init()) {
-        sb.append("  - ").append(prop).append("\n");
-    }
-
-    JTextArea textArea = new JTextArea(sb.toString());
-    textArea.setEditable(false);
-    JScrollPane scroll = new JScrollPane(textArea);
-
-    JOptionPane.showMessageDialog(this, scroll, title + " Info", JOptionPane.INFORMATION_MESSAGE);
-}
 }
