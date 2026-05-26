@@ -1,13 +1,9 @@
 package com.spring.graphics.panels.menubars;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
+import java.awt.GridLayout;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
 
 import com.spring.controllers.controllers.SnowPlowPlayerController;
 import com.spring.graphics.components.BaseButton;
